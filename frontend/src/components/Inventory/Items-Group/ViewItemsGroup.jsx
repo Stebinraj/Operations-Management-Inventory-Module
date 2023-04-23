@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
-const ReadItemsGroup = (props) => {
+const ViewItemsGroup = (props) => {
 
     const [groupData, setGroupData] = useState([]);
 
@@ -22,17 +22,21 @@ const ReadItemsGroup = (props) => {
                     <h5 className="m-0">Avaliable Item Groups</h5>
                 </div>
                 <div className="card-body">
-                    <ul className="list-group">
+                    <div className="row">
                         {groupData.map((value, index) => {
                             return (
-                                <li key={index} className="list-group-item">{value.item_group_label}</li>
+                                <div className="col-md-4" key={index}>
+                                    <ul className="list-group">
+                                        <li className="list-group-item">{value.item_group_label}</li>
+                                    </ul>
+                                </div>
                             )
                         })}
-                    </ul>
+                    </div>
                 </div>
             </div>
         </>
     )
 }
 
-export default ReadItemsGroup
+export default ViewItemsGroup

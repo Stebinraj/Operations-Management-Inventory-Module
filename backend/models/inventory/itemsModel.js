@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const itemsSchema = mongoose.Schema({
-    item_group: { type: String, required: true },
+    item_group_id: { type: mongoose.SchemaTypes.ObjectId, required: true },
     item_name: { type: String, required: true },
     unit: { type: String, required: true },
     dimensions: {

@@ -32,7 +32,11 @@ const Layouts = (props) => {
 
                     {/* Main content */}
                     <div className="content pt-3">
-                        <MainContent dashboard={props.dashboard} itemGroup={props.itemGroup} />
+                        <MainContent
+                            dashboard={props.dashboard}
+                            itemGroup={props.itemGroup}
+                            items={props.items}
+                        />
                     </div>
                     {/* content */}
                 </div>

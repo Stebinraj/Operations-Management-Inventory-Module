@@ -18,10 +18,10 @@ const Navbar = () => {
                     <li>
                         <div className="user-panel d-flex">
                             <div className="image">
-                                <img src={require('../../assets/images/images.png')} alt="User" />
+                                <img src={require('../../assets/images/userlogo.png')} alt="User" />
                             </div>
-                            <div className="info">
-                                <Link className="d-block">User</Link>
+                            <div className="info ">
+                                <Link className="d-block text-dark">User</Link>
                             </div>
                         </div>
                     </li>

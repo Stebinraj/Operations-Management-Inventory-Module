@@ -13,13 +13,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // items route
-const items = require('./routes/itemsRoutes');
+const items = require('./routes/inventory/itemsRoutes');
 // inventory routes
-const inventoryAdjustment = require('./routes/inventoryAdjustmentsRoute');
+const inventoryAdjustment = require('./routes/inventory/inventoryAdjustmentsRoute');
 // item groups route
-const itemGroups = require('./routes/itemGroupRoutes');
+const itemGroups = require('./routes/inventory/itemGroupRoutes');
 
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use(items);
 app.use(inventoryAdjustment);
