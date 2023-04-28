@@ -1,5 +1,5 @@
 const express = require('express');
-const itemsModel = require('../../models/inventory/itemsModel');
+const itemsModel = require('../../models/Inventory/itemsModel');
 const router = express.Router();
 
 // create items
@@ -15,7 +15,7 @@ router.get('/items', async (req, res) => {
     res.send({ success: data });
 });
 
-// new method
+// get items by id
 router.get('/items/:id', async (req, res) => {
     const data = await itemsModel.find({ item_group_id: req.params.id });
     res.send({ success: data });

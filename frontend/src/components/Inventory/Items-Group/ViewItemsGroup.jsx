@@ -25,7 +25,7 @@ const ViewItemsGroup = (props) => {
                     <div className="row">
                         {groupData.map((value, index) => {
                             return (
-                                <div className="col-md-4" key={index}>
+                                <div className="col-sm-6 col-md-4 mb-2" key={index}>
                                     <ul className="list-group">
                                         <li className="list-group-item">{value.item_group_label}</li>
                                     </ul>

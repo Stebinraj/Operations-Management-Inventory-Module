@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-const AddItems = () => {
+const AddItems = (props) => {
 
     const [item_group_id, setItemGroupId] = useState('');
     const [itemGroupData, setItemGroupData] = useState([]);
@@ -45,7 +45,6 @@ const AddItems = () => {
                 image_of_item
             });
             if (response && response.data.success) {
-                alert('Item added successfull !!!');
                 navigate('/view/items');
             }
         } catch (error) {
@@ -61,7 +60,7 @@ const AddItems = () => {
             }
         }
         getItemsGroup();
-    }, []);
+    }, [props.reload]);
 
     return (
         <>
@@ -122,7 +121,7 @@ const AddItems = () => {
                         </div>
                         <div className="mb-3 form-group col-md-6">
                             <span className="card-text">Description</span>
-                            <input type="number" className="form-control" placeholder='Enter Description' onChange={(e) => { setDescription(e.target.value) }} />
+                            <input type="text" className="form-control" placeholder='Enter Description' onChange={(e) => { setDescription(e.target.value) }} />
                         </div>
                         <div className="mb-3 form-group col-md-6">
                             <span className="card-text">Opening Stock</span>

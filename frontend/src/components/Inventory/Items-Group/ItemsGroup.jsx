@@ -13,7 +13,6 @@ const ItemsGroup = () => {
         setReload(false);
         const response = await axios.post('http://localhost:5000/items-group', { item_group_label });
         if (response && response.data.success) {
-            alert('Item Group Added Successfull !!!');
             setReload(true);
             setItemGroupLabel('');
         }
@@ -46,7 +45,7 @@ const ItemsGroup = () => {
 
             <div className="col-md-6">
                 {/* Add items component */}
-                <AddItems />
+                <AddItems reload={reload}/>
                 {/* Add items component */}
             </div>
         </>

@@ -36,6 +36,8 @@ const Layouts = (props) => {
                             dashboard={props.dashboard}
                             itemGroup={props.itemGroup}
                             items={props.items}
+                            inventoryAdjustment={props.inventoryAdjustment}
+                            customers={props.customers}
                         />
                     </div>
                     {/* content */}
@@ -44,6 +46,9 @@ const Layouts = (props) => {
 
                 {/* Main Footer */}
                 <Footer />
+
+                <div id="sidebar-overlay" data-widget="pushmenu"></div>
+
             </div>
             {/* wrapper */}
         </>

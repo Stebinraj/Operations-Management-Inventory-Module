@@ -13,17 +13,23 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // items route
-const items = require('./routes/inventory/itemsRoutes');
+const items = require('./routes/Inventory/itemsRoutes');
 // inventory routes
-const inventoryAdjustment = require('./routes/inventory/inventoryAdjustmentsRoute');
+const inventoryAdjustment = require('./routes/Inventory/inventoryAdjustmentsRoute');
 // item groups route
-const itemGroups = require('./routes/inventory/itemGroupRoutes');
+const itemGroups = require('./routes/Inventory/itemGroupRoutes');
+// customers route
+const customers = require('./routes/Sales/customersRoute');
+// sales order routes
+const salesOrder = require('./routes/Sales/salesOrderRoutes');
 
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
 
 app.use(items);
 app.use(inventoryAdjustment);
 app.use(itemGroups);
+app.use(customers);
+app.use(salesOrder);
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on the port ${process.env.PORT}`);
