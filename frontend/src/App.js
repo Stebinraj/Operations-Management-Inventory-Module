@@ -5,6 +5,7 @@ import ItemsGroup from './pages/ItemsGroup';
 import Items from './pages/Items';
 import InventoryAdjustments from './pages/InventoryAdjustments';
 import Customers from './pages/Customers';
+import SalesOrders from './pages/SalesOrders';
 
 function App() {
     return (
@@ -17,6 +18,8 @@ function App() {
             {/* Inventory */}
             {/* Sales */}
             <Route path='/customers' element={<Customers />}></Route>
+            <Route path='/orders/sales' element={<SalesOrders />}></Route>
+            {/* Sales */}
         </Routes>
     );
 }

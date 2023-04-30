@@ -5,7 +5,7 @@ const morgan = require('morgan');
 const dotenv = require('dotenv');
 dotenv.config();
 
-const app = new express();
+const app = express();
 
 app.use(cors());
 app.use(morgan('dev'));
@@ -22,6 +22,8 @@ const itemGroups = require('./routes/Inventory/itemGroupRoutes');
 const customers = require('./routes/Sales/customersRoute');
 // sales order routes
 const salesOrder = require('./routes/Sales/salesOrderRoutes');
+// cart routes
+const cart = require('./routes/Sales/cartRoutes');
 
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
 
@@ -30,6 +32,7 @@ app.use(inventoryAdjustment);
 app.use(itemGroups);
 app.use(customers);
 app.use(salesOrder);
+app.use(cart);
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on the port ${process.env.PORT}`);

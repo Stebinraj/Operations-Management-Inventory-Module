@@ -96,22 +96,22 @@ const ViewCustomers = (props) => {
                         <table className="table table-bordered">
                             <thead className='text-bg-primary'>
                                 <tr>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Phone Number</th>
-                                    <th scope="col">Billing Address</th>
-                                    <th scope="col">Actions</th>
+                                    <th scope="col" className='text-nowrap'>Name</th>
+                                    <th scope="col" className='text-nowrap'>Email</th>
+                                    <th scope="col" className='text-nowrap'>Phone Number</th>
+                                    <th scope="col" className='text-nowrap'>Billing Address</th>
+                                    <th scope="col" className='text-nowrap'>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {customerData.map((value, index) => {
                                     return (
                                         <tr key={index}>
-                                            <td>{value.name}</td>
-                                            <td>{value.email}</td>
-                                            <td>{value.phone_number}</td>
-                                            <td>{value.billing_address}</td>
-                                            <td>
+                                            <td className='text-nowrap'>{value.name}</td>
+                                            <td className='text-nowrap'>{value.email}</td>
+                                            <td className='text-nowrap'>{value.phone_number}</td>
+                                            <td className='text-nowrap'>{value.billing_address}</td>
+                                            <td className='text-nowrap'>
                                                 <button className='btn btn-primary' data-bs-toggle="modal" data-bs-target="#updateCustomers" onClick={(e) => { handleUpdateData(e, value) }}>Update</button>
                                             </td>
                                         </tr>

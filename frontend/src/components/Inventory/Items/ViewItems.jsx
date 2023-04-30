@@ -6,7 +6,6 @@ const ViewItems = () => {
     const [itemsData, setItemsData] = useState([]);
 
     const [item_id, setItemId] = useState('');
-    const [item_name, setItemName] = useState('');
     const [mode_of_adjustment, setModeOfAdjustment] = useState('');
     const [reason, setReason] = useState('');
     const [description, setDescription] = useState('');
@@ -16,6 +15,24 @@ const ViewItems = () => {
     const [value, setValue] = useState('');
     const randomNum = Math.floor(Math.random() * 10000000000);
     const reference_number = String(randomNum).padStart(10, '0');
+
+    const table = [
+        { headings: 'Item Group' },
+        { headings: 'Item Name' },
+        { headings: 'Unit' },
+        { headings: 'Dimensions' },
+        { headings: 'Weight' },
+        { headings: 'Manufacturer' },
+        { headings: 'Brand' },
+        { headings: 'Selling Price' },
+        { headings: 'Cost Price' },
+        { headings: 'Description' },
+        { headings: 'Opening Stock' },
+        { headings: 'Reorder Point' },
+        { headings: 'Preferred Vendor' },
+        { headings: 'Image' },
+        { headings: 'Adjustments' }
+    ];
 
     const getItems = async () => {
         try {
@@ -31,10 +48,21 @@ const ViewItems = () => {
     const handleAdjust = async (e, value) => {
         e.preventDefault();
         setItemId(value._id);
-        setItemName(value.item_name);
         setSellingPrice(value.selling_price);
         setOpeningStock(value.opening_stock);
         setDescription(value.description);
+    };
+
+    const handleModeOfAdjustmentChange = (e) => {
+        const selectedMode = e.target.value;
+        setModeOfAdjustment(selectedMode);
+        if (selectedMode === 'Quantity') {
+            setQuantity('');
+            setReason('');
+        } else if (selectedMode === "Value") {
+            setValue('');
+            setReason('');
+        }
     };
 
     const submitAdjustment = async (e) => {
@@ -42,7 +70,6 @@ const ViewItems = () => {
             e.preventDefault();
             const response = await axios.put(`http://localhost:5000/adjust-items/${item_id}`, {
                 item_id,
-                item_name,
                 mode_of_adjustment,
                 reference_number,
                 date: new Date(),
@@ -55,7 +82,6 @@ const ViewItems = () => {
             });
             if (response && response.data.success) {
                 setItemId('');
-                setItemName('');
                 setModeOfAdjustment('');
                 setReason('');
                 setDescription('');
@@ -70,10 +96,9 @@ const ViewItems = () => {
         }
     };
 
-    const handleClose = async (e) => {
+    const handleAdjustClose = async (e) => {
         e.preventDefault();
         setItemId('');
-        setItemName('');
         setModeOfAdjustment('');
         setReason('');
         setDescription('');
@@ -81,11 +106,11 @@ const ViewItems = () => {
         setOpeningStock('');
         setQuantity('');
         setValue('');
-    }
+    };
 
     useEffect(() => {
         getItems();
-    }, [])
+    }, []);
 
     return (
         <>
@@ -99,7 +124,7 @@ const ViewItems = () => {
                             <form className='row'>
                                 <div className="mb-3 form-group col-12">
                                     <span>Mode of Adjustment</span>
-                                    <select className="form-control" value={mode_of_adjustment} onChange={(e) => { setModeOfAdjustment(e.target.value) }}>
+                                    <select className="form-control" value={mode_of_adjustment} onChange={handleModeOfAdjustmentChange}>
                                         <option value="" disabled={true} className='text-secondary'>--Select--</option>
                                         <option value={'Quantity'}>Quantity</option>
                                         <option value={'Value'}>Value</option>
@@ -132,13 +157,12 @@ const ViewItems = () => {
                             </form>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={handleClose}>Close</button>
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={handleAdjustClose}>Close</button>
                             <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={(e) => { submitAdjustment(e) }}>Submit</button>
                         </div>
                     </div>
                 </div>
             </div>
-
 
             <div className="col-sm-12">
                 <div className="card card-primary card-outline">
@@ -146,40 +170,32 @@ const ViewItems = () => {
                         <table className="table table-bordered">
                             <thead className='text-bg-primary'>
                                 <tr>
-                                    <th scope="col">Item Name</th>
-                                    <th scope="col">Unit</th>
-                                    <th scope="col">Dimensions</th>
-                                    <th scope="col">Weight</th>
-                                    <th scope="col">Manufacturer</th>
-                                    <th scope="col">Brand</th>
-                                    <th scope="col">Selling Price</th>
-                                    <th scope="col">Cost price</th>
-                                    <th scope="col">Description</th>
-                                    <th scope="col">Opening Stock</th>
-                                    <th scope="col">Reorder point</th>
-                                    <th scope="col">Preferred Vendor</th>
-                                    <th scope="col">Image</th>
-                                    <th scope="col">Adjustments</th>
+                                    {table.map((value, index) => {
+                                        return (
+                                            <th scope="col" className='text-nowrap' key={index}>{value.headings}</th>
+                                        )
+                                    })}
                                 </tr>
                             </thead>
                             <tbody>
                                 {itemsData.map((value, index) => {
                                     return (
                                         <tr key={index}>
-                                            <td>{value.item_name}</td>
-                                            <td>{value.unit}</td>
-                                            <td>{`${value.dimensions.length} L ${value.dimensions.width} W ${value.dimensions.height} H`}</td>
-                                            <td>{value.weight}</td>
-                                            <td>{value.manufacturer}</td>
-                                            <td>{value.brand}</td>
-                                            <td>{value.selling_price}</td>
-                                            <td>{value.cost_price}</td>
-                                            <td>{value.description}</td>
-                                            <td>{value.opening_stock}</td>
-                                            <td>{value.reorder_point}</td>
-                                            <td>{value.preferred_vendor}</td>
-                                            <td>{value.image_of_item}</td>
-                                            <td>
+                                            <td className='text-nowrap'>{value.item_group_id.item_group_label}</td>
+                                            <td className='text-nowrap'>{value.item_name}</td>
+                                            <td className='text-nowrap'>{value.unit}</td>
+                                            <td className='text-nowrap'>{`${value.dimensions.length} L ${value.dimensions.width} W ${value.dimensions.height} H`}</td>
+                                            <td className='text-nowrap'>{value.weight}</td>
+                                            <td className='text-nowrap'>{value.manufacturer}</td>
+                                            <td className='text-nowrap'>{value.brand}</td>
+                                            <td className='text-nowrap'>{value.selling_price}</td>
+                                            <td className='text-nowrap'>{value.cost_price}</td>
+                                            <td className='text-nowrap'>{value.description}</td>
+                                            <td className='text-nowrap'>{value.opening_stock}</td>
+                                            <td className='text-nowrap'>{value.reorder_point}</td>
+                                            <td className='text-nowrap'>{value.preferred_vendor}</td>
+                                            <td className='text-nowrap'>{value.image_of_item}</td>
+                                            <td className='text-nowrap'>
                                                 <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#inventoryAdjustModal" onClick={(e) => { handleAdjust(e, value) }}>Adjust</button>
                                             </td>
                                         </tr>

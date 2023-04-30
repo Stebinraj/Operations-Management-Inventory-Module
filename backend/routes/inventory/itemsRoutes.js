@@ -12,7 +12,10 @@ router.post('/items', async (req, res) => {
 
 // retrieve items
 router.get('/items', async (req, res) => {
-    const data = await itemsModel.find({});
+    const data = await itemsModel.find({}).populate({
+        path: 'item_group_id',
+        model: itemsGroupModel
+    });
     res.send({ success: data });
 });
 
@@ -23,16 +26,6 @@ router.get('/items/:id', async (req, res) => {
 });
 
 // aggregate and populate
-
-router.get('/view/items', async (req, res) => {
-    const data = await itemsModel.find({}).populate({
-        path: 'item_group_id',
-        model: itemsGroupModel,
-        lean: true
-    });
-    res.send({ success: data });
-});
-
 
 // router.get('/view/items', async (req, res) => {
 //     const data = await itemsModel.aggregate([

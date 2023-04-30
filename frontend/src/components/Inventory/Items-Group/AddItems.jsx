@@ -137,7 +137,7 @@ const AddItems = (props) => {
                         </div>
                         <div className="mb-3 form-group col-12">
                             <span className="card-text">Image of Item</span>
-                            <input type="file" className="form-control" placeholder='Enter Manufacturer' onChange={(e) => { setImageOfItem(e.target.value) }} />
+                            <input type="file" className="form-control" onChange={(e) => { setImageOfItem(e.target.value) }} />
                         </div>
                         <button className="btn btn-primary w-100" onClick={(e) => { addItems(e) }}>Submit</button>
                     </form>

@@ -39,7 +39,7 @@ const Sidebar = () => {
                                     Customers
                                 </p>
                             </Link>
-                            <Link to={'/customers'} replace={true} className="nav-link text-dark" onClick={() => { window.scrollTo({ top: 0, behavior: 'instant' }) }}>
+                            <Link to={'/orders/sales'} replace={true} className="nav-link text-dark" onClick={() => { window.scrollTo({ top: 0, behavior: 'instant' }) }}>
                                 <i className="nav-icon bi bi-bag-check" style={{ fontSize: '21px', color: 'indigo' }}></i>
                                 <p className='sidebar-links ml-3' style={{ color: 'grey' }}>
                                     Sales Orders

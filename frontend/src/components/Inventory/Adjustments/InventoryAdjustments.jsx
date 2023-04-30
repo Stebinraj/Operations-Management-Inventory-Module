@@ -91,28 +91,36 @@ const InventoryAdjustments = () => {
                         <table className="table table-bordered">
                             <thead className='text-bg-primary'>
                                 <tr>
-                                    <th scope="col">Item Name</th>
-                                    <th scope="col">Mode of Adjustment</th>
-                                    <th scope="col">Quantity</th>
-                                    <th scope="col">Value</th>
-                                    <th scope="col">Reference Number</th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Reason</th>
-                                    <th scope="col">Description</th>
+                                    <th scope="col" className='text-nowrap'>Item Group</th>
+                                    <th scope="col" className='text-nowrap'>Item Name</th>
+                                    <th scope="col" className='text-nowrap'>Brand</th>
+                                    <th scope="col" className='text-nowrap'>Manufacturer</th>
+                                    <th scope="col" className='text-nowrap'>Mode of Adjustment</th>
+                                    <th scope="col" className='text-nowrap'>Quantity</th>
+                                    <th scope="col" className='text-nowrap'>Value</th>
+                                    <th scope="col" className='text-nowrap'>Reference Number</th>
+                                    <th scope="col" className='text-nowrap'>Date</th>
+                                    <th scope="col" className='text-nowrap'>Reason</th>
+                                    <th scope="col" className='text-nowrap'>Description</th>
+                                    <th scope="col" className='text-nowrap'>Image</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {reportData.map((value, index) => {
                                     return (
                                         <tr key={index}>
-                                            <td>{value.item_name}</td>
-                                            <td>{value.mode_of_adjustment}</td>
-                                            <td>{value.quantity === "" ? ("-") : (value.quantity)}</td>
-                                            <td>{value.value === "" ? ("-") : (value.value)}</td>
-                                            <td>{value.reference_number}</td>
-                                            <td>{moment(value.date).format('DD-MM-YYYY')}</td>
-                                            <td>{value.reason}</td>
-                                            <td>{value.description}</td>
+                                            <td className='text-nowrap'>{value.item_id.item_group_id.item_group_label}</td>
+                                            <td className='text-nowrap'>{value.item_id.item_name}</td>
+                                            <td className='text-nowrap'>{value.item_id.brand}</td>
+                                            <td className='text-nowrap'>{value.item_id.manufacturer}</td>
+                                            <td className='text-nowrap'>{value.mode_of_adjustment}</td>
+                                            <td className='text-nowrap'>{value.quantity === "" ? ("-") : (value.quantity)}</td>
+                                            <td className='text-nowrap'>{value.value === "" ? ("-") : (value.value)}</td>
+                                            <td className='text-nowrap'>{value.reference_number}</td>
+                                            <td className='text-nowrap'>{moment(value.date).format('DD-MM-YYYY')}</td>
+                                            <td className='text-nowrap'>{value.reason}</td>
+                                            <td className='text-nowrap'>{value.description}</td>
+                                            <td className='text-nowrap'>{value.item_id.image_of_item}</td>
                                         </tr>
                                     )
                                 })}

@@ -4,6 +4,7 @@ import ItemsGroup from '../Inventory/Items-Group/ItemsGroup'
 import ViewItems from '../Inventory/Items/ViewItems'
 import InventoryAdjustments from '../Inventory/Adjustments/InventoryAdjustments'
 import Customers from '../Sales/Customers/Customers'
+import SalesOrders from '../Sales/SalesOrders/SalesOrders'
 
 const MainContent = (props) => {
     return (
@@ -15,6 +16,7 @@ const MainContent = (props) => {
                     {props.items && (<ViewItems />)}
                     {props.inventoryAdjustment && (<InventoryAdjustments />)}
                     {props.customers && (<Customers />)}
+                    {props.salesOrder && (<SalesOrders />)}
                 </div>
             </div>
         </>
