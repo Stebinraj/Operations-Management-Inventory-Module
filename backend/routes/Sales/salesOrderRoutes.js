@@ -1,15 +1,14 @@
 const express = require('express');
 const salesOrderModel = require('../../models/Sales/salesOrderModel');
 const itemsModel = require('../../models/Inventory/itemsModel');
+const cartModel = require('../../models/Sales/cartModel');
 const router = express.Router();
 
-router.put('/salesorders', async (req, res) => {
+router.post('/salesorders', async (req, res) => {
     try {
-        req.body.map(async (value) => {
-            await itemsModel.updateMany({ _id: value.item_id }, { $set: { opening_stock: value.opening_stock } });
-        })
-        const salesOrder = await salesOrderModel.insertMany(req.body);
-        res.send({ success: salesOrder });
+        const orders = await salesOrderModel.insertMany(req.body);
+        const deleteCart = await cartModel.deleteMany(req.body.delete_cart_id);
+        res.send({ success: orders, deleteCart });
     } catch (error) {
         res.send(error);
         return;
