@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import ViewCustomers from './ViewCustomers';
+import { toast } from 'react-toastify';
 
 const Customers = () => {
 
@@ -25,6 +26,15 @@ const Customers = () => {
             setReload(false);
             const response = await axios.post('http://localhost:5000/customer', { name, email, phone_number, billing_address });
             if (response && response.data.success) {
+                toast.success('Customer Added Successfully !!!', {
+                    position: "top-right",
+                    autoClose: 1500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    newestOnTop: false,
+                    theme: "light",
+                });
                 setReload(true);
                 setName('');
                 setEmail('');

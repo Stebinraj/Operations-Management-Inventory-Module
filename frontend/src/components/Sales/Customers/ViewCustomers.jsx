@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { toast } from 'react-toastify';
 
 const ViewCustomers = (props) => {
 
@@ -36,6 +37,15 @@ const ViewCustomers = (props) => {
                 setPhoneNumber('');
                 setBillingAddress('');
                 await getCustomer();
+                toast.success('Customer Updated !!!', {
+                    position: "top-right",
+                    autoClose: 1500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    newestOnTop: false,
+                    theme: "light",
+                });
             }
         } catch (error) {
             console.log(error.message);

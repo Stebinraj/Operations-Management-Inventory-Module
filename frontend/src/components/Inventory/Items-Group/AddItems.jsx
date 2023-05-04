@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const AddItems = (props) => {
 
@@ -45,7 +46,17 @@ const AddItems = (props) => {
                 image_of_item
             });
             if (response && response.data.success) {
-                navigate('/view/items');
+                toast.success('Items Created Successfully !!!', {
+                    position: "top-right",
+                    autoClose: 1500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    newestOnTop: false,
+                    theme: "light",
+                });
+                setTimeout(() => {
+                    navigate('/view/items');
+                }, 2500);
             }
         } catch (error) {
             console.error(error.message);

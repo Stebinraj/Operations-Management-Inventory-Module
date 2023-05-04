@@ -3,6 +3,7 @@ import moment from 'moment/moment';
 import DatePicker from 'react-datepicker';
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const InventoryAdjustments = () => {
 
@@ -24,6 +25,14 @@ const InventoryAdjustments = () => {
     const handleSpecificDate = async (e) => {
         e.preventDefault();
         await getDateRangeReports();
+        toast.success('Filtered Successfully !!!', {
+            position: "top-right",
+            autoClose: 1500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            newestOnTop: false,
+            theme: "light",
+        });
     };
 
     const reset = async (e) => {
@@ -31,6 +40,14 @@ const InventoryAdjustments = () => {
         setStartDate(new Date());
         setEndDate(new Date());
         await getReports();
+        toast.success('Resetted Successfully !!!', {
+            position: "top-right",
+            autoClose: 1500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            newestOnTop: false,
+            theme: "light",
+        });
     }
 
     const getDateRangeReports = async () => {

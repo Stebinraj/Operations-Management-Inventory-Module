@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios';
 import ViewItemsGroup from './ViewItemsGroup';
 import AddItems from './AddItems';
+import { toast } from 'react-toastify';
 
 const ItemsGroup = () => {
 
@@ -13,6 +14,14 @@ const ItemsGroup = () => {
         setReload(false);
         const response = await axios.post('http://localhost:5000/items-group', { item_group_label });
         if (response && response.data.success) {
+            toast.success('Group Created Successfully !!!', {
+                position: "top-right",
+                autoClose: 1500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                newestOnTop: false,
+                theme: "light",
+            });
             setReload(true);
             setItemGroupLabel('');
         }
@@ -45,7 +54,7 @@ const ItemsGroup = () => {
 
             <div className="col-md-6">
                 {/* Add items component */}
-                <AddItems reload={reload}/>
+                <AddItems reload={reload} />
                 {/* Add items component */}
             </div>
         </>

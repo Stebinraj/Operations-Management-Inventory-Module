@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { toast } from 'react-toastify';
 
 const ViewItems = () => {
 
@@ -81,6 +82,14 @@ const ViewItems = () => {
                 selling_price: value === "" ? (selling_price) : (value)
             });
             if (response && response.data.success) {
+                toast.success('Items Adjusted Successfully !!!', {
+                    position: "top-right",
+                    autoClose: 1500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    newestOnTop: false,
+                    theme: "light",
+                });
                 setItemId('');
                 setModeOfAdjustment('');
                 setReason('');

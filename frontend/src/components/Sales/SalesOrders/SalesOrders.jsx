@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const SalesOrders = () => {
 
@@ -88,38 +89,84 @@ const SalesOrders = () => {
     const addItemsToCart = async (e) => {
         try {
             e.preventDefault();
-            if (!customer_id && !item_id && !quantity) {
-                return alert('All fields are mandatory');
-            } else if (quantity > opening_stock) {
-                alert('Invalid Quantity');
-                setItemId('');
-                setOpeningStock('');
-                setSellingPrice('');
-                setCustomerId('');
-                setCustomerEmail('');
-                setCustomerPhoneNumber('');
-                setCustomerBillingAddress('');
-                setQuantity('');
-                return;
+            const data = {
+                item_id: item_id,
+                customer_id: customer_id,
+                quantity: quantity
+            };
+
+            for (const cart of cartItemsData) {
+                if (data.item_id === item_id) {
+                    if (data.quantity > opening_stock - cart.quantity) {
+                        console.log('greater');
+                        console.log(`Choose between 0 to ${opening_stock - cart.quantity} rest of them taken in cart`);
+                    } else {
+                        console.log('lesser');
+                    }
+                    // setOpeningStock(a)
+                }
             }
 
-            const response = await axios.post('http://localhost:5000/cart', {
-                item_id,
-                customer_id,
-                quantity
-            });
 
-            if (response && response.data.success) {
-                await getCartItems();
-                setItemId('');
-                setOpeningStock('');
-                setSellingPrice('');
-                setCustomerId('');
-                setCustomerEmail('');
-                setCustomerPhoneNumber('');
-                setCustomerBillingAddress('');
-                setQuantity('');
-            }
+            // if (!customer_id || !item_id || !quantity) {
+            //     toast.error('All Fields Required !!!', {
+            //         position: "top-right",
+            //         autoClose: 1500,
+            //         hideProgressBar: false,
+            //         closeOnClick: true,
+            //         pauseOnHover: false,
+            //         newestOnTop: false,
+            //         theme: "light",
+            //     });
+            //     return;
+            // }
+            // else if (quantity > opening_stock) {
+            //     toast.error('Invalid Quantity !!!', {
+            //         position: "top-right",
+            //         autoClose: 1500,
+            //         hideProgressBar: false,
+            //         closeOnClick: true,
+            //         pauseOnHover: false,
+            //         newestOnTop: false,
+            //         theme: "light",
+            //     });
+            //     setItemId('');
+            //     setOpeningStock('');
+            //     setSellingPrice('');
+            //     setCustomerId('');
+            //     setCustomerEmail('');
+            //     setCustomerPhoneNumber('');
+            //     setCustomerBillingAddress('');
+            //     setQuantity('');
+            //     return;
+            // }
+
+            // const response = await axios.post('http://localhost:5000/cart', {
+            //     item_id,
+            //     customer_id,
+            //     quantity
+            // });
+
+            // if (response && response.data.success) {
+            //     await getCartItems();
+            //     toast.success('Items Added to Cart !!!', {
+            //         position: "top-right",
+            //         autoClose: 1500,
+            //         hideProgressBar: false,
+            //         closeOnClick: true,
+            //         pauseOnHover: false,
+            //         newestOnTop: false,
+            //         theme: "light",
+            //     });
+            //     setItemId('');
+            //     setOpeningStock('');
+            //     setSellingPrice('');
+            //     setCustomerId('');
+            //     setCustomerEmail('');
+            //     setCustomerPhoneNumber('');
+            //     setCustomerBillingAddress('');
+            //     setQuantity('');
+            // }
         } catch (error) {
             console.error(error.message);
         }
@@ -128,7 +175,16 @@ const SalesOrders = () => {
     const orderItems = async (e, cartItemsData) => {
         e.preventDefault();
         if (cartItemsData.length === 0) {
-            return alert('Nothing to Order');
+            toast.error('Nothing to Order !!!', {
+                position: "top-right",
+                autoClose: 1500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                newestOnTop: false,
+                theme: "light",
+            });
+            return;
         }
 
         const itemsToOrder = cartItemsData.map((items) => ({
@@ -145,6 +201,7 @@ const SalesOrders = () => {
         if (response && response.data.success) {
             alert('Order placed');
             await getCartItems();
+            await getItems();
         }
     }
 
