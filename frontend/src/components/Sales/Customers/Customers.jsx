@@ -1,9 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import ViewCustomers from './ViewCustomers';
 import { toast } from 'react-toastify';
 import AddCustomerButton from './AddCustomerButton';
 import AddCustomerModal from './AddCustomerModal';
+import CustomerLists from './CustomerLists';
 
 const Customers = () => {
 
@@ -11,6 +11,7 @@ const Customers = () => {
     const [email, setEmail] = useState('');
     const [phone_number, setPhoneNumber] = useState('');
     const [billing_address, setBillingAddress] = useState('');
+    const [updateForm, setupdateForm] = useState(false);
 
     const [customerData, setCustomerData] = useState([]);
     const [id, setId] = useState('');
@@ -21,6 +22,7 @@ const Customers = () => {
         setEmail('');
         setPhoneNumber('');
         setBillingAddress('');
+        setupdateForm(false);
     };
 
     const addCustomer = async (e) => {
@@ -44,6 +46,7 @@ const Customers = () => {
         const response = await axios.get('http://localhost:5000/customer');
         if (response && response.data.success) {
             setCustomerData(response.data.success);
+            setupdateForm(false);
         }
     };
 
@@ -54,6 +57,7 @@ const Customers = () => {
         setEmail(value.email);
         setPhoneNumber(value.phone_number);
         setBillingAddress(value.billing_address);
+        setupdateForm(true);
     };
 
     const updateCustomer = async (e) => {
@@ -94,22 +98,13 @@ const Customers = () => {
                 handleClose={handleClose}
                 addCustomer={addCustomer}
                 name={name}
+                updateCustomer={updateCustomer}
+                updateForm={updateForm}
             />
 
-            {/* view customers component */}
-            <ViewCustomers
+            <CustomerLists
                 customerData={customerData}
                 handleUpdateData={handleUpdateData}
-                name={name}
-                setName={setName}
-                setEmail={setEmail}
-                setBillingAddress={setBillingAddress}
-                email={email}
-                billing_address={billing_address}
-                setPhoneNumber={setPhoneNumber}
-                phone_number={phone_number}
-                handleClose={handleClose}
-                updateCustomer={updateCustomer}
             />
         </>
     )

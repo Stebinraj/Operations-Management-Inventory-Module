@@ -1,13 +1,17 @@
 import React from 'react'
 
-const AddCustomerModal = ({ setName, setEmail, email, setPhoneNumber, phone_number, setBillingAddress, billing_address, handleClose, addCustomer, name }) => {
+const AddCustomerModal = ({ setName, setEmail, email, setPhoneNumber, phone_number, setBillingAddress, billing_address, handleClose, addCustomer, name, updateCustomer, updateForm }) => {
     return (
         <>
             <div className="modal fade" id="customers" tabIndex={-1} aria-labelledby="customersLabel" aria-hidden="true" data-bs-backdrop="static">
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h1 className="modal-title fs-5" id="exampleModalLabel">Create Customer</h1>
+                            {updateForm ? (
+                                <h1 className="modal-title fs-5" id="exampleModalLabel">Update Customer</h1>
+                            ) : (
+                                <h1 className="modal-title fs-5" id="exampleModalLabel">Create Customer</h1>
+                            )}
                         </div>
                         <div className="modal-body">
                             <form className='row'>
@@ -31,7 +35,7 @@ const AddCustomerModal = ({ setName, setEmail, email, setPhoneNumber, phone_numb
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={handleClose}>Close</button>
-                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={(e) => { addCustomer(e) }}>Submit</button>
+                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={(e) => { updateForm ? (updateCustomer(e)) : (addCustomer(e)) }}>Submit</button>
                         </div>
                     </div>
                 </div>

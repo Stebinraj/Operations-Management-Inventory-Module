@@ -34,7 +34,7 @@ const CustomerLists = ({ customerData, handleUpdateData }) => {
                                             <td className='text-nowrap'>{value.phone_number}</td>
                                             <td className='text-nowrap'>{value.billing_address}</td>
                                             <td className='text-nowrap'>
-                                                <button className='btn btn-primary' data-bs-toggle="modal" data-bs-target="#updateCustomers" onClick={(e) => { handleUpdateData(e, value) }}>Update</button>
+                                                <button className='btn btn-primary' data-bs-toggle="modal" data-bs-target="#customers" onClick={(e) => { handleUpdateData(e, value) }}>Update</button>
                                             </td>
                                         </tr>
                                     )
