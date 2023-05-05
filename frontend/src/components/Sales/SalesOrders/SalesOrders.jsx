@@ -109,27 +109,11 @@ const SalesOrders = () => {
 
 
             if (!customer_id || !item_id || !quantity) {
-                toast.error('All Fields Required !!!', {
-                    position: "top-right",
-                    autoClose: 1500,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: false,
-                    newestOnTop: false,
-                    theme: "light",
-                });
+                toast.error('All Fields Required !!!');
                 return;
             }
             else if (quantity > opening_stock) {
-                toast.error('Invalid Quantity !!!', {
-                    position: "top-right",
-                    autoClose: 1500,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: false,
-                    newestOnTop: false,
-                    theme: "light",
-                });
+                toast.error('Invalid Quantity !!!');
                 setItemId('');
                 setOpeningStock('');
                 setSellingPrice('');
@@ -176,15 +160,7 @@ const SalesOrders = () => {
     const orderItems = async (e, cartItemsData) => {
         e.preventDefault();
         if (cartItemsData.length === 0) {
-            toast.error('Nothing to Order !!!', {
-                position: "top-right",
-                autoClose: 1500,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: false,
-                newestOnTop: false,
-                theme: "light",
-            });
+            toast.error('Nothing to Order !!!');
             return;
         }
 
@@ -200,7 +176,7 @@ const SalesOrders = () => {
 
         const response = await axios.post('http://localhost:5000/salesorders', itemsToOrder);
         if (response && response.data.success) {
-            alert('Order placed');
+            toast.success('Order Placed !!!')
             await getCartItems();
             await getItems();
         }
@@ -221,7 +197,9 @@ const SalesOrders = () => {
         e.preventDefault();
         const response = await axios.delete(`http://localhost:5000/cart`, { data: { id: value._id } });
         if (response && response.data.success) {
+            toast.success('Deleted SuccessFully !!!')
             await getCartItems();
+            await getItems();
         }
     }
 
