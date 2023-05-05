@@ -134,15 +134,7 @@ const SalesOrders = () => {
             if (response && response.data.success) {
                 await getCartItems();
                 await getItems();
-                toast.success('Items Added to Cart !!!', {
-                    position: "top-right",
-                    autoClose: 1500,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: false,
-                    newestOnTop: false,
-                    theme: "light",
-                });
+                toast.success('Items Added to Cart !!!');
                 setItemId('');
                 setOpeningStock('');
                 setSellingPrice('');
