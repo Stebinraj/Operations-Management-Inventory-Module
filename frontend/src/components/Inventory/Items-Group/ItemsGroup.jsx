@@ -130,7 +130,7 @@ const ItemsGroup = () => {
                     setItemName={setItemName}
                     setUnit={setUnit}
                     setWeight={setWeight}
-                    dimensions={setDimensions}
+                    dimensions={dimensions}
                 />
                 {/* Add items component */}
             </div>
