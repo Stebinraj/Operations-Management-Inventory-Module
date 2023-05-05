@@ -43,10 +43,14 @@ const Customers = () => {
     };
 
     const getCustomer = async () => {
-        const response = await axios.get('http://localhost:5000/customer');
-        if (response && response.data.success) {
-            setCustomerData(response.data.success);
-            setupdateForm(false);
+        try {
+            const response = await axios.get('http://localhost:5000/customer');
+            if (response && response.data.success) {
+                setCustomerData(response.data.success);
+                setupdateForm(false);
+            }
+        } catch (error) {
+            console.error(error.message);
         }
     };
 

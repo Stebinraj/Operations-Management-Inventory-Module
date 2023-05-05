@@ -34,13 +34,17 @@ const ItemsGroup = () => {
     const navigate = useNavigate();
 
     const addGroup = async (e) => {
-        e.preventDefault();
-        setReload(false);
-        const response = await axios.post('http://localhost:5000/items-group', { item_group_label });
-        if (response && response.data.success) {
-            toast.success('Group Created Successfully !!!');
-            setReload(true);
-            setItemGroupLabel('');
+        try {
+            e.preventDefault();
+            setReload(false);
+            const response = await axios.post('http://localhost:5000/items-group', { item_group_label });
+            if (response && response.data.success) {
+                toast.success('Group Created Successfully !!!');
+                setReload(true);
+                setItemGroupLabel('');
+            }
+        } catch (error) {
+            console.error(error.message);
         }
     }
 
@@ -75,16 +79,24 @@ const ItemsGroup = () => {
     };
 
     const getGroup = async () => {
-        const response = await axios.get('http://localhost:5000/items-group');
-        if (response && response.data.success) {
-            setGroupData(response.data.success);
+        try {
+            const response = await axios.get('http://localhost:5000/items-group');
+            if (response && response.data.success) {
+                setGroupData(response.data.success);
+            }
+        } catch (error) {
+            console.error(error.message);
         }
     }
 
     const getItemsGroup = async () => {
-        const response = await axios.get('http://localhost:5000/items-group');
-        if (response && response.data.success) {
-            setItemGroupData(response.data.success);
+        try {
+            const response = await axios.get('http://localhost:5000/items-group');
+            if (response && response.data.success) {
+                setItemGroupData(response.data.success);
+            }
+        } catch (error) {
+            console.error(error.message);
         }
     }
 
