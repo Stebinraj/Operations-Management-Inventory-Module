@@ -1,8 +1,9 @@
 import axios from 'axios';
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
 import ViewCustomers from './ViewCustomers';
 import { toast } from 'react-toastify';
+import AddCustomerButton from './AddCustomerButton';
+import AddCustomerModal from './AddCustomerModal';
 
 const Customers = () => {
 
@@ -10,7 +11,9 @@ const Customers = () => {
     const [email, setEmail] = useState('');
     const [phone_number, setPhoneNumber] = useState('');
     const [billing_address, setBillingAddress] = useState('');
-    const [reload, setReload] = useState(false);
+
+    const [customerData, setCustomerData] = useState([]);
+    const [id, setId] = useState('');
 
     const handleClose = async (e) => {
         e.preventDefault();
@@ -23,76 +26,91 @@ const Customers = () => {
     const addCustomer = async (e) => {
         try {
             e.preventDefault();
-            setReload(false);
             const response = await axios.post('http://localhost:5000/customer', { name, email, phone_number, billing_address });
             if (response && response.data.success) {
-                toast.success('Customer Added Successfully !!!', {
-                    position: "top-right",
-                    autoClose: 1500,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: false,
-                    newestOnTop: false,
-                    theme: "light",
-                });
-                setReload(true);
+                toast.success('Customer Added Successfully !!!');
                 setName('');
                 setEmail('');
                 setPhoneNumber('');
                 setBillingAddress('');
+                await getCustomer();
+            }
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+
+    const getCustomer = async () => {
+        const response = await axios.get('http://localhost:5000/customer');
+        if (response && response.data.success) {
+            setCustomerData(response.data.success);
+        }
+    };
+
+    const handleUpdateData = async (e, value) => {
+        e.preventDefault();
+        setId(value._id);
+        setName(value.name);
+        setEmail(value.email);
+        setPhoneNumber(value.phone_number);
+        setBillingAddress(value.billing_address);
+    };
+
+    const updateCustomer = async (e) => {
+        try {
+            e.preventDefault();
+            const response = await axios.put(`http://localhost:5000/customer/${id}`, { name, email, phone_number, billing_address });
+            if (response && response.data.success) {
+                setName('');
+                setEmail('');
+                setPhoneNumber('');
+                setBillingAddress('');
+                setId('');
+                await getCustomer();
+                toast.success('Customer Updated !!!');
+                await getCustomer();
             }
         } catch (error) {
             console.log(error.message);
         }
     }
 
+    useEffect(() => {
+        getCustomer();
+    }, [])
+
     return (
         <>
-            <div className="col-12 d-flex justify-content-end mb-2">
-                <Link className="nav-link text-dark d-flex p-0" data-bs-toggle="modal" data-bs-target="#customers">
-                    <i className="nav-icon bi bi-filter-circle me-1" style={{ fontSize: '21px', color: 'blue' }}></i>
-                    <p className='sidebar-links m-auto h6' style={{ color: 'grey' }}>
-                        Add Customer
-                    </p>
-                </Link>
-            </div>
+            <AddCustomerButton />
 
-            <div className="modal fade" id="customers" tabIndex={-1} aria-labelledby="customersLabel" aria-hidden="true" data-bs-backdrop="static">
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h1 className="modal-title fs-5" id="exampleModalLabel">Create Customer</h1>
-                        </div>
-                        <div className="modal-body">
-                            <form className='row'>
-                                <div className="mb-3 form-group col-12">
-                                    <span>Name</span>
-                                    <input type="text" className="form-control" placeholder='Enter Name' onChange={(e) => { setName(e.target.value) }} value={name} />
-                                </div>
-                                <div className="mb-3 form-group col-12">
-                                    <span>Email</span>
-                                    <input type="text" className="form-control" placeholder='Enter Email' onChange={(e) => { setEmail(e.target.value) }} value={email} />
-                                </div>
-                                <div className="mb-3 form-group col-12">
-                                    <span>Phone Number</span>
-                                    <input type="text" className="form-control" placeholder='Enter Phone Number' onChange={(e) => { setPhoneNumber(e.target.value) }} value={phone_number} />
-                                </div>
-                                <div className="mb-3 form-group col-12">
-                                    <span>Billing Address</span>
-                                    <input type="text" className="form-control" placeholder='Enter Billing Address' onChange={(e) => { setBillingAddress(e.target.value) }} value={billing_address} />
-                                </div>
-                            </form>
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={handleClose}>Close</button>
-                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={(e) => { addCustomer(e) }}>Submit</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <AddCustomerModal
+                setName={setName}
+                setEmail={setEmail}
+                email={email}
+                setPhoneNumber={setPhoneNumber}
+                phone_number={phone_number}
+                setBillingAddress={setBillingAddress}
+                billing_address={billing_address}
+                handleClose={handleClose}
+                addCustomer={addCustomer}
+                name={name}
+            />
 
             {/* view customers component */}
-            <ViewCustomers reload={reload} />
+            <ViewCustomers
+                customerData={customerData}
+                handleUpdateData={handleUpdateData}
+                name={name}
+                setName={setName}
+                setEmail={setEmail}
+                setBillingAddress={setBillingAddress}
+                email={email}
+                billing_address={billing_address}
+                setPhoneNumber={setPhoneNumber}
+                phone_number={phone_number}
+                handleClose={handleClose}
+                updateCustomer={updateCustomer}
+            />
         </>
     )
 }

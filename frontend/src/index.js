@@ -11,7 +11,15 @@ import { ToastContainer } from 'react-toastify';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
-        <ToastContainer className={'mt-5'}/>
+        <ToastContainer
+            className={'mt-5'}
+            autoClose={1500}
+            position='top-right'
+            hideProgressBar={false}
+            closeOnClick={true}
+            newestOnTop={false}
+            theme={'light'}
+        />
         <BrowserRouter>
             <App />
         </BrowserRouter>

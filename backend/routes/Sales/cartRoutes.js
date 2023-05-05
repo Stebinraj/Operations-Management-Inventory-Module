@@ -12,10 +12,14 @@ router.post('/cart', async (req, res) => {
         res.send({ success: data });
         return;
     } else {
-        const cart = new cartModel(req.body);
-        const data = await cart.save();
-        res.send({ success: data });
-        return;
+        const carts = await cartModel(req.body);
+        const item = await itemsModel.findById({ _id: carts.item_id });
+        if (item) {
+            await carts.save();
+            item.opening_stock -= carts.quantity;
+            await item.save();
+        }
+        res.send({ success: carts, item });
     }
 });
 
@@ -38,8 +42,34 @@ router.get('/cart', async (req, res) => {
 });
 
 router.delete('/cart', async (req, res) => {
-    const data = await cartModel.findByIdAndDelete({ _id: req.body.id });
-    res.send({ success: data });
+    // const data = await cartModel.findByIdAndDelete({ _id: req.body.id });
+    const cart = await cartModel.findByIdAndDelete({ _id: req.body.id });
+    if (cart) {
+        const item = await itemsModel.findById({ _id: cart.item_id });
+        if (item) {
+            item.opening_stock += cart.quantity;
+            await item.save();
+        }
+    }
+    res.send({ success: cart });
+});
+
+router.post('/cart', async (req, res) => {
+    const cart = await cartModel.find({ customer_id: req.body.customer_id, item_id: req.body.item_id });
+    if (cart.length) {
+        const data = await cartModel.findOneAndUpdate({ customer_id: req.body.customer_id, item_id: req.body.item_id }, req.body);
+        res.send({ success: data });
+        return;
+    } else {
+        const carts = await cartModel(req.body);
+        const item = await itemsModel.findById({ _id: carts.item_id });
+        if (item) {
+            await carts.save();
+            item.opening_stock -= carts.quantity;
+            await item.save();
+        }
+        res.send({ success: carts, item });
+    }
 });
 
 

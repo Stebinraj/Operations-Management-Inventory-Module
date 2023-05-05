@@ -4,7 +4,6 @@ const Footer = () => {
     return (
         <>
             <footer className="main-footer text-center">
-                {/* Default */}
                 <strong>Copyright &copy; {new Date().getFullYear()} </strong>
             </footer>
         </>

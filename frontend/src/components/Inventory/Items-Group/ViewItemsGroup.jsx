@@ -1,19 +1,6 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
-const ViewItemsGroup = (props) => {
-
-    const [groupData, setGroupData] = useState([]);
-
-    useEffect(() => {
-        const getGroup = async () => {
-            const response = await axios.get('http://localhost:5000/items-group');
-            if (response && response.data.success) {
-                setGroupData(response.data.success);
-            }
-        }
-        getGroup();
-    }, [props.reload]);
+const ViewItemsGroup = ({ groupData }) => {
 
     return (
         <>
