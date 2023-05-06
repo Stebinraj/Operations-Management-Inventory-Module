@@ -189,7 +189,7 @@ const SalesOrders = () => {
         e.preventDefault();
         const response = await axios.delete(`http://localhost:5000/cart`, { data: { id: value._id } });
         if (response && response.data.success) {
-            toast.success('Deleted SuccessFully !!!')
+            toast.success('Deleted Successfully !!!')
             await getCartItems();
             await getItems();
         }

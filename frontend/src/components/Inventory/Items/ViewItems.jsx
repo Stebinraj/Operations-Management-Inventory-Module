@@ -61,9 +61,7 @@ const ViewItems = () => {
                 reason,
                 description,
                 quantity,
-                value,
-                opening_stock: quantity === "" ? (opening_stock) : (quantity),
-                selling_price: value === "" ? (selling_price) : (value)
+                value
             });
             if (response && response.data.success) {
                 toast.success('Items Adjusted Successfully !!!');
@@ -78,7 +76,7 @@ const ViewItems = () => {
                 await getItems();
             }
         } catch (error) {
-            console.error(error.message);
+            console.error(error);
         }
     };
 
