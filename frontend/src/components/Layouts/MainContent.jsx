@@ -13,10 +13,10 @@ const MainContent = (props) => {
                 <div className="row">
                     {props.dashboard && (<Dashboard />)}
                     {props.itemGroup && (<ItemsGroup />)}
-                    {props.items && (<ViewItems />)}
+                    {props.items && (<ViewItems itemsPage={props.items} />)}
                     {props.inventoryAdjustment && (<InventoryAdjustments />)}
                     {props.customers && (<Customers />)}
-                    {props.salesOrder && (<SalesOrders />)}
+                    {props.salesOrder && (<SalesOrders salesOrderPage={props.salesOrder} />)}
                 </div>
             </div>
         </>

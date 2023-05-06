@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import AdjustmentModal from './AdjustmentModal';
 import ItemsList from './ItemsList';
 
-const ViewItems = () => {
+const ViewItems = ({ itemsPage }) => {
 
     const [itemsData, setItemsData] = useState([]);
 
@@ -118,6 +118,7 @@ const ViewItems = () => {
             <ItemsList
                 handleAdjust={handleAdjust}
                 itemsData={itemsData}
+                itemsPage={itemsPage}
             />
         </>
     )
