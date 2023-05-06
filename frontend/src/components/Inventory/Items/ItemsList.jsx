@@ -2,24 +2,6 @@ import React from 'react'
 
 const ItemsList = ({ handleAdjust, itemsData }) => {
 
-    const table = [
-        { headings: 'Item Group' },
-        { headings: 'Item Name' },
-        { headings: 'Unit' },
-        { headings: 'Dimensions' },
-        { headings: 'Weight' },
-        { headings: 'Manufacturer' },
-        { headings: 'Brand' },
-        { headings: 'Selling Price' },
-        { headings: 'Cost Price' },
-        { headings: 'Description' },
-        { headings: 'Opening Stock' },
-        { headings: 'Reorder Point' },
-        { headings: 'Preferred Vendor' },
-        { headings: 'Image' },
-        { headings: 'Adjustments' }
-    ];
-
     return (
         <>
             <div className="col-sm-12">
@@ -28,11 +10,21 @@ const ItemsList = ({ handleAdjust, itemsData }) => {
                         <table className="table table-bordered">
                             <thead className='text-bg-primary'>
                                 <tr>
-                                    {table.map((value, index) => {
-                                        return (
-                                            <th scope="col" className='text-nowrap' key={index}>{value.headings}</th>
-                                        )
-                                    })}
+                                    <th scope="col" className='text-nowrap'>Item Group</th>
+                                    <th scope="col" className='text-nowrap'>Item Name</th>
+                                    <th scope="col" className='text-nowrap'>Unit</th>
+                                    <th scope="col" className='text-nowrap'>Dimensions</th>
+                                    <th scope="col" className='text-nowrap'>Weight</th>
+                                    <th scope="col" className='text-nowrap'>Manufacturer</th>
+                                    <th scope="col" className='text-nowrap'>Brand</th>
+                                    <th scope="col" className='text-nowrap'>Selling Price</th>
+                                    <th scope="col" className='text-nowrap'>Cost Price</th>
+                                    <th scope="col" className='text-nowrap'>Description</th>
+                                    <th scope="col" className='text-nowrap'>Opening Stock</th>
+                                    <th scope="col" className='text-nowrap'>Reorder Point</th>
+                                    <th scope="col" className='text-nowrap'>Preferred Vendor</th>
+                                    <th scope="col" className='text-nowrap'>Image</th>
+                                    <th scope="col" className='text-nowrap'>Adjustments</th>
                                 </tr>
                             </thead>
                             <tbody>
