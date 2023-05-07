@@ -1,93 +1,13 @@
 const express = require('express');
-const cartModel = require('../../models/Sales/cartModel');
-const itemsModel = require('../../models/Inventory/itemsModel');
-const itemsGroupModel = require('../../models/Inventory/itemsGroupModel');
-const customerModel = require('../../models/Sales/customersModel');
+const getCartController = require('../../controller/Sales/GET/getCartController');
+const addToCartController = require('../../controller/Sales/POST/addToCartController');
+const deleteCartController = require('../../controller/Sales/DELETE/deleteCartController');
 const router = express.Router();
 
-router.post('/cart', async (req, res) => {
-    const cart = await cartModel.find({ customer_id: req.body.customer_id, item_id: req.body.item_id });
-    if (cart.length) {
-        const existingQuantity = cart.map((value) => { return (value.quantity) });
-        if (req.body.quantity > existingQuantity) {
-            const quantityToAdd = req.body.quantity - existingQuantity;
-            const item = await itemsModel.findById({ _id: req.body.item_id });
-            if (item) {
-                item.opening_stock -= quantityToAdd;
-                await item.save();
-            }
-        }
-        else if (req.body.quantity < existingQuantity) {
-            const quantityToSub = existingQuantity - req.body.quantity;
-            const item = await itemsModel.findById({ _id: req.body.item_id });
-            if (item) {
-                item.opening_stock += quantityToSub;
-                await item.save();
-            }
-        }
-        const data = await cartModel.findOneAndUpdate({ customer_id: req.body.customer_id, item_id: req.body.item_id }, req.body);
-        res.send({ success: data });
-        return;
-    } else {
-        const carts = await cartModel(req.body);
-        const item = await itemsModel.findById({ _id: carts.item_id });
-        if (item) {
-            await carts.save();
-            item.opening_stock -= carts.quantity;
-            await item.save();
-        }
-        res.send({ success: carts, item });
-        return;
-    }
-});
+router.post('/cart', addToCartController);
 
-router.get('/cart', async (req, res) => {
-    const data = await cartModel.find({}).populate([
-        {
-            path: 'item_id',
-            model: itemsModel,
-            populate: {
-                path: 'item_group_id',
-                model: itemsGroupModel
-            }
-        },
-        {
-            path: 'customer_id',
-            model: customerModel
-        }
-    ]);
-    res.send({ success: data });
-});
+router.get('/cart', getCartController);
 
-router.delete('/cart', async (req, res) => {
-    const cart = await cartModel.findByIdAndDelete({ _id: req.body.id });
-    if (cart) {
-        const item = await itemsModel.findById({ _id: cart.item_id });
-        if (item) {
-            item.opening_stock += cart.quantity;
-            await item.save();
-        }
-    }
-    res.send({ success: cart });
-});
-
-router.post('/cart', async (req, res) => {
-    const cart = await cartModel.find({ customer_id: req.body.customer_id, item_id: req.body.item_id });
-    if (cart.length) {
-        const data = await cartModel.findOneAndUpdate({ customer_id: req.body.customer_id, item_id: req.body.item_id }, req.body);
-        res.send({ success: data });
-        return;
-    } else {
-        const carts = await cartModel(req.body);
-        const item = await itemsModel.findById({ _id: carts.item_id });
-        if (item) {
-            await carts.save();
-            item.opening_stock -= carts.quantity;
-            await item.save();
-        }
-        res.send({ success: carts, item });
-    }
-});
-
+router.delete('/cart', deleteCartController);
 
 module.exports = router;

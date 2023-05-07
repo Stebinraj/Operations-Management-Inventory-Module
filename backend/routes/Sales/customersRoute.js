@@ -1,24 +1,16 @@
 const express = require('express');
-const customerModel = require('../../models/Sales/customersModel');
+const addCustomerController = require('../../controller/Sales/POST/addCustomerController');
+const getCustomerController = require('../../controller/Sales/GET/getCustomerController');
+const updateCustomerController = require('../../controller/Sales/PUT/updateCustomerController');
 const router = express.Router();
 
 // create customer
-router.post('/customer', async (req, res) => {
-    const customers = new customerModel(req.body);
-    const data = await customers.save();
-    res.send({ success: data });
-})
+router.post('/customer', addCustomerController);
 
 // retrieve customers
-router.get('/customer', async (req, res) => {
-    const data = await customerModel.find({});
-    res.send({ success: data });
-});
+router.get('/customer', getCustomerController);
 
 // update customers
-router.put('/customer/:id', async (req, res) => {
-    const data = await customerModel.findByIdAndUpdate({ _id: req.params.id },req.body);
-    res.send({ success: data });
-})
+router.put('/customer/:id', updateCustomerController)
 
 module.exports = router;
