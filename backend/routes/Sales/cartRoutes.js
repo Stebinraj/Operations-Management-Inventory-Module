@@ -8,6 +8,23 @@ const router = express.Router();
 router.post('/cart', async (req, res) => {
     const cart = await cartModel.find({ customer_id: req.body.customer_id, item_id: req.body.item_id });
     if (cart.length) {
+        const existingQuantity = cart.map((value) => { return (value.quantity) });
+        if (req.body.quantity > existingQuantity) {
+            const quantityToAdd = req.body.quantity - existingQuantity;
+            const item = await itemsModel.findById({ _id: req.body.item_id });
+            if (item) {
+                item.opening_stock -= quantityToAdd;
+                await item.save();
+            }
+        }
+        else if (req.body.quantity < existingQuantity) {
+            const quantityToSub = existingQuantity - req.body.quantity;
+            const item = await itemsModel.findById({ _id: req.body.item_id });
+            if (item) {
+                item.opening_stock += quantityToSub;
+                await item.save();
+            }
+        }
         const data = await cartModel.findOneAndUpdate({ customer_id: req.body.customer_id, item_id: req.body.item_id }, req.body);
         res.send({ success: data });
         return;
@@ -20,6 +37,7 @@ router.post('/cart', async (req, res) => {
             await item.save();
         }
         res.send({ success: carts, item });
+        return;
     }
 });
 
@@ -42,7 +60,6 @@ router.get('/cart', async (req, res) => {
 });
 
 router.delete('/cart', async (req, res) => {
-    // const data = await cartModel.findByIdAndDelete({ _id: req.body.id });
     const cart = await cartModel.findByIdAndDelete({ _id: req.body.id });
     if (cart) {
         const item = await itemsModel.findById({ _id: cart.item_id });
