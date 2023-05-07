@@ -53,6 +53,30 @@ const ViewItems = ({ itemsPage }) => {
     const submitAdjustment = async (e) => {
         try {
             e.preventDefault();
+            if (Number(opening_stock) + Number(quantity) < 0) {
+                toast.error('Invalid Quantity !!!');
+                setItemId('');
+                setModeOfAdjustment('');
+                setReason('');
+                setDescription('');
+                setSellingPrice('');
+                setOpeningStock('');
+                setQuantity('');
+                setValue('');
+                return;
+            }
+            else if (Number(selling_price) + Number(value) < 0) {
+                toast.error('Invalid Value !!!');
+                setItemId('');
+                setModeOfAdjustment('');
+                setReason('');
+                setDescription('');
+                setSellingPrice('');
+                setOpeningStock('');
+                setQuantity('');
+                setValue('');
+                return;
+            }
             const response = await axios.put(`http://localhost:5000/adjust-items/${item_id}`, {
                 item_id,
                 mode_of_adjustment,
