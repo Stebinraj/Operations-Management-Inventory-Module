@@ -23,7 +23,7 @@ const AdjustmentModal = ({ handleAdjustClose, handleModeOfAdjustmentChange, setD
                                     <>
                                         <div className="mb-3 form-group col-12">
                                             <span>Opening Stock ({opening_stock})</span>
-                                            <input type="number" className="form-control" placeholder='Enter Quantity' onChange={(e) => { setQuantity(e.target.value); setValue('') }} value={quantity} />
+                                            <input type="number" className="form-control" placeholder='Enter Quantity' onChange={(e) => { setQuantity(e.target.value) }} value={quantity} />
                                         </div>
                                     </>
                                 )}
@@ -31,7 +31,7 @@ const AdjustmentModal = ({ handleAdjustClose, handleModeOfAdjustmentChange, setD
                                     <>
                                         <div className="mb-3 form-group col-12">
                                             <span>Selling Price ({selling_price})</span>
-                                            <input type="number" className="form-control" placeholder='Enter Value' onChange={(e) => { setValue(e.target.value); setQuantity("") }} value={value} />
+                                            <input type="number" className="form-control" placeholder='Enter Value' onChange={(e) => { setValue(e.target.value) }} value={value} />
                                         </div>
                                     </>
                                 )}
