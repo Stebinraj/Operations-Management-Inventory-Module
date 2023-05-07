@@ -13,7 +13,7 @@ router.get('/items', getItemsController);
 // get items by id
 router.get('/items/:id', getItemsBySpecificIdController);
 
-// aggregate and populate
+// aggregate
 
 // router.get('/view/items', async (req, res) => {
 //     const data = await itemsModel.aggregate([
@@ -29,7 +29,7 @@ router.get('/items/:id', getItemsBySpecificIdController);
 //     res.send({ success: data });
 // });
 
-// aggregate and populate
+// aggregate
 
 
 module.exports = router;
