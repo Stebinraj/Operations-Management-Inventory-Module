@@ -3,6 +3,7 @@ import React from 'react'
 
 const AdjustmentReport = ({ reportData }) => {
 
+    // inventory adjustments table headings
     const table = [
         { headings: 'Item Group' },
         { headings: 'Item Name' },
@@ -20,6 +21,7 @@ const AdjustmentReport = ({ reportData }) => {
 
     return (
         <>
+            {/* inventory adjustments reports */}
             <div className="col-12">
                 <div className="card card-primary card-outline">
                     <div className="card-body table-responsive">
@@ -57,6 +59,7 @@ const AdjustmentReport = ({ reportData }) => {
                     </div>
                 </div>
             </div>
+            {/* inventory adjustments reports */}
         </>
     )
 }

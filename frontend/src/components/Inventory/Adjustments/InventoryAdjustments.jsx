@@ -7,10 +7,12 @@ import AdjustmentReport from './AdjustmentReport';
 
 const InventoryAdjustments = () => {
 
+    // State variables to manage inventory adjustment report data and date range reports
     const [reportData, setReportData] = useState([]);
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
 
+    // fetch inventory adjustment reports and set to reportData
     const getReports = async () => {
         try {
             const response = await axios.get('http://localhost:5000/adjust-reports');
@@ -22,12 +24,14 @@ const InventoryAdjustments = () => {
         }
     };
 
+    // filtering specific date range inventory adjustment reports
     const handleSpecificDate = async (e) => {
         e.preventDefault();
         await getDateRangeReports();
         toast.success('Filtered Successfully !!!');
     };
 
+    // reset filtered adjustments reports
     const reset = async (e) => {
         e.preventDefault();
         setStartDate(new Date());
@@ -36,6 +40,7 @@ const InventoryAdjustments = () => {
         toast.success('Resetted Successfully !!!');
     }
 
+    // fetching specific date range inventory adjustment reports and st to reportData
     const getDateRangeReports = async () => {
         try {
             const start = startDate.toISOString();
@@ -49,14 +54,17 @@ const InventoryAdjustments = () => {
         }
     }
 
+    // handle side-efffects while fetching inventory adjustment reports
     useEffect(() => {
         getReports();
     }, [])
 
     return (
         <>
+            {/* filter button component */}
             <FilterButton />
 
+            {/* Adjustment filter range component */}
             <AdjustmentFilterRange
                 startDate={startDate}
                 endDate={endDate}
@@ -66,6 +74,7 @@ const InventoryAdjustments = () => {
                 setEndDate={setEndDate}
             />
 
+            {/* adjustment report component */}
             <AdjustmentReport
                 reportData={reportData}
             />

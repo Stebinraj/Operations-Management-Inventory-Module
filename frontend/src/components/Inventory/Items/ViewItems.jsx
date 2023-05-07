@@ -6,8 +6,10 @@ import ItemsList from './ItemsList';
 
 const ViewItems = ({ itemsPage }) => {
 
+    // State variables to view items
     const [itemsData, setItemsData] = useState([]);
 
+    // State variables to adjust inventory adjustments
     const [item_id, setItemId] = useState('');
     const [mode_of_adjustment, setModeOfAdjustment] = useState('');
     const [reason, setReason] = useState('');
@@ -19,6 +21,7 @@ const ViewItems = ({ itemsPage }) => {
     const randomNum = Math.floor(Math.random() * 10000000000);
     const reference_number = String(randomNum).padStart(10, '0');
 
+    // fetch items and set to setItemsData
     const getItems = async () => {
         try {
             const response = await axios.get('http://localhost:5000/items');
@@ -30,6 +33,7 @@ const ViewItems = ({ itemsPage }) => {
         }
     };
 
+    // store item id, selling price, opening_stock, description in state variable for inventory adjustments
     const handleAdjust = async (e, value) => {
         e.preventDefault();
         setItemId(value._id);
@@ -38,21 +42,23 @@ const ViewItems = ({ itemsPage }) => {
         setDescription(value.description);
     };
 
+    // When changing the mode of adjustment, reset quantity, value and reason if necessary
     const handleModeOfAdjustmentChange = (e) => {
         const selectedMode = e.target.value;
         setModeOfAdjustment(selectedMode);
         if (selectedMode === 'Quantity') {
             setQuantity('');
-            setReason('');
         } else if (selectedMode === "Value") {
             setValue('');
-            setReason('');
         }
+        setReason('');
     };
 
+    // submit inventory adjustments data
     const submitAdjustment = async (e) => {
         try {
             e.preventDefault();
+            // checking for non negative while adding opening stock and quantity
             if (Number(opening_stock) + Number(quantity) < 0) {
                 toast.error('Invalid Quantity !!!');
                 setItemId('');
@@ -65,6 +71,7 @@ const ViewItems = ({ itemsPage }) => {
                 setValue('');
                 return;
             }
+            // checking for non negative while adding selling price and value
             else if (Number(selling_price) + Number(value) < 0) {
                 toast.error('Invalid Value !!!');
                 setItemId('');
@@ -77,6 +84,7 @@ const ViewItems = ({ itemsPage }) => {
                 setValue('');
                 return;
             }
+            // send adjustments data to the database
             const response = await axios.put(`http://localhost:5000/adjust-items/${item_id}`, {
                 item_id,
                 mode_of_adjustment,
@@ -87,6 +95,7 @@ const ViewItems = ({ itemsPage }) => {
                 quantity,
                 value
             });
+            // if adjustment data sends and save successfully an alert appears then the state variables set to empty
             if (response && response.data.success) {
                 toast.success('Items Adjusted Successfully !!!');
                 setItemId('');
@@ -104,6 +113,7 @@ const ViewItems = ({ itemsPage }) => {
         }
     };
 
+    // closing the adjustment to make state variables empty
     const handleAdjustClose = async (e) => {
         e.preventDefault();
         setItemId('');
@@ -116,12 +126,14 @@ const ViewItems = ({ itemsPage }) => {
         setValue('');
     };
 
+    // handle side-effects while fetching items
     useEffect(() => {
         getItems();
     }, []);
 
     return (
         <>
+            {/* adjustment modal component */}
             <AdjustmentModal
                 handleAdjustClose={handleAdjustClose}
                 handleModeOfAdjustmentChange={handleModeOfAdjustmentChange}
@@ -138,7 +150,9 @@ const ViewItems = ({ itemsPage }) => {
                 description={description}
                 submitAdjustment={submitAdjustment}
             />
+            {/* adjustment modal component */}
 
+            {/* items list component */}
             <ItemsList
                 handleAdjust={handleAdjust}
                 itemsData={itemsData}

@@ -7,13 +7,11 @@ import CreateItemGroup from './CreateItemGroup';
 import { useNavigate } from 'react-router-dom';
 
 const ItemsGroup = () => {
+    // State variables to view items group
+    const [itemGroupData, setItemGroupData] = useState([]);
 
     const [item_group_label, setItemGroupLabel] = useState('');
-    const [reload, setReload] = useState(false);
-    const [groupData, setGroupData] = useState([]);
-
     const [item_group_id, setItemGroupId] = useState('');
-    const [itemGroupData, setItemGroupData] = useState([]);
     const [item_name, setItemName] = useState('');
     const [unit, setUnit] = useState('');
     const [dimensions, setDimensions] = useState({
@@ -33,14 +31,14 @@ const ItemsGroup = () => {
     const [image_of_item, setImageOfItem] = useState('');
     const navigate = useNavigate();
 
+    // create new item groups
     const addGroup = async (e) => {
         try {
             e.preventDefault();
-            setReload(false);
             const response = await axios.post('http://localhost:5000/items-group', { item_group_label });
             if (response && response.data.success) {
                 toast.success('Group Created Successfully !!!');
-                setReload(true);
+                await getItemsGroup();
                 setItemGroupLabel('');
             }
         } catch (error) {
@@ -48,6 +46,7 @@ const ItemsGroup = () => {
         }
     }
 
+    // add new items to inventory
     const addItems = async (e) => {
         try {
             e.preventDefault();
@@ -93,17 +92,7 @@ const ItemsGroup = () => {
         }
     };
 
-    const getGroup = async () => {
-        try {
-            const response = await axios.get('http://localhost:5000/items-group');
-            if (response && response.data.success) {
-                setGroupData(response.data.success);
-            }
-        } catch (error) {
-            console.error(error.message);
-        }
-    }
-
+    // create new items groups
     const getItemsGroup = async () => {
         try {
             const response = await axios.get('http://localhost:5000/items-group');
@@ -115,10 +104,10 @@ const ItemsGroup = () => {
         }
     }
 
+    // handles side-effects while fething items group
     useEffect(() => {
-        getGroup();
         getItemsGroup();
-    }, [reload]);
+    }, []);
 
     return (
         <>
@@ -133,7 +122,7 @@ const ItemsGroup = () => {
 
                 {/* View item group component */}
                 <ViewItemsGroup
-                    groupData={groupData} />
+                    itemGroupData={itemGroupData} />
                 {/* View item group component */}
             </div>
 

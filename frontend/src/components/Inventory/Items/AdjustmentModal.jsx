@@ -3,6 +3,7 @@ import React from 'react'
 const AdjustmentModal = ({ handleAdjustClose, handleModeOfAdjustmentChange, setDescription, setQuantity, setReason, setValue, mode_of_adjustment, opening_stock, quantity, selling_price, value, reason, description, submitAdjustment }) => {
     return (
         <>
+            {/* create inventory adjustment form modal*/}
             <div className="modal fade" id="inventoryAdjustModal" tabIndex={-1} aria-labelledby="inventoryAdjustModalLabel" aria-hidden="true" data-bs-backdrop="static">
                 <div className="modal-dialog">
                     <div className="modal-content">
@@ -52,6 +53,7 @@ const AdjustmentModal = ({ handleAdjustClose, handleModeOfAdjustmentChange, setD
                     </div>
                 </div>
             </div>
+            {/* create inventory adjustment form modal*/}
         </>
     )
 }

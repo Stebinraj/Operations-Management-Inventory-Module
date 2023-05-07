@@ -3,6 +3,7 @@ import React from 'react'
 const CreateItemGroup = ({ setItemGroupLabel, addGroup, item_group_label }) => {
     return (
         <>
+            {/* create new item group form */}
             <div className="card card-primary card-outline">
                 <div className="card-header">
                     <h5 className="m-0">Create Item Group</h5>
@@ -17,6 +18,7 @@ const CreateItemGroup = ({ setItemGroupLabel, addGroup, item_group_label }) => {
                     </form>
                 </div>
             </div>
+            {/* create new item group form */}
         </>
     )
 }

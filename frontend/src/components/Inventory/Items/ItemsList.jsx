@@ -4,6 +4,7 @@ const ItemsList = ({ handleAdjust, itemsData, itemsPage, salesOrderPage, handleC
 
     return (
         <>
+            {/* view items list */}
             <div className="col-sm-12">
                 <div className="card card-primary card-outline">
                     <div className="card-body table-responsive">
@@ -74,6 +75,7 @@ const ItemsList = ({ handleAdjust, itemsData, itemsPage, salesOrderPage, handleC
                     </div>
                 </div>
             </div>
+            {/* view items list */}
         </>
     )
 }

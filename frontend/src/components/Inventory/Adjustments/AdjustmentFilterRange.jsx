@@ -4,6 +4,7 @@ import DatePicker from 'react-datepicker';
 const AdjustmentFilterRange = ({ startDate, endDate, reset, handleSpecificDate, setStartDate, setEndDate }) => {
     return (
         <>
+            {/* inventory adjustment filter by date */}
             <div className="col-12 collapse" id='filterInventoryReports'>
                 <div className="card card-primary card-outline">
                     <div className="card-body">
@@ -28,6 +29,7 @@ const AdjustmentFilterRange = ({ startDate, endDate, reset, handleSpecificDate, 
                     </div>
                 </div>
             </div>
+            {/* inventory adjustment filter by date */}
         </>
     )
 }
