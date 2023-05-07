@@ -3,6 +3,7 @@ import React from 'react'
 const ViewCartItemsModal = ({ cartItemsData, deleteCartItems, handleCartClose, orderItems }) => {
     return (
         <>
+            {/* view cart items modal */}
             <div className="modal fade" id="cartItems" tabIndex={-1} aria-labelledby="cartItemsLabel" aria-hidden="true" data-bs-backdrop="static">
                 <div className="modal-dialog" style={{ maxWidth: '100%' }}>
                     <div className="modal-content">
@@ -52,6 +53,7 @@ const ViewCartItemsModal = ({ cartItemsData, deleteCartItems, handleCartClose, o
                     </div>
                 </div>
             </div>
+            {/* view cart items modal */}
         </>
     )
 }

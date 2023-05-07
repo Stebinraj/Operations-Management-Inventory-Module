@@ -3,6 +3,7 @@ import React from 'react'
 const AddToCartFormModal = ({ customer_id, handleCustomerChange, customerData, customerEmail, customerPhoneNumber, customerBillingAddress, setQuantity, quantity, total_price, handleCartClose, addItemsToCart }) => {
     return (
         <>
+            {/* add to cart form modal */}
             <div className="modal fade" id="addToCart" tabIndex={-1} aria-labelledby="addToCartLabel" aria-hidden="true" data-bs-backdrop="static">
                 <div className="modal-dialog" style={{ minWidth: '50%' }}>
                     <div className="modal-content">
@@ -51,6 +52,7 @@ const AddToCartFormModal = ({ customer_id, handleCustomerChange, customerData, c
                     </div>
                 </div>
             </div>
+            {/* add to cart form modal */}
         </>
     )
 }

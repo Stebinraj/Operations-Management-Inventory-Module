@@ -5,12 +5,15 @@ import ItemsList from '../../Inventory/Items/ItemsList';
 import CartIconLabelLink from './CartIconLabelLink';
 import ViewCartItemsModal from './ViewCartItemsModal';
 import AddToCartFormModal from './AddToCartFormModal';
-import OrdersLink from './OrdersLink';
+import OrdersIconLabelLink from './OrdersIconLabelLink';
 
 const SalesOrders = ({ salesOrderPage }) => {
 
+    // items data state variable
     const [itemsData, setItemsData] = useState([]);
+    // customer data state variable
     const [customerData, setCustomerData] = useState([]);
+    // cart items data state variable
     const [cartItemsData, setCartItemsData] = useState([]);
 
     const [item_id, setItemId] = useState('');
@@ -25,6 +28,7 @@ const SalesOrders = ({ salesOrderPage }) => {
     const randomNum = Math.floor(Math.random() * 10000000000);
     const ordered_id = String(randomNum).padStart(10, '0');
 
+    // fetch items and set to setItemsData
     const getItems = async () => {
         try {
             const response = await axios.get('http://localhost:5000/items');
@@ -36,6 +40,7 @@ const SalesOrders = ({ salesOrderPage }) => {
         }
     };
 
+    // before adding cart store the id, selling price, opening_stock to a state variable
     const handleCart = async (e, value) => {
         e.preventDefault();
         setItemId(value._id);
@@ -43,6 +48,7 @@ const SalesOrders = ({ salesOrderPage }) => {
         setSellingPrice(value.selling_price);
     };
 
+    // closing the cart form to reset the state to emptyy
     const handleCartClose = async (e) => {
         e.preventDefault();
         setItemId('');
@@ -55,6 +61,7 @@ const SalesOrders = ({ salesOrderPage }) => {
         setQuantity('');
     };
 
+    // fetch customer and set to setCustomerData
     const getCustomer = async () => {
         try {
             const response = await axios.get('http://localhost:5000/customer');
@@ -66,6 +73,7 @@ const SalesOrders = ({ salesOrderPage }) => {
         }
     };
 
+    // choosing customer then find the id, email, billing address, phone number to a state variable
     const handleCustomerChange = (e) => {
         const selectedCustomer = customerData.find(customer => customer._id === e.target.value);
         setCustomerId(selectedCustomer._id);
@@ -74,13 +82,16 @@ const SalesOrders = ({ salesOrderPage }) => {
         setCustomerPhoneNumber(selectedCustomer.phone_number);
     };
 
+    // add items to cart
     const addItemsToCart = async (e) => {
         try {
             e.preventDefault();
+            // checking if customer_id, item_id, quantity exists
             if (!customer_id || !item_id || !quantity) {
                 toast.error('All Fields Required !!!');
                 return;
             }
+            // checking quantity is greater than opening stock if true reset the state variable to empty and error appears
             else if (quantity > opening_stock) {
                 toast.error('Invalid Quantity !!!');
                 setItemId('');
@@ -93,13 +104,14 @@ const SalesOrders = ({ salesOrderPage }) => {
                 setQuantity('');
                 return;
             }
-
+            // send cart items datas
             const response = await axios.post('http://localhost:5000/cart', {
                 item_id,
                 customer_id,
                 quantity
             });
 
+            // cart items send and save successfully then cart items and items data's fetched
             if (response && response.data.success) {
                 await getCartItems();
                 await getItems();
@@ -118,13 +130,16 @@ const SalesOrders = ({ salesOrderPage }) => {
         }
     };
 
+    // order the cart items
     const orderItems = async (e, cartItemsData) => {
         e.preventDefault();
+        // checking is there any items in cart if nothing there errors appears
         if (cartItemsData.length === 0) {
             toast.error('Nothing to Order !!!');
             return;
         }
 
+        // map the array of cart items data
         const itemsToOrder = cartItemsData.map((items) => ({
             ordered_id,
             order_date: new Date(),
@@ -136,6 +151,7 @@ const SalesOrders = ({ salesOrderPage }) => {
             delete_cart_id: items._id
         }));
 
+        // send order details
         const response = await axios.post('http://localhost:5000/salesorders', itemsToOrder);
         if (response && response.data.success) {
             toast.success('Order Placed !!!')
@@ -144,6 +160,7 @@ const SalesOrders = ({ salesOrderPage }) => {
         }
     }
 
+    // fetch cart items data and set to setCartItemsData
     const getCartItems = async () => {
         try {
             const response = await axios.get('http://localhost:5000/cart');
@@ -155,6 +172,7 @@ const SalesOrders = ({ salesOrderPage }) => {
         }
     };
 
+    // delete cart items and fetch cartitems and items data
     const deleteCartItems = async (e, value) => {
         e.preventDefault();
         const response = await axios.delete(`http://localhost:5000/cart`, { data: { id: value._id } });
@@ -165,6 +183,7 @@ const SalesOrders = ({ salesOrderPage }) => {
         }
     }
 
+    // handle sideeffects while fetching items data, customer data and carts items data
     useEffect(() => {
         getItems();
         getCustomer();
@@ -174,19 +193,23 @@ const SalesOrders = ({ salesOrderPage }) => {
     return (
         <>
             <div className="col-12 d-flex justify-content-end mb-2">
-                <OrdersLink />
+                {/* ordersicon with label link component */}
+                <OrdersIconLabelLink />
 
+                {/* cart icons with label link component */}
                 <CartIconLabelLink
                     cartItemsData={cartItemsData}
                 />
             </div>
 
+            {/* items list components */}
             <ItemsList
                 itemsData={itemsData}
                 salesOrderPage={salesOrderPage}
                 handleCart={handleCart}
             />
 
+            {/* view cart items modal components */}
             <ViewCartItemsModal
                 cartItemsData={cartItemsData}
                 deleteCartItems={deleteCartItems}
@@ -194,6 +217,7 @@ const SalesOrders = ({ salesOrderPage }) => {
                 orderItems={orderItems}
             />
 
+            {/* add to cart form modal component */}
             <AddToCartFormModal
                 customer_id={customer_id}
                 handleCustomerChange={handleCustomerChange}

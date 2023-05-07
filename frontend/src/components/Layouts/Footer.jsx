@@ -3,6 +3,7 @@ import React from 'react'
 const Footer = () => {
     return (
         <>
+            {/* footer */}
             <footer className="main-footer text-center">
                 <strong>Copyright &copy; {new Date().getFullYear()} </strong>
             </footer>

@@ -9,6 +9,7 @@ import SalesOrders from '../Sales/SalesOrders/SalesOrders'
 const MainContent = (props) => {
     return (
         <>
+            {/* main content */}
             <div className="container-fluid">
                 <div className="row">
                     {props.dashboard && (<Dashboard />)}

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
 
+    // sidebar links with icons, path, color, size
     const sidebarLinks = [
         { title: 'Dashboard', navigate: '/', icon: 'bi-house-door', fontSize: '21px', iconColor: 'blue' },
         { title: 'Items Group', navigate: '/group/items', icon: 'bi-collection', fontSize: '21px', iconColor: 'blue' },
@@ -14,6 +15,7 @@ const Sidebar = () => {
 
     return (
         <>
+            {/* sidebar */}
             <div className="sidebar">
                 {/* Sidebar Menu */}
                 <nav className="mt-2">

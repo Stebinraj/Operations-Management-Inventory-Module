@@ -11,11 +11,14 @@ const Customers = () => {
     const [email, setEmail] = useState('');
     const [phone_number, setPhoneNumber] = useState('');
     const [billing_address, setBillingAddress] = useState('');
+    // conditionally render form create and update user
     const [updateForm, setupdateForm] = useState(false);
 
+    // state variable of customers datas
     const [customerData, setCustomerData] = useState([]);
     const [id, setId] = useState('');
 
+    // create / update form close to set variables empty 
     const handleClose = async (e) => {
         e.preventDefault();
         setName('');
@@ -25,6 +28,7 @@ const Customers = () => {
         setupdateForm(false);
     };
 
+    // create new customer
     const addCustomer = async (e) => {
         try {
             e.preventDefault();
@@ -42,6 +46,7 @@ const Customers = () => {
         }
     };
 
+    // fetch customers and set to setCustomerData
     const getCustomer = async () => {
         try {
             const response = await axios.get('http://localhost:5000/customer');
@@ -54,6 +59,7 @@ const Customers = () => {
         }
     };
 
+    // before updating customer store id, name, email, phone number, billing address to a variable
     const handleUpdateData = async (e, value) => {
         e.preventDefault();
         setId(value._id);
@@ -64,6 +70,7 @@ const Customers = () => {
         setupdateForm(true);
     };
 
+    // update a customer
     const updateCustomer = async (e) => {
         try {
             e.preventDefault();
@@ -83,14 +90,17 @@ const Customers = () => {
         }
     }
 
+    // handle side-effects while fetching customers
     useEffect(() => {
         getCustomer();
     }, [])
 
     return (
         <>
+            {/* add customer button component */}
             <AddCustomerButton />
 
+            {/* add customer modal form component */}
             <AddCustomerModal
                 setName={setName}
                 setEmail={setEmail}
@@ -105,7 +115,9 @@ const Customers = () => {
                 updateCustomer={updateCustomer}
                 updateForm={updateForm}
             />
+            {/* add customer modal form component */}
 
+            {/* customer lists components */}
             <CustomerLists
                 customerData={customerData}
                 handleUpdateData={handleUpdateData}

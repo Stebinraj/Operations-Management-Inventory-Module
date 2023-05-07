@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 const Navbar = () => {
     return (
         <>
+            {/* navbar */}
             <nav className="main-header navbar navbar-expand navbar-white">
                 {/* Left navbar links */}
                 <ul className="navbar-nav">
