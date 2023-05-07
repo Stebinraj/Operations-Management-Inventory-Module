@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const salesOrderSchema = mongoose.Schema({
+    order_id: { type: Number, required: true, unique: true },
     order_date: { type: String, required: true },
     customer_id: { type: mongoose.SchemaTypes.ObjectId, required: true },
     item_id: { type: mongoose.SchemaTypes.ObjectId, required: true },

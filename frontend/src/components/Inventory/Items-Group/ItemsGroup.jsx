@@ -69,6 +69,21 @@ const ItemsGroup = () => {
             });
             if (response && response.data.success) {
                 toast.success('Items Created Successfully !!!');
+                setItemGroupLabel('');
+                setItemGroupId('');
+                setItemName('');
+                setUnit('');
+                setDimensions('');
+                setWeight('');
+                setManufacturer('');
+                setBrand('');
+                setSellingPrice('');
+                setCostPrice('');
+                setDescription('');
+                setOpeningStock('');
+                setReorderPoint('');
+                setPreferredVendor('');
+                setImageOfItem('');
                 setTimeout(() => {
                     navigate('/view/items');
                 }, 2500);
@@ -143,6 +158,18 @@ const ItemsGroup = () => {
                     setUnit={setUnit}
                     setWeight={setWeight}
                     dimensions={dimensions}
+                    item_name={item_name}
+                    unit={unit}
+                    weight={weight}
+                    manufacturer={manufacturer}
+                    brand={brand}
+                    selling_price={selling_price}
+                    cost_price={cost_price}
+                    description={description}
+                    opening_stock={opening_stock}
+                    reorder_point={reorder_point}
+                    preferred_vendor={preferred_vendor}
+                    image_of_item={image_of_item}
                 />
                 {/* Add items component */}
             </div>
