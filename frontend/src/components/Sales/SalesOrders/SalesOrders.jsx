@@ -23,7 +23,7 @@ const SalesOrders = ({ salesOrderPage }) => {
     const [customerBillingAddress, setCustomerBillingAddress] = useState();
     const total_price = Number(selling_price) * Number(quantity);
     const randomNum = Math.floor(Math.random() * 10000000000);
-    const order_id = String(randomNum).padStart(10, '0');
+    const ordered_id = String(randomNum).padStart(10, '0');
 
     const getItems = async () => {
         try {
@@ -126,7 +126,7 @@ const SalesOrders = ({ salesOrderPage }) => {
         }
 
         const itemsToOrder = cartItemsData.map((items) => ({
-            order_id,
+            ordered_id,
             order_date: new Date(),
             customer_id: items.customer_id._id,
             item_id: items.item_id._id,
