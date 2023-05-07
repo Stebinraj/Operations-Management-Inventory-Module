@@ -1,29 +1,17 @@
 const express = require('express');
-const itemsModel = require('../../models/Inventory/itemsModel');
-const itemsGroupModel = require('../../models/Inventory/itemsGroupModel');
+const createNewItemsController = require('../../controller/Inventory/POST/createNewItemsController');
+const getItemsController = require('../../controller/Inventory/GET/getItemsController');
+const getItemsBySpecificIdController = require('../../controller/Inventory/GET/getItemsBySpecificIdController');
 const router = express.Router();
 
 // create items
-router.post('/items', async (req, res) => {
-    const items = new itemsModel(req.body);
-    const data = await items.save();
-    res.send({ success: data });
-});
+router.post('/items', createNewItemsController);
 
 // retrieve items
-router.get('/items', async (req, res) => {
-    const data = await itemsModel.find({}).populate({
-        path: 'item_group_id',
-        model: itemsGroupModel
-    });
-    res.send({ success: data });
-});
+router.get('/items', getItemsController);
 
 // get items by id
-router.get('/items/:id', async (req, res) => {
-    const data = await itemsModel.find({ item_group_id: req.params.id });
-    res.send({ success: data });
-});
+router.get('/items/:id', getItemsBySpecificIdController);
 
 // aggregate and populate
 
