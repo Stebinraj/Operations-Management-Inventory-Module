@@ -6,6 +6,7 @@ import CartIconLabelLink from './CartIconLabelLink';
 import ViewCartItemsModal from './ViewCartItemsModal';
 import AddToCartFormModal from './AddToCartFormModal';
 import OrdersIconLabelLink from './OrdersIconLabelLink';
+import ViewOrdersModal from './ViewOrdersModal';
 
 const SalesOrders = ({ salesOrderPage }) => {
 
@@ -15,6 +16,8 @@ const SalesOrders = ({ salesOrderPage }) => {
     const [customerData, setCustomerData] = useState([]);
     // cart items data state variable
     const [cartItemsData, setCartItemsData] = useState([]);
+    // order items data state variable
+    const [orderItemsData, setOrderItemsData] = useState([]);
 
     const [item_id, setItemId] = useState('');
     const [quantity, setQuantity] = useState('');
@@ -158,6 +161,7 @@ const SalesOrders = ({ salesOrderPage }) => {
             toast.success('Order Placed !!!')
             await getCartItems();
             await getItems();
+            await getOrderItems();
         }
     }
 
@@ -184,18 +188,29 @@ const SalesOrders = ({ salesOrderPage }) => {
         }
     }
 
+    // fetch order items and set to orderItemsData
+    const getOrderItems = async () => {
+        const response = await axios.get(`http://localhost:5000/salesorders`);
+        if (response && response.data.success) {
+            setOrderItemsData(response.data.success)
+        }
+    }
+
     // handle sideeffects while fetching items data, customer data and carts items data
     useEffect(() => {
         getItems();
         getCustomer();
         getCartItems();
+        getOrderItems();
     }, []);
 
     return (
         <>
             <div className="col-12 d-flex justify-content-end mb-2">
                 {/* ordersicon with label link component */}
-                <OrdersIconLabelLink />
+                <OrdersIconLabelLink
+                    orderItemsData={orderItemsData}
+                />
 
                 {/* cart icons with label link component */}
                 <CartIconLabelLink
@@ -216,6 +231,11 @@ const SalesOrders = ({ salesOrderPage }) => {
                 deleteCartItems={deleteCartItems}
                 handleCartClose={handleCartClose}
                 orderItems={orderItems}
+            />
+
+            {/* view order modal components */}
+            <ViewOrdersModal
+                orderItemsData={orderItemsData}
             />
 
             {/* add to cart form modal component */}
