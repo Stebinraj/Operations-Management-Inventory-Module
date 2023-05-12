@@ -39,6 +39,7 @@ const Layouts = (props) => {
                             inventoryAdjustment={props.inventoryAdjustment}
                             customers={props.customers}
                             salesOrder={props.salesOrder}
+                            packages={props.packages}
                         />
                     </div>
                     {/* content */}

@@ -6,6 +6,7 @@ import Items from './pages/Items';
 import InventoryAdjustments from './pages/InventoryAdjustments';
 import Customers from './pages/Customers';
 import SalesOrders from './pages/SalesOrders';
+import Packages from './pages/Packages';
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
             {/* Sales */}
             <Route path='/customers' element={<Customers />}></Route>
             <Route path='/orders/sales' element={<SalesOrders />}></Route>
+            <Route path='/packages' element={<Packages />}></Route>
             {/* Sales */}
         </Routes>
     );

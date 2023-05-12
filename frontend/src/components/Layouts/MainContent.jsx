@@ -5,6 +5,7 @@ import ViewItems from '../Inventory/Items/ViewItems'
 import InventoryAdjustments from '../Inventory/Adjustments/InventoryAdjustments'
 import Customers from '../Sales/Customers/Customers'
 import SalesOrders from '../Sales/SalesOrders/SalesOrders'
+import Packages from '../Sales/Packages/Packages'
 
 const MainContent = (props) => {
     return (
@@ -18,6 +19,7 @@ const MainContent = (props) => {
                     {props.inventoryAdjustment && (<InventoryAdjustments />)}
                     {props.customers && (<Customers />)}
                     {props.salesOrder && (<SalesOrders salesOrderPage={props.salesOrder} />)}
+                    {props.packages && (<Packages />)}
                 </div>
             </div>
         </>
