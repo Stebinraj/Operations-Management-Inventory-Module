@@ -148,7 +148,8 @@ const SalesOrders = ({ salesOrderPage }) => {
             quantity: items.quantity,
             total: items.quantity * items.item_id.selling_price,
             order_status: 'Confirmed',
-            delete_cart_id: items._id
+            delete_cart_id: items._id,
+            ordered_price_per_item: items.item_id.selling_price
         }));
 
         // send order details

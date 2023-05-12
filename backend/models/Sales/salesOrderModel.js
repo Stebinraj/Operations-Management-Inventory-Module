@@ -7,7 +7,8 @@ const salesOrderSchema = mongoose.Schema({
     item_id: { type: mongoose.SchemaTypes.ObjectId, required: true },
     quantity: { type: Number, required: true },
     total: { type: Number, required: true },
-    order_status: { type: String, required: true }
+    order_status: { type: String, required: true },
+    ordered_price_per_item: { type: Number, required: true },
 });
 
 const salesOrderModel = mongoose.model('salesorders', salesOrderSchema);
