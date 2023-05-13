@@ -32,15 +32,6 @@ const Layouts = ({ mainContent }) => {
                     {/* Main content component*/}
                     <div className="content pt-3">
                         {mainContent}
-                        {/* <MainContent
-                            dashboard={props.dashboard}
-                            itemGroup={props.itemGroup}
-                            items={props.items}
-                            inventoryAdjustment={props.inventoryAdjustment}
-                            customers={props.customers}
-                            salesOrder={props.salesOrder}
-                            packages={props.packages}
-                        /> */}
                     </div>
                     {/* content */}
                 </div>
