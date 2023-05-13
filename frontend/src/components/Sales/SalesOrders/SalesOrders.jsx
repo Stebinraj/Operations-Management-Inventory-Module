@@ -7,6 +7,7 @@ import ViewCartItemsModal from './ViewCartItemsModal';
 import AddToCartFormModal from './AddToCartFormModal';
 import OrdersIconLabelLink from './OrdersIconLabelLink';
 import ViewOrdersModal from './ViewOrdersModal';
+import ItemsListTable from '../../Inventory/Items/ItemsListTable';
 
 const SalesOrders = ({ salesOrderPage }) => {
 
@@ -220,9 +221,13 @@ const SalesOrders = ({ salesOrderPage }) => {
 
             {/* items list components */}
             <ItemsList
-                itemsData={itemsData}
-                salesOrderPage={salesOrderPage}
-                handleCart={handleCart}
+                itemsListTable={
+                    <ItemsListTable
+                        itemsData={itemsData}
+                        salesOrderPage={salesOrderPage}
+                        handleCart={handleCart}
+                    />
+                }
             />
 
             {/* view cart items modal components */}
