@@ -1,26 +1,26 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import Dashboard from './pages/Dashboard';
-import ItemsGroup from './pages/ItemsGroup';
-import Items from './pages/Items';
-import InventoryAdjustments from './pages/InventoryAdjustments';
-import Customers from './pages/Customers';
-import SalesOrders from './pages/SalesOrders';
-import Packages from './pages/Packages';
+import DashboardPage from './pages/DashboardPage';
+import CustomersPage from './pages/CustomersPage';
+import ItemGroupPage from './pages/ItemGroupPage';
+import ItemsPage from './pages/ItemsPage';
+import InventoryAdjustmentsPage from './pages/InventoryAdjustmentsPage';
+import SalesOrdersPage from './pages/SalesOrdersPage';
+import PackagesPage from './pages/PackagesPage';
 
 function App() {
     return (
         <Routes>
-            <Route path='/' element={<Dashboard />}></Route>
+            <Route path='/' element={<DashboardPage />}></Route>
             {/* Inventory */}
-            <Route path='/group/items' element={<ItemsGroup />}></Route>
-            <Route path='/view/items' element={<Items />}></Route>
-            <Route path='/adjustments/inventory' element={<InventoryAdjustments />}></Route>
+            <Route path='/group/items' element={<ItemGroupPage />}></Route>
+            <Route path='/view/items' element={<ItemsPage />}></Route>
+            <Route path='/adjustments/inventory' element={<InventoryAdjustmentsPage />}></Route>
             {/* Inventory */}
             {/* Sales */}
-            <Route path='/customers' element={<Customers />}></Route>
-            <Route path='/orders/sales' element={<SalesOrders />}></Route>
-            <Route path='/packages' element={<Packages />}></Route>
+            <Route path='/customers' element={<CustomersPage />}></Route>
+            <Route path='/orders/sales' element={<SalesOrdersPage />}></Route>
+            <Route path='/packages' element={<PackagesPage />}></Route>
             {/* Sales */}
         </Routes>
     );

@@ -4,9 +4,8 @@ import BrandLogo from './BrandLogo'
 import Sidebar from './Sidebar'
 // import ContentHeader from './ContentHeader'
 import Footer from './Footer'
-import MainContent from './MainContent'
 
-const Layouts = (props) => {
+const Layouts = ({ mainContent }) => {
     return (
         <>
             <div className="wrapper">
@@ -30,9 +29,10 @@ const Layouts = (props) => {
                     {/* <ContentHeader /> */}
                     {/* content-header */}
 
-                    {/* Main content */}
+                    {/* Main content component*/}
                     <div className="content pt-3">
-                        <MainContent
+                        {mainContent}
+                        {/* <MainContent
                             dashboard={props.dashboard}
                             itemGroup={props.itemGroup}
                             items={props.items}
@@ -40,7 +40,7 @@ const Layouts = (props) => {
                             customers={props.customers}
                             salesOrder={props.salesOrder}
                             packages={props.packages}
-                        />
+                        /> */}
                     </div>
                     {/* content */}
                 </div>
