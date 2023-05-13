@@ -1,16 +1,14 @@
 import React from 'react'
-import AdjustmentReportTable from './AdjustmentReportTable';
 
-const AdjustmentReport = ({ reportData }) => {
+const AdjustmentReport = ({ AdjustmentReportTable }) => {
 
     return (
         <>
             {/* inventory adjustments reports */}
             <div className="col-12">
                 <div className="card card-primary card-outline">
-                    <AdjustmentReportTable
-                        reportData={reportData}
-                    />
+                    {/* adjustment report table component */}
+                    {AdjustmentReportTable}
                 </div>
             </div>
             {/* inventory adjustments reports */}

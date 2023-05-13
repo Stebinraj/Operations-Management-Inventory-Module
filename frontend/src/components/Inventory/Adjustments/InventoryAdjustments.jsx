@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import FilterButton from './FilterButton';
 import AdjustmentFilterRange from './AdjustmentFilterRange';
 import AdjustmentReport from './AdjustmentReport';
+import AdjustmentReportTable from './AdjustmentReportTable';
 
 const InventoryAdjustments = () => {
 
@@ -76,7 +77,13 @@ const InventoryAdjustments = () => {
 
             {/* adjustment report component */}
             <AdjustmentReport
-                reportData={reportData}
+
+                AdjustmentReportTable={
+                    <AdjustmentReportTable
+                        reportData={reportData}
+                    />
+                }
+
             />
         </>
     )
