@@ -1,7 +1,6 @@
 import React from 'react'
-import AdjustmentForm from './AdjustmentForm'
 
-const AdjustmentModal = ({ handleAdjustClose, handleModeOfAdjustmentChange, setDescription, setQuantity, setReason, setValue, mode_of_adjustment, opening_stock, quantity, selling_price, value, reason, description, submitAdjustment }) => {
+const AdjustmentModal = ({ handleAdjustClose, submitAdjustment, adjustmentForm }) => {
     return (
         <>
             {/* create inventory adjustment form modal*/}
@@ -13,20 +12,7 @@ const AdjustmentModal = ({ handleAdjustClose, handleModeOfAdjustmentChange, setD
                         </div>
                         <div className="modal-body">
                             {/* Adjustment form component */}
-                            <AdjustmentForm
-                                handleModeOfAdjustmentChange={handleModeOfAdjustmentChange}
-                                setDescription={setDescription}
-                                setQuantity={setQuantity}
-                                setReason={setReason}
-                                setValue={setValue}
-                                mode_of_adjustment={mode_of_adjustment}
-                                opening_stock={opening_stock}
-                                quantity={quantity}
-                                selling_price={selling_price}
-                                value={value}
-                                reason={reason}
-                                description={description}
-                            />
+                            {adjustmentForm}
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={handleAdjustClose}>Close</button>

@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
 import AdjustmentModal from './AdjustmentModal';
 import ItemsList from './ItemsList';
+import ItemsListTable from './ItemsListTable';
+import AdjustmentForm from './AdjustmentForm';
 
 const ViewItems = ({ itemsPage }) => {
 
@@ -136,27 +138,35 @@ const ViewItems = ({ itemsPage }) => {
             {/* adjustment modal component */}
             <AdjustmentModal
                 handleAdjustClose={handleAdjustClose}
-                handleModeOfAdjustmentChange={handleModeOfAdjustmentChange}
-                setDescription={setDescription}
-                setQuantity={setQuantity}
-                setReason={setReason}
-                setValue={setValue}
-                mode_of_adjustment={mode_of_adjustment}
-                opening_stock={opening_stock}
-                quantity={quantity}
-                selling_price={selling_price}
-                value={value}
-                reason={reason}
-                description={description}
                 submitAdjustment={submitAdjustment}
+                adjustmentForm={
+                    <AdjustmentForm
+                        handleModeOfAdjustmentChange={handleModeOfAdjustmentChange}
+                        setDescription={setDescription}
+                        setQuantity={setQuantity}
+                        setReason={setReason}
+                        setValue={setValue}
+                        mode_of_adjustment={mode_of_adjustment}
+                        opening_stock={opening_stock}
+                        quantity={quantity}
+                        selling_price={selling_price}
+                        value={value}
+                        reason={reason}
+                        description={description}
+                    />
+                }
             />
             {/* adjustment modal component */}
 
             {/* items list component */}
             <ItemsList
-                handleAdjust={handleAdjust}
-                itemsData={itemsData}
-                itemsPage={itemsPage}
+                itemsListTable={
+                    <ItemsListTable
+                        handleAdjust={handleAdjust}
+                        itemsData={itemsData}
+                        itemsPage={itemsPage}
+                    />
+                }
             />
         </>
     )

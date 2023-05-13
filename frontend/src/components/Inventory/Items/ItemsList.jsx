@@ -1,7 +1,6 @@
 import React from 'react'
-import ItemsListTable from './ItemsListTable'
 
-const ItemsList = ({ handleAdjust, itemsData, itemsPage, salesOrderPage, handleCart }) => {
+const ItemsList = ({ itemsListTable }) => {
 
     return (
         <>
@@ -9,13 +8,7 @@ const ItemsList = ({ handleAdjust, itemsData, itemsPage, salesOrderPage, handleC
             <div className="col-sm-12">
                 <div className="card card-primary card-outline">
                     {/* items List Table Components */}
-                    <ItemsListTable
-                        handleAdjust={handleAdjust}
-                        itemsData={itemsData}
-                        itemsPage={itemsPage}
-                        salesOrderPage={salesOrderPage}
-                        handleCart={handleCart}
-                    />
+                    {itemsListTable}
                 </div>
             </div>
             {/* view items list */}
