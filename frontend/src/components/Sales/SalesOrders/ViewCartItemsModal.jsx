@@ -1,7 +1,6 @@
 import React from 'react'
-import CartListTable from './CartListTable'
 
-const ViewCartItemsModal = ({ cartItemsData, deleteCartItems, handleCartClose, orderItems }) => {
+const ViewCartItemsModal = ({ cartItemsData, cartListTable, handleCartClose, orderItems }) => {
     return (
         <>
             {/* view cart items modal */}
@@ -13,10 +12,8 @@ const ViewCartItemsModal = ({ cartItemsData, deleteCartItems, handleCartClose, o
                         </div>
                         <div className="modal-body">
                             <div className="card card-primary card-outline">
-                                <CartListTable
-                                    deleteCartItems={deleteCartItems}
-                                    cartItemsData={cartItemsData}
-                                />
+                                {/* Cart list table Component */}
+                                {cartListTable}
                             </div>
                         </div>
                         <div className="modal-footer">

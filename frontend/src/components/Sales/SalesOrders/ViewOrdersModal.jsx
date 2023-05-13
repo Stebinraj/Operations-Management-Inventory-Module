@@ -1,7 +1,6 @@
 import React from 'react'
-import OrdersListTable from './OrdersListTable'
 
-const ViewOrdersModal = ({ orderItemsData }) => {
+const ViewOrdersModal = ({ ordersListTable }) => {
     return (
         <>
             {/* view orders modal */}
@@ -14,7 +13,7 @@ const ViewOrdersModal = ({ orderItemsData }) => {
                         <div className="modal-body">
                             <div className="card card-primary card-outline">
                                 {/* orders list table components */}
-                                <OrdersListTable orderItemsData={orderItemsData} />
+                                {ordersListTable}
                             </div>
                         </div>
                         <div className="modal-footer">

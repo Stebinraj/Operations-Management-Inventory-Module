@@ -8,6 +8,8 @@ import AddToCartFormModal from './AddToCartFormModal';
 import OrdersIconLabelLink from './OrdersIconLabelLink';
 import ViewOrdersModal from './ViewOrdersModal';
 import ItemsListTable from '../../Inventory/Items/ItemsListTable';
+import CartListTable from './CartListTable';
+import OrdersListTable from './OrdersListTable';
 
 const SalesOrders = ({ salesOrderPage }) => {
 
@@ -232,15 +234,23 @@ const SalesOrders = ({ salesOrderPage }) => {
 
             {/* view cart items modal components */}
             <ViewCartItemsModal
-                cartItemsData={cartItemsData}
-                deleteCartItems={deleteCartItems}
                 handleCartClose={handleCartClose}
                 orderItems={orderItems}
+                cartListTable={
+                    <CartListTable
+                        deleteCartItems={deleteCartItems}
+                        cartItemsData={cartItemsData}
+                    />
+                }
             />
 
             {/* view order modal components */}
             <ViewOrdersModal
-                orderItemsData={orderItemsData}
+                ordersListTable={
+                    <OrdersListTable
+                        orderItemsData={orderItemsData}
+                    />
+                }
             />
 
             {/* add to cart form modal component */}

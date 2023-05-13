@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import AddCustomerButton from './AddCustomerButton';
 import AddCustomerModal from './AddCustomerModal';
 import CustomerLists from './CustomerLists';
+import CustomerListTable from './CustomerListTable';
 
 const Customers = () => {
 
@@ -119,8 +120,12 @@ const Customers = () => {
 
             {/* customer lists components */}
             <CustomerLists
-                customerData={customerData}
-                handleUpdateData={handleUpdateData}
+                customerListTable={
+                    <CustomerListTable
+                        customerData={customerData}
+                        handleUpdateData={handleUpdateData}
+                    />
+                }
             />
         </>
     )
