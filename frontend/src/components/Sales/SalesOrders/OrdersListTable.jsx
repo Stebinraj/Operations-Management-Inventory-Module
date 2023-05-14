@@ -8,6 +8,7 @@ const OrdersListTable = ({ orderItemsData, salesOrderPage, packagesPage, markAsP
                 <table className="table table-bordered">
                     <thead className='text-bg-primary'>
                         <tr>
+                            <th scope="col" className='text-nowrap'>Order Date</th>
                             <th scope="col" className='text-nowrap'>Order Id</th>
                             <th scope="col" className='text-nowrap'>Customer Name</th>
                             <th scope="col" className='text-nowrap'>Email</th>
@@ -19,7 +20,6 @@ const OrdersListTable = ({ orderItemsData, salesOrderPage, packagesPage, markAsP
                             <th scope="col" className='text-nowrap'>Quantity</th>
                             <th scope="col" className='text-nowrap'>Price Per Item</th>
                             <th scope="col" className='text-nowrap'>Total</th>
-                            <th scope="col" className='text-nowrap'>Order Date</th>
                             {salesOrderPage && (
                                 <th scope="col" className='text-nowrap'>Order Status</th>
                             )}
@@ -32,6 +32,7 @@ const OrdersListTable = ({ orderItemsData, salesOrderPage, packagesPage, markAsP
                         {orderItemsData.map((value, index) => {
                             return (
                                 <tr key={index}>
+                                    <td className='text-nowrap'>{moment(value.order_date).format('DD-MM-YYYY')}</td>
                                     <td className='text-nowrap'>{`SO - ${value.ordered_id}`}</td>
                                     <td className='text-nowrap'>{value.customer_id.name}</td>
                                     <td className='text-nowrap'>{value.customer_id.email}</td>
@@ -43,7 +44,6 @@ const OrdersListTable = ({ orderItemsData, salesOrderPage, packagesPage, markAsP
                                     <td className='text-nowrap'>{value.quantity}</td>
                                     <td className='text-nowrap'>{value.ordered_price_per_item}</td>
                                     <td className='text-nowrap'>{value.quantity * value.ordered_price_per_item}</td>
-                                    <td className='text-nowrap'>{moment(value.order_date).format('DD-MM-YYYY')}</td>
                                     <td className='text-nowrap'>
                                         {value.order_status === "Confirmed" && (
                                             salesOrderPage ? (
