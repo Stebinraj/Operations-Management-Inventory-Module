@@ -236,6 +236,7 @@ const SalesOrders = ({ salesOrderPage }) => {
             <ViewCartItemsModal
                 handleCartClose={handleCartClose}
                 orderItems={orderItems}
+                cartItemsData={cartItemsData}
                 cartListTable={
                     <CartListTable
                         deleteCartItems={deleteCartItems}
