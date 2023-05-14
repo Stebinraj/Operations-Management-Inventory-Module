@@ -20,7 +20,7 @@ const OrdersListTable = ({ orderItemsData }) => {
                             <th scope="col" className='text-nowrap'>Price Per Item</th>
                             <th scope="col" className='text-nowrap'>Total</th>
                             <th scope="col" className='text-nowrap'>Order Date</th>
-                            <th scope="col" className='text-nowrap'>Status</th>
+                            <th scope="col" className='text-nowrap'>Order Status</th>
                         </tr>
                     </thead>
                     <tbody>
