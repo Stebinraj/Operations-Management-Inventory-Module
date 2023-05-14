@@ -15,7 +15,10 @@ const PackagesPage = () => {
                 mainContent={
                     <MainContent
                         packages={
-                            packages && <Packages />
+                            packages &&
+                            <Packages
+                                packagesPage={packages}
+                            />
                         }
                     />
                 }

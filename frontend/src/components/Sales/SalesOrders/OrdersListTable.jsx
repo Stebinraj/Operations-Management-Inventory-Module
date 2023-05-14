@@ -1,7 +1,7 @@
 import moment from 'moment'
 import React from 'react'
 
-const OrdersListTable = ({ orderItemsData }) => {
+const OrdersListTable = ({ orderItemsData, salesOrderPage, packagesPage, markAsPacked }) => {
     return (
         <>
             <div className="card-body table-responsive">
@@ -20,7 +20,12 @@ const OrdersListTable = ({ orderItemsData }) => {
                             <th scope="col" className='text-nowrap'>Price Per Item</th>
                             <th scope="col" className='text-nowrap'>Total</th>
                             <th scope="col" className='text-nowrap'>Order Date</th>
-                            <th scope="col" className='text-nowrap'>Order Status</th>
+                            {salesOrderPage && (
+                                <th scope="col" className='text-nowrap'>Order Status</th>
+                            )}
+                            {packagesPage && (
+                                <th scope="col" className='text-nowrap'>Manage / Status</th>
+                            )}
                         </tr>
                     </thead>
                     <tbody>
@@ -41,8 +46,14 @@ const OrdersListTable = ({ orderItemsData }) => {
                                     <td className='text-nowrap'>{moment(value.order_date).format('DD-MM-YYYY')}</td>
                                     <td className='text-nowrap'>
                                         {value.order_status === "Confirmed" && (
-                                            <span className="badge rounded-pill text-bg-primary">{value.order_status}</span>
+                                            salesOrderPage ? (
+                                                <span className="badge rounded-pill text-bg-primary">{value.order_status}</span>
+                                            ) : packagesPage && (
+                                                <button className="btn btn-primary" onClick={(e) => { markAsPacked(e, value) }}>Mark as Packed</button>
+                                            )
                                         )}
+                                        {value.order_status === "Packed" && <span className="badge rounded-pill text-bg-warning text-white">{value.order_status}</span>}
+                                        {value.order_status === "Challans Generated" && <span className="badge rounded-pill text-bg-info text-white">{value.order_status}</span>}
                                     </td>
                                 </tr>
                             )

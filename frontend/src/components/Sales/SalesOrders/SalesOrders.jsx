@@ -250,6 +250,7 @@ const SalesOrders = ({ salesOrderPage }) => {
                 ordersListTable={
                     <OrdersListTable
                         orderItemsData={orderItemsData}
+                        salesOrderPage={salesOrderPage}
                     />
                 }
             />

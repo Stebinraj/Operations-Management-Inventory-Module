@@ -24,6 +24,10 @@ const customers = require('./routes/Sales/customersRoute');
 const salesOrder = require('./routes/Sales/salesOrderRoutes');
 // cart routes
 const cart = require('./routes/Sales/cartRoutes');
+// package route
+const package = require('./routes/Sales/packageRoute');
+// delivery challans route
+const deliveryChallans = require('./routes/Sales/deliveryChallansRoute');
 
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
 
@@ -33,6 +37,8 @@ app.use(itemGroups);
 app.use(customers);
 app.use(salesOrder);
 app.use(cart);
+app.use(package);
+app.use(deliveryChallans);
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on the port ${process.env.PORT}`);
