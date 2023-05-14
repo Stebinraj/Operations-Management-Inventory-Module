@@ -27,7 +27,7 @@ const OrdersListTable = ({ orderItemsData }) => {
                         {orderItemsData.map((value, index) => {
                             return (
                                 <tr key={index}>
-                                    <td className='text-nowrap'>{value.ordered_id}</td>
+                                    <td className='text-nowrap'>{`SO - ${value.ordered_id}`}</td>
                                     <td className='text-nowrap'>{value.customer_id.name}</td>
                                     <td className='text-nowrap'>{value.customer_id.email}</td>
                                     <td className='text-nowrap'>{value.customer_id.phone_number}</td>
