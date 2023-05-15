@@ -1,7 +1,7 @@
 import moment from 'moment'
 import React from 'react'
 
-const ChallansListTable = ({ deliveryChallansData }) => {
+const ChallansListTable = ({ deliveryChallansData, deliveryChallansPage }) => {
     return (
         <>
             <div className="card card-primary card-outline">
@@ -21,7 +21,9 @@ const ChallansListTable = ({ deliveryChallansData }) => {
                                 <th scope="col" className='text-nowrap'>Quantity</th>
                                 <th scope="col" className='text-nowrap'>Price Per Item</th>
                                 <th scope="col" className='text-nowrap'>Total</th>
-                                <th scope="col" className='text-nowrap'>Status</th>
+                                {deliveryChallansPage && (
+                                    <th scope="col" className='text-nowrap'>Status</th>
+                                )}
                             </tr>
                         </thead>
                         <tbody>
@@ -42,7 +44,9 @@ const ChallansListTable = ({ deliveryChallansData }) => {
                                         <td className='text-nowrap'>{value.package_id.order_id.total}</td>
                                         <td className='text-nowrap'>
                                             {value.package_id.order_id.order_status === "Challans Generated" && (
-                                                <span className="badge rounded-pill text-bg-info text-white w-100 p-2">{value.package_id.order_id.order_status}</span>
+                                                deliveryChallansPage && (
+                                                    <span className="badge rounded-pill text-bg-info text-white w-100 p-2">{value.package_id.order_id.order_status}</span>
+                                                )
                                             )}
                                         </td>
                                         {/* <td className='text-nowrap'>

@@ -73,6 +73,7 @@ const DeliveryChallans = ({ deliveryChallansPage }) => {
                 deliveryChallansListTable={
                     <ChallansListTable
                         deliveryChallansData={deliveryChallansData}
+                        deliveryChallansPage={deliveryChallansPage}
                     />
                 }
             />

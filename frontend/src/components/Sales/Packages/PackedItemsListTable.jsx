@@ -24,7 +24,7 @@ const PackedItemsListTable = ({ packedItemsData, generateChallans, packagesPage,
                                 <th scope="col" className='text-nowrap'>Status</th>
                             )}
                             {deliveryChallansPage && (
-                                <th scope="col" className='text-nowrap'>Challans</th>
+                                <th scope="col" className='text-nowrap'>Generate Challans</th>
                             )}
                         </tr>
                     </thead>
