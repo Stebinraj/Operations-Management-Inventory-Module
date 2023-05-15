@@ -1,7 +1,7 @@
 import moment from 'moment'
 import React from 'react'
 
-const PackedItemsListTable = ({ packedItemsData, generateChallans, packagesPage }) => {
+const PackedItemsListTable = ({ packedItemsData, generateChallans }) => {
     return (
         <>
             <div className="card-body table-responsive">
@@ -20,9 +20,7 @@ const PackedItemsListTable = ({ packedItemsData, generateChallans, packagesPage 
                             <th scope="col" className='text-nowrap'>Quantity</th>
                             <th scope="col" className='text-nowrap'>Price Per Item</th>
                             <th scope="col" className='text-nowrap'>Total</th>
-                            {packagesPage && (
-                                <th scope="col" className='text-nowrap'>Challans / Status</th>
-                            )}
+                            <th scope="col" className='text-nowrap'>Challans / Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -43,14 +41,10 @@ const PackedItemsListTable = ({ packedItemsData, generateChallans, packagesPage 
                                     <td className='text-nowrap'>{value.order_id.ordered_price_per_item * value.order_id.quantity}</td>
                                     <td className='text-nowrap'>
                                         {value.order_id.order_status === "Packed" && (
-                                            packagesPage && (
-                                                <button className='btn btn-primary w-100' onClick={(e) => { generateChallans(e, value) }}>Generate</button>
-                                            )
+                                            <button className='btn btn-primary w-100' onClick={(e) => { generateChallans(e, value) }}>Generate</button>
                                         )}
                                         {value.order_id.order_status === "Challans Generated" && (
-                                            packagesPage && (
-                                                <span className="badge rounded-pill text-bg-info text-white w-100 p-2">{value.order_id.order_status}</span>
-                                            )
+                                            <span className="badge rounded-pill text-bg-info text-white w-100 p-2">{value.order_id.order_status}</span>
                                         )}
                                     </td>
                                 </tr>
