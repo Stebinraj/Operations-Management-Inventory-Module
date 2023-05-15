@@ -4,7 +4,7 @@ const ViewOrdersModal = ({ ordersListTable }) => {
     return (
         <>
             {/* view orders modal */}
-            <div className="modal fade" id="orderItems" tabIndex={-1} aria-labelledby="orderItemsLabel" aria-hidden="true">
+            <div className="modal fade" id="orderItems" tabIndex={-1} aria-labelledby="orderItemsLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
                 <div className="modal-dialog" style={{ maxWidth: '100%' }}>
                     <div className="modal-content">
                         <div className="modal-header">

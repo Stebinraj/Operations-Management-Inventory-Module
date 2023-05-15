@@ -3,7 +3,7 @@ import React from 'react'
 const AddCustomerModal = ({ setName, setEmail, email, setPhoneNumber, phone_number, setBillingAddress, billing_address, handleClose, addCustomer, name, updateCustomer, updateForm }) => {
     return (
         <>
-            <div className="modal fade" id="customers" tabIndex={-1} aria-labelledby="customersLabel" aria-hidden="true" data-bs-backdrop="static">
+            <div className="modal fade" id="customers" tabIndex={-1} aria-labelledby="customersLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">

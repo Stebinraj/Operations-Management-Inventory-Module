@@ -4,7 +4,7 @@ const ViewCartItemsModal = ({ cartItemsData, cartListTable, handleCartClose, ord
     return (
         <>
             {/* view cart items modal */}
-            <div className="modal fade" id="cartItems" tabIndex={-1} aria-labelledby="cartItemsLabel" aria-hidden="true" data-bs-backdrop="static">
+            <div className="modal fade" id="cartItems" tabIndex={-1} aria-labelledby="cartItemsLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
                 <div className="modal-dialog" style={{ maxWidth: '100%' }}>
                     <div className="modal-content">
                         <div className="modal-header">

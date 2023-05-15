@@ -4,7 +4,7 @@ const AddToCartFormModal = ({ customer_id, handleCustomerChange, customerData, c
     return (
         <>
             {/* add to cart form modal */}
-            <div className="modal fade" id="addToCart" tabIndex={-1} aria-labelledby="addToCartLabel" aria-hidden="true" data-bs-backdrop="static">
+            <div className="modal fade" id="addToCart" tabIndex={-1} aria-labelledby="addToCartLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
                 <div className="modal-dialog" style={{ minWidth: '50%' }}>
                     <div className="modal-content">
                         <div className="modal-header">

@@ -49,7 +49,7 @@ const OrdersListTable = ({ orderItemsData, salesOrderPage, packagesPage, markAsP
                                             salesOrderPage ? (
                                                 <span className="badge rounded-pill text-bg-primary w-100 p-2">{value.order_status}</span>
                                             ) : packagesPage && (
-                                                <button className="btn btn-primary" onClick={(e) => { markAsPacked(e, value) }}>Mark as Packed</button>
+                                                <button className="btn btn-primary w-100" onClick={(e) => { markAsPacked(e, value) }}>Mark as Packed</button>
                                             )
                                         )}
                                         {value.order_status === "Packed" && <span className="badge rounded-pill text-bg-warning text-white w-100 p-2">{value.order_status}</span>}

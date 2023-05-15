@@ -41,7 +41,7 @@ const PackedItemsListTable = ({ packedItemsData, generateChallans }) => {
                                     <td className='text-nowrap'>{value.order_id.ordered_price_per_item * value.order_id.quantity}</td>
                                     <td className='text-nowrap'>
                                         {value.order_id.order_status === "Packed" && (
-                                            <button className='btn btn-primary' onClick={(e) => { generateChallans(e, value) }}>Generate</button>
+                                            <button className='btn btn-primary w-100' onClick={(e) => { generateChallans(e, value) }}>Generate</button>
                                         )}
                                         {value.order_id.order_status === "Challans Generated" && (
                                             <span className="badge rounded-pill text-bg-info text-white w-100 p-2">{value.order_id.order_status}</span>
