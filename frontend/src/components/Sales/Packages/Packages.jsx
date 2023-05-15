@@ -91,6 +91,7 @@ const Packages = ({ packagesPage }) => {
             <PackedItemsModal
                 packedItemsListTable={
                     <PackedItemsListTable
+                        packagesPage={packagesPage}
                         packedItemsData={packedItemsData}
                         generateChallans={generateChallans}
                     />
