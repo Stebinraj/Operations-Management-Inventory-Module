@@ -20,7 +20,7 @@ const PackedItemsListTable = ({ packedItemsData, generateChallans }) => {
                             <th scope="col" className='text-nowrap'>Quantity</th>
                             <th scope="col" className='text-nowrap'>Price Per Item</th>
                             <th scope="col" className='text-nowrap'>Total</th>
-                            <th scope="col" className='text-nowrap'>Generate Challans</th>
+                            <th scope="col" className='text-nowrap'>Challans / Status</th>
                         </tr>
                     </thead>
                     <tbody>
