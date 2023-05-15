@@ -4,7 +4,6 @@ import React from 'react'
 const ChallansListTable = ({ deliveryChallansData, deliveryChallansPage }) => {
     return (
         <>
-            <div className="card card-primary card-outline">
                 <div className="card-body table-responsive">
                     <table className="table table-bordered">
                         <thead className='text-bg-primary'>
@@ -66,7 +65,6 @@ const ChallansListTable = ({ deliveryChallansData, deliveryChallansPage }) => {
                         </tbody>
                     </table>
                 </div>
-            </div>
         </>
     )
 }

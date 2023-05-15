@@ -13,7 +13,7 @@ const DeliveryChallans = ({ deliveryChallansPage }) => {
     const randomNum = Math.floor(Math.random() * 10000000000);
     const challan_id = String(randomNum).padStart(10, '0');
 
-    // fetch delivery challans and set to orderItemsData
+    // fetch delivery challans and set to deliveryChallansData
     const getDeliveryChallans = async () => {
         const response = await axios.get(`http://localhost:5000/delivery-challans`);
         if (response && response.data.success) {
