@@ -16,7 +16,9 @@ const PackagesPage = () => {
                     <MainContent
                         packages={
                             packages &&
-                            <Packages />
+                            <Packages
+                                packagesPage={packages}
+                            />
                         }
                     />
                 }

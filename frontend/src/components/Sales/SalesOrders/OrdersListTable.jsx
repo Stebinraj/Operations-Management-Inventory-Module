@@ -24,7 +24,7 @@ const OrdersListTable = ({ orderItemsData, salesOrderPage, packagesPage, markAsP
                                 <th scope="col" className='text-nowrap'>Order Status</th>
                             )}
                             {packagesPage && (
-                                <th scope="col" className='text-nowrap'>Manage / Status</th>
+                                <th scope="col" className='text-nowrap'>Manage</th>
                             )}
                         </tr>
                     </thead>

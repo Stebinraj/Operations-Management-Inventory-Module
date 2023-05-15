@@ -1,9 +1,83 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import ChallansListTable from './ChallansListTable';
+import PackedItemsListTable from '../Packages/PackedItemsListTable';
+import { toast } from 'react-toastify';
+import DeliveryChallansIconLabelLink from './DeliveryChallansIconLabelLink';
+import DeliveryChallansModal from './DeliveryChallansModal';
 
-const DeliveryChallans = () => {
-  return (
-    <div>DeliveryChallans</div>
-  )
+const DeliveryChallans = ({ deliveryChallansPage }) => {
+
+    const [deliveryChallansData, setDeliveryChallansData] = useState([]);
+    const [packedItemsData, setPackedItemsData] = useState([]);
+    const randomNum = Math.floor(Math.random() * 10000000000);
+    const challan_id = String(randomNum).padStart(10, '0');
+
+    // fetch delivery challans and set to orderItemsData
+    const getDeliveryChallans = async () => {
+        const response = await axios.get(`http://localhost:5000/delivery-challans`);
+        if (response && response.data.success) {
+            setDeliveryChallansData(response.data.success.filter(items => items.package_id.order_id.order_status === "Challans Generated"))
+        }
+    }
+
+    // fetch packed items
+    const getPackages = async () => {
+        const response = await axios.get(`http://localhost:5000/packages`);
+        if (response && response.data.success) {
+            setPackedItemsData(response.data.success.filter(items => items.order_id.order_status === "Packed"))
+        }
+    }
+
+    const generateChallans = async (e, value) => {
+        e.preventDefault();
+        const response = await axios.post(`http://localhost:5000/delivery-challans`, {
+            order_id: value.order_id._id,
+            package_id: value._id,
+            challan_id,
+            challan_date: new Date(),
+            challan_status: "Challans Generated"
+        });
+        if (response && response.data.success) {
+            toast.success('Challans Generated');
+            await getPackages();
+            await getDeliveryChallans();
+        }
+    }
+
+    // handle sideeffects while fetching delivery challans
+    useEffect(() => {
+        getDeliveryChallans();
+        getPackages();
+    }, []);
+
+    return (
+        <>
+            <div className="col-12 d-flex justify-content-end mb-2">
+                {/* deliver challans icon label component */}
+                <DeliveryChallansIconLabelLink
+                    deliveryChallansData={deliveryChallansData}
+                />
+            </div>
+
+            <div className="card card-primary card-outline">
+                {/* packed items list table component */}
+                <PackedItemsListTable
+                    packedItemsData={packedItemsData}
+                    deliveryChallansPage={deliveryChallansPage}
+                    generateChallans={generateChallans}
+                />
+            </div>
+
+            <DeliveryChallansModal
+                deliveryChallansListTable={
+                    <ChallansListTable
+                        deliveryChallansData={deliveryChallansData}
+                    />
+                }
+            />
+        </>
+    )
 }
 
 export default DeliveryChallans

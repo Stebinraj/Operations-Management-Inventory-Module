@@ -14,7 +14,9 @@ const DeliveryChallansPage = () => {
                 mainContent={
                     <MainContent
                         deliveryChallans={
-                            deliveryChallans && <DeliveryChallans />
+                            deliveryChallans && <DeliveryChallans
+                                deliveryChallansPage={deliveryChallans}
+                            />
                         }
                     />
                 }

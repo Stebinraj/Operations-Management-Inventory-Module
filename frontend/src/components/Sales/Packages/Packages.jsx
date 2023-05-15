@@ -13,7 +13,6 @@ const Packages = ({ packagesPage }) => {
     const [packedItemsData, setPackedItemsData] = useState([]);
     const randomNum = Math.floor(Math.random() * 10000000000);
     const packed_id = String(randomNum).padStart(10, '0');
-    const challan_id = String(randomNum).padStart(10, '0');
 
     // fetch order items and set to orderItemsData
     const getOrderItems = async () => {
@@ -27,7 +26,7 @@ const Packages = ({ packagesPage }) => {
     const getPackages = async () => {
         const response = await axios.get(`http://localhost:5000/packages`);
         if (response && response.data.success) {
-            setPackedItemsData(response.data.success)
+            setPackedItemsData(response.data.success.filter(items => items.order_id.order_status === "Packed"))
         }
     }
 
@@ -43,22 +42,6 @@ const Packages = ({ packagesPage }) => {
             toast.success('Packed Successfully!!!')
             await getOrderItems();
             await getPackages();
-        }
-    }
-
-    const generateChallans = async (e, value) => {
-        e.preventDefault();
-        const response = await axios.post(`http://localhost:5000/delivery-challans`, {
-            order_id: value.order_id._id,
-            package_id: value._id,
-            challan_id,
-            challan_date: new Date(),
-            challan_status: "Challans Generated"
-        });
-        if (response && response.data.success) {
-            toast.success('Challans Generated');
-            await getPackages();
-            await getOrderItems();
         }
     }
 
@@ -93,7 +76,6 @@ const Packages = ({ packagesPage }) => {
                     <PackedItemsListTable
                         packagesPage={packagesPage}
                         packedItemsData={packedItemsData}
-                        generateChallans={generateChallans}
                     />
                 }
             />
