@@ -47,13 +47,13 @@ const OrdersListTable = ({ orderItemsData, salesOrderPage, packagesPage, markAsP
                                     <td className='text-nowrap'>
                                         {value.order_status === "Confirmed" && (
                                             salesOrderPage ? (
-                                                <span className="badge rounded-pill text-bg-primary">{value.order_status}</span>
+                                                <span className="badge rounded-pill text-bg-primary w-100 p-2">{value.order_status}</span>
                                             ) : packagesPage && (
                                                 <button className="btn btn-primary" onClick={(e) => { markAsPacked(e, value) }}>Mark as Packed</button>
                                             )
                                         )}
-                                        {value.order_status === "Packed" && <span className="badge rounded-pill text-bg-warning text-white">{value.order_status}</span>}
-                                        {value.order_status === "Challans Generated" && <span className="badge rounded-pill text-bg-info text-white">{value.order_status}</span>}
+                                        {value.order_status === "Packed" && <span className="badge rounded-pill text-bg-warning text-white w-100 p-2">{value.order_status}</span>}
+                                        {value.order_status === "Challans Generated" && <span className="badge rounded-pill text-bg-info text-white w-100 p-2">{value.order_status}</span>}
                                     </td>
                                 </tr>
                             )
