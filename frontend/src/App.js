@@ -8,6 +8,7 @@ import InventoryAdjustmentsPage from './pages/InventoryAdjustmentsPage';
 import SalesOrdersPage from './pages/SalesOrdersPage';
 import PackagesPage from './pages/PackagesPage';
 import DeliveryChallansPage from './pages/DeliveryChallansPage';
+import ShipmentsPage from './pages/ShipmentsPage';
 
 function App() {
     return (
@@ -18,11 +19,13 @@ function App() {
             <Route path='/view/items' element={<ItemsPage />}></Route>
             <Route path='/adjustments/inventory' element={<InventoryAdjustmentsPage />}></Route>
             {/* Inventory */}
+            
             {/* Sales */}
             <Route path='/customers' element={<CustomersPage />}></Route>
             <Route path='/orders/sales' element={<SalesOrdersPage />}></Route>
             <Route path='/packages' element={<PackagesPage />}></Route>
             <Route path='/delivery/challans' element={<DeliveryChallansPage />}></Route>
+            <Route path='/shipments' element={<ShipmentsPage />}></Route>
             {/* Sales */}
         </Routes>
     );
