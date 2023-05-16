@@ -13,7 +13,8 @@ const Sidebar = () => {
         { title: 'Sales Orders', navigate: '/orders/sales', icon: 'bi-bag-check', fontSize: '21px', iconColor: 'indigo' },
         { title: 'Packages', navigate: '/packages', icon: 'bi-cart4', fontSize: '21px', iconColor: 'lightBlue' },
         { title: 'Delivery Challans', navigate: '/delivery/challans', icon: 'bi-card-checklist', fontSize: '21px', iconColor: 'pink' },
-        { title: 'Shipments', navigate: '/shipments', icon: 'bi-truck', fontSize: '21px', iconColor: 'orange' }
+        { title: 'Shipments', navigate: '/shipments', icon: 'bi-truck', fontSize: '21px', iconColor: 'orange' },
+        { title: 'Delivered Items', navigate: '/delivered/items', icon: 'bi-patch-check', fontSize: '21px', iconColor: 'purple' }
     ]
 
     return (

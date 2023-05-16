@@ -1,6 +1,6 @@
 import React from 'react'
 
-const MainContent = ({ dashboard, itemGroup, customers, items, inventoryAdjustment, salesOrder, packages, deliveryChallans, shipments }) => {
+const MainContent = ({ dashboard, itemGroup, customers, items, inventoryAdjustment, salesOrder, packages, deliveryChallans, shipments, deliveredItems }) => {
     return (
         <>
             {/* main content */}
@@ -15,6 +15,7 @@ const MainContent = ({ dashboard, itemGroup, customers, items, inventoryAdjustme
                     {packages}
                     {deliveryChallans}
                     {shipments}
+                    {deliveredItems}
                 </div>
             </div>
         </>
