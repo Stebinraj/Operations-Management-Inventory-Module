@@ -138,33 +138,37 @@ const SalesOrders = ({ salesOrderPage }) => {
 
     // order the cart items
     const orderItems = async (e, cartItemsData) => {
-        e.preventDefault();
-        // checking is there any items in cart if nothing there errors appears
-        if (cartItemsData.length === 0) {
-            toast.error('Nothing to Order !!!');
-            return;
-        }
+        try {
+            e.preventDefault();
+            // checking is there any items in cart if nothing there errors appears
+            if (cartItemsData.length === 0) {
+                toast.error('Nothing to Order !!!');
+                return;
+            }
 
-        // map the array of cart items data
-        const itemsToOrder = cartItemsData.map((items) => ({
-            ordered_id,
-            order_date: new Date(),
-            customer_id: items.customer_id._id,
-            item_id: items.item_id._id,
-            quantity: items.quantity,
-            total: items.quantity * items.item_id.selling_price,
-            order_status: 'Confirmed',
-            delete_cart_id: items._id,
-            ordered_price_per_item: items.item_id.selling_price
-        }));
+            // map the array of cart items data
+            const itemsToOrder = cartItemsData.map((items) => ({
+                ordered_id,
+                order_date: new Date(),
+                customer_id: items.customer_id._id,
+                item_id: items.item_id._id,
+                quantity: items.quantity,
+                total: items.quantity * items.item_id.selling_price,
+                order_status: 'Confirmed',
+                delete_cart_id: items._id,
+                ordered_price_per_item: items.item_id.selling_price
+            }));
 
-        // send order details
-        const response = await axios.post('http://localhost:5000/salesorders', itemsToOrder);
-        if (response && response.data.success) {
-            toast.success('Order Placed !!!')
-            await getCartItems();
-            await getItems();
-            await getOrderItems();
+            // send order details
+            const response = await axios.post('http://localhost:5000/salesorders', itemsToOrder);
+            if (response && response.data.success) {
+                toast.success('Order Placed !!!')
+                await getCartItems();
+                await getItems();
+                await getOrderItems();
+            }
+        } catch (error) {
+            console.log(error);
         }
     }
 
@@ -182,20 +186,28 @@ const SalesOrders = ({ salesOrderPage }) => {
 
     // delete cart items and fetch cartitems and items data
     const deleteCartItems = async (e, value) => {
-        e.preventDefault();
-        const response = await axios.delete(`http://localhost:5000/cart`, { data: { id: value._id } });
-        if (response && response.data.success) {
-            toast.success('Deleted Successfully !!!')
-            await getCartItems();
-            await getItems();
+        try {
+            e.preventDefault();
+            const response = await axios.delete(`http://localhost:5000/cart`, { data: { id: value._id } });
+            if (response && response.data.success) {
+                toast.success('Deleted Successfully !!!')
+                await getCartItems();
+                await getItems();
+            }
+        } catch (error) {
+            console.log(error);
         }
     }
 
     // fetch order items and set to orderItemsData
     const getOrderItems = async () => {
-        const response = await axios.get(`http://localhost:5000/salesorders`);
-        if (response && response.data.success) {
-            setOrderItemsData(response.data.success)
+        try {
+            const response = await axios.get(`http://localhost:5000/salesorders`);
+            if (response && response.data.success) {
+                setOrderItemsData(response.data.success)
+            }
+        } catch (error) {
+            console.log(error);
         }
     }
 

@@ -15,33 +15,45 @@ const DeliveryChallans = ({ deliveryChallansPage }) => {
 
     // fetch delivery challans and set to deliveryChallansData
     const getDeliveryChallans = async () => {
-        const response = await axios.get(`http://localhost:5000/delivery-challans`);
-        if (response && response.data.success) {
-            setDeliveryChallansData(response.data.success.filter(items => items.package_id.order_id.order_status === "Challans Generated"))
+        try {
+            const response = await axios.get(`http://localhost:5000/delivery-challans`);
+            if (response && response.data.success) {
+                setDeliveryChallansData(response.data.success.filter(items => items.package_id.order_id.order_status === "Challans Generated"))
+            }
+        } catch (error) {
+            console.log(error);
         }
     }
 
     // fetch packed items
     const getPackages = async () => {
-        const response = await axios.get(`http://localhost:5000/packages`);
-        if (response && response.data.success) {
-            setPackedItemsData(response.data.success.filter(items => items.order_id.order_status === "Packed"))
+        try {
+            const response = await axios.get(`http://localhost:5000/packages`);
+            if (response && response.data.success) {
+                setPackedItemsData(response.data.success.filter(items => items.order_id.order_status === "Packed"))
+            }
+        } catch (error) {
+            console.log(error);
         }
     }
 
     const generateChallans = async (e, value) => {
-        e.preventDefault();
-        const response = await axios.post(`http://localhost:5000/delivery-challans`, {
-            order_id: value.order_id._id,
-            package_id: value._id,
-            challan_id,
-            challan_date: new Date(),
-            challan_status: "Challans Generated"
-        });
-        if (response && response.data.success) {
-            toast.success('Challans Generated');
-            await getPackages();
-            await getDeliveryChallans();
+        try {
+            e.preventDefault();
+            const response = await axios.post(`http://localhost:5000/delivery-challans`, {
+                order_id: value.order_id._id,
+                package_id: value._id,
+                challan_id,
+                challan_date: new Date(),
+                challan_status: "Challans Generated"
+            });
+            if (response && response.data.success) {
+                toast.success('Challans Generated');
+                await getPackages();
+                await getDeliveryChallans();
+            }
+        } catch (error) {
+            console.log(error);
         }
     }
 

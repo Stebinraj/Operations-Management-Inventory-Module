@@ -16,32 +16,44 @@ const Packages = ({ packagesPage }) => {
 
     // fetch order items and set to orderItemsData
     const getOrderItems = async () => {
-        const response = await axios.get(`http://localhost:5000/salesorders`);
-        if (response && response.data.success) {
-            setOrderItemsData(response.data.success.filter(items => items.order_status === "Confirmed"))
+        try {
+            const response = await axios.get(`http://localhost:5000/salesorders`);
+            if (response && response.data.success) {
+                setOrderItemsData(response.data.success.filter(items => items.order_status === "Confirmed"))
+            }
+        } catch (error) {
+            console.log(error);
         }
     }
 
     // fetch packed items
     const getPackages = async () => {
-        const response = await axios.get(`http://localhost:5000/packages`);
-        if (response && response.data.success) {
-            setPackedItemsData(response.data.success.filter(items => items.order_id.order_status === "Packed"))
+        try {
+            const response = await axios.get(`http://localhost:5000/packages`);
+            if (response && response.data.success) {
+                setPackedItemsData(response.data.success.filter(items => items.order_id.order_status === "Packed"))
+            }
+        } catch (error) {
+            console.log(error);
         }
     }
 
     const markAsPacked = async (e, value) => {
-        e.preventDefault();
-        const response = await axios.post(`http://localhost:5000/packages`, {
-            package_date: new Date(),
-            packed_id,
-            order_id: value._id,
-            package_status: "Packed"
-        });
-        if (response && response.data.success) {
-            toast.success('Packed Successfully!!!')
-            await getOrderItems();
-            await getPackages();
+        try {
+            e.preventDefault();
+            const response = await axios.post(`http://localhost:5000/packages`, {
+                package_date: new Date(),
+                packed_id,
+                order_id: value._id,
+                package_status: "Packed"
+            });
+            if (response && response.data.success) {
+                toast.success('Packed Successfully!!!')
+                await getOrderItems();
+                await getPackages();
+            }
+        } catch (error) {
+            console.log(error);
         }
     }
 

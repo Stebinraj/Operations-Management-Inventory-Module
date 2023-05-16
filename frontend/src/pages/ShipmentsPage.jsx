@@ -16,7 +16,9 @@ const ShipmentsPage = () => {
                     <MainContent
                         shipments={
                             shipments &&
-                            <Shipments />
+                            <Shipments
+                                shipmentsPage={shipments}
+                            />
                         }
                     />
                 }
