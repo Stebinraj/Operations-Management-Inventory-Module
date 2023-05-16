@@ -30,6 +30,8 @@ const package = require('./routes/Sales/packageRoute');
 const deliveryChallans = require('./routes/Sales/deliveryChallansRoute');
 // shipment route
 const shipment = require('./routes/Sales/shipmentRoutes');
+// delivered items route
+const deliveredItems = require('./routes/Sales/deliveredItemsRoute');
 
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
 
@@ -42,6 +44,7 @@ app.use(cart);
 app.use(package);
 app.use(deliveryChallans);
 app.use(shipment);
+app.use(deliveredItems);
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on the port ${process.env.PORT}`);

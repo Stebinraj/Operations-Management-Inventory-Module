@@ -1,7 +1,7 @@
 import moment from 'moment'
 import React from 'react'
 
-const ShipmentsListTable = ({ shipmentsData, shipmentsPage }) => {
+const ShipmentsListTable = ({ shipmentsData, shipmentsPage, deliveredItemsPage, markAsDelivered }) => {
     return (
         <>
             <div className="card-body table-responsive">
@@ -22,6 +22,9 @@ const ShipmentsListTable = ({ shipmentsData, shipmentsPage }) => {
                             <th scope="col" className='text-nowrap'>Total</th>
                             {shipmentsPage && (
                                 <th scope="col" className='text-nowrap'>Status</th>
+                            )}
+                            {deliveredItemsPage && (
+                                <th scope="col" className='text-nowrap'>Manage</th>
                             )}
                         </tr>
                     </thead>
@@ -45,28 +48,11 @@ const ShipmentsListTable = ({ shipmentsData, shipmentsPage }) => {
                                         {value.delivery_challans_id.package_id.order_id.order_status === "Shipped" && (
                                             shipmentsPage ? (
                                                 <span className="badge rounded-pill text-bg-danger text-white w-100 p-2">{value.delivery_challans_id.package_id.order_id.order_status}</span>
-                                            ) : null
-                                        )}
-                                    </td>
-                                    {/* <td className='text-nowrap'>{value.package_id.order_id.customer_id.name}</td>
-                                    <td className='text-nowrap'>{value.package_id.order_id.customer_id.email}</td>
-                                    <td className='text-nowrap'>{value.package_id.order_id.customer_id.phone_number}</td>
-                                    <td className='text-nowrap'>{value.package_id.order_id.customer_id.name}</td>
-                                    <td className='text-nowrap'>{value.package_id.order_id.item_id.item_group_id.item_group_label}</td>
-                                    <td className='text-nowrap'>{value.package_id.order_id.item_id.item_name}</td>
-                                    <td className='text-nowrap'>{value.package_id.order_id.item_id.image_of_item}</td>
-                                    <td className='text-nowrap'>{value.package_id.order_id.quantity}</td>
-                                    <td className='text-nowrap'>{value.package_id.order_id.ordered_price_per_item}</td>
-                                    <td className='text-nowrap'>{value.package_id.order_id.total}</td> */}
-                                    {/* <td className='text-nowrap'>
-                                        {value.package_id.order_id.order_status === "Challans Generated" && (
-                                            deliveryChallansPage ? (
-                                                <span className="badge rounded-pill text-bg-info text-white w-100 p-2">{value.package_id.order_id.order_status}</span>
-                                            ) : shipmentsPage && (
-                                                <button className="btn btn-primary w-100" onClick={(e) => { markAsShipped(e, value) }}>Mark as Shipped</button>
+                                            ) : deliveredItemsPage && (
+                                                <button className='btn btn-primary w-100' onClick={(e) => { markAsDelivered(e, value) }}>Mark as Delivered</button>
                                             )
                                         )}
-                                    </td> */}
+                                    </td>
                                 </tr>
                             )
                         })}

@@ -57,8 +57,10 @@ const OrdersListTable = ({ orderItemsData, salesOrderPage, packagesPage, markAsP
                                             <span className="badge rounded-pill text-bg-warning text-white w-100 p-2">{value.order_status}</span>
                                         ) : value.order_status === "Challans Generated" ? (
                                             <span className="badge rounded-pill text-bg-info text-white w-100 p-2">{value.order_status}</span>
-                                        ) : value.order_status === "Shipped" && (
+                                        ) : value.order_status === "Shipped" ? (
                                             <span className="badge rounded-pill text-bg-danger text-white w-100 p-2">{value.order_status}</span>
+                                        ) : value.order_status === "Delivered" && (
+                                            <span className="badge rounded-pill text-bg-success text-white w-100 p-2">{value.order_status}</span>
                                         )}
                                     </td>
                                 </tr>
