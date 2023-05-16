@@ -19,3 +19,21 @@
 ::-webkit-scrollbar-thumb:hover {
     background-color: #0056b3;
 }
+
+.sidebar::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background-color: #fff;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: #007bff;
+    border-radius: 2.5px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background-color: #0056b3;
+}

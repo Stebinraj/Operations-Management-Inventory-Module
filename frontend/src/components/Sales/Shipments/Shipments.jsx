@@ -39,6 +39,7 @@ const Shipments = ({ shipmentsPage }) => {
             if (response && response.data.success) {
                 toast.success('Package Shipped !!!');
                 await getDeliveryChallans();
+                await getShipments();
             }
         } catch (error) {
             console.log(error);
