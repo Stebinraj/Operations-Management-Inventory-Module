@@ -20,7 +20,7 @@ const Sidebar = () => {
     return (
         <>
             {/* sidebar */}
-            <div className="sidebar">
+            <div className="sidebar" style={{ overflowY: 'auto' }}>
                 {/* Sidebar Menu */}
                 <nav className="mt-2">
                     <ul className="nav nav-pills nav-sidebar flex-column">
