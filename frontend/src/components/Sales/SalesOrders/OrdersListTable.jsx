@@ -61,8 +61,10 @@ const OrdersListTable = ({ orderItemsData, salesOrderPage, packagesPage, markAsP
                                             <span className="badge rounded-pill text-bg-danger text-white w-100 p-2">{value.order_status}</span>
                                         ) : value.order_status === "Delivered" ? (
                                             <span className="badge rounded-pill text-bg-success text-white w-100 p-2">{value.order_status}</span>
-                                        ) : value.order_status === "Invoiced" && (
+                                        ) : value.order_status === "Invoiced" ? (
                                             <span className="badge rounded-pill text-bg-secondary text-white w-100 p-2">{value.order_status}</span>
+                                        ) : value.order_status === "Paid" && (
+                                            <span className="badge rounded-pill text-bg-dark text-white w-100 p-2">{value.order_status}</span>
                                         )}
                                     </td>
                                 </tr>

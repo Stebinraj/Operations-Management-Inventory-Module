@@ -34,6 +34,8 @@ const shipment = require('./routes/Sales/shipmentRoutes');
 const deliveredItems = require('./routes/Sales/deliveredItemsRoute');
 // invoices route
 const invoices = require('./routes/Sales/invoicesRoute');
+// payments route
+const payments = require('./routes/Sales/paymentsRoute');
 
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
 
@@ -48,6 +50,7 @@ app.use(deliveryChallans);
 app.use(shipment);
 app.use(deliveredItems);
 app.use(invoices)
+app.use(payments)
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on the port ${process.env.PORT}`);

@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import DeliveredItemsListTable from '../DeliveredItems/DeliveredItemsListTable'
 import axios from 'axios';
 import InvoicesIconLabelLink from './InvoicesIconLabelLink';
-import { toast } from 'react-toastify';
 import InvoicedItemsModal from './InvoicedItemsModal';
 import InvoicedItemsListTable from './InvoicedItemsListTable';
+import { toast } from 'react-toastify';
 
 const Invoices = ({ invoicesPage }) => {
 
