@@ -52,7 +52,7 @@ const Invoices = ({ invoicesPage }) => {
         try {
             const response = await axios.get(`http://localhost:5000/invoices`);
             if (response && response.data.success) {
-                setInvoicedItemsData(response.data.success);
+                setInvoicedItemsData(response.data.success.filter(items => items.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.order_status === "Invoiced"));
             }
         } catch (error) {
             console.log(error);

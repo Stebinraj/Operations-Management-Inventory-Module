@@ -15,13 +15,14 @@ const Sidebar = () => {
         { title: 'Delivery Challans', navigate: '/delivery/challans', icon: 'bi-card-checklist', fontSize: '21px', iconColor: 'pink' },
         { title: 'Shipments', navigate: '/shipments', icon: 'bi-truck', fontSize: '21px', iconColor: 'orange' },
         { title: 'Delivered Items', navigate: '/delivered/items', icon: 'bi-patch-check', fontSize: '21px', iconColor: 'purple' },
-        { title: 'Invoices', navigate: '/invoices', icon: 'bi-ticket-perforated', fontSize: '21px', iconColor: 'red' }
+        { title: 'Invoices', navigate: '/invoices', icon: 'bi-ticket-perforated', fontSize: '21px', iconColor: 'red' },
+        { title: 'Payments Received', navigate: '/payments/received', icon: 'bi-receipt', fontSize: '21px', iconColor: 'teal' }
     ]
 
     return (
         <>
             {/* sidebar */}
-            <div className="sidebar" style={{ overflowY: 'auto' }}>
+            <div className="sidebar" style={{ overflowY: 'auto', overflowX: 'hidden' }}>
                 {/* Sidebar Menu */}
                 <nav className="mt-2">
                     <ul className="nav nav-pills nav-sidebar flex-column">
