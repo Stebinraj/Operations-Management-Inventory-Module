@@ -18,6 +18,19 @@ const PaymentsReceived = ({ paymentsReceivedPage }) => {
         }
     }
 
+    // mark the invoiced items as paid
+    const markAsPaid = async (e, value) => {
+        e.preventDefault();
+        try {
+            const response = await axios.get(`http://localhost:5000/payments`);
+            if (response && response.data.success) {
+                toast.success('Payments Received !!!');
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     // handle sideeffects while fetching shipments
     useEffect(() => {
         getInvoicedItems();
@@ -30,6 +43,7 @@ const PaymentsReceived = ({ paymentsReceivedPage }) => {
                 <InvoicedItemsListTable
                     invoicedItemsData={invoicedItemsData}
                     paymentsReceivedPage={paymentsReceivedPage}
+                    markAsPaid={markAsPaid}
                 />
             </div>
         </>
