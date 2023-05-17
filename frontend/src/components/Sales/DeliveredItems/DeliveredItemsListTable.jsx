@@ -1,7 +1,7 @@
 import moment from 'moment'
 import React from 'react'
 
-const DeliveredItemsListTable = ({ deliveredItemsPage, deliveredItemsData }) => {
+const DeliveredItemsListTable = ({ deliveredItemsPage, deliveredItemsData, invoicesPage, generateInvoice }) => {
     return (
         <>
             <div className="card-body table-responsive">
@@ -22,6 +22,9 @@ const DeliveredItemsListTable = ({ deliveredItemsPage, deliveredItemsData }) => 
                             <th scope="col" className='text-nowrap'>Total</th>
                             {deliveredItemsPage && (
                                 <th scope="col" className='text-nowrap'>Status</th>
+                            )}
+                            {invoicesPage && (
+                                <th scope="col" className='text-nowrap'>Generate Invoice</th>
                             )}
                         </tr>
                     </thead>
@@ -45,7 +48,9 @@ const DeliveredItemsListTable = ({ deliveredItemsPage, deliveredItemsData }) => 
                                         {value.shipments_id.delivery_challans_id.package_id.order_id.order_status === "Delivered" && (
                                             deliveredItemsPage ? (
                                                 <span className="badge rounded-pill text-bg-success text-white w-100 p-2">{value.shipments_id.delivery_challans_id.package_id.order_id.order_status}</span>
-                                            ) : null
+                                            ) : invoicesPage && (
+                                                <button className='btn btn-primary w-100' onClick={(e) => { generateInvoice(e, value) }}>Generate</button>
+                                            )
                                         )}
                                     </td>
                                 </tr>
