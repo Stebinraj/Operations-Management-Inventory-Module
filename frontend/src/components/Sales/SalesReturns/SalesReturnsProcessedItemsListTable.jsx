@@ -8,8 +8,8 @@ const SalesReturnsProcessedItemsListTable = ({ processedReturnsItemsData, salesR
                 <table className="table table-bordered">
                     <thead className='text-bg-primary'>
                         <tr>
-                            <th scope="col" className='text-nowrap'>Payment Date</th>
-                            <th scope="col" className='text-nowrap'>Payment Id</th>
+                            <th scope="col" className='text-nowrap'>Returns Process Date</th>
+                            <th scope="col" className='text-nowrap'>Returns Process Id</th>
                             <th scope="col" className='text-nowrap'>Customer Name</th>
                             <th scope="col" className='text-nowrap'>Email</th>
                             <th scope="col" className='text-nowrap'>Phone Number</th>
