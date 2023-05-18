@@ -1,7 +1,7 @@
 import moment from 'moment'
 import React from 'react'
 
-const SalesReturnsProcessedItemsListTable = ({ processedReturnsItemsData, salesReturnsPage }) => {
+const SalesReturnsProcessedItemsListTable = ({ processedReturnsItemsData, salesReturnsPage, returnedItemsPage, markAsReturned }) => {
     return (
         <>
             <div className="card-body table-responsive">
@@ -23,6 +23,9 @@ const SalesReturnsProcessedItemsListTable = ({ processedReturnsItemsData, salesR
                             {salesReturnsPage && (
                                 <th scope="col" className='text-nowrap'>Status</th>
                             )}
+                            {returnedItemsPage && (
+                                <th scope="col" className='text-nowrap'>Manage Returns</th>
+                            )}
                         </tr>
                     </thead>
                     <tbody>
@@ -43,12 +46,11 @@ const SalesReturnsProcessedItemsListTable = ({ processedReturnsItemsData, salesR
                                     <td className='text-nowrap'>{value.payment_id.invoice_id.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.total}</td>
                                     <td className='text-nowrap'>
                                         {value.payment_id.invoice_id.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.order_status === "Returns Processed" && (
-                                            salesReturnsPage && (
+                                            salesReturnsPage ? (
                                                 <span className="badge rounded-pill text-bg-warning text-white w-100 p-2">{value.payment_id.invoice_id.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.order_status}</span>
+                                            ) : returnedItemsPage && (
+                                                <button className='btn btn-primary w-100' onClick={(e) => { markAsReturned(e, value) }}>Mark as Returned</button>
                                             )
-                                            //     : salesReturnsPage && (
-                                            //     <button className='btn btn-primary w-100' onClick={(e) => { processReturns(e, value) }}>Process Returns</button>
-                                            // )
                                         )}
                                     </td>
                                 </tr>
