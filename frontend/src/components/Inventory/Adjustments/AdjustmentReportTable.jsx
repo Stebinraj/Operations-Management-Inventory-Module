@@ -43,7 +43,7 @@ const AdjustmentReportTable = ({ reportData }) => {
                                     <td className='text-nowrap'>{value.mode_of_adjustment}</td>
                                     <td className='text-nowrap'>{value.quantity === "" ? ("-") : (value.quantity)}</td>
                                     <td className='text-nowrap'>{value.value === "" ? ("-") : (value.value)}</td>
-                                    <td className='text-nowrap'>{value.reference_number}</td>
+                                    <td className='text-nowrap'>{`IA - ${value.reference_number}`}</td>
                                     <td className='text-nowrap'>{moment(value.date).format('DD-MM-YYYY')}</td>
                                     <td className='text-nowrap'>{value.reason}</td>
                                     <td className='text-nowrap'>{value.description}</td>
