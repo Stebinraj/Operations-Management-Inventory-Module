@@ -9,6 +9,7 @@ const AddToCartFormModal = ({ customer_id, handleCustomerChange, customerData, c
                     <div className="modal-content">
                         <div className="modal-header">
                             <h1 className="modal-title fs-5" id="exampleModalLabel">Add to Cart</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={handleCartClose}></button>
                         </div>
                         <div className="modal-body">
                             <form className='row'>

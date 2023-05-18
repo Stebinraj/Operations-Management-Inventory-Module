@@ -246,7 +246,6 @@ const SalesOrders = ({ salesOrderPage }) => {
 
             {/* view cart items modal components */}
             <ViewCartItemsModal
-                handleCartClose={handleCartClose}
                 orderItems={orderItems}
                 cartItemsData={cartItemsData}
                 cartListTable={
