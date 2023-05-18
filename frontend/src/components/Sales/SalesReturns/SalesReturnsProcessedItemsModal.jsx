@@ -1,20 +1,20 @@
 import React from 'react'
 
-const ShipmentsModal = ({ shipmentsListTable }) => {
+const SalesReturnsProcessedItemsModal = ({ salesReturnsProcessedItemsListTable }) => {
     return (
         <>
-            {/* shipments modal */}
-            <div className="modal fade" id="shipments" tabIndex={-1} aria-labelledby="shipmentsLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+            {/* sales returns processed items  modal */}
+            <div className="modal fade" id="salesReturnsProcessedItems" tabIndex={-1} aria-labelledby="salesReturnsProcessedItemsLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
                 <div className="modal-dialog" style={{ maxWidth: '100%' }}>
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h1 className="modal-title fs-5" id="exampleModalLabel">Shipped Items</h1>
+                            <h1 className="modal-title fs-5" id="exampleModalLabel">Sales Returns Processed Items</h1>
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
                             <div className="card card-primary card-outline">
-                                {/* shipments list table components */}
-                                {shipmentsListTable}
+                                {/* sales returns processed items list table Component */}
+                                {salesReturnsProcessedItemsListTable}
                             </div>
                         </div>
                         <div className="modal-footer">
@@ -23,9 +23,9 @@ const ShipmentsModal = ({ shipmentsListTable }) => {
                     </div>
                 </div>
             </div>
-            {/* shipments modal */}
+            {/* sales returns processed items modal */}
         </>
     )
 }
 
-export default ShipmentsModal
+export default SalesReturnsProcessedItemsModal

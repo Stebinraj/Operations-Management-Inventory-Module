@@ -12,6 +12,7 @@ import ShipmentsPage from './pages/ShipmentsPage';
 import DeliveredItemsPage from './pages/DeliveredItemsPage';
 import InvoicesPage from './pages/InvoicesPage';
 import PaymentsReceivedPage from './pages/PaymentsReceivedPage';
+import SalesReturnsPage from './pages/SalesReturnsPage';
 
 function App() {
     return (
@@ -32,6 +33,7 @@ function App() {
             <Route path='/delivered/items' element={<DeliveredItemsPage />}></Route>
             <Route path='/invoices' element={<InvoicesPage />}></Route>
             <Route path='/payments/received' element={<PaymentsReceivedPage />}></Route>
+            <Route path='/returns/sales' element={<SalesReturnsPage />}></Route>
             {/* Sales */}
         </Routes>
     );

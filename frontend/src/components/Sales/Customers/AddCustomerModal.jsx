@@ -10,7 +10,7 @@ const AddCustomerModal = ({ setName, setEmail, email, setPhoneNumber, phone_numb
                             <h1 className="modal-title fs-5" id="exampleModalLabel">
                                 {updateForm ? 'Update Customer' : 'Create Customer'}
                             </h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={handleClose}></button>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={handleClose}></button>
                         </div>
                         <div className="modal-body">
                             <form className='row'>

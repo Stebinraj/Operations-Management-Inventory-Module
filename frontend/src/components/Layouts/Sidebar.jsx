@@ -16,7 +16,8 @@ const Sidebar = () => {
         { title: 'Shipments', navigate: '/shipments', icon: 'bi-truck', fontSize: '21px', iconColor: 'orange' },
         { title: 'Delivered Items', navigate: '/delivered/items', icon: 'bi-patch-check', fontSize: '21px', iconColor: 'purple' },
         { title: 'Invoices', navigate: '/invoices', icon: 'bi-ticket-perforated', fontSize: '21px', iconColor: 'red' },
-        { title: 'Payments Received', navigate: '/payments/received', icon: 'bi-receipt', fontSize: '21px', iconColor: 'teal' }
+        { title: 'Payments Received', navigate: '/payments/received', icon: 'bi-receipt', fontSize: '21px', iconColor: 'teal' },
+        { title: 'Sales Returns', navigate: '/returns/sales', icon: 'bi-box', fontSize: '21px', iconColor: 'blue' }
     ]
 
     return (

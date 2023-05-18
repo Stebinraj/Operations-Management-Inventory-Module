@@ -27,8 +27,8 @@ const PaymentsReceived = ({ paymentsReceivedPage }) => {
 
     // mark the invoiced items as paid
     const markAsPaid = async (e, value) => {
-        e.preventDefault();
         try {
+            e.preventDefault();
             const response = await axios.post(`http://localhost:5000/payments`, {
                 invoice_id: await value._id,
                 paid_id,
@@ -48,9 +48,13 @@ const PaymentsReceived = ({ paymentsReceivedPage }) => {
 
     // fetch payments and set to paymentsReceivedData
     const getPayments = async () => {
-        const response = await axios.get(`http://localhost:5000/payments`);
-        if (response && response.data.success) {
-            setPaymentsReceivedData(response.data.success.filter(items => items.invoice_id.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.order_status === "Paid"))
+        try {
+            const response = await axios.get(`http://localhost:5000/payments`);
+            if (response && response.data.success) {
+                setPaymentsReceivedData(response.data.success.filter(items => items.invoice_id.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.order_status === "Paid"))
+            }
+        } catch (error) {
+            console.log(error);
         }
     }
 

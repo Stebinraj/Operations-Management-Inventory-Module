@@ -1,7 +1,7 @@
 import moment from 'moment'
 import React from 'react'
 
-const PaymentsReceivedListTable = ({ paymentsReceivedPage, paymentsReceivedData }) => {
+const PaymentsReceivedListTable = ({ paymentsReceivedPage, paymentsReceivedData, salesReturnsPage, processReturns }) => {
     return (
         <>
             <div className="card-body table-responsive">
@@ -23,6 +23,9 @@ const PaymentsReceivedListTable = ({ paymentsReceivedPage, paymentsReceivedData 
                             {paymentsReceivedPage && (
                                 <th scope="col" className='text-nowrap'>Status</th>
                             )}
+                            {salesReturnsPage && (
+                                <th scope="col" className='text-nowrap'>Manage</th>
+                            )}
                         </tr>
                     </thead>
                     <tbody>
@@ -43,13 +46,11 @@ const PaymentsReceivedListTable = ({ paymentsReceivedPage, paymentsReceivedData 
                                     <td className='text-nowrap'>{value.invoice_id.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.total}</td>
                                     <td className='text-nowrap'>
                                         {value.invoice_id.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.order_status === "Paid" && (
-                                            paymentsReceivedPage && (
+                                            paymentsReceivedPage ? (
                                                 <span className="badge rounded-pill text-bg-dark text-white w-100 p-2">{value.invoice_id.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.order_status}</span>
+                                            ) : salesReturnsPage && (
+                                                <button className='btn btn-primary w-100' onClick={(e) => { processReturns(e, value) }}>Process Returns</button>
                                             )
-
-                                            //     : paymentsReceivedPage && (
-                                            //     <button className='btn btn-primary w-100' onClick={(e) => { markAsPaid(e, value) }}>Mark as Paid</button>
-                                            // )
                                         )}
                                     </td>
                                 </tr>
