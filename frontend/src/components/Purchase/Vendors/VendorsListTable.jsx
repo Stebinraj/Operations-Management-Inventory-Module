@@ -6,7 +6,7 @@ const VendorsListTable = ({ vendorData, handleUpdateData }) => {
         { headings: 'Name' },
         { headings: 'Email' },
         { headings: 'Phone Number' },
-        { headings: 'Address' },
+        { headings: 'Company Address' },
         { headings: 'Actions' },
     ]
 
