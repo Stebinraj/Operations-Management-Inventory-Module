@@ -15,6 +15,7 @@ import PaymentsReceivedPage from './pages/PaymentsReceivedPage';
 import SalesReturnsPage from './pages/SalesReturnsPage';
 import ReturnedItemsPage from './pages/ReturnedItemsPage';
 import CreditNotesPage from './pages/CreditNotesPage';
+import VendorsPage from './pages/VendorsPage';
 
 function App() {
     return (
@@ -39,6 +40,10 @@ function App() {
             <Route path='/returns/items' element={<ReturnedItemsPage />}></Route>
             <Route path='/returns/credit' element={<CreditNotesPage />}></Route>
             {/* Sales */}
+
+            {/* Purchase */}
+            <Route path='/vendors' element={<VendorsPage />}></Route>
+            {/* Purchase */}
         </Routes>
     );
 }

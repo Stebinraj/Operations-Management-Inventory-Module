@@ -19,7 +19,8 @@ const Sidebar = () => {
         { title: 'Payments Received', navigate: '/payments/received', icon: 'bi-receipt', fontSize: '21px', iconColor: 'teal' },
         { title: 'Sales Returns', navigate: '/returns/sales', icon: 'bi-box', fontSize: '21px', iconColor: 'blue' },
         { title: 'Returned Items', navigate: '/returns/items', icon: 'bi-boxes', fontSize: '21px', iconColor: 'blue' },
-        { title: 'Credit Notes', navigate: '/returns/credit', icon: 'bi-card-list', fontSize: '21px', iconColor: 'brown' }
+        { title: 'Credit Notes', navigate: '/returns/credit', icon: 'bi-card-list', fontSize: '21px', iconColor: 'brown' },
+        { title: 'Vendors', navigate: '/vendors', icon: 'bi-person-up', fontSize: '21px', iconColor: 'orange' }
     ]
 
     return (

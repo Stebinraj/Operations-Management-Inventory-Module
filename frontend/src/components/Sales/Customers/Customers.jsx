@@ -82,7 +82,6 @@ const Customers = () => {
                 setPhoneNumber('');
                 setBillingAddress('');
                 setId('');
-                await getCustomer();
                 toast.success('Customer Updated !!!');
                 await getCustomer();
             }
