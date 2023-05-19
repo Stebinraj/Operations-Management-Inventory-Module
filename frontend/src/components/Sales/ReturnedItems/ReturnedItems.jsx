@@ -41,6 +41,7 @@ const ReturnedItems = ({ returnedItemsPage }) => {
             if (response && response.data.success) {
                 toast.success('Returned Successfully !!!');
                 await getProcessedReturns();
+                await getReturnedItems();
             }
         } catch (error) {
             console.log(error);

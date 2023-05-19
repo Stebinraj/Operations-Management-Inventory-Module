@@ -1,7 +1,7 @@
 import moment from 'moment'
 import React from 'react'
 
-const ReturnedItemsListTable = ({ returnedItemsData, returnedItemsPage }) => {
+const ReturnedItemsListTable = ({ returnedItemsData, returnedItemsPage, creditNotesPage, issueCredits }) => {
     return (
         <>
             <div className="card-body table-responsive">
@@ -23,6 +23,9 @@ const ReturnedItemsListTable = ({ returnedItemsData, returnedItemsPage }) => {
                             {returnedItemsPage && (
                                 <th scope="col" className='text-nowrap'>Status</th>
                             )}
+                            {creditNotesPage && (
+                                <th scope="col" className='text-nowrap'>Manage</th>
+                            )}
                         </tr>
                     </thead>
                     <tbody>
@@ -43,12 +46,11 @@ const ReturnedItemsListTable = ({ returnedItemsData, returnedItemsPage }) => {
                                     <td className='text-nowrap'>{value.returns_processed_id.payment_id.invoice_id.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.total}</td>
                                     <td className='text-nowrap'>
                                         {value.returns_processed_id.payment_id.invoice_id.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.order_status === "Returned" && (
-                                            returnedItemsPage && (
+                                            returnedItemsPage ? (
                                                 <span className="badge rounded-pill text-bg-danger text-white w-100 p-2">{value.returns_processed_id.payment_id.invoice_id.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.order_status}</span>
+                                            ) : creditNotesPage && (
+                                                <button className='btn btn-primary w-100' onClick={(e) => { issueCredits(e, value) }}>Issue Credits</button>
                                             )
-                                            //     : returnedItemsPage && (
-                                            //     <button className='btn btn-primary w-100' onClick={(e) => { markAsReturned(e, value) }}>Mark as Returned</button>
-                                            // )
                                         )}
                                     </td>
                                 </tr>

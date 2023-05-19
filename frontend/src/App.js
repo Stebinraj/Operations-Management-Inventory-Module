@@ -14,6 +14,7 @@ import InvoicesPage from './pages/InvoicesPage';
 import PaymentsReceivedPage from './pages/PaymentsReceivedPage';
 import SalesReturnsPage from './pages/SalesReturnsPage';
 import ReturnedItemsPage from './pages/ReturnedItemsPage';
+import CreditNotesPage from './pages/CreditNotesPage';
 
 function App() {
     return (
@@ -36,6 +37,7 @@ function App() {
             <Route path='/payments/received' element={<PaymentsReceivedPage />}></Route>
             <Route path='/returns/sales' element={<SalesReturnsPage />}></Route>
             <Route path='/returns/items' element={<ReturnedItemsPage />}></Route>
+            <Route path='/returns/credit' element={<CreditNotesPage />}></Route>
             {/* Sales */}
         </Routes>
     );

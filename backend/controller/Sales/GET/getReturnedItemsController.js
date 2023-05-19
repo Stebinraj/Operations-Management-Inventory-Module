@@ -13,7 +13,6 @@ const shipmentModel = require("../../../models/Sales/shipmentsModel");
 
 const getReturnedItemsController = async (req, res) => {
     try {
-        // returns_processed_id
         const data = await returnedItemsModel.find({}).populate([
             {
                 path: 'returns_processed_id',
