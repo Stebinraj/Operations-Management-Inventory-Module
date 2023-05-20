@@ -20,6 +20,11 @@ const PurchaseOrders = ({ purchaseOrdersPage }) => {
         }
     };
 
+    // purchase the items
+    const handlePurchase = async (e, value) => {
+        e.preventDefault();
+    }
+
     // handle side-effects while fetching items
     useEffect(() => {
         getItems();
@@ -33,6 +38,7 @@ const PurchaseOrders = ({ purchaseOrdersPage }) => {
                     <ItemsListTable
                         itemsData={itemsData}
                         purchaseOrdersPage={purchaseOrdersPage}
+                        handlePurchase={handlePurchase}
                     />
                 }
             />
