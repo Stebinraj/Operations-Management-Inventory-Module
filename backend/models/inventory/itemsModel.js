@@ -18,7 +18,8 @@ const itemsSchema = mongoose.Schema({
     opening_stock: { type: Number, required: true },
     reorder_point: { type: Number, required: true },
     preferred_vendor: { type: String, required: true },
-    image_of_item: { type: String }
+    image_of_item: { type: String },
+    added_date: { type: Date, required: true }
 });
 
 const itemsModel = mongoose.model('items', itemsSchema);

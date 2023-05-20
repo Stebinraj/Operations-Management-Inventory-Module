@@ -64,7 +64,8 @@ const ItemsGroup = () => {
                 opening_stock,
                 reorder_point,
                 preferred_vendor,
-                image_of_item
+                image_of_item,
+                added_date: new Date()
             });
             if (response && response.data.success) {
                 toast.success('Items Created Successfully !!!');
