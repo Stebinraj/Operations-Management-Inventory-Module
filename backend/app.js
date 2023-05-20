@@ -45,7 +45,7 @@ const creditNotes = require('./routes/Sales/creditNotesRoute');
 // vendors route
 const vendors = require('./routes/Purchase/vendorsRoute');
 
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use(items);
 app.use(inventoryAdjustment);
