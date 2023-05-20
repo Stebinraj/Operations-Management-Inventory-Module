@@ -155,6 +155,11 @@ const getPaymentsController = async (req, res) => {
             },
             {
                 $unwind: "$invoice_id.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.item_id.item_group_id"
+            },
+            {
+                $sort: {
+                    paid_date: -1
+                }
             }
         ]);
 

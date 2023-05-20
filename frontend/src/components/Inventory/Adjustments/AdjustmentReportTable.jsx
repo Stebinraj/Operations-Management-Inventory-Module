@@ -5,6 +5,7 @@ const AdjustmentReportTable = ({ reportData }) => {
 
     // inventory adjustments table headings
     const table = [
+        { headings: 'Date' },
         { headings: 'Item Group' },
         { headings: 'Item Name' },
         { headings: 'Brand' },
@@ -13,7 +14,6 @@ const AdjustmentReportTable = ({ reportData }) => {
         { headings: 'Quantity' },
         { headings: 'Value' },
         { headings: 'Reference Number' },
-        { headings: 'Date' },
         { headings: 'Reason' },
         { headings: 'Description' },
         { headings: 'Image' },
@@ -36,6 +36,7 @@ const AdjustmentReportTable = ({ reportData }) => {
                         {reportData.map((value, index) => {
                             return (
                                 <tr key={index}>
+                                    <td className='text-nowrap'>{moment(value.date).format('DD-MM-YYYY')}</td>
                                     <td className='text-nowrap'>{value.item_id.item_group_id.item_group_label}</td>
                                     <td className='text-nowrap'>{value.item_id.item_name}</td>
                                     <td className='text-nowrap'>{value.item_id.brand}</td>
@@ -44,7 +45,6 @@ const AdjustmentReportTable = ({ reportData }) => {
                                     <td className='text-nowrap'>{value.quantity === "" ? ("-") : (value.quantity)}</td>
                                     <td className='text-nowrap'>{value.value === "" ? ("-") : (value.value)}</td>
                                     <td className='text-nowrap'>{`IA - ${value.reference_number}`}</td>
-                                    <td className='text-nowrap'>{moment(value.date).format('DD-MM-YYYY')}</td>
                                     <td className='text-nowrap'>{value.reason}</td>
                                     <td className='text-nowrap'>{value.description}</td>
                                     <td className='text-nowrap'>{value.item_id.image_of_item}</td>

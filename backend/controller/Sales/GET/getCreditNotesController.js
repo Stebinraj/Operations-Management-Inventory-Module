@@ -203,6 +203,11 @@ const getCreditNotesController = async (req, res) => {
             },
             {
                 $unwind: "$returned_id.returns_processed_id.payment_id.invoice_id.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.item_id.item_group_id"
+            },
+            {
+                $sort: {
+                    credit_date: -1
+                }
             }
         ]);
 

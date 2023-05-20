@@ -75,9 +75,14 @@ const getPackageController = async (req, res) => {
             },
             {
                 $unwind: "$order_id.item_id.item_group_id"
+            },
+            {
+                $sort: {
+                    package_date: -1
+                }
             }
         ])
-        
+
         res.send({ success: data })
     } catch (error) {
         res.send(error);

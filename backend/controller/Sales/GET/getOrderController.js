@@ -57,6 +57,11 @@ const getOrderController = async (req, res) => {
             },
             {
                 $unwind: "$item_id.item_group_id"
+            },
+            {
+                $sort: {
+                    order_date: -1
+                }
             }
         ])
 

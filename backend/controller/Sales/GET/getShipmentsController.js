@@ -111,6 +111,11 @@ const getShipmentsController = async (req, res) => {
             },
             {
                 $unwind: "$delivery_challans_id.package_id.order_id.item_id.item_group_id"
+            },
+            {
+                $sort: {
+                    shipment_date: -1
+                }
             }
         ]);
 

@@ -91,6 +91,11 @@ const getDeliveryChallansController = async (req, res) => {
             },
             {
                 $unwind: "$package_id.order_id.item_id.item_group_id"
+            },
+            {
+                $sort: {
+                    challan_date: -1
+                }
             }
         ]);
 

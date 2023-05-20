@@ -39,6 +39,11 @@ const getAdjustmentReportsController = async (req, res) => {
             },
             {
                 $unwind: "$item_id.item_group_id"
+            },
+            {
+                $sort: {
+                    date: -1
+                }
             }
         ]);
         res.send({ success: data })
