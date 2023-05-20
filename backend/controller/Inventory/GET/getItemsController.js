@@ -23,6 +23,11 @@ const getItemsController = async (req, res) => {
             },
             {
                 $unwind: "$item_group_id"
+            },
+            {
+                $sort: {
+                    added_date: -1
+                }
             }
         ]);
 
