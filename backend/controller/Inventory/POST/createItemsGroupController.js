@@ -2,8 +2,7 @@ const itemsGroupModel = require("../../../models/Inventory/itemsGroupModel");
 
 const createItemsGroupController = async (req, res) => {
     try {
-        const itemGroup = new itemsGroupModel(req.body);
-        const data = await itemGroup.save();
+        const data = await itemsGroupModel.create(req.body);
         res.send({ success: data });
     } catch (error) {
         res.send(error);

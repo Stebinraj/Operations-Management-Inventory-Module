@@ -12,7 +12,6 @@ const CreditNotes = ({ creditNotesPage }) => {
     const credit_id = String(randomNum).padStart(10, '0');
     const [returnedItemsData, setReturnedItemsData] = useState([]);
     const [creditNotesData, setCreditNotesData] = useState([]);
-    console.log(creditNotesData);
 
     // fetch returned items and set to returnedItemsData
     const getReturnedItems = async () => {
