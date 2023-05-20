@@ -16,6 +16,7 @@ import SalesReturnsPage from './pages/SalesReturnsPage';
 import ReturnedItemsPage from './pages/ReturnedItemsPage';
 import CreditNotesPage from './pages/CreditNotesPage';
 import VendorsPage from './pages/VendorsPage';
+import PurchaseOrdersPage from './pages/PurchaseOrdersPage';
 
 function App() {
     return (
@@ -43,6 +44,7 @@ function App() {
 
             {/* Purchase */}
             <Route path='/vendors' element={<VendorsPage />}></Route>
+            <Route path='/purchase/orders' element={<PurchaseOrdersPage />}></Route>
             {/* Purchase */}
         </Routes>
     );

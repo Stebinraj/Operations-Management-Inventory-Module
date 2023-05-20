@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ItemsListTable = ({ handleAdjust, itemsData, itemsPage, salesOrderPage, handleCart }) => {
+const ItemsListTable = ({ handleAdjust, itemsData, itemsPage, salesOrderPage, handleCart, purchaseOrdersPage }) => {
     return (
         <>
             <div className="card-body table-responsive">
@@ -30,6 +30,9 @@ const ItemsListTable = ({ handleAdjust, itemsData, itemsPage, salesOrderPage, ha
                             )}
                             {salesOrderPage && (
                                 <th scope="col" className='text-nowrap'>Cart</th>
+                            )}
+                            {purchaseOrdersPage && (
+                                <th scope="col" className='text-nowrap'>Manage</th>
                             )}
                         </tr>
                     </thead>
@@ -61,6 +64,9 @@ const ItemsListTable = ({ handleAdjust, itemsData, itemsPage, salesOrderPage, ha
                                         )}
                                         {salesOrderPage && (
                                             <button type="button" className="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#addToCart" onClick={(e) => { handleCart(e, value) }}>Add to Cart</button>
+                                        )}
+                                        {purchaseOrdersPage && (
+                                            <button className='btn btn-primary w-100'>Purchase</button>
                                         )}
                                     </td>
                                 </tr>
