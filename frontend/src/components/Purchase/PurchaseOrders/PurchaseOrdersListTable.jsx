@@ -1,7 +1,7 @@
 import moment from 'moment'
 import React from 'react'
 
-const PurchaseOrdersListTable = ({ purchaseOrdersData }) => {
+const PurchaseOrdersListTable = ({ purchaseOrdersData, purchaseOrdersPage }) => {
     return (
         <>
             <div className="card-body table-responsive">
@@ -17,7 +17,9 @@ const PurchaseOrdersListTable = ({ purchaseOrdersData }) => {
                             <th scope="col" className='text-nowrap'>Quantity</th>
                             <th scope="col" className='text-nowrap'>Price Per Item</th>
                             <th scope="col" className='text-nowrap'>Total</th>
-                            <th scope="col" className='text-nowrap'>Status</th>
+                            {purchaseOrdersPage && (
+                                <th scope="col" className='text-nowrap'>Status</th>
+                            )}
                         </tr>
                     </thead>
                     <tbody>
@@ -35,7 +37,9 @@ const PurchaseOrdersListTable = ({ purchaseOrdersData }) => {
                                     <td className='text-nowrap'>{value.total}</td>
                                     <td className='text-nowrap'>
                                         {value.purchase_status === "Confirmed" && (
-                                            <span className="badge rounded-pill text-bg-primary w-100 p-2">{value.purchase_status}</span>
+                                            purchaseOrdersPage ? (
+                                                <span className="badge rounded-pill text-bg-primary w-100 p-2">{value.purchase_status}</span>
+                                            ) : null
                                         )}
                                     </td>
                                 </tr>

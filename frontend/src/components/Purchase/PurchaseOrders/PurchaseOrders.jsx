@@ -215,6 +215,7 @@ const PurchaseOrders = ({ purchaseOrdersPage }) => {
                 purchaseOrdersListTable={
                     <PurchaseOrdersListTable
                         purchaseOrdersData={purchaseOrdersData}
+                        purchaseOrdersPage={purchaseOrdersPage}
                     />
                 }
             />
