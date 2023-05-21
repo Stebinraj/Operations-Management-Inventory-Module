@@ -23,6 +23,7 @@ const Sidebar = () => {
         { title: 'Vendors', navigate: '/vendors', icon: 'bi-person-up', fontSize: '21px', iconColor: 'orange' },
         { title: 'Purchase Orders', navigate: '/purchase/orders', icon: 'bi-inboxes', fontSize: '21px', iconColor: 'purple' },
         { title: 'Received Orders', navigate: '/purchase/received', icon: 'bi-arrow-down-right-circle', fontSize: '21px', iconColor: 'indigo' },
+        { title: 'Bills', navigate: '/purchase/bills', icon: 'bi-journal-text', fontSize: '21px', iconColor: 'lightBlue' },
     ]
 
     return (

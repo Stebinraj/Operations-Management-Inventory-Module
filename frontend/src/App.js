@@ -18,6 +18,7 @@ import CreditNotesPage from './pages/CreditNotesPage';
 import VendorsPage from './pages/VendorsPage';
 import PurchaseOrdersPage from './pages/PurchaseOrdersPage';
 import ReceivedOrdersPage from './pages/ReceivedOrdersPage';
+import BillsPage from './pages/BillsPage';
 
 function App() {
     return (
@@ -47,6 +48,7 @@ function App() {
             <Route path='/vendors' element={<VendorsPage />}></Route>
             <Route path='/purchase/orders' element={<PurchaseOrdersPage />}></Route>
             <Route path='/purchase/received' element={<ReceivedOrdersPage />}></Route>
+            <Route path='/purchase/bills' element={<BillsPage />}></Route>
             {/* Purchase */}
         </Routes>
     );
