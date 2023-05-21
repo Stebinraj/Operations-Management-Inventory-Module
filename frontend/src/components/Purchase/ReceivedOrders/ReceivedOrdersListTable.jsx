@@ -1,7 +1,7 @@
 import moment from 'moment'
 import React from 'react'
 
-const ReceivedOrdersListTable = ({ receivedOrdersPage, receivedOrdersData }) => {
+const ReceivedOrdersListTable = ({ receivedOrdersPage, receivedOrdersData, billsPage, generateBill }) => {
     return (
         <>
             <div className="card-body table-responsive">
@@ -20,6 +20,9 @@ const ReceivedOrdersListTable = ({ receivedOrdersPage, receivedOrdersData }) => 
                             {receivedOrdersPage && (
                                 <th scope="col" className='text-nowrap'>Status</th>
                             )}
+                            {billsPage && (
+                                <th scope="col" className='text-nowrap'>Manage Bill</th>
+                            )}
                         </tr>
                     </thead>
                     <tbody>
@@ -37,12 +40,11 @@ const ReceivedOrdersListTable = ({ receivedOrdersPage, receivedOrdersData }) => 
                                     <td className='text-nowrap'>{value.purchased_id.total}</td>
                                     <td className='text-nowrap'>
                                         {value.purchased_id.purchase_status === "Received" && (
-                                            receivedOrdersPage && (
+                                            receivedOrdersPage ? (
                                                 <span className="badge rounded-pill text-bg-warning text-white w-100 p-2">{value.purchased_id.purchase_status}</span>
+                                            ) : billsPage && (
+                                                <button className='btn btn-primary w-100' onClick={(e) => { generateBill(e, value) }}>Generate Bill</button>
                                             )
-                                            //     : receivedOrdersPage && (
-                                            //     <button className='btn btn-primary w-100' onClick={(e) => { markAsReceived(e, value) }}>Mark as Received</button>
-                                            // )
                                         )}
                                     </td>
                                 </tr>

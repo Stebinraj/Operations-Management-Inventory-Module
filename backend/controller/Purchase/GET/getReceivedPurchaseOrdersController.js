@@ -35,7 +35,7 @@ const getReceivedPurchaseOrdersController = async (req, res) => {
             },
             {
                 $unwind: "$purchased_id.item_id.item_group_id"
-            },
+            }
         ]);
         res.send({ success: data });
     } catch (error) {
