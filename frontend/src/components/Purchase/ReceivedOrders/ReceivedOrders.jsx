@@ -27,27 +27,35 @@ const ReceivedOrders = ({ receivedOrdersPage }) => {
 
     // mark the purchased items as received and add the quantity to inventory
     const markAsReceived = async (e, value) => {
-        e.preventDefault();
-        const response = await axios.post('http://localhost:5000/purchase/received', {
-            purchased_id: await value._id,
-            received_date: new Date(),
-            received_id,
-            received_status: 'Received',
-            quantity: await value.quantity,
-            item_id: await value.item_id._id
-        });
-        if (response && response.data.success) {
-            toast.success('Marked as Received !!!');
-            await getPurchaseOrders();
-            await getReceivedOrders();
+        try {
+            e.preventDefault();
+            const response = await axios.post('http://localhost:5000/purchase/received', {
+                purchased_id: await value._id,
+                received_date: new Date(),
+                received_id,
+                received_status: 'Received',
+                quantity: await value.quantity,
+                item_id: await value.item_id._id
+            });
+            if (response && response.data.success) {
+                toast.success('Marked as Received !!!');
+                await getPurchaseOrders();
+                await getReceivedOrders();
+            }
+        } catch (error) {
+            console.log(error);
         }
     };
 
     // fetch received items and set to receivedOrdersData
     const getReceivedOrders = async () => {
-        const response = await axios.get('http://localhost:5000/purchase/received');
-        if (response && response.data.success) {
-            setReceivedOrdersData(response.data.success.filter(items => items.purchased_id.purchase_status === "Received"));
+        try {
+            const response = await axios.get('http://localhost:5000/purchase/received');
+            if (response && response.data.success) {
+                setReceivedOrdersData(response.data.success.filter(items => items.purchased_id.purchase_status === "Received"));
+            }
+        } catch (error) {
+            console.log(error);
         }
     }
 

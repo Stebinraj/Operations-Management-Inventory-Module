@@ -15,33 +15,46 @@ const Bills = ({ billsPage }) => {
 
     // fetch received items and set to receivedOrdersData
     const getReceivedOrders = async () => {
-        const response = await axios.get('http://localhost:5000/purchase/received');
-        if (response && response.data.success) {
-            setReceivedOrdersData(response.data.success.filter(items => items.purchased_id.purchase_status === "Received"));
+        try {
+            const response = await axios.get('http://localhost:5000/purchase/received');
+            if (response && response.data.success) {
+                setReceivedOrdersData(response.data.success.filter(items => items.purchased_id.purchase_status === "Received"));
+            }
+        } catch (error) {
+            console.log(error);
         }
     }
 
     // generate bill for received items
     const generateBill = async (e, value) => {
-        e.preventDefault();
-        const response = await axios.post('http://localhost:5000/purchase/bills', {
-            received_order_id: await value._id,
-            bill_id,
-            bill_date: new Date(),
-            bill_status: 'Billed',
-            purchased_id: await value.purchased_id._id
-        });
-        if (response && response.data.success) {
-            toast.success('Bills Generated !!!');
-            await getReceivedOrders();
-            await getBill();
+        try {
+            e.preventDefault();
+            const response = await axios.post('http://localhost:5000/purchase/bills', {
+                received_order_id: await value._id,
+                bill_id,
+                bill_date: new Date(),
+                bill_status: 'Billed',
+                purchased_id: await value.purchased_id._id
+            });
+            if (response && response.data.success) {
+                toast.success('Bills Generated !!!');
+                await getReceivedOrders();
+                await getBill();
+            }
+        } catch (error) {
+            console.log(error);
         }
     }
 
+    // fetch bill and set to setBillsData
     const getBill = async () => {
-        const response = await axios.get('http://localhost:5000/purchase/bills');
-        if (response && response.data.success) {
-            setBillsData(response.data.success.filter(items => items.received_order_id.purchased_id.purchase_status === "Billed"));
+        try {
+            const response = await axios.get('http://localhost:5000/purchase/bills');
+            if (response && response.data.success) {
+                setBillsData(response.data.success.filter(items => items.received_order_id.purchased_id.purchase_status === "Billed"));
+            }
+        } catch (error) {
+            console.log(error);
         }
     }
 

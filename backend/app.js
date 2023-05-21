@@ -52,6 +52,8 @@ const purchaseOrders = require('./routes/Purchase/purchaseOrdersRoute');
 const receivedPurchaseOrders = require('./routes/Purchase/receivedPurchaseOrdersRoute');
 // bills route
 const bills = require('./routes/Purchase/billsRoute');
+// bill payments route
+const billPayments = require('./routes/Purchase/billPaymentsRoute');
 
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -75,6 +77,7 @@ app.use(purchaseCart);
 app.use(purchaseOrders);
 app.use(receivedPurchaseOrders);
 app.use(bills);
+app.use(billPayments);
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on the port ${process.env.PORT}`);

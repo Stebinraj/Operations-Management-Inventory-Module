@@ -1,7 +1,7 @@
 import moment from 'moment'
 import React from 'react'
 
-const BillsListTable = ({ billsPage, billsData }) => {
+const BillsListTable = ({ billsPage, billsData, billPaymentsPage, markAsBillPaid }) => {
     return (
         <>
             <div className="card-body table-responsive">
@@ -20,6 +20,9 @@ const BillsListTable = ({ billsPage, billsData }) => {
                             {billsPage && (
                                 <th scope="col" className='text-nowrap'>Status</th>
                             )}
+                            {billPaymentsPage && (
+                                <th scope="col" className='text-nowrap'>Manage Payments</th>
+                            )}
                         </tr>
                     </thead>
                     <tbody>
@@ -37,12 +40,11 @@ const BillsListTable = ({ billsPage, billsData }) => {
                                     <td className='text-nowrap'>{value.received_order_id.purchased_id.total}</td>
                                     <td className='text-nowrap'>
                                         {value.received_order_id.purchased_id.purchase_status === "Billed" && (
-                                            billsPage && (
+                                            billsPage ? (
                                                 <span className="badge rounded-pill text-bg-danger text-white w-100 p-2">{value.received_order_id.purchased_id.purchase_status}</span>
+                                            ) : billPaymentsPage && (
+                                                <button className='btn btn-primary w-100' onClick={(e) => { markAsBillPaid(e, value) }}>Mark as Paid</button>
                                             )
-                                            //     : billsPage && (
-                                            //     <button className='btn btn-primary w-100' onClick={(e) => { generateBill(e, value) }}>Generate Bill</button>
-                                            // )
                                         )}
                                     </td>
                                 </tr>

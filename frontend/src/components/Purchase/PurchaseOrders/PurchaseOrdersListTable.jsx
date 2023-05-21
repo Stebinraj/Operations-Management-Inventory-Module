@@ -48,8 +48,10 @@ const PurchaseOrdersListTable = ({ purchaseOrdersData, purchaseOrdersPage, recei
                                         )}
                                         {value.purchase_status === "Received" ? (
                                             <span className="badge rounded-pill text-bg-warning w-100 text-white p-2">{value.purchase_status}</span>
-                                        ) : value.purchase_status === "Billed" && (
+                                        ) : value.purchase_status === "Billed" ? (
                                             <span className="badge rounded-pill text-bg-danger w-100 text-white p-2">{value.purchase_status}</span>
+                                        ) : value.purchase_status === "Paid" && (
+                                            <span className="badge rounded-pill text-bg-info w-100 text-white p-2">{value.purchase_status}</span>
                                         )}
                                     </td>
                                 </tr>
