@@ -39,6 +39,7 @@ const ReceivedOrders = ({ receivedOrdersPage }) => {
         if (response && response.data.success) {
             toast.success('Marked as Received !!!');
             await getPurchaseOrders();
+            await getReceivedOrders();
         }
     };
 
