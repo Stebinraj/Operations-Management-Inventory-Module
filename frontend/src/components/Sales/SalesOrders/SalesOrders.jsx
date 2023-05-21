@@ -55,8 +55,7 @@ const SalesOrders = ({ salesOrderPage }) => {
     };
 
     // closing the cart form to reset the state to emptyy
-    const handleCartClose = async (e) => {
-        e.preventDefault();
+    const handleCartClose = async () => {
         setItemId('');
         setOpeningStock('');
         setSellingPrice('');
@@ -100,14 +99,11 @@ const SalesOrders = ({ salesOrderPage }) => {
             // checking quantity is greater than opening stock if true reset the state variable to empty and error appears
             else if (quantity > opening_stock) {
                 toast.error('Invalid Quantity !!!');
-                setItemId('');
-                setOpeningStock('');
-                setSellingPrice('');
-                setCustomerId('');
-                setCustomerEmail('');
-                setCustomerPhoneNumber('');
-                setCustomerBillingAddress('');
-                setQuantity('');
+                await handleCartClose();
+                return;
+            } else if (quantity <= 0) {
+                toast.error('Invalid Quantity !!!');
+                await handleCartClose();
                 return;
             }
             // send cart items datas

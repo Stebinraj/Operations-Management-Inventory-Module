@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ItemsListTable = ({ handleAdjust, itemsData, itemsPage, salesOrderPage, handleCart, purchaseOrdersPage, handlePurchase }) => {
+const ItemsListTable = ({ handleAdjust, itemsData, itemsPage, salesOrderPage, handleCart, purchaseOrdersPage, handlePurchaseCart }) => {
     return (
         <>
             <div className="card-body table-responsive">
@@ -66,7 +66,7 @@ const ItemsListTable = ({ handleAdjust, itemsData, itemsPage, salesOrderPage, ha
                                             <button type="button" className="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#addToCart" onClick={(e) => { handleCart(e, value) }}>Add to Cart</button>
                                         )}
                                         {purchaseOrdersPage && (
-                                            <button className='btn btn-primary w-100' onClick={(e) => { handlePurchase(e, value) }}>Purchase</button>
+                                            <button className='btn btn-primary w-100' data-bs-toggle="modal" data-bs-target="#addToPurchaseCart" onClick={(e) => { handlePurchaseCart(e, value) }}>Add to Cart</button>
                                         )}
                                     </td>
                                 </tr>
