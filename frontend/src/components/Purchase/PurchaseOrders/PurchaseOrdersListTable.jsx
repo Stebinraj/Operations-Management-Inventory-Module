@@ -1,7 +1,7 @@
 import moment from 'moment'
 import React from 'react'
 
-const PurchaseOrdersListTable = ({ purchaseOrdersData, purchaseOrdersPage }) => {
+const PurchaseOrdersListTable = ({ purchaseOrdersData, purchaseOrdersPage, receivedOrdersPage, markAsReceived }) => {
     return (
         <>
             <div className="card-body table-responsive">
@@ -19,6 +19,9 @@ const PurchaseOrdersListTable = ({ purchaseOrdersData, purchaseOrdersPage }) => 
                             <th scope="col" className='text-nowrap'>Total</th>
                             {purchaseOrdersPage && (
                                 <th scope="col" className='text-nowrap'>Status</th>
+                            )}
+                            {receivedOrdersPage && (
+                                <th scope="col" className='text-nowrap'>Manage Received</th>
                             )}
                         </tr>
                     </thead>
@@ -38,9 +41,14 @@ const PurchaseOrdersListTable = ({ purchaseOrdersData, purchaseOrdersPage }) => 
                                     <td className='text-nowrap'>
                                         {value.purchase_status === "Confirmed" && (
                                             purchaseOrdersPage ? (
-                                                <span className="badge rounded-pill text-bg-primary w-100 p-2">{value.purchase_status}</span>
-                                            ) : null
+                                                <span className="badge rounded-pill text-bg-primary text-white w-100 p-2">{value.purchase_status}</span>
+                                            ) : receivedOrdersPage && (
+                                                <button className='btn btn-primary w-100' onClick={(e) => { markAsReceived(e, value) }}>Mark as Received</button>
+                                            )
                                         )}
+                                        {value.purchase_status === "Received" ? (
+                                            <span className="badge rounded-pill text-bg-warning w-100 text-white p-2">{value.purchase_status}</span>
+                                        ) : null}
                                     </td>
                                 </tr>
                             )
