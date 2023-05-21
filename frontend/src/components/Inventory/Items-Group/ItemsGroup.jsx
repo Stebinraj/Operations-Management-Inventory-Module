@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 const ItemsGroup = () => {
     // State variables to view items group
     const [itemGroupData, setItemGroupData] = useState([]);
+    const [vendorsData, setVendorsData] = useState([]);
 
     const [item_group_label, setItemGroupLabel] = useState('');
     const [item_group_id, setItemGroupId] = useState('');
@@ -105,9 +106,22 @@ const ItemsGroup = () => {
         }
     }
 
+    // fetch vedors and set to vendorsData
+    const getVendors = async () => {
+        try {
+            const response = await axios.get('http://localhost:5000/vendors');
+            if (response && response.data.success) {
+                setVendorsData(response.data.success);
+            }
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
     // handles side-effects while fething items group
     useEffect(() => {
         getItemsGroup();
+        getVendors();
     }, []);
 
     return (
@@ -160,6 +174,7 @@ const ItemsGroup = () => {
                     reorder_point={reorder_point}
                     preferred_vendor={preferred_vendor}
                     image_of_item={image_of_item}
+                    vendorsData={vendorsData}
                 />
                 {/* Add items component */}
             </div>

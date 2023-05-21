@@ -56,7 +56,7 @@ const ItemsListTable = ({ handleAdjust, itemsData, itemsPage, salesOrderPage, ha
                                     {itemsPage && (
                                         <td className='text-nowrap'>{value.reorder_point}</td>
                                     )}
-                                    <td className='text-nowrap'>{value.preferred_vendor}</td>
+                                    <td className='text-nowrap'>{value.preferred_vendor.name}</td>
                                     <td className='text-nowrap'>{value.image_of_item}</td>
                                     <td className='text-nowrap'>
                                         {itemsPage && (

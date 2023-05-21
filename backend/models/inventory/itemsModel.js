@@ -17,7 +17,7 @@ const itemsSchema = mongoose.Schema({
     description: { type: String },
     opening_stock: { type: Number, required: true },
     reorder_point: { type: Number, required: true },
-    preferred_vendor: { type: String, required: true },
+    preferred_vendor: { type: mongoose.SchemaTypes.ObjectId, required: true },
     image_of_item: { type: String },
     added_date: { type: Date, required: true }
 });

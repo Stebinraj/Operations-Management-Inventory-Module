@@ -1,6 +1,6 @@
 import React from 'react'
 
-const AddItems = ({ itemGroupData, item_group_id, setItemGroupId, addItems, setImageOfItem, setPreferredVendor, setReorderPoint, setOpeningStock, setDescription, setDimensions, setBrand, setCostPrice, setSellingPrice, setManufacturer, setItemName, setUnit, setWeight, dimensions, item_name, unit, weight, manufacturer, brand, selling_price, cost_price, description, opening_stock, reorder_point, preferred_vendor, image_of_item }) => {
+const AddItems = ({ itemGroupData, item_group_id, setItemGroupId, addItems, setImageOfItem, setPreferredVendor, setReorderPoint, setOpeningStock, setDescription, setDimensions, setBrand, setCostPrice, setSellingPrice, setManufacturer, setItemName, setUnit, setWeight, dimensions, item_name, unit, weight, manufacturer, brand, selling_price, cost_price, description, opening_stock, reorder_point, preferred_vendor, image_of_item, vendorsData }) => {
     return (
         <>
             {/* add new items to inventory */}
@@ -71,9 +71,20 @@ const AddItems = ({ itemGroupData, item_group_id, setItemGroupId, addItems, setI
                             <span className="card-text">Reorder Point</span>
                             <input type="number" className="form-control" placeholder='Enter Reorder Point' onChange={(e) => { setReorderPoint(e.target.value) }} value={reorder_point} />
                         </div>
-                        <div className="mb-3 form-group col-md-6">
+                        {/* <div className="mb-3 form-group col-md-6">
                             <span className="card-text">Preferred Vendor</span>
                             <input type="text" className="form-control" placeholder='Enter Preferred Vendor' onChange={(e) => { setPreferredVendor(e.target.value) }} value={preferred_vendor} />
+                        </div> */}
+                        <div className="mb-3 form-group col-md-6">
+                            <span className="card-text">Preferred Vendor</span>
+                            <select className="form-control" onChange={(e) => { setPreferredVendor(e.target.value) }} value={preferred_vendor}>
+                                <option value="" disabled={true} className='text-secondary'>--Select--</option>
+                                {vendorsData.map((item, index) => {
+                                    return (
+                                        <option key={index} value={item._id}>{item.name}</option>
+                                    )
+                                })}
+                            </select>
                         </div>
                         <div className="mb-3 form-group col-12">
                             <span className="card-text">Image of Item</span>

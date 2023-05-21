@@ -1,17 +1,7 @@
-const itemsGroupModel = require("../../../models/Inventory/itemsGroupModel");
 const itemsModel = require("../../../models/Inventory/itemsModel");
 
 const getItemsController = async (req, res) => {
     try {
-        // populate method
-
-        // const data = await itemsModel.find({}).populate({
-        //     path: 'item_group_id',
-        //     model: itemsGroupModel
-        // });
-
-        // aggregate method
-
         const data = await itemsModel.aggregate([
             {
                 $lookup: {
@@ -23,6 +13,17 @@ const getItemsController = async (req, res) => {
             },
             {
                 $unwind: "$item_group_id"
+            },
+            {
+                $lookup: {
+                    from: "vendors",
+                    localField: "preferred_vendor",
+                    foreignField: "_id",
+                    as: "preferred_vendor"
+                }
+            },
+            {
+                $unwind: "$preferred_vendor"
             },
             {
                 $sort: {

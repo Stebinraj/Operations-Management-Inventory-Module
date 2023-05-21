@@ -2,11 +2,6 @@ const itemsModel = require("../../../models/Inventory/itemsModel");
 
 const getItemsBySpecificIdController = async (req, res) => {
     try {
-        // mongoose library usage
-
-        // const data = await itemsModel.find({ item_group_id: req.params.id });
-
-        // aggregate method
         const data = await itemsModel.aggregate([
             { $match: { item_group_id: req.params.id } }
         ]);
