@@ -1,7 +1,7 @@
 import moment from 'moment'
 import React from 'react'
 
-const BillPaymentsListTable = ({ billsPaymentsData, billPaymentsPage }) => {
+const BillPaymentsListTable = ({ billsPaymentsData, billPaymentsPage, vendorCreditPage, issueVendorCredits }) => {
     return (
         <>
             <div className="card-body table-responsive">
@@ -20,6 +20,9 @@ const BillPaymentsListTable = ({ billsPaymentsData, billPaymentsPage }) => {
                             {billPaymentsPage && (
                                 <th scope="col" className='text-nowrap'>Status</th>
                             )}
+                            {vendorCreditPage && (
+                                <th scope="col" className='text-nowrap'>Manage Credits</th>
+                            )}
                         </tr>
                     </thead>
                     <tbody>
@@ -37,12 +40,11 @@ const BillPaymentsListTable = ({ billsPaymentsData, billPaymentsPage }) => {
                                     <td className='text-nowrap'>{value.billed_id.received_order_id.purchased_id.total}</td>
                                     <td className='text-nowrap'>
                                         {value.billed_id.received_order_id.purchased_id.purchase_status === "Paid" && (
-                                            billPaymentsPage && (
+                                            billPaymentsPage ? (
                                                 <span className="badge rounded-pill text-bg-info text-white w-100 p-2">{value.billed_id.received_order_id.purchased_id.purchase_status}</span>
+                                            ) : vendorCreditPage && (
+                                                <button className='btn btn-primary w-100' onClick={(e) => { issueVendorCredits(e, value) }}>Issue Credits</button>
                                             )
-                                            //     : billPaymentsPage && (
-                                            //     <button className='btn btn-primary w-100' onClick={(e) => { markAsBillPaid(e, value) }}>Mark as Paid</button>
-                                            // )
                                         )}
                                     </td>
                                 </tr>

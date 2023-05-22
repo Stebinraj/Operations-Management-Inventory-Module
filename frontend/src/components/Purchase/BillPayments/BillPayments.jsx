@@ -74,7 +74,7 @@ const BillPayments = ({ billPaymentsPage }) => {
             </div>
 
             <div className="card card-primary card-outline">
-                {/* bill payments list table component */}
+                {/* bill list table component */}
                 <BillsListTable
                     billsData={billsData}
                     billPaymentsPage={billPaymentsPage}
