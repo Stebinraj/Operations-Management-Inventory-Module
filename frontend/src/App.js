@@ -20,6 +20,7 @@ import PurchaseOrdersPage from './pages/PurchaseOrdersPage';
 import ReceivedOrdersPage from './pages/ReceivedOrdersPage';
 import BillsPage from './pages/BillsPage';
 import BillPaymentsPage from './pages/BillPaymentsPage';
+import VendorCreditPage from './pages/VendorCreditPage';
 
 function App() {
     return (
@@ -51,6 +52,7 @@ function App() {
             <Route path='/purchase/received' element={<ReceivedOrdersPage />}></Route>
             <Route path='/purchase/bills' element={<BillsPage />}></Route>
             <Route path='/purchase/payments/bills' element={<BillPaymentsPage />}></Route>
+            <Route path='/purchase/vendor/credit' element={<VendorCreditPage />}></Route>
             {/* Purchase */}
         </Routes>
     );

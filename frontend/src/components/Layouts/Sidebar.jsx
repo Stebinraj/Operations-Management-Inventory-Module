@@ -25,6 +25,7 @@ const Sidebar = () => {
         { title: 'Received Orders', navigate: '/purchase/received', icon: 'bi-arrow-down-right-circle', fontSize: '21px', iconColor: 'indigo' },
         { title: 'Bills', navigate: '/purchase/bills', icon: 'bi-journal-text', fontSize: '21px', iconColor: 'lightBlue' },
         { title: 'Bills Payments', navigate: '/purchase/payments/bills', icon: 'bi-credit-card-2-front', fontSize: '21px', iconColor: 'pink' },
+        { title: 'Vendor Credit', navigate: '/purchase/vendor/credit', icon: 'bi-cash-coin', fontSize: '21px', iconColor: 'orange' },
     ]
 
     return (
