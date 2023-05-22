@@ -28,6 +28,13 @@ const InventoryAdjustments = () => {
     // filtering specific date range inventory adjustment reports
     const handleSpecificDate = async (e) => {
         e.preventDefault();
+        if (startDate > new Date()) {
+            toast.error('Invalid Date !!!');
+            return;
+        } else if (endDate > new Date()) {
+            toast.error('Invalid Date !!!');
+            return;
+        }
         await getDateRangeReports();
         toast.success('Filtered Successfully !!!');
     };
