@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ProductSalesTotalValueSummary = () => {
+const ProductSalesTotalValueSummary = ({ productSalesSummaryData }) => {
     return (
         <>
             <div className="col-md-6 col-xl-3">
@@ -11,12 +11,11 @@ const ProductSalesTotalValueSummary = () => {
                                 <i className="bi bi-cart fs-1 text-primary" />
                             </div>
                             <div className="text-right">
-                                {/* {ordersSummaryData.map((value, index) => {
+                                {productSalesSummaryData.map((value, index) => {
                                     return (
-                                        <h3 className="text-secondary" key={index}>{value.orderQuantity}</h3>
+                                        <h3 className="text-secondary" key={index}>{`₹ ${value.salesTotalPrice}`}</h3>
                                     )
-                                })} */}
-                                <h3>200</h3>
+                                })}
                                 <span className="text-secondary">Product Sales Value</span>
                             </div>
                         </div>

@@ -12,6 +12,7 @@ const Dashboard = () => {
 
     const [inventorySummaryData, setInventorySummaryData] = useState([]);
     const [ordersSummaryData, setOrdersSummaryData] = useState([]);
+    const [productSalesSummaryData, setProductSalesSummaryData] = useState([]);
 
     // fetch inventory summary and set to inventorySummaryData
     const getInventorySummary = async () => {
@@ -37,10 +38,23 @@ const Dashboard = () => {
         }
     };
 
+    // fetch product sales summary and set to productSalesSummaryData 
+    const getProductSalesSummary = async () => {
+        try {
+            const response = await axios.get('http://localhost:5000/product-sales/summary');
+            if (response && response.data.success) {
+                setProductSalesSummaryData(response.data.success);
+            }
+        } catch (error) {
+            console.error(error.message);
+        }
+    }
+
     // handle sideeffects while fetchinf inventory, orders summary
     useEffect(() => {
         getInventorySummary();
         getOrderSummary();
+        getProductSalesSummary();
     }, [])
 
 
@@ -57,10 +71,14 @@ const Dashboard = () => {
             />
 
             {/* Product Sales Summary Component */}
-            <ProductSalesSummary />
+            <ProductSalesSummary
+                productSalesSummaryData={productSalesSummaryData}
+            />
 
             {/* product sales summary total value component */}
-            <ProductSalesTotalValueSummary />
+            <ProductSalesTotalValueSummary
+                productSalesSummaryData={productSalesSummaryData}
+            />
 
             {/* Inventory stock summary */}
             <InventoryStockSummary

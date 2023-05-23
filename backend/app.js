@@ -60,6 +60,8 @@ const vendorCredits = require('./routes/Purchase/vendorCreditsRoute');
 const inventorySummary = require('./routes/Dashboard/inventorySummaryRoute');
 // orders summary route
 const ordersSummary = require('./routes/Dashboard/ordersSummaryRoute');
+// product sales summary route
+const productSales = require('./routes/Dashboard/productSalesSummaryRoute');
 
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -87,6 +89,7 @@ app.use(billPayments);
 app.use(vendorCredits);
 app.use(inventorySummary);
 app.use(ordersSummary);
+app.use(productSales);
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on the port ${process.env.PORT}`);
