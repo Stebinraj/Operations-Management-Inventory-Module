@@ -8,6 +8,7 @@ import InventoryStockSummary from './InventoryStockSummary';
 import InventoryStockTotalPriceSummary from './InventoryStockTotalPriceSummary';
 import RegisteredCustomersSummary from './RegisteredCustomersSummary';
 import './dashboard.css';
+import RegisteredVendorsSummary from './RegisteredVendorsSummary';
 
 const Dashboard = () => {
 
@@ -15,6 +16,7 @@ const Dashboard = () => {
     const [ordersSummaryData, setOrdersSummaryData] = useState([]);
     const [productSalesSummaryData, setProductSalesSummaryData] = useState([]);
     const [customerCountData, setCustomerCountData] = useState([]);
+    const [vendorCountData, setVendorCountData] = useState([]);
 
     // fetch inventory summary and set to inventorySummaryData
     const getInventorySummary = async () => {
@@ -62,14 +64,27 @@ const Dashboard = () => {
         } catch (error) {
             console.error(error.message);
         }
+    };
+
+    // fetch customer count and set to vendorCountData 
+    const getVendorCount = async () => {
+        try {
+            const response = await axios.get('http://localhost:5000/vendor/count');
+            if (response && response.data.success) {
+                setVendorCountData(response.data.success);
+            }
+        } catch (error) {
+            console.error(error.message);
+        }
     }
 
-    // handle sideeffects while fetching inventory, orders , product sales summary
+    // handle sideeffects while fetching inventory, orders , product sales, customer count, vendor count summary
     useEffect(() => {
         getInventorySummary();
         getOrderSummary();
         getProductSalesSummary();
         getCustomerCount();
+        getVendorCount();
     }, [])
 
 
@@ -108,6 +123,11 @@ const Dashboard = () => {
             {/* registered customers summary component */}
             <RegisteredCustomersSummary
                 customerCountData={customerCountData}
+            />
+
+            {/* registered vendor summary component */}
+            <RegisteredVendorsSummary
+                vendorCountData={vendorCountData}
             />
         </>
     )
