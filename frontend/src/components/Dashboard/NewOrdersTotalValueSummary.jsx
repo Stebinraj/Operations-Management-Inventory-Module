@@ -11,11 +11,13 @@ const NewOrdersTotalValueSummary = ({ ordersSummaryData }) => {
                                 <i className="bi bi-cart fs-1 text-primary" />
                             </div>
                             <div className="text-right">
-                                {ordersSummaryData.map((value, index) => {
-                                    return (
+                                {ordersSummaryData.length === 0 ? (
+                                    <h3 className="text-secondary">₹ 0</h3>
+                                ) : (
+                                    ordersSummaryData.map((value, index) => (
                                         <h3 className="text-secondary" key={index}>{`₹ ${value.orderTotalPrice}`}</h3>
-                                    )
-                                })}
+                                    ))
+                                )}
                                 <span className="text-secondary">New Orders Value</span>
                             </div>
                         </div>
