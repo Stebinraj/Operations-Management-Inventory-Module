@@ -13,6 +13,7 @@ const Dashboard = () => {
     const [inventorySummaryData, setInventorySummaryData] = useState([]);
     const [ordersSummaryData, setOrdersSummaryData] = useState([]);
     const [productSalesSummaryData, setProductSalesSummaryData] = useState([]);
+    const [customerCountData, setCustomerCountData] = useState([]);
 
     // fetch inventory summary and set to inventorySummaryData
     const getInventorySummary = async () => {
@@ -50,11 +51,24 @@ const Dashboard = () => {
         }
     }
 
+    // fetch customer count and set to customerCountData 
+    const getCustomerCount = async () => {
+        try {
+            const response = await axios.get('http://localhost:5000/customer/count');
+            if (response && response.data.success) {
+                setCustomerCountData(response.data.success);
+            }
+        } catch (error) {
+            console.error(error.message);
+        }
+    }
+
     // handle sideeffects while fetching inventory, orders , product sales summary
     useEffect(() => {
         getInventorySummary();
         getOrderSummary();
         getProductSalesSummary();
+        getCustomerCount();
     }, [])
 
 
@@ -91,7 +105,9 @@ const Dashboard = () => {
             />
 
             {/* registered customers summary component */}
-            <RegisteredCustomersSummary />
+            <RegisteredCustomersSummary
+                customerCountData={customerCountData}
+            />
         </>
     )
 }

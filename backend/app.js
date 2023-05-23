@@ -62,6 +62,8 @@ const inventorySummary = require('./routes/Dashboard/inventorySummaryRoute');
 const ordersSummary = require('./routes/Dashboard/ordersSummaryRoute');
 // product sales summary route
 const productSales = require('./routes/Dashboard/productSalesSummaryRoute');
+// customer count route
+const customerCount = require('./routes/Dashboard/customersCountRoute');
 
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -90,6 +92,7 @@ app.use(vendorCredits);
 app.use(inventorySummary);
 app.use(ordersSummary);
 app.use(productSales);
+app.use(customerCount);
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on the port ${process.env.PORT}`);
