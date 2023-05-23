@@ -14,7 +14,7 @@ const RegisteredCustomersSummary = ({ customerCountData }) => {
                                 {customerCountData.length === 0 ? (
                                     <h3 className="text-secondary">0</h3>
                                 ) : (
-                                    <h3 className="text-secondary">{customerCountData.length}</h3>
+                                    <h3 className="text-secondary">{customerCountData}</h3>
                                 )}
                                 <span className="text-secondary">Registered Customers</span>
                             </div>
