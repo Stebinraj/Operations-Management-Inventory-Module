@@ -10,6 +10,7 @@ import RegisteredCustomersSummary from './RegisteredCustomersSummary';
 import './dashboard.css';
 import RegisteredVendorsSummary from './RegisteredVendorsSummary';
 import PackedItemsSummary from './PackedItemsSummary';
+import PackedItemsTotalValueSummary from './PackedItemsTotalValueSummary';
 
 const Dashboard = () => {
 
@@ -19,6 +20,7 @@ const Dashboard = () => {
     const [customerCountData, setCustomerCountData] = useState([]);
     const [vendorCountData, setVendorCountData] = useState([]);
     const [packedItemsData, setPackedItemsData] = useState([]);
+    console.log(packedItemsData);
 
     // fetch inventory summary and set to inventorySummaryData
     const getInventorySummary = async () => {
@@ -147,6 +149,11 @@ const Dashboard = () => {
 
             {/* packed items summary component */}
             <PackedItemsSummary
+                packedItemsData={packedItemsData}
+            />
+
+            {/* packed items total value summary component */}
+            <PackedItemsTotalValueSummary
                 packedItemsData={packedItemsData}
             />
         </>
