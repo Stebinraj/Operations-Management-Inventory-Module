@@ -9,6 +9,7 @@ import InventoryStockTotalPriceSummary from './InventoryStockTotalPriceSummary';
 import RegisteredCustomersSummary from './RegisteredCustomersSummary';
 import './dashboard.css';
 import RegisteredVendorsSummary from './RegisteredVendorsSummary';
+import PackedItemsSummary from './PackedItemsSummary';
 
 const Dashboard = () => {
 
@@ -17,6 +18,7 @@ const Dashboard = () => {
     const [productSalesSummaryData, setProductSalesSummaryData] = useState([]);
     const [customerCountData, setCustomerCountData] = useState([]);
     const [vendorCountData, setVendorCountData] = useState([]);
+    const [packedItemsData, setPackedItemsData] = useState([]);
 
     // fetch inventory summary and set to inventorySummaryData
     const getInventorySummary = async () => {
@@ -78,13 +80,26 @@ const Dashboard = () => {
         }
     }
 
-    // handle sideeffects while fetching inventory, orders , product sales, customer count, vendor count summary
+    // fetch packed items and set to packedItemsData
+    const getPackedItems = async () => {
+        try {
+            const response = await axios.get('http://localhost:5000/packed-items/summary');
+            if (response && response.data.success) {
+                setPackedItemsData(response.data.success);
+            }
+        } catch (error) {
+            console.error(error.message);
+        }
+    };
+
+    // handle sideeffects while fetching inventory, orders , product sales, customer count, vendor count, packed items summary
     useEffect(() => {
         getInventorySummary();
         getOrderSummary();
         getProductSalesSummary();
         getCustomerCount();
         getVendorCount();
+        getPackedItems();
     }, [])
 
 
@@ -128,6 +143,11 @@ const Dashboard = () => {
             {/* registered vendor summary component */}
             <RegisteredVendorsSummary
                 vendorCountData={vendorCountData}
+            />
+
+            {/* packed items summary component */}
+            <PackedItemsSummary
+                packedItemsData={packedItemsData}
             />
         </>
     )
