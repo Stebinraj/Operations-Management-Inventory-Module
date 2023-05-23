@@ -50,7 +50,7 @@ const Dashboard = () => {
         }
     }
 
-    // handle sideeffects while fetchinf inventory, orders summary
+    // handle sideeffects while fetching inventory, orders , product sales summary
     useEffect(() => {
         getInventorySummary();
         getOrderSummary();
