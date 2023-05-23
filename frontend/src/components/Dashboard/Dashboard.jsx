@@ -1,104 +1,79 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import NewOrdersSummary from './NewOrdersSummary';
+import NewOrdersTotalValueSummary from './NewOrdersTotalValueSummary';
+import ProductSalesSummary from './ProductSalesSummary';
+import ProductSalesTotalValueSummary from './ProductSalesTotalValueSummary';
+import InventoryStockSummary from './InventoryStockSummary';
+import InventoryStockTotalPriceSummary from './InventoryStockTotalPriceSummary';
+import RegisteredCustomersSummary from './RegisteredCustomersSummary';
 
 const Dashboard = () => {
+
+    const [inventorySummaryData, setInventorySummaryData] = useState([]);
+    const [ordersSummaryData, setOrdersSummaryData] = useState([]);
+
+    // fetch inventory summary and set to inventorySummaryData
+    const getInventorySummary = async () => {
+        try {
+            const response = await axios.get('http://localhost:5000/inventory/summary');
+            if (response && response.data.success) {
+                setInventorySummaryData(response.data.success);
+            }
+        } catch (error) {
+            console.error(error.message);
+        }
+    };
+
+    // fetch inventory summary and set to ordersSummaryData 
+    const getOrderSummary = async () => {
+        try {
+            const response = await axios.get('http://localhost:5000/order/summary');
+            if (response && response.data.success) {
+                setOrdersSummaryData(response.data.success);
+            }
+        } catch (error) {
+            console.error(error.message);
+        }
+    };
+
+    // handle sideeffects while fetchinf inventory, orders summary
+    useEffect(() => {
+        getInventorySummary();
+        getOrderSummary();
+    }, [])
+
+
     return (
         <>
-            <div className="col-md-6 col-xl-3">
-                <div className="card text-bg-primary mb-3">
-                    <div className="card-header">Header</div>
-                    <div className="card-body">
-                        <h5 className="card-title">Primary card title</h5>
-                        <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-            </div>
-            <div className="col-md-6 col-xl-3">
-                <div className="card text-bg-success mb-3">
-                    <div className="card-header">Header</div>
-                    <div className="card-body">
-                        <h5 className="card-title">Success card title</h5>
-                        <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-            </div>
-            <div className="col-md-6 col-xl-3">
-                <div className="card text-bg-danger mb-3">
-                    <div className="card-header">Header</div>
-                    <div className="card-body">
-                        <h5 className="card-title">Danger card title</h5>
-                        <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-            </div>
-            <div className="col-md-6 col-xl-3">
-                <div className="card text-bg-warning mb-3 text-white">
-                    <div className="card-header">Header</div>
-                    <div className="card-body">
-                        <h5 className="card-title">Secondary card title</h5>
-                        <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-            </div>
+            {/* New orders Summary Component */}
+            <NewOrdersSummary
+                ordersSummaryData={ordersSummaryData}
+            />
 
-            <div className="col-lg-6">
-                <div className="card">
-                    <div className="card-body">
-                        <h5 className="card-title">Card title</h5>
+            {/* New orders total value Summary Component */}
+            <NewOrdersTotalValueSummary
+                ordersSummaryData={ordersSummaryData}
+            />
 
-                        <p className="card-text">
-                            Some quick example text to build on the card title and make up the bulk of the
-                            card's
-                            content.
-                        </p>
+            {/* Product Sales Summary Component */}
+            <ProductSalesSummary />
 
-                        <Link className="card-link">Card link</Link>
-                        <Link className="card-link">Another link</Link>
-                    </div>
-                </div>
+            {/* product sales summary total value component */}
+            <ProductSalesTotalValueSummary />
 
-                <div className="card card-primary card-outline">
-                    <div className="card-body">
-                        <h5 className="card-title">Card title</h5>
+            {/* Inventory stock summary */}
+            <InventoryStockSummary
+                inventorySummaryData={inventorySummaryData}
+            />
 
-                        <p className="card-text">
-                            Some quick example text to build on the card title and make up the bulk of the
-                            card's
-                            content.
-                        </p>
-                        <Link className="card-link">Card link</Link>
-                        <Link className="card-link">Another link</Link>
-                    </div>
-                </div>
-            </div>
+            {/* Inventory stock total price summary */}
+            <InventoryStockTotalPriceSummary
+                inventorySummaryData={inventorySummaryData}
+            />
 
-            <div className="col-lg-6">
-                <div className="card">
-                    <div className="card-header">
-                        <h5 className="m-0">Featured</h5>
-                    </div>
-                    <div className="card-body">
-                        <h6 className="card-title">Special title treatment</h6>
-
-                        <p className="card-text">With supporting text below as a natural lead-in to additional
-                            content.</p>
-                        <Link className="btn btn-primary">Go somewhere</Link>
-                    </div>
-                </div>
-
-                <div className="card card-primary card-outline">
-                    <div className="card-header">
-                        <h5 className="m-0">Featured</h5>
-                    </div>
-                    <div className="card-body">
-                        <h6 className="card-title">Special title treatment</h6>
-
-                        <p className="card-text">With supporting text below as a natural lead-in to additional
-                            content.</p>
-                        <Link className="btn btn-primary">Go somewhere</Link>
-                    </div>
-                </div>
-            </div>
+            {/* registered customers summary component */}
+            <RegisteredCustomersSummary />
         </>
     )
 }
