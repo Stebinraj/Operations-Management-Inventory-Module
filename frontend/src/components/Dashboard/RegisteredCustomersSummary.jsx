@@ -1,23 +1,31 @@
 import React from 'react'
 
 const RegisteredCustomersSummary = ({ customerCountData }) => {
+
+    const minProgressValue = 0;
+    const maxProgressValue = customerCountData > 0 ? customerCountData + 100 : 100;
+    const progressValue = customerCountData > 0 ? (customerCountData / maxProgressValue) * 100 : minProgressValue;
+
     return (
         <>
-            <div className="col-md-6 col-xl-3">
-                <div className="card">
-                    <div className="card-body">
-                        <div className="d-flex justify-content-between">
-                            <div className="align-self-center">
-                                <i className="bi bi-cart fs-1 text-primary" />
-                            </div>
-                            <div className="text-right">
-                                {customerCountData.length === 0 ? (
-                                    <h3 className="text-secondary">0</h3>
+            <div className="col-xl-3 col-lg-6">
+                <div className="stats card l-bg-orange-dark">
+                    <div className="card-statistic-3 p-4">
+                        <div className="card-icon card-icon-large"><i className="fas fa-users" /></div>
+                        <div className="mb-4">
+                            <h5 className="card-title mb-0">Registered Customers</h5>
+                        </div>
+                        <div className="row align-items-center mb-2 d-flex">
+                            <div className="col-8">
+                                {customerCountData === 0 ? (
+                                    <h2 className="d-flex align-items-center mb-0">0</h2>
                                 ) : (
-                                    <h3 className="text-secondary">{customerCountData}</h3>
+                                    <h2 className="d-flex align-items-center mb-0">{customerCountData}</h2>
                                 )}
-                                <span className="text-secondary">Registered Customers</span>
                             </div>
+                        </div>
+                        <div className="progress mt-1" style={{ height: '8px' }}>
+                            <div className="progress-bar l-bg-cyan" role="progressbar" aria-valuenow={progressValue} aria-valuemin={minProgressValue} aria-valuemax={maxProgressValue} style={{ width: `${progressValue}%` }} />
                         </div>
                     </div>
                 </div>

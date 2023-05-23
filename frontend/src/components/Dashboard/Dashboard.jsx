@@ -7,6 +7,7 @@ import ProductSalesTotalValueSummary from './ProductSalesTotalValueSummary';
 import InventoryStockSummary from './InventoryStockSummary';
 import InventoryStockTotalPriceSummary from './InventoryStockTotalPriceSummary';
 import RegisteredCustomersSummary from './RegisteredCustomersSummary';
+import './dashboard.css';
 
 const Dashboard = () => {
 
