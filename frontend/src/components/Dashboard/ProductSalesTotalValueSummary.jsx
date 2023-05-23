@@ -11,11 +11,15 @@ const ProductSalesTotalValueSummary = ({ productSalesSummaryData }) => {
                                 <i className="bi bi-cart fs-1 text-primary" />
                             </div>
                             <div className="text-right">
-                                {productSalesSummaryData.map((value, index) => {
-                                    return (
-                                        <h3 className="text-secondary" key={index}>{`₹ ${value.salesTotalPrice}`}</h3>
-                                    )
-                                })}
+                                {productSalesSummaryData.length === 0 ? (
+                                    <h3 className="text-secondary">₹ 0</h3>
+                                ) : (
+                                    productSalesSummaryData.map((value, index) => {
+                                        return (
+                                            <h3 className="text-secondary" key={index}>{`₹ ${value.salesTotalPrice}`}</h3>
+                                        )
+                                    })
+                                )}
                                 <span className="text-secondary">Product Sales Value</span>
                             </div>
                         </div>

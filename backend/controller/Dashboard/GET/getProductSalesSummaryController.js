@@ -4,7 +4,7 @@ const getProductSalesSummaryController = async (req, res) => {
     try {
         const data = await salesOrderModel.aggregate([
             {
-                $match: { order_status: 'Delivered' }
+                $match: { order_status: 'Paid' }
             },
             {
                 $group: {

@@ -11,11 +11,15 @@ const InventoryStockSummary = ({ inventorySummaryData }) => {
                                 <i className="bi bi-cart fs-1 text-primary" />
                             </div>
                             <div className="text-right">
-                                {inventorySummaryData.map((value, index) => {
-                                    return (
-                                        <h3 className="text-secondary" key={index}>{value.inventoryTotalStock}</h3>
-                                    )
-                                })}
+                                {inventorySummaryData.length === 0 ? (
+                                    <h3 className="text-secondary">0</h3>
+                                ) : (
+                                    inventorySummaryData.map((value, index) => {
+                                        return (
+                                            <h3 className="text-secondary" key={index}>{value.inventoryTotalStock}</h3>
+                                        )
+                                    })
+                                )}
                                 <span className="text-secondary">Inventory Stock</span>
                             </div>
                         </div>
