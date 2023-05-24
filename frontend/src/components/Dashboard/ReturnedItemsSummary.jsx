@@ -11,7 +11,6 @@ const ReturnedItemsSummary = ({ returnedItemsData }) => {
             <div className="col-xl-3 col-lg-6">
                 <div className="stats card l-bg-blue-dark">
                     <div className="card-statistic-3 p-4">
-                        <div className="card-icon card-icon-large"><i className="fas fa-users" /></div>
                         <div className="mb-4">
                             <h5 className="card-title mb-0">Returned Items</h5>
                         </div>
