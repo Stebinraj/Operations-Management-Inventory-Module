@@ -61,13 +61,15 @@ const inventorySummary = require('./routes/Dashboard/inventorySummaryRoute');
 // orders summary route
 const ordersSummary = require('./routes/Dashboard/ordersSummaryRoute');
 // product sales summary route
-const productSales = require('./routes/Dashboard/productSalesSummaryRoute');
+const productSalesSummary = require('./routes/Dashboard/productSalesSummaryRoute');
 // customer count route
-const customerCount = require('./routes/Dashboard/customersCountRoute');
+const customerCountSummary = require('./routes/Dashboard/customersCountRoute');
 // vendors count route
-const vendorsCount = require('./routes/Dashboard/vendorsCountRoute');
+const vendorsCountSummary = require('./routes/Dashboard/vendorsCountRoute');
 // packed items summary route
-const packedItems = require('./routes/Dashboard/packedItemsSummaryRoute');
+const packedItemsSummary = require('./routes/Dashboard/packedItemsSummaryRoute');
+// shipped items summary route
+const shippedItemsSummary = require('./routes/Dashboard/shippedItemsSummaryRoute');
 
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -95,10 +97,11 @@ app.use(billPayments);
 app.use(vendorCredits);
 app.use(inventorySummary);
 app.use(ordersSummary);
-app.use(productSales);
-app.use(customerCount);
-app.use(vendorsCount);
-app.use(packedItems);
+app.use(productSalesSummary);
+app.use(customerCountSummary);
+app.use(vendorsCountSummary);
+app.use(packedItemsSummary);
+app.use(shippedItemsSummary);
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on the port ${process.env.PORT}`);

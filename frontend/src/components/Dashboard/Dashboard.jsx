@@ -11,6 +11,8 @@ import './dashboard.css';
 import RegisteredVendorsSummary from './RegisteredVendorsSummary';
 import PackedItemsSummary from './PackedItemsSummary';
 import PackedItemsTotalValueSummary from './PackedItemsTotalValueSummary';
+import ShippedItemsSummary from './ShippedItemsSummary';
+import ShippedItemsTotalValueSummary from './ShippedItemsTotalValueSummary';
 
 const Dashboard = () => {
 
@@ -20,7 +22,8 @@ const Dashboard = () => {
     const [customerCountData, setCustomerCountData] = useState([]);
     const [vendorCountData, setVendorCountData] = useState([]);
     const [packedItemsData, setPackedItemsData] = useState([]);
-    console.log(packedItemsData);
+    const [shippedItemsData, setShippedItemsData] = useState([]);
+    console.log(shippedItemsData);
 
     // fetch inventory summary and set to inventorySummaryData
     const getInventorySummary = async () => {
@@ -59,7 +62,7 @@ const Dashboard = () => {
     }
 
     // fetch customer count and set to customerCountData 
-    const getCustomerCount = async () => {
+    const getCustomerCountSummary = async () => {
         try {
             const response = await axios.get('http://localhost:5000/customer/count');
             if (response && response.data.success) {
@@ -71,7 +74,7 @@ const Dashboard = () => {
     };
 
     // fetch customer count and set to vendorCountData 
-    const getVendorCount = async () => {
+    const getVendorCountSummary = async () => {
         try {
             const response = await axios.get('http://localhost:5000/vendor/count');
             if (response && response.data.success) {
@@ -83,11 +86,23 @@ const Dashboard = () => {
     }
 
     // fetch packed items and set to packedItemsData
-    const getPackedItems = async () => {
+    const getPackedItemsSummary = async () => {
         try {
             const response = await axios.get('http://localhost:5000/packed-items/summary');
             if (response && response.data.success) {
                 setPackedItemsData(response.data.success);
+            }
+        } catch (error) {
+            console.error(error.message);
+        }
+    };
+
+    // fetch packed items and set to shippedItemsData
+    const getShippedItemsSummary = async () => {
+        try {
+            const response = await axios.get('http://localhost:5000/shipped-items/summary');
+            if (response && response.data.success) {
+                setShippedItemsData(response.data.success);
             }
         } catch (error) {
             console.error(error.message);
@@ -99,9 +114,10 @@ const Dashboard = () => {
         getInventorySummary();
         getOrderSummary();
         getProductSalesSummary();
-        getCustomerCount();
-        getVendorCount();
-        getPackedItems();
+        getCustomerCountSummary();
+        getVendorCountSummary();
+        getPackedItemsSummary();
+        getShippedItemsSummary();
     }, [])
 
 
@@ -155,6 +171,16 @@ const Dashboard = () => {
             {/* packed items total value summary component */}
             <PackedItemsTotalValueSummary
                 packedItemsData={packedItemsData}
+            />
+
+            {/* Shipped items summary component */}
+            <ShippedItemsSummary
+                shippedItemsData={shippedItemsData}
+            />
+
+            {/* Shipped items summary component */}
+            <ShippedItemsTotalValueSummary
+                shippedItemsData={shippedItemsData}
             />
         </>
     )
