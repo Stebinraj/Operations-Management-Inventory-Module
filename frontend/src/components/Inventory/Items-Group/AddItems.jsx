@@ -71,10 +71,6 @@ const AddItems = ({ itemGroupData, item_group_id, setItemGroupId, addItems, setI
                             <span className="card-text">Reorder Point</span>
                             <input type="number" className="form-control" placeholder='Enter Reorder Point' onChange={(e) => { setReorderPoint(e.target.value) }} value={reorder_point} />
                         </div>
-                        {/* <div className="mb-3 form-group col-md-6">
-                            <span className="card-text">Preferred Vendor</span>
-                            <input type="text" className="form-control" placeholder='Enter Preferred Vendor' onChange={(e) => { setPreferredVendor(e.target.value) }} value={preferred_vendor} />
-                        </div> */}
                         <div className="mb-3 form-group col-md-6">
                             <span className="card-text">Preferred Vendor</span>
                             <select className="form-control" onChange={(e) => { setPreferredVendor(e.target.value) }} value={preferred_vendor}>
