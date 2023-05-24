@@ -29,7 +29,6 @@ const Dashboard = () => {
     const [shippedItemsData, setShippedItemsData] = useState([]);
     const [deliveredItemsData, setDeliveredItemsData] = useState([]);
     const [returnedItemsData, setReturnedItemsData] = useState([]);
-    console.log(returnedItemsData);
 
     // fetch inventory summary and set to inventorySummaryData
     const getInventorySummary = async () => {
@@ -127,7 +126,7 @@ const Dashboard = () => {
         }
     };
 
-    // fetch delivered items and set to deliveredItemsData
+    // fetch returned items and set to returnedItemsData
     const getreturnedItemsSummary = async () => {
         try {
             const response = await axios.get('http://localhost:5000/returned-items/summary');
