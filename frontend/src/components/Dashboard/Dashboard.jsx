@@ -15,6 +15,8 @@ import ShippedItemsSummary from './ShippedItemsSummary';
 import ShippedItemsTotalValueSummary from './ShippedItemsTotalValueSummary';
 import DeliveredItemsSummary from './DeliveredItemsSummary';
 import DeliveredItemsTotalValueSummary from './DeliveredItemsTotalValueSummary';
+import ReturnedItemsSummary from './ReturnedItemsSummary';
+import ReturnedItemsTotalValueSummary from './ReturnedItemsTotalValueSummary';
 
 const Dashboard = () => {
 
@@ -26,6 +28,8 @@ const Dashboard = () => {
     const [packedItemsData, setPackedItemsData] = useState([]);
     const [shippedItemsData, setShippedItemsData] = useState([]);
     const [deliveredItemsData, setDeliveredItemsData] = useState([]);
+    const [returnedItemsData, setReturnedItemsData] = useState([]);
+    console.log(returnedItemsData);
 
     // fetch inventory summary and set to inventorySummaryData
     const getInventorySummary = async () => {
@@ -123,6 +127,18 @@ const Dashboard = () => {
         }
     };
 
+    // fetch delivered items and set to deliveredItemsData
+    const getreturnedItemsSummary = async () => {
+        try {
+            const response = await axios.get('http://localhost:5000/returned-items/summary');
+            if (response && response.data.success) {
+                setReturnedItemsData(response.data.success);
+            }
+        } catch (error) {
+            console.error(error.message);
+        }
+    };
+
     // handle sideeffects while fetching inventory, orders , product sales, customer count, vendor count, packed items summary
     useEffect(() => {
         getInventorySummary();
@@ -133,6 +149,7 @@ const Dashboard = () => {
         getPackedItemsSummary();
         getShippedItemsSummary();
         getDeliveredItemsSummary();
+        getreturnedItemsSummary();
     }, [])
 
 
@@ -206,6 +223,16 @@ const Dashboard = () => {
             {/* Delivered items total value component */}
             <DeliveredItemsTotalValueSummary
                 deliveredItemsData={deliveredItemsData}
+            />
+
+            {/* returned items summary component */}
+            <ReturnedItemsSummary
+                returnedItemsData={returnedItemsData}
+            />
+
+            {/* returned items total value summary component */}
+            <ReturnedItemsTotalValueSummary
+                returnedItemsData={returnedItemsData}
             />
         </>
     )

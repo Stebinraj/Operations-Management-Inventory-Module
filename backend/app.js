@@ -72,6 +72,8 @@ const packedItemsSummary = require('./routes/Dashboard/packedItemsSummaryRoute')
 const shippedItemsSummary = require('./routes/Dashboard/shippedItemsSummaryRoute');
 // delivered items summary
 const deliveredItemsSummary = require('./routes/Dashboard/deliveredItemsSummaryRoute');
+// returned items summary
+const returnedItemsSummary = require('./routes/Dashboard/returnedItemsSummaryRoute');
 
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -105,6 +107,7 @@ app.use(vendorsCountSummary);
 app.use(packedItemsSummary);
 app.use(shippedItemsSummary);
 app.use(deliveredItemsSummary);
+app.use(returnedItemsSummary);
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on the port ${process.env.PORT}`);
