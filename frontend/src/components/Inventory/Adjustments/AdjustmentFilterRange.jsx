@@ -9,7 +9,7 @@ const AdjustmentFilterRange = ({ startDate, endDate, reset, handleSpecificDate, 
                 <div className="card card-primary card-outline">
                     <div className="card-body">
                         <div className="d-md-flex">
-                            <form className='row w-100'>
+                            <form className='row w-100' onSubmit={handleSpecificDate}>
                                 <div className="mb-3 form-group col-md-4">
                                     <span className="card-text">Start Date</span>
                                     <DatePicker className="form-control" dateFormat="dd/MM/yyyy" selected={startDate} onChange={(date) => { setStartDate(date) }} shouldCloseOnSelect={true} />
@@ -19,12 +19,12 @@ const AdjustmentFilterRange = ({ startDate, endDate, reset, handleSpecificDate, 
                                     <DatePicker className="form-control" dateFormat="dd/MM/yyyy" selected={endDate} onChange={(date) => { setEndDate(date) }} shouldCloseOnSelect={true} />
                                 </div>
                                 <div className="form-group col-md-2 mt-auto">
-                                    <button className='btn btn-primary w-100' onClick={handleSpecificDate}>Filter</button>
+                                    <button type='submit' className='btn btn-primary w-100'>Filter</button>
+                                </div>
+                                <div className="form-group col-md-2 mt-auto d-md-flex">
+                                    <button type='button' className='btn btn-primary w-100' onClick={reset}>Reset</button>
                                 </div>
                             </form>
-                            <div className="form-group col-md-2 mt-auto row d-md-flex">
-                                <button className='btn btn-primary w-100' onClick={reset}>Reset</button>
-                            </div>
                         </div>
                     </div>
                 </div>
