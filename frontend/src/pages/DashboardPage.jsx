@@ -15,7 +15,9 @@ const DashboardPage = () => {
                 mainContent={
                     <MainContent
                         dashboard={
-                            dashboard && <Dashboard />
+                            dashboard && <Dashboard
+                                dashboardPage={dashboard}
+                            />
                         }
                     />
                 }

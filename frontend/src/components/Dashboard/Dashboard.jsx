@@ -17,8 +17,10 @@ import DeliveredItemsSummary from './DeliveredItemsSummary';
 import DeliveredItemsTotalValueSummary from './DeliveredItemsTotalValueSummary';
 import ReturnedItemsSummary from './ReturnedItemsSummary';
 import ReturnedItemsTotalValueSummary from './ReturnedItemsTotalValueSummary';
+import SalesByItemsOrCustomersSummary from './SalesByItemsOrCustomersSummary';
+import OrdersListTable from '../Sales/SalesOrders/OrdersListTable';
 
-const Dashboard = () => {
+const Dashboard = ({ dashboardPage }) => {
 
     const [inventorySummaryData, setInventorySummaryData] = useState([]);
     const [ordersSummaryData, setOrdersSummaryData] = useState([]);
@@ -29,6 +31,7 @@ const Dashboard = () => {
     const [shippedItemsData, setShippedItemsData] = useState([]);
     const [deliveredItemsData, setDeliveredItemsData] = useState([]);
     const [returnedItemsData, setReturnedItemsData] = useState([]);
+    const [orderItemsData, setOrderItemsData] = useState([]);
 
     // fetch inventory summary and set to inventorySummaryData
     const getInventorySummary = async () => {
@@ -138,6 +141,18 @@ const Dashboard = () => {
         }
     };
 
+    // fetch order items and set to orderItemsData
+    const getOrderItems = async () => {
+        try {
+            const response = await axios.get(`http://localhost:5000/salesorders`);
+            if (response && response.data.success) {
+                setOrderItemsData(response.data.success)
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     // handle sideeffects while fetching inventory, orders , product sales, customer count, vendor count, packed items summary
     useEffect(() => {
         getInventorySummary();
@@ -149,6 +164,7 @@ const Dashboard = () => {
         getShippedItemsSummary();
         getDeliveredItemsSummary();
         getreturnedItemsSummary();
+        getOrderItems();
     }, [])
 
 
@@ -232,6 +248,16 @@ const Dashboard = () => {
             {/* returned items total value summary component */}
             <ReturnedItemsTotalValueSummary
                 returnedItemsData={returnedItemsData}
+            />
+
+            {/* Sales by items or customers summary component */}
+            <SalesByItemsOrCustomersSummary
+                ordersListTable={
+                    <OrdersListTable
+                        orderItemsData={orderItemsData}
+                        dashboardPage={dashboardPage}
+                    />
+                }
             />
         </>
     )

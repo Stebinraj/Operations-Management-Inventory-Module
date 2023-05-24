@@ -1,7 +1,7 @@
 import moment from 'moment'
 import React from 'react'
 
-const OrdersListTable = ({ orderItemsData, salesOrderPage, packagesPage, markAsPacked }) => {
+const OrdersListTable = ({ orderItemsData, salesOrderPage, packagesPage, markAsPacked, dashboardPage }) => {
     return (
         <>
             <div className="card-body table-responsive">
@@ -12,20 +12,34 @@ const OrdersListTable = ({ orderItemsData, salesOrderPage, packagesPage, markAsP
                             <th scope="col" className='text-nowrap'>Order Id</th>
                             <th scope="col" className='text-nowrap'>Customer Name</th>
                             <th scope="col" className='text-nowrap'>Email</th>
-                            <th scope="col" className='text-nowrap'>Phone Number</th>
-                            <th scope="col" className='text-nowrap'>Address</th>
-                            <th scope="col" className='text-nowrap'>Item Group</th>
+
+                            {salesOrderPage || packagesPage ? (
+                                <>
+                                    <th scope="col" className='text-nowrap'>Phone Number</th>
+                                    <th scope="col" className='text-nowrap'>Address</th>
+                                    <th scope="col" className='text-nowrap'>Item Group</th>
+                                </>
+                            ) : null}
+
                             <th scope="col" className='text-nowrap'>Item Name</th>
                             <th scope="col" className='text-nowrap'>Image</th>
                             <th scope="col" className='text-nowrap'>Quantity</th>
-                            <th scope="col" className='text-nowrap'>Price Per Item</th>
-                            <th scope="col" className='text-nowrap'>Total</th>
-                            {salesOrderPage && (
+
+                            {salesOrderPage || packagesPage ? (
+                                <>
+                                    <th scope="col" className='text-nowrap'>Price Per Item</th>
+                                    <th scope="col" className='text-nowrap'>Total</th>
+                                </>
+                            ) : null}
+
+                            {salesOrderPage || dashboardPage ? (
                                 <th scope="col" className='text-nowrap'>Order Status</th>
-                            )}
+                            ) : null}
+
                             {packagesPage && (
                                 <th scope="col" className='text-nowrap'>Manage</th>
                             )}
+
                         </tr>
                     </thead>
                     <tbody>
@@ -36,17 +50,29 @@ const OrdersListTable = ({ orderItemsData, salesOrderPage, packagesPage, markAsP
                                     <td className='text-nowrap'>{`SO - ${value.ordered_id}`}</td>
                                     <td className='text-nowrap'>{value.customer_id.name}</td>
                                     <td className='text-nowrap'>{value.customer_id.email}</td>
-                                    <td className='text-nowrap'>{value.customer_id.phone_number}</td>
-                                    <td className='text-nowrap'>{value.customer_id.billing_address}</td>
-                                    <td className='text-nowrap'>{value.item_id.item_group_id.item_group_label}</td>
+
+                                    {salesOrderPage || packagesPage ? (
+                                        <>
+                                            <td className='text-nowrap'>{value.customer_id.phone_number}</td>
+                                            <td className='text-nowrap'>{value.customer_id.billing_address}</td>
+                                            <td className='text-nowrap'>{value.item_id.item_group_id.item_group_label}</td>
+                                        </>
+                                    ) : null}
+
                                     <td className='text-nowrap'>{value.item_id.item_name}</td>
                                     <td className='text-nowrap'>{value.item_id.image_of_item}</td>
                                     <td className='text-nowrap'>{value.quantity}</td>
-                                    <td className='text-nowrap'>{value.ordered_price_per_item}</td>
-                                    <td className='text-nowrap'>{value.quantity * value.ordered_price_per_item}</td>
+
+                                    {salesOrderPage || packagesPage ? (
+                                        <>
+                                            <td className='text-nowrap'>{value.ordered_price_per_item}</td>
+                                            <td className='text-nowrap'>{value.quantity * value.ordered_price_per_item}</td>
+                                        </>
+                                    ) : null}
+
                                     <td className='text-nowrap'>
                                         {value.order_status === "Confirmed" && (
-                                            salesOrderPage ? (
+                                            salesOrderPage || dashboardPage ? (
                                                 <span className="badge rounded-pill text-bg-primary w-100 p-2">{value.order_status}</span>
                                             ) : packagesPage && (
                                                 <button className="btn btn-primary w-100" onClick={(e) => { markAsPacked(e, value) }}>Mark as Packed</button>
