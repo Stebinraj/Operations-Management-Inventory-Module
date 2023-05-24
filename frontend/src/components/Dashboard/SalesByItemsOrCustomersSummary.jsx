@@ -11,11 +11,17 @@ const SalesByItemsOrCustomersSummary = ({ ordersListTable }) => {
                             <form className='row col-12'>
                                 <div className="mb-2 form-group col-sm-6 col-lg-4 d-lg-flex">
                                     <span className="card-text text-nowrap my-auto me-2">Filter By</span>
-                                    <input type="text" className="form-control" placeholder='Enter Item Name' />
+                                    <select className="form-control">
+                                        <option value="" disabled={true} className='text-secondary'>--Select--</option>
+                                        <option>hello</option>
+                                    </select>
                                 </div>
                                 <div className="mb-2 form-group col-sm-6 col-lg-4 d-lg-flex">
-                                    <span className="card-text text-nowrap my-auto me-2">Items / Customer</span>
-                                    <input type="text" className="form-control" placeholder='Enter Item Name' />
+                                    <span className="card-text text-nowrap my-auto me-2">Items / Customers</span>
+                                    <select className="form-control">
+                                        <option value="" disabled={true} className='text-secondary'>--Select--</option>
+                                        <option>hello</option>
+                                    </select>
                                 </div>
                                 <div className="form-group col-sm-6 col-lg-2 mb-2">
                                     <button type='submit' className='btn btn-primary w-100'>Filter</button>
