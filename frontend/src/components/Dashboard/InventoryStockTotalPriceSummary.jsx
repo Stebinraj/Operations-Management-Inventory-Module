@@ -8,30 +8,6 @@ const InventoryStockTotalPriceSummary = ({ inventorySummaryData }) => {
 
     return (
         <>
-            {/* <div className="col-md-6 col-xl-3">
-                <div className="card">
-                    <div className="card-body">
-                        <div className="d-flex justify-content-between">
-                            <div className="align-self-center">
-                                <i className="bi bi-cart fs-1" style={{color:'indigo'}} />
-                            </div>
-                            <div className="text-right">
-                                {inventorySummaryData.length === 0 ? (
-                                    <h3 className="text-secondary">₹ 0</h3>
-                                ) : (
-                                    inventorySummaryData.map((value, index) => {
-                                        return (
-                                            <h3 className="text-secondary" key={index}>{`₹ ${value.inventoryTotalPrice}`}</h3>
-                                        )
-                                    })
-                                )}
-                                <span className="text-secondary">Inventory Stock Value</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> */}
-
             <div className="col-xl-3 col-lg-6">
                 <div className="stats card l-bg-green-dark">
                     <div className="card-statistic-3 p-4">
