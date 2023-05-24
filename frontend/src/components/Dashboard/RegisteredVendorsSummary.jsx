@@ -17,7 +17,7 @@ const RegisteredVendorsSummary = ({ vendorCountData }) => {
                         </div>
                         <div className="row align-items-center mb-2 d-flex">
                             <div className="col-8">
-                                {vendorCountData === 0 ? (
+                                {vendorCountData.length === 0 ? (
                                     <h2 className="d-flex align-items-center mb-0">0</h2>
                                 ) : (
                                     <h2 className="d-flex align-items-center mb-0">{vendorCountData}</h2>
