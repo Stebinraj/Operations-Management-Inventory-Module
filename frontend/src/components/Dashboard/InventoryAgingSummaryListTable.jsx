@@ -12,7 +12,9 @@ const InventoryAgingSummaryListTable = ({ itemsData }) => {
                             <th scope="col" className='text-nowrap'>0 to 30 Days</th>
                             <th scope="col" className='text-nowrap'>31 to 60 Days</th>
                             <th scope="col" className='text-nowrap'>61 to 90 Days</th>
-                            <th scope="col" className='text-nowrap'>Above 90 Days</th>
+                            <th scope="col" className='text-nowrap'>91 to 120 Days</th>
+                            <th scope="col" className='text-nowrap'>121 to 150 Days</th>
+                            <th scope="col" className='text-nowrap'>Above 150 Days</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -27,7 +29,9 @@ const InventoryAgingSummaryListTable = ({ itemsData }) => {
                                     <td>{differenceInDays >= 0 && differenceInDays < 31 ? (value.opening_stock) : ('-')}</td>
                                     <td>{differenceInDays > 30 && differenceInDays < 61 ? (value.opening_stock) : ('-')}</td>
                                     <td>{differenceInDays > 60 && differenceInDays < 91 ? (value.opening_stock) : ('-')}</td>
-                                    <td>{differenceInDays > 90 ? (value.opening_stock) : ('-')}</td>
+                                    <td>{differenceInDays > 90 && differenceInDays < 121 ? (value.opening_stock) : ('-')}</td>
+                                    <td>{differenceInDays > 120 && differenceInDays < 151 ? (value.opening_stock) : ('-')}</td>
+                                    <td>{differenceInDays > 150 ? (value.opening_stock) : ('-')}</td>
                                 </tr>
                             )
                         })}
