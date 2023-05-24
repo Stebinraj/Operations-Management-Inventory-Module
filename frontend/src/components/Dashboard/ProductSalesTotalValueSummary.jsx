@@ -11,7 +11,6 @@ const ProductSalesTotalValueSummary = ({ productSalesSummaryData }) => {
             <div className="col-xl-3 col-lg-6">
                 <div className="stats card l-bg-orange-dark">
                     <div className="card-statistic-3 p-4">
-                    <i class=""></i>
                         <div className="mb-4">
                             <h5 className="card-title mb-0">Product Sales Value</h5>
                         </div>
