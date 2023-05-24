@@ -8,7 +8,7 @@ const NewOrdersSummary = ({ ordersSummaryData }) => {
 
     return (
         <>
-            <div className="col-xl-3 col-lg-6">
+            <div className="col-xl-3 col-md-6">
                 <div className="stats card l-bg-cherry">
                     <div className="card-statistic-3 p-4">
                         <div className="mb-4">
