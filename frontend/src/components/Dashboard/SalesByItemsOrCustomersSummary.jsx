@@ -9,18 +9,18 @@ const SalesByItemsOrCustomersSummary = ({ ordersListTable }) => {
                         <h5 className="m-0 col-2">Sales</h5>
                         <div className="col-10">
                             <form className='row col-12'>
-                                <div className="mb-0 form-group col-sm-6 col-lg-4 d-lg-flex">
+                                <div className="mb-2 form-group col-sm-6 col-lg-4 d-lg-flex">
                                     <span className="card-text text-nowrap my-auto me-2">Filter By</span>
                                     <input type="text" className="form-control" placeholder='Enter Item Name' />
                                 </div>
-                                <div className="mb-0 form-group col-sm-6 col-lg-4 d-lg-flex">
+                                <div className="mb-2 form-group col-sm-6 col-lg-4 d-lg-flex">
                                     <span className="card-text text-nowrap my-auto me-2">Items / Customer</span>
                                     <input type="text" className="form-control" placeholder='Enter Item Name' />
                                 </div>
-                                <div className="form-group col-sm-6 col-lg-2 mb-0">
+                                <div className="form-group col-sm-6 col-lg-2 mb-2">
                                     <button type='submit' className='btn btn-primary w-100'>Filter</button>
                                 </div>
-                                <div className="form-group col-sm-6 col-lg-2 mt-auto d-lg-flex mb-0">
+                                <div className="form-group col-sm-6 col-lg-2 mt-auto d-lg-flex mb-2">
                                     <button type='button' className='btn btn-primary w-100' >Reset</button>
                                 </div>
                             </form>
