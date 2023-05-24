@@ -13,23 +13,5 @@ router.get('/items', getItemsController);
 // get items by id
 router.get('/items/:id', getItemsBySpecificIdController);
 
-// aggregate
-
-// router.get('/view/items', async (req, res) => {
-//     const data = await itemsModel.aggregate([
-//         {
-//             $lookup: {
-//                 from: 'item-groups',
-//                 localField: 'item_group_id',
-//                 foreignField: '_id',
-//                 as: 'item_group'
-//             }
-//         }
-//     ]);
-//     res.send({ success: data });
-// });
-
-// aggregate
-
 
 module.exports = router;
