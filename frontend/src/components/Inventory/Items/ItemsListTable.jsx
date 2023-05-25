@@ -40,27 +40,30 @@ const ItemsListTable = ({ handleAdjust, itemsData, itemsPage, salesOrderPage, ha
                         {itemsData.map((value, index) => {
                             return (
                                 <tr key={index}>
-                                    <td className='text-nowrap'>{value.item_group_id.item_group_label}</td>
-                                    <td className='text-nowrap'>{value.item_name}</td>
-                                    <td className='text-nowrap'>{value.unit}</td>
-                                    <td className='text-nowrap'>{`${value.dimensions.length} L ${value.dimensions.width} W ${value.dimensions.height} H`}</td>
-                                    <td className='text-nowrap'>{value.weight}</td>
-                                    <td className='text-nowrap'>{value.manufacturer}</td>
-                                    <td className='text-nowrap'>{value.brand}</td>
-                                    <td className='text-nowrap'>{value.selling_price}</td>
+                                    <td className='text-nowrap align-middle'>{value.item_group_id.item_group_label}</td>
+                                    <td className='text-nowrap align-middle'>{value.item_name}</td>
+                                    <td className='text-nowrap align-middle'>{value.unit}</td>
+                                    <td className='text-nowrap align-middle'>{`${value.dimensions.length} L ${value.dimensions.width} W ${value.dimensions.height} H`}</td>
+                                    <td className='text-nowrap align-middle'>{value.weight}</td>
+                                    <td className='text-nowrap align-middle'>{value.manufacturer}</td>
+                                    <td className='text-nowrap align-middle'>{value.brand}</td>
+                                    <td className='text-nowrap align-middle'>{value.selling_price}</td>
                                     {itemsPage && (
-                                        <td className='text-nowrap'>{value.cost_price}</td>
+                                        <td className='text-nowrap align-middle'>{value.cost_price}</td>
                                     )}
-                                    <td className='text-nowrap'>{value.description}</td>
-                                    <td className='text-nowrap'>{value.opening_stock}</td>
+                                    <td className='text-nowrap align-middle'>{value.description}</td>
+                                    <td className='text-nowrap align-middle'>{value.opening_stock}</td>
                                     {itemsPage && (
-                                        <td className='text-nowrap'>{value.reorder_point}</td>
+                                        <td className='text-nowrap align-middle'>{value.reorder_point}</td>
                                     )}
-                                    <td className='text-nowrap'>{value.preferred_vendor.name}</td>
-                                    <td className='text-nowrap'>
-                                        {<img src={value.image_of_item} />}
+                                    <td className='text-nowrap align-middle'>{value.preferred_vendor.name}</td>
+                                    <td className='text-nowrap align-middle'>
+                                        <div className="card" style={{ width: '100px', height: '100px', backgroundSize: 'cover' }}>
+                                            <img src={value.image_of_item} style={{ width: '100%', height: '100%' }} alt='itemImage'/>
+                                        </div>
                                     </td>
-                                    <td className='text-nowrap'>
+
+                                    <td className='text-nowrap align-middle'>
                                         {itemsPage && (
                                             <button type="button" className="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#inventoryAdjustModal" onClick={(e) => { handleAdjust(e, value) }}>Adjust</button>
                                         )}
