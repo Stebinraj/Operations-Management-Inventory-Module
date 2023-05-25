@@ -57,7 +57,9 @@ const ItemsListTable = ({ handleAdjust, itemsData, itemsPage, salesOrderPage, ha
                                         <td className='text-nowrap'>{value.reorder_point}</td>
                                     )}
                                     <td className='text-nowrap'>{value.preferred_vendor.name}</td>
-                                    <td className='text-nowrap'>{value.image_of_item}</td>
+                                    <td className='text-nowrap'>
+                                        {<img src={value.image_of_item} />}
+                                    </td>
                                     <td className='text-nowrap'>
                                         {itemsPage && (
                                             <button type="button" className="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#inventoryAdjustModal" onClick={(e) => { handleAdjust(e, value) }}>Adjust</button>

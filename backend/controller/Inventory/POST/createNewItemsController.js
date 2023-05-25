@@ -2,6 +2,7 @@ const itemsModel = require("../../../models/Inventory/itemsModel");
 
 const createNewItemsController = async (req, res) => {
     try {
+        const url = req.protocol + '://' + req.get('host')
         const reqItems = {
             item_group_id: req.body.item_group_id,
             item_name: req.body.item_name,
@@ -16,7 +17,7 @@ const createNewItemsController = async (req, res) => {
             opening_stock: req.body.opening_stock,
             reorder_point: req.body.reorder_point,
             preferred_vendor: req.body.preferred_vendor,
-            image_of_item: '/images/' + req.file.filename,
+            image_of_item: url + '/images/' + req.file.filename,
             added_date: req.body.added_date
         }
 
