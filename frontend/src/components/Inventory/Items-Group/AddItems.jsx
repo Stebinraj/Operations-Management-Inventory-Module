@@ -36,11 +36,11 @@ const AddItems = ({ itemGroupData, item_group_id, setItemGroupId, addItems, setI
                         <div className="form-group mb-3 col-12">
                             <span className="card-text">Dimensions</span>
                             <div className='d-flex'>
-                                <input className="form-control text-right " type="number" placeholder='Length' onChange={(e) => { setDimensions({ length: e.target.value, width: dimensions.width, height: dimensions.height }) }} value={dimensions.length || ''} />
+                                <input className="form-control text-right " type="number" placeholder='Length' onChange={(e) => { setDimensions({ ...dimensions, length: e.target.value }) }} value={dimensions.length || ''} />
                                 <span className='m-auto text-secondary'>x</span>
-                                <input className="form-control text-right" type="number" placeholder='Width' onChange={(e) => { setDimensions({ length: dimensions.length, width: e.target.value, height: dimensions.height }) }} value={dimensions.width || ''} />
+                                <input className="form-control text-right" type="number" placeholder='Width' onChange={(e) => { setDimensions({ ...dimensions, width: e.target.value }) }} value={dimensions.width || ''} />
                                 <span className='m-auto text-secondary'>x</span>
-                                <input className="form-control text-right" type="number" placeholder='Height' onChange={(e) => { setDimensions({ length: dimensions.length, width: dimensions.width, height: e.target.value }) }} value={dimensions.height || ''} />
+                                <input className="form-control text-right" type="number" placeholder='Height' onChange={(e) => { setDimensions({ ...dimensions, height: e.target.value }) }} value={dimensions.height || ''} />
                             </div>
                         </div>
                         <div className="mb-3 form-group col-md-6">
