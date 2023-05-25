@@ -26,16 +26,20 @@ const VendorCreditsListTable = ({ vendorCreditsData, vendorCreditPage }) => {
                         {vendorCreditsData.map((value, index) => {
                             return (
                                 <tr key={index}>
-                                    <td className='text-nowrap'>{moment(value.credit_date).format('DD-MM-YYYY')}</td>
-                                    <td className='text-nowrap'>{`CR - ${value.credit_id}`}</td>
-                                    <td className='text-nowrap'>{value.payment_id.billed_id.received_order_id.purchased_id.item_id.preferred_vendor.name}</td>
-                                    <td className='text-nowrap'>{value.payment_id.billed_id.received_order_id.purchased_id.item_id.item_group_id.item_group_label}</td>
-                                    <td className='text-nowrap'>{value.payment_id.billed_id.received_order_id.purchased_id.item_id.item_name}</td>
-                                    <td className='text-nowrap'>{value.payment_id.billed_id.received_order_id.purchased_id.item_id.image_of_item}</td>
-                                    <td className='text-nowrap'>{value.payment_id.billed_id.received_order_id.purchased_id.quantity}</td>
-                                    <td className='text-nowrap'>{value.payment_id.billed_id.received_order_id.purchased_id.purchased_price_per_item}</td>
-                                    <td className='text-nowrap'>{value.payment_id.billed_id.received_order_id.purchased_id.total}</td>
-                                    <td className='text-nowrap'>
+                                    <td className='text-nowrap align-middle'>{moment(value.credit_date).format('DD-MM-YYYY')}</td>
+                                    <td className='text-nowrap align-middle'>{`CR - ${value.credit_id}`}</td>
+                                    <td className='text-nowrap align-middle'>{value.payment_id.billed_id.received_order_id.purchased_id.item_id.preferred_vendor.name}</td>
+                                    <td className='text-nowrap align-middle'>{value.payment_id.billed_id.received_order_id.purchased_id.item_id.item_group_id.item_group_label}</td>
+                                    <td className='text-nowrap align-middle'>{value.payment_id.billed_id.received_order_id.purchased_id.item_id.item_name}</td>
+                                    <td className='text-nowrap align-middle'>
+                                        <div className="card" style={{ width: '100px', height: '100px', backgroundSize: 'cover' }}>
+                                            <img src={value.payment_id.billed_id.received_order_id.purchased_id.item_id.image_of_item} style={{ width: '100%', height: '100%' }} alt='itemImage' />
+                                        </div>
+                                    </td>
+                                    <td className='text-nowrap align-middle'>{value.payment_id.billed_id.received_order_id.purchased_id.quantity}</td>
+                                    <td className='text-nowrap align-middle'>{value.payment_id.billed_id.received_order_id.purchased_id.purchased_price_per_item}</td>
+                                    <td className='text-nowrap align-middle'>{value.payment_id.billed_id.received_order_id.purchased_id.total}</td>
+                                    <td className='text-nowrap align-middle'>
                                         {value.payment_id.billed_id.received_order_id.purchased_id.purchase_status === "Credited" && (
                                             vendorCreditPage && (
                                                 <span className="badge rounded-pill text-bg-success text-white w-100 p-2">{value.payment_id.billed_id.received_order_id.purchased_id.purchase_status}</span>

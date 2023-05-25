@@ -32,19 +32,23 @@ const InvoicedItemsListTable = ({ invoicedItemsData, invoicesPage, paymentsRecei
                         {invoicedItemsData.map((value, index) => {
                             return (
                                 <tr key={index}>
-                                    <td className='text-nowrap'>{moment(value.invoiced_date).format('DD-MM-YYYY')}</td>
-                                    <td className='text-nowrap'>{`INV - ${value.invoiced_id}`}</td>
-                                    <td className='text-nowrap'>{value.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.customer_id.name}</td>
-                                    <td className='text-nowrap'>{value.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.customer_id.email}</td>
-                                    <td className='text-nowrap'>{value.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.customer_id.phone_number}</td>
-                                    <td className='text-nowrap'>{value.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.customer_id.billing_address}</td>
-                                    <td className='text-nowrap'>{value.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.item_id.item_group_id.item_group_label}</td>
-                                    <td className='text-nowrap'>{value.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.item_id.item_name}</td>
-                                    <td className='text-nowrap'>{value.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.item_id.image_of_item}</td>
-                                    <td className='text-nowrap'>{value.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.quantity}</td>
-                                    <td className='text-nowrap'>{value.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.ordered_price_per_item}</td>
-                                    <td className='text-nowrap'>{value.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.total}</td>
-                                    <td className='text-nowrap'>
+                                    <td className='text-nowrap align-middle'>{moment(value.invoiced_date).format('DD-MM-YYYY')}</td>
+                                    <td className='text-nowrap align-middle'>{`INV - ${value.invoiced_id}`}</td>
+                                    <td className='text-nowrap align-middle'>{value.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.customer_id.name}</td>
+                                    <td className='text-nowrap align-middle'>{value.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.customer_id.email}</td>
+                                    <td className='text-nowrap align-middle'>{value.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.customer_id.phone_number}</td>
+                                    <td className='text-nowrap align-middle'>{value.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.customer_id.billing_address}</td>
+                                    <td className='text-nowrap align-middle'>{value.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.item_id.item_group_id.item_group_label}</td>
+                                    <td className='text-nowrap align-middle'>{value.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.item_id.item_name}</td>
+                                    <td className='text-nowrap align-middle'>
+                                        <div className="card" style={{ width: '100px', height: '100px', backgroundSize: 'cover' }}>
+                                            <img src={value.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.item_id.image_of_item} style={{ width: '100%', height: '100%' }} alt='itemImage' />
+                                        </div>
+                                    </td>
+                                    <td className='text-nowrap align-middle'>{value.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.quantity}</td>
+                                    <td className='text-nowrap align-middle'>{value.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.ordered_price_per_item}</td>
+                                    <td className='text-nowrap align-middle'>{value.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.total}</td>
+                                    <td className='text-nowrap align-middle'>
                                         {value.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.order_status === "Invoiced" && (
                                             invoicesPage ? (
                                                 <span className="badge rounded-pill text-bg-secondary text-white w-100 p-2">{value.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.order_status}</span>

@@ -20,13 +20,17 @@ const CartListTable = ({ deleteCartItems, cartItemsData }) => {
                         {cartItemsData.map((value, index) => {
                             return (
                                 <tr key={index}>
-                                    <td className='text-nowrap'>{value.customer_id.email}</td>
-                                    <td className='text-nowrap'>{value.item_id.item_group_id.item_group_label}</td>
-                                    <td className='text-nowrap'>{value.item_id.item_name}</td>
-                                    <td className='text-nowrap'>{value.item_id.image_of_item}</td>
-                                    <td className='text-nowrap'>{value.quantity}</td>
-                                    <td className='text-nowrap'>{value.quantity * value.item_id.selling_price}</td>
-                                    <td className='text-nowrap'>
+                                    <td className='text-nowrap align-middle'>{value.customer_id.email}</td>
+                                    <td className='text-nowrap align-middle'>{value.item_id.item_group_id.item_group_label}</td>
+                                    <td className='text-nowrap align-middle'>{value.item_id.item_name}</td>
+                                    <td className='text-nowrap align-middle'>
+                                        <div className="card" style={{ width: '100px', height: '100px', backgroundSize: 'cover' }}>
+                                            <img src={value.item_id.image_of_item} style={{ width: '100%', height: '100%' }} alt='itemImage' />
+                                        </div>
+                                    </td>
+                                    <td className='text-nowrap align-middle'>{value.quantity}</td>
+                                    <td className='text-nowrap align-middle'>{value.quantity * value.item_id.selling_price}</td>
+                                    <td className='text-nowrap align-middle'>
                                         <button className='btn btn-primary' onClick={(e) => { deleteCartItems(e, value) }}>Delete</button>
                                     </td>
                                 </tr>

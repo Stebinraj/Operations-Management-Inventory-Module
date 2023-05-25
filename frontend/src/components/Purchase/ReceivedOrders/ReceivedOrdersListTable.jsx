@@ -29,16 +29,20 @@ const ReceivedOrdersListTable = ({ receivedOrdersPage, receivedOrdersData, bills
                         {receivedOrdersData.map((value, index) => {
                             return (
                                 <tr key={index}>
-                                    <td className='text-nowrap'>{moment(value.received_date).format('DD-MM-YYYY')}</td>
-                                    <td className='text-nowrap'>{`RV - ${value.received_id}`}</td>
-                                    <td className='text-nowrap'>{value.purchased_id.item_id.preferred_vendor.name}</td>
-                                    <td className='text-nowrap'>{value.purchased_id.item_id.item_group_id.item_group_label}</td>
-                                    <td className='text-nowrap'>{value.purchased_id.item_id.item_name}</td>
-                                    <td className='text-nowrap'>{value.purchased_id.item_id.image_of_item}</td>
-                                    <td className='text-nowrap'>{value.purchased_id.quantity}</td>
-                                    <td className='text-nowrap'>{value.purchased_id.purchased_price_per_item}</td>
-                                    <td className='text-nowrap'>{value.purchased_id.total}</td>
-                                    <td className='text-nowrap'>
+                                    <td className='text-nowrap align-middle'>{moment(value.received_date).format('DD-MM-YYYY')}</td>
+                                    <td className='text-nowrap align-middle'>{`RV - ${value.received_id}`}</td>
+                                    <td className='text-nowrap align-middle'>{value.purchased_id.item_id.preferred_vendor.name}</td>
+                                    <td className='text-nowrap align-middle'>{value.purchased_id.item_id.item_group_id.item_group_label}</td>
+                                    <td className='text-nowrap align-middle'>{value.purchased_id.item_id.item_name}</td>
+                                    <td className='text-nowrap align-middle'>
+                                        <div className="card" style={{ width: '100px', height: '100px', backgroundSize: 'cover' }}>
+                                            <img src={value.purchased_id.item_id.image_of_item} style={{ width: '100%', height: '100%' }} alt='itemImage' />
+                                        </div>
+                                    </td>
+                                    <td className='text-nowrap align-middle'>{value.purchased_id.quantity}</td>
+                                    <td className='text-nowrap align-middle'>{value.purchased_id.purchased_price_per_item}</td>
+                                    <td className='text-nowrap align-middle'>{value.purchased_id.total}</td>
+                                    <td className='text-nowrap align-middle'>
                                         {value.purchased_id.purchase_status === "Received" && (
                                             receivedOrdersPage ? (
                                                 <span className="badge rounded-pill text-bg-warning text-white w-100 p-2">{value.purchased_id.purchase_status}</span>

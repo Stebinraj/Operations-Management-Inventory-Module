@@ -29,16 +29,20 @@ const PurchaseOrdersListTable = ({ purchaseOrdersData, purchaseOrdersPage, recei
                         {purchaseOrdersData.map((value, index) => {
                             return (
                                 <tr key={index}>
-                                    <td className='text-nowrap'>{moment(value.purchase_date).format('DD-MM-YYYY')}</td>
-                                    <td className='text-nowrap'>{`PI - ${value.purchase_id}`}</td>
-                                    <td className='text-nowrap'>{value.item_id.preferred_vendor.name}</td>
-                                    <td className='text-nowrap'>{value.item_id.item_group_id.item_group_label}</td>
-                                    <td className='text-nowrap'>{value.item_id.item_name}</td>
-                                    <td className='text-nowrap'>{value.item_id.image_of_item}</td>
-                                    <td className='text-nowrap'>{value.quantity}</td>
-                                    <td className='text-nowrap'>{value.purchased_price_per_item}</td>
-                                    <td className='text-nowrap'>{value.total}</td>
-                                    <td className='text-nowrap'>
+                                    <td className='text-nowrap align-middle'>{moment(value.purchase_date).format('DD-MM-YYYY')}</td>
+                                    <td className='text-nowrap align-middle'>{`PI - ${value.purchase_id}`}</td>
+                                    <td className='text-nowrap align-middle'>{value.item_id.preferred_vendor.name}</td>
+                                    <td className='text-nowrap align-middle'>{value.item_id.item_group_id.item_group_label}</td>
+                                    <td className='text-nowrap align-middle'>{value.item_id.item_name}</td>
+                                    <td className='text-nowrap align-middle'>
+                                        <div className="card" style={{ width: '100px', height: '100px', backgroundSize: 'cover' }}>
+                                            <img src={value.item_id.image_of_item} style={{ width: '100%', height: '100%' }} alt='itemImage' />
+                                        </div>
+                                    </td>
+                                    <td className='text-nowrap align-middle'>{value.quantity}</td>
+                                    <td className='text-nowrap align-middle'>{value.purchased_price_per_item}</td>
+                                    <td className='text-nowrap align-middle'>{value.total}</td>
+                                    <td className='text-nowrap align-middle'>
                                         {value.purchase_status === "Confirmed" && (
                                             purchaseOrdersPage ? (
                                                 <span className="badge rounded-pill text-bg-primary text-white w-100 p-2">{value.purchase_status}</span>

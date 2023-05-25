@@ -46,31 +46,35 @@ const OrdersListTable = ({ orderItemsData, salesOrderPage, packagesPage, markAsP
                         {orderItemsData.map((value, index) => {
                             return (
                                 <tr key={index}>
-                                    <td className='text-nowrap'>{moment(value.order_date).format('DD-MM-YYYY')}</td>
-                                    <td className='text-nowrap'>{`SO - ${value.ordered_id}`}</td>
-                                    <td className='text-nowrap'>{value.customer_id.name}</td>
-                                    <td className='text-nowrap'>{value.customer_id.email}</td>
+                                    <td className='text-nowrap align-middle'>{moment(value.order_date).format('DD-MM-YYYY')}</td>
+                                    <td className='text-nowrap align-middle'>{`SO - ${value.ordered_id}`}</td>
+                                    <td className='text-nowrap align-middle'>{value.customer_id.name}</td>
+                                    <td className='text-nowrap align-middle'>{value.customer_id.email}</td>
 
                                     {salesOrderPage || packagesPage ? (
                                         <>
-                                            <td className='text-nowrap'>{value.customer_id.phone_number}</td>
-                                            <td className='text-nowrap'>{value.customer_id.billing_address}</td>
-                                            <td className='text-nowrap'>{value.item_id.item_group_id.item_group_label}</td>
+                                            <td className='text-nowrap align-middle'>{value.customer_id.phone_number}</td>
+                                            <td className='text-nowrap align-middle'>{value.customer_id.billing_address}</td>
+                                            <td className='text-nowrap align-middle'>{value.item_id.item_group_id.item_group_label}</td>
                                         </>
                                     ) : null}
 
-                                    <td className='text-nowrap'>{value.item_id.item_name}</td>
-                                    <td className='text-nowrap'>{value.item_id.image_of_item}</td>
-                                    <td className='text-nowrap'>{value.quantity}</td>
+                                    <td className='text-nowrap align-middle'>{value.item_id.item_name}</td>
+                                    <td className='text-nowrap align-middle'>
+                                        <div className="card" style={{ width: '100px', height: '100px', backgroundSize: 'cover' }}>
+                                            <img src={value.item_id.image_of_item} style={{ width: '100%', height: '100%' }} alt='itemImage' />
+                                        </div>
+                                    </td>
+                                    <td className='text-nowrap align-middle'>{value.quantity}</td>
 
                                     {salesOrderPage || packagesPage ? (
                                         <>
-                                            <td className='text-nowrap'>{value.ordered_price_per_item}</td>
-                                            <td className='text-nowrap'>{value.quantity * value.ordered_price_per_item}</td>
+                                            <td className='text-nowrap align-middle'>{value.ordered_price_per_item}</td>
+                                            <td className='text-nowrap align-middle'>{value.quantity * value.ordered_price_per_item}</td>
                                         </>
                                     ) : null}
 
-                                    <td className='text-nowrap'>
+                                    <td className='text-nowrap align-middle'>
                                         {value.order_status === "Confirmed" && (
                                             salesOrderPage || dashboardPage ? (
                                                 <span className="badge rounded-pill text-bg-primary w-100 p-2">{value.order_status}</span>

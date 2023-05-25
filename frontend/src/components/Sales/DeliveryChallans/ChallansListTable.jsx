@@ -32,19 +32,23 @@ const ChallansListTable = ({ deliveryChallansData, deliveryChallansPage, shipmen
                         {deliveryChallansData.map((value, index) => {
                             return (
                                 <tr key={index}>
-                                    <td className='text-nowrap'>{moment(value.challan_date).format('DD-MM-YYYY')}</td>
-                                    <td className='text-nowrap'>{`DC - ${value.challan_id}`}</td>
-                                    <td className='text-nowrap'>{value.package_id.order_id.customer_id.name}</td>
-                                    <td className='text-nowrap'>{value.package_id.order_id.customer_id.email}</td>
-                                    <td className='text-nowrap'>{value.package_id.order_id.customer_id.phone_number}</td>
-                                    <td className='text-nowrap'>{value.package_id.order_id.customer_id.name}</td>
-                                    <td className='text-nowrap'>{value.package_id.order_id.item_id.item_group_id.item_group_label}</td>
-                                    <td className='text-nowrap'>{value.package_id.order_id.item_id.item_name}</td>
-                                    <td className='text-nowrap'>{value.package_id.order_id.item_id.image_of_item}</td>
-                                    <td className='text-nowrap'>{value.package_id.order_id.quantity}</td>
-                                    <td className='text-nowrap'>{value.package_id.order_id.ordered_price_per_item}</td>
-                                    <td className='text-nowrap'>{value.package_id.order_id.total}</td>
-                                    <td className='text-nowrap'>
+                                    <td className='text-nowrap align-middle'>{moment(value.challan_date).format('DD-MM-YYYY')}</td>
+                                    <td className='text-nowrap align-middle'>{`DC - ${value.challan_id}`}</td>
+                                    <td className='text-nowrap align-middle'>{value.package_id.order_id.customer_id.name}</td>
+                                    <td className='text-nowrap align-middle'>{value.package_id.order_id.customer_id.email}</td>
+                                    <td className='text-nowrap align-middle'>{value.package_id.order_id.customer_id.phone_number}</td>
+                                    <td className='text-nowrap align-middle'>{value.package_id.order_id.customer_id.name}</td>
+                                    <td className='text-nowrap align-middle'>{value.package_id.order_id.item_id.item_group_id.item_group_label}</td>
+                                    <td className='text-nowrap align-middle'>{value.package_id.order_id.item_id.item_name}</td>
+                                    <td className='text-nowrap align-middle'>
+                                        <div className="card" style={{ width: '100px', height: '100px', backgroundSize: 'cover' }}>
+                                            <img src={value.package_id.order_id.item_id.image_of_item} style={{ width: '100%', height: '100%' }} alt='itemImage' />
+                                        </div>
+                                    </td>
+                                    <td className='text-nowrap align-middle'>{value.package_id.order_id.quantity}</td>
+                                    <td className='text-nowrap align-middle'>{value.package_id.order_id.ordered_price_per_item}</td>
+                                    <td className='text-nowrap align-middle'>{value.package_id.order_id.total}</td>
+                                    <td className='text-nowrap align-middle'>
                                         {value.package_id.order_id.order_status === "Challans Generated" && (
                                             deliveryChallansPage ? (
                                                 <span className="badge rounded-pill text-bg-info text-white w-100 p-2">{value.package_id.order_id.order_status}</span>
