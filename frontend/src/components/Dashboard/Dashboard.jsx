@@ -35,6 +35,9 @@ const Dashboard = ({ dashboardPage }) => {
     const [returnedItemsData, setReturnedItemsData] = useState([]);
     const [orderItemsData, setOrderItemsData] = useState([]);
     const [itemsData, setItemsData] = useState([]);
+    const [filterBy, setFilterBy] = useState('');
+    const [filterId, setFilterId] = useState('');
+    const [customerOrFilterItemsData, setCustomerOrFilterItemsData] = useState([]);
 
     // fetch inventory summary and set to inventorySummaryData
     const getInventorySummary = async () => {
@@ -158,9 +161,76 @@ const Dashboard = ({ dashboardPage }) => {
 
     // fetch items and set to ItemsData
     const getItems = async () => {
-        const response = await axios.get('http://localhost:5000/items');
-        if (response && response.data.success) {
-            setItemsData(response.data.success);
+        try {
+            const response = await axios.get('http://localhost:5000/items');
+            if (response && response.data.success) {
+                setItemsData(response.data.success);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const getItemsFilter = async () => {
+        try {
+            const response = await axios.get('http://localhost:5000/items');
+            if (response && response.data.success) {
+                setCustomerOrFilterItemsData(response.data.success);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    // handle while filtering sales orders
+    const handleFilterBy = async (e) => {
+        setFilterBy(e.target.value);
+        if (e.target.value === "Customer") {
+            await getCustomerFilter();
+        } else if (e.target.value === "Items") {
+            await getItemsFilter();
+        }
+        setFilterId('');
+    };
+
+    // fetch customers and set to setCustomerData
+    const getCustomerFilter = async () => {
+        try {
+            const response = await axios.get('http://localhost:5000/customer');
+            if (response && response.data.success) {
+                setCustomerOrFilterItemsData(response.data.success);
+            }
+        } catch (error) {
+            console.error(error.message);
+        }
+    };
+
+    const filterSalesOrders = async (e) => {
+        try {
+            e.preventDefault();
+            if (filterBy === "Customer" || filterBy === "Items") {
+                await getSpecificSales(filterId);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const resetSalesOrder = async () => {
+        await getOrderItems();
+        setFilterBy('');
+        setFilterId('');
+        setCustomerOrFilterItemsData([]);
+    }
+
+    const getSpecificSales = async (id) => {
+        try {
+            const response = await axios.get(`http://localhost:5000/filter/salesorders/${id}`);
+            if (response && response.data.success) {
+                setOrderItemsData(response.data.success);
+            }
+        } catch (error) {
+            console.error(error.message);
         }
     };
 
@@ -264,6 +334,13 @@ const Dashboard = ({ dashboardPage }) => {
 
             {/* Sales by items or customers summary component */}
             <SalesByItemsOrCustomersSummary
+                customerOrFilterItemsData={customerOrFilterItemsData}
+                filterBy={filterBy}
+                filterId={filterId}
+                handleFilterBy={handleFilterBy}
+                setFilterId={setFilterId}
+                filterSalesOrders={filterSalesOrders}
+                resetSalesOrder={resetSalesOrder}
                 ordersListTable={
                     <OrdersListTable
                         orderItemsData={orderItemsData}
