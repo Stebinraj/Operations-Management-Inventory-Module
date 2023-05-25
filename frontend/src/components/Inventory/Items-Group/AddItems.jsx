@@ -9,7 +9,7 @@ const AddItems = ({ itemGroupData, item_group_id, setItemGroupId, addItems, setI
                     <h5 className="m-0">Create Item</h5>
                 </div>
                 <div className="card-body">
-                    <form className='row'>
+                    <form className='row' encType='multipart/form-data'>
                         <div className="mb-3 form-group col-md-6">
                             <span className="card-text">Name of Item Group</span>
                             <select className="form-control" value={item_group_id} onChange={(e) => { setItemGroupId(e.target.value) }}>
@@ -84,7 +84,7 @@ const AddItems = ({ itemGroupData, item_group_id, setItemGroupId, addItems, setI
                         </div>
                         <div className="mb-3 form-group col-12">
                             <span className="card-text">Image of Item</span>
-                            <input type="file" className="form-control" onChange={(e) => { setImageOfItem(e.target.value) }} value={image_of_item} />
+                            <input type="file" name='photo' className="form-control" onChange={(e) => { setImageOfItem(e.target.files[0]) }} />
                         </div>
                         <button className="btn btn-primary w-100" onClick={(e) => { addItems(e) }}>Submit</button>
                     </form>

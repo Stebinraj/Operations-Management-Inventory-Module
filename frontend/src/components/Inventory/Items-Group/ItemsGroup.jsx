@@ -29,7 +29,7 @@ const ItemsGroup = () => {
     const [opening_stock, setOpeningStock] = useState('');
     const [reorder_point, setReorderPoint] = useState('');
     const [preferred_vendor, setPreferredVendor] = useState('');
-    const [image_of_item, setImageOfItem] = useState('');
+    const [image_of_item, setImageOfItem] = useState([]);
     const navigate = useNavigate();
 
     // create new item groups
@@ -51,22 +51,27 @@ const ItemsGroup = () => {
     const addItems = async (e) => {
         try {
             e.preventDefault();
-            const response = await axios.post('http://localhost:5000/items', {
-                item_group_id,
-                item_name,
-                unit,
-                dimensions,
-                weight,
-                manufacturer,
-                brand,
-                selling_price,
-                cost_price,
-                description,
-                opening_stock,
-                reorder_point,
-                preferred_vendor,
-                image_of_item,
-                added_date: new Date()
+            const formData = new FormData();
+            formData.append('photo', image_of_item);
+
+            formData.append('item_group_id', item_group_id);
+            formData.append('item_name', item_name);
+            formData.append('unit', unit);
+            formData.append('dimensions', JSON.stringify(dimensions));
+            formData.append('weight', weight);
+            formData.append('manufacturer', manufacturer);
+            formData.append('brand', brand);
+            formData.append('selling_price', selling_price);
+            formData.append('cost_price', cost_price);
+            formData.append('description', description);
+            formData.append('opening_stock', opening_stock);
+            formData.append('reorder_point', reorder_point);
+            formData.append('preferred_vendor', preferred_vendor);
+            formData.append('added_date', new Date());
+            const response = await axios.post('http://localhost:5000/items', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
             });
             if (response && response.data.success) {
                 toast.success('Items Created Successfully !!!');
@@ -84,7 +89,7 @@ const ItemsGroup = () => {
                 setOpeningStock('');
                 setReorderPoint('');
                 setPreferredVendor('');
-                setImageOfItem('');
+                setImageOfItem([]);
                 setTimeout(() => {
                     navigate('/view/items');
                 }, 2500);

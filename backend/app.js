@@ -11,6 +11,7 @@ app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use('/images', express.static('images'));
 
 // items route
 const items = require('./routes/Inventory/itemsRoutes');
