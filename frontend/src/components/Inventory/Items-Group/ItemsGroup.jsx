@@ -11,29 +11,26 @@ const ItemsGroup = () => {
     const [itemGroupData, setItemGroupData] = useState([]);
     const [vendorsData, setVendorsData] = useState([]);
     const alpabeticRegex = /^[a-zA-Z]+(?:\s[a-zA-Z]+)*$/;
+    const numberRegex = /^[0-9]*$/;
 
-    const [item_group_label, setItemGroupLabel] = useState({
-        item_group_label: '',
-        class: '',
-        feedback: ''
-    });
-    const [item_group_id, setItemGroupId] = useState('');
-    const [item_name, setItemName] = useState('');
-    const [unit, setUnit] = useState('');
+    const [item_group_label, setItemGroupLabel] = useState({ item_group_label: '', class: '', feedback: '' });
+    const [item_group_id, setItemGroupId] = useState({ item_group_id: '', class: '', feedback: '' });
+    const [item_name, setItemName] = useState({ item_name: '', class: '', feedback: '' });
+    const [unit, setUnit] = useState({ unit: '', class: '', feedback: '' });
     const [dimensions, setDimensions] = useState({
         length: '',
         width: '',
         height: ''
     });
-    const [weight, setWeight] = useState('');
-    const [manufacturer, setManufacturer] = useState('');
-    const [brand, setBrand] = useState('');
-    const [selling_price, setSellingPrice] = useState('');
-    const [cost_price, setCostPrice] = useState('');
+    const [weight, setWeight] = useState({ weight: '', class: '', feedback: '' });
+    const [manufacturer, setManufacturer] = useState({ manufacturer: '', class: '', feedback: '' });
+    const [brand, setBrand] = useState({ brand: '', class: '', feedback: '' });
+    const [selling_price, setSellingPrice] = useState({ selling_price: '', class: '', feedback: '' });
+    const [cost_price, setCostPrice] = useState({ cost_price: '', class: '', feedback: '' });
     const [description, setDescription] = useState('');
-    const [opening_stock, setOpeningStock] = useState('');
-    const [reorder_point, setReorderPoint] = useState('');
-    const [preferred_vendor, setPreferredVendor] = useState('');
+    const [opening_stock, setOpeningStock] = useState({ opening_stock: '', class: '', feedback: '' });
+    const [reorder_point, setReorderPoint] = useState({ reorder_point: '', class: '', feedback: '' });
+    const [preferred_vendor, setPreferredVendor] = useState({ preferred_vendor: '', class: '', feedback: '' });
     const [image_of_item, setImageOfItem] = useState([]);
     const navigate = useNavigate();
 
@@ -62,47 +59,49 @@ const ItemsGroup = () => {
     const addItems = async (e) => {
         try {
             e.preventDefault();
-            const formData = new FormData();
-            formData.append('photo', image_of_item);
-            formData.append('item_group_id', item_group_id);
-            formData.append('item_name', item_name);
-            formData.append('unit', unit);
-            formData.append('dimensions', JSON.stringify(dimensions));
-            formData.append('weight', weight);
-            formData.append('manufacturer', manufacturer);
-            formData.append('brand', brand);
-            formData.append('selling_price', selling_price);
-            formData.append('cost_price', cost_price);
-            formData.append('description', description);
-            formData.append('opening_stock', opening_stock);
-            formData.append('reorder_point', reorder_point);
-            formData.append('preferred_vendor', preferred_vendor);
-            formData.append('added_date', new Date());
-            const response = await axios.post('http://localhost:5000/items', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
+            if (await validateItemGroupId() & await validateItemName() & await validateUnit() & await validateWeight() & await validateManufacturer() & await validateBrand() & await validateSellingPrice() & await validateCostPrice() & await validateOpeningStock() & await validateReorderPoint() & await validatePreferredVendor()) {
+                const formData = new FormData();
+                formData.append('item_group_id', item_group_id.item_group_id);
+                formData.append('item_name', item_name.item_name);
+                formData.append('unit', unit.unit);
+                formData.append('dimensions', JSON.stringify(dimensions));
+                formData.append('weight', weight.weight);
+                formData.append('manufacturer', manufacturer.manufacturer);
+                formData.append('brand', brand.brand);
+                formData.append('selling_price', selling_price.selling_price);
+                formData.append('cost_price', cost_price.cost_price);
+                formData.append('description', description);
+                formData.append('opening_stock', opening_stock.opening_stock);
+                formData.append('reorder_point', reorder_point.reorder_point);
+                formData.append('preferred_vendor', preferred_vendor.preferred_vendor);
+                formData.append('photo', image_of_item);
+                formData.append('added_date', new Date());
+                const response = await axios.post('http://localhost:5000/items', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                });
+                if (response && response.data.success) {
+                    toast.success('Items Created Successfully !!!');
+                    setTimeout(() => {
+                        setItemGroupLabel({ item_group_label: '', class: '', feedback: '' });
+                        setItemGroupId({ item_group_id: '', class: '', feedback: '' });
+                        setItemName({ item_name: '', class: '', feedback: '' });
+                        setUnit({ unit: '', class: '', feedback: '' });
+                        setDimensions({ length: '', width: '', height: '' });
+                        setWeight({ weight: '', class: '', feedback: '' });
+                        setManufacturer({ manufacturer: '', class: '', feedback: '' });
+                        setBrand({ brand: '', class: '', feedback: '' });
+                        setSellingPrice({ selling_price: '', class: '', feedback: '' });
+                        setCostPrice({ cost_price: '', class: '', feedback: '' });
+                        setDescription('');
+                        setOpeningStock({ opening_stock: '', class: '', feedback: '' });
+                        setReorderPoint({ reorder_point: '', class: '', feedback: '' });
+                        setPreferredVendor({ preferred_vendor: '', class: '', feedback: '' });
+                        setImageOfItem([]);
+                        navigate('/view/items');
+                    }, 2500);
                 }
-            });
-            if (response && response.data.success) {
-                toast.success('Items Created Successfully !!!');
-                setItemGroupLabel('');
-                setItemGroupId('');
-                setItemName('');
-                setUnit('');
-                setDimensions('');
-                setWeight('');
-                setManufacturer('');
-                setBrand('');
-                setSellingPrice('');
-                setCostPrice('');
-                setDescription('');
-                setOpeningStock('');
-                setReorderPoint('');
-                setPreferredVendor('');
-                setImageOfItem([]);
-                setTimeout(() => {
-                    navigate('/view/items');
-                }, 2500);
             }
         } catch (error) {
             console.error(error.message);
@@ -142,11 +141,185 @@ const ItemsGroup = () => {
             setItemGroupLabel({ ...item_group_label, feedback: 'All Good', class: 'is-valid' });
             return true;
         } else if (!alpabeticRegex.test(item_group_label.item_group_label)) {
-            setItemGroupLabel({ ...item_group_label, feedback: 'Please Enter Text Only', class: 'is-invalid' });
+            setItemGroupLabel({ ...item_group_label, feedback: 'Text Only Accepted', class: 'is-invalid' });
             return false;
         } else {
             setItemGroupLabel({ ...item_group_label, feedback: 'Invalid', class: 'is-invalid' });
             return false;
+        }
+    };
+
+    // validate item name
+    const validateItemName = async () => {
+        if (item_name.item_name === "") {
+            setItemName({ ...item_name, feedback: 'Required *', class: 'is-invalid' });
+            return false;
+        } else if (alpabeticRegex.test(item_name.item_name)) {
+            setItemName({ ...item_name, feedback: 'All Good', class: 'is-valid' });
+            return true
+        } else if (!alpabeticRegex.test(item_name.item_name)) {
+            setItemName({ ...item_name, feedback: 'Text Only Accepted', class: 'is-invalid' });
+            return false;
+        } else {
+            setItemName({ ...item_name, feedback: 'Invalid', class: 'is-invalid' });
+            return false;
+        }
+    };
+
+    // validate group id
+    const validateItemGroupId = async () => {
+        if (item_group_id.item_group_id === "") {
+            setItemGroupId({ ...item_group_id, feedback: 'Required *', class: 'is-invalid' });
+            return false;
+        } else {
+            setItemGroupId({ ...item_group_id, feedback: 'All Good', class: 'is-valid' });
+            return true;
+        }
+    };
+
+    // validate unit
+    const validateUnit = async () => {
+        if (unit.unit === "") {
+            setUnit({ ...unit, feedback: 'Required *', class: 'is-invalid' });
+            return false;
+        } else if (alpabeticRegex.test(unit.unit)) {
+            setUnit({ ...unit, feedback: 'All Good', class: 'is-valid' });
+            return true;
+        } else if (!alpabeticRegex.test(unit.unit)) {
+            setUnit({ ...unit, feedback: 'Text Only Accepted', class: 'is-invalid' });
+            return false;
+        } else {
+            setUnit({ ...unit, feedback: 'Invalid', class: 'is-invalid' });
+            return false;
+        }
+    };
+
+    // validate weight
+    const validateWeight = async () => {
+        if (weight.weight === "") {
+            setWeight({ ...weight, feedback: 'Required *', class: 'is-invalid' });
+            return false;
+        } else if (numberRegex.test(weight.weight)) {
+            setWeight({ ...weight, feedback: 'All Good', class: 'is-valid' });
+            return true;
+        } else if (!numberRegex.test(weight.weight)) {
+            setWeight({ ...weight, feedback: 'Number Only Accepted', class: 'is-invalid' });
+            return false;
+        } else {
+            setWeight({ ...weight, feedback: 'Invalid', class: 'is-invalid' });
+            return false;
+        }
+    };
+
+    // validate manufacturer
+    const validateManufacturer = async () => {
+        if (manufacturer.manufacturer === "") {
+            setManufacturer({ ...manufacturer, feedback: 'Required *', class: 'is-invalid' });
+            return false;
+        } else if (alpabeticRegex.test(manufacturer.manufacturer)) {
+            setManufacturer({ ...manufacturer, feedback: 'All Good', class: 'is-valid' });
+            return true;
+        } else if (!alpabeticRegex.test(manufacturer.manufacturer)) {
+            setManufacturer({ ...manufacturer, feedback: 'Text Only Accepted', class: 'is-invalid' });
+            return false;
+        } else {
+            setManufacturer({ ...manufacturer, feedback: 'Invalid', class: 'is-invalid' });
+            return false;
+        }
+    };
+
+    // validate brand
+    const validateBrand = async () => {
+        if (brand.brand === "") {
+            setBrand({ ...brand, feedback: 'Required *', class: 'is-invalid' });
+            return false;
+        } else if (alpabeticRegex.test(brand.brand)) {
+            setBrand({ ...brand, feedback: 'All Good', class: 'is-valid' });
+            return true;
+        } else if (!alpabeticRegex.test(brand.brand)) {
+            setBrand({ ...brand, feedback: 'Text Only Accepted', class: 'is-invalid' });
+            return false;
+        } else {
+            setBrand({ ...brand, feedback: 'Invalid', class: 'is-invalid' });
+            return false;
+        }
+    };
+
+    // validate selling price
+    const validateSellingPrice = async () => {
+        if (selling_price.selling_price === "") {
+            setSellingPrice({ ...selling_price, feedback: 'Required *', class: 'is-invalid' });
+            return false;
+        } else if (numberRegex.test(selling_price.selling_price)) {
+            setSellingPrice({ ...selling_price, feedback: 'All Good', class: 'is-valid' });
+            return true;
+        } else if (!numberRegex.test(selling_price.selling_price)) {
+            setSellingPrice({ ...selling_price, feedback: 'Number Only Accepted', class: 'is-invalid' });
+            return false;
+        } else {
+            setSellingPrice({ ...selling_price, feedback: 'Invalid', class: 'is-invalid' });
+            return false;
+        }
+    }
+
+    // validate cost price
+    const validateCostPrice = async () => {
+        if (cost_price.cost_price === "") {
+            setCostPrice({ ...cost_price, feedback: 'Required *', class: 'is-invalid' });
+            return false;
+        } else if (numberRegex.test(cost_price.cost_price)) {
+            setCostPrice({ ...cost_price, feedback: 'All Good', class: 'is-valid' });
+            return true;
+        } else if (!numberRegex.test(cost_price.cost_price)) {
+            setCostPrice({ ...cost_price, feedback: 'Number Only Accepted', class: 'is-invalid' });
+            return false;
+        } else {
+            setCostPrice({ ...cost_price, feedback: 'Invalid', class: 'is-invalid' });
+            return false;
+        }
+    }
+
+    // validate Opening Stock
+    const validateOpeningStock = async () => {
+        if (opening_stock.opening_stock === "") {
+            setOpeningStock({ ...opening_stock, feedback: 'Required *', class: 'is-invalid' });
+            return false;
+        } else if (numberRegex.test(opening_stock.opening_stock)) {
+            setOpeningStock({ ...opening_stock, feedback: 'All Good', class: 'is-valid' });
+            return true;
+        } else if (!numberRegex.test(opening_stock.opening_stock)) {
+            setOpeningStock({ ...opening_stock, feedback: 'Number Only Accepted', class: 'is-invalid' });
+            return false;
+        } else {
+            setOpeningStock({ ...opening_stock, feedback: 'Invalid', class: 'is-invalid' });
+            return false;
+        }
+    };
+
+    // validate reorder point
+    const validateReorderPoint = async () => {
+        if (reorder_point.reorder_point === "") {
+            setReorderPoint({ ...reorder_point, feedback: 'Required *', class: 'is-invalid' });
+            return false;
+        } else if (numberRegex.test(reorder_point.reorder_point)) {
+            setReorderPoint({ ...reorder_point, feedback: 'All Good', class: 'is-valid' });
+            return true;
+        } else if (!numberRegex.test(reorder_point.reorder_point)) {
+            setReorderPoint({ ...reorder_point, feedback: 'Number Only Accepted', class: 'is-invalid' });
+            return false;
+        } else {
+            setReorderPoint({ ...reorder_point, feedback: 'Invalid', class: 'is-invalid' });
+            return false;
+        }
+    };
+
+    const validatePreferredVendor = async () => {
+        if (preferred_vendor.preferred_vendor === "") {
+            setPreferredVendor({ ...preferred_vendor, feedback: 'Required *', class: 'is-invalid' });
+            return false;
+        } else {
+            setPreferredVendor({ ...preferred_vendor, feedback: 'All Good', class: 'is-valid' });
+            return true;
         }
     };
 
