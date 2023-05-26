@@ -53,7 +53,6 @@ const ItemsGroup = () => {
             e.preventDefault();
             const formData = new FormData();
             formData.append('photo', image_of_item);
-
             formData.append('item_group_id', item_group_id);
             formData.append('item_name', item_name);
             formData.append('unit', unit);
