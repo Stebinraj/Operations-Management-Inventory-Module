@@ -1,6 +1,6 @@
 import React from 'react'
 
-const AddItems = ({ itemGroupData, item_group_id, setItemGroupId, addItems, setImageOfItem, setPreferredVendor, setReorderPoint, setOpeningStock, setDescription, setDimensions, setBrand, setCostPrice, setSellingPrice, setManufacturer, setItemName, setUnit, setWeight, dimensions, item_name, unit, weight, manufacturer, brand, selling_price, cost_price, description, opening_stock, reorder_point, preferred_vendor, image_of_item, vendorsData }) => {
+const AddItems = ({ itemGroupData, item_group_id, setItemGroupId, addItems, setImageOfItem, setPreferredVendor, setReorderPoint, setOpeningStock, setDescription, setDimensions, setBrand, setCostPrice, setSellingPrice, setManufacturer, setItemName, setUnit, setWeight, dimensions, item_name, unit, weight, manufacturer, brand, selling_price, cost_price, description, opening_stock, reorder_point, preferred_vendor, vendorsData }) => {
     return (
         <>
             {/* add new items to inventory */}

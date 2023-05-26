@@ -177,7 +177,6 @@ const ItemsGroup = () => {
                     opening_stock={opening_stock}
                     reorder_point={reorder_point}
                     preferred_vendor={preferred_vendor}
-                    image_of_item={image_of_item}
                     vendorsData={vendorsData}
                 />
                 {/* Add items component */}
