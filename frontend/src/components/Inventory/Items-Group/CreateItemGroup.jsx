@@ -12,7 +12,13 @@ const CreateItemGroup = ({ setItemGroupLabel, addGroup, item_group_label }) => {
                     <form>
                         <div className="mb-3">
                             <span className="card-text">Name of Item Group</span>
-                            <input type="text" className="form-control" onChange={(e) => { setItemGroupLabel(e.target.value) }} value={item_group_label} placeholder='Enter Group Name' />
+                            <input type="text" className={item_group_label.class ? (`form-control ${item_group_label.class}`) : ('form-control')} onChange={(e) => { setItemGroupLabel({ ...item_group_label, item_group_label: e.target.value }) }} value={item_group_label.item_group_label} placeholder='Enter Group Name' />
+                            {item_group_label.feedback && (
+                                <>
+                                    <small className="valid-feedback">{item_group_label.feedback}</small>
+                                    <small className="invalid-feedback">{item_group_label.feedback}</small>
+                                </>
+                            )}
                         </div>
                         <button className="btn btn-primary w-100" onClick={(e) => { addGroup(e) }}>Submit</button>
                     </form>

@@ -10,8 +10,13 @@ const ItemsGroup = () => {
     // State variables to view items group
     const [itemGroupData, setItemGroupData] = useState([]);
     const [vendorsData, setVendorsData] = useState([]);
+    const alpabeticRegex = /^[a-zA-Z]+(?:\s[a-zA-Z]+)*$/;
 
-    const [item_group_label, setItemGroupLabel] = useState('');
+    const [item_group_label, setItemGroupLabel] = useState({
+        item_group_label: '',
+        class: '',
+        feedback: ''
+    });
     const [item_group_id, setItemGroupId] = useState('');
     const [item_name, setItemName] = useState('');
     const [unit, setUnit] = useState('');
@@ -36,14 +41,20 @@ const ItemsGroup = () => {
     const addGroup = async (e) => {
         try {
             e.preventDefault();
-            const response = await axios.post('http://localhost:5000/items-group', { item_group_label });
-            if (response && response.data.success) {
-                toast.success('Group Created Successfully !!!');
-                await getItemsGroup();
-                setItemGroupLabel('');
+            if (await validateItemGroup()) {
+                const response = await axios.post('http://localhost:5000/items-group', { item_group_label: item_group_label.item_group_label });
+                if (response && response.data.success) {
+                    toast.success('Group Created Successfully !!!');
+                    await getItemsGroup();
+                    setTimeout(() => {
+                        setItemGroupLabel({ item_group_label: '', class: '', feedback: '' });
+                    }, 1000);
+                    return;
+                }
             }
         } catch (error) {
             console.error(error.message);
+            return;
         }
     }
 
@@ -121,6 +132,23 @@ const ItemsGroup = () => {
             console.log(error.message);
         }
     }
+
+    // Validate items group
+    const validateItemGroup = async () => {
+        if (item_group_label.item_group_label === "") {
+            setItemGroupLabel({ ...item_group_label, feedback: 'Required *', class: 'is-invalid' });
+            return false;
+        } else if (alpabeticRegex.test(item_group_label.item_group_label)) {
+            setItemGroupLabel({ ...item_group_label, feedback: 'All Good', class: 'is-valid' });
+            return true;
+        } else if (!alpabeticRegex.test(item_group_label.item_group_label)) {
+            setItemGroupLabel({ ...item_group_label, feedback: 'Please Enter Text Only', class: 'is-invalid' });
+            return false;
+        } else {
+            setItemGroupLabel({ ...item_group_label, feedback: 'Invalid', class: 'is-invalid' });
+            return false;
+        }
+    };
 
     // handles side-effects while fething items group
     useEffect(() => {
