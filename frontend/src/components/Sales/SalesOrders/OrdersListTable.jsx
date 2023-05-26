@@ -22,7 +22,9 @@ const OrdersListTable = ({ orderItemsData, salesOrderPage, packagesPage, markAsP
                             ) : null}
 
                             <th scope="col" className='text-nowrap'>Item Name</th>
-                            <th scope="col" className='text-nowrap'>Image</th>
+                            {salesOrderPage || packagesPage ? (
+                                <th scope="col" className='text-nowrap'>Image</th>
+                            ) : null}
                             <th scope="col" className='text-nowrap'>Quantity</th>
 
                             {salesOrderPage || packagesPage ? (
@@ -60,11 +62,13 @@ const OrdersListTable = ({ orderItemsData, salesOrderPage, packagesPage, markAsP
                                     ) : null}
 
                                     <td className='text-nowrap align-middle'>{value.item_id.item_name}</td>
-                                    <td className='text-nowrap align-middle'>
-                                        <div className="card" style={{ width: '100px', height: '100px', backgroundSize: 'cover' }}>
-                                            <img src={value.item_id.image_of_item} style={{ width: '100%', height: '100%' }} alt='itemImage' />
-                                        </div>
-                                    </td>
+                                    {salesOrderPage || packagesPage ? (
+                                        <td className='text-nowrap align-middle'>
+                                            <div className="card" style={{ width: '100px', height: '100px', backgroundSize: 'cover' }}>
+                                                <img src={value.item_id.image_of_item} style={{ width: '100%', height: '100%' }} alt='itemImage' />
+                                            </div>
+                                        </td>
+                                    ) : null}
                                     <td className='text-nowrap align-middle'>{value.quantity}</td>
 
                                     {salesOrderPage || packagesPage ? (
