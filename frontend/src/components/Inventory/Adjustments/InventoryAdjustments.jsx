@@ -36,6 +36,10 @@ const InventoryAdjustments = () => {
             return;
         }
         await getDateRangeReports();
+        if (reportData.length === 0) {
+            toast.error('Nothing to Filter !!!');
+            return;
+        }
         toast.success('Filtered Successfully !!!');
     };
 
