@@ -10,7 +10,6 @@ const VendorCredit = ({ vendorCreditPage }) => {
 
     const [billsPaymentsData, setBillsPaymentsData] = useState([]);
     const [vendorCreditsData, setVendorCreditsData] = useState([]);
-    console.log(vendorCreditsData);
     const randomNum = Math.floor(Math.random() * 10000000000);
     const credit_id = String(randomNum).padStart(10, '0');
 

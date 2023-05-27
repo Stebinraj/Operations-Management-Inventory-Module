@@ -3,12 +3,13 @@ const itemsModel = require("../../../models/Inventory/itemsModel");
 const createNewItemsController = async (req, res) => {
     try {
         const url = req.protocol + '://' + req.get('host');
-        
         const reqItems = {
             item_group_id: req.body.item_group_id,
             item_name: req.body.item_name,
             unit: req.body.unit,
-            dimensions: JSON.parse(req.body.dimensions),
+            length: req.body.length,
+            width: req.body.width,
+            height: req.body.height,
             weight: req.body.weight,
             manufacturer: req.body.manufacturer,
             brand: req.body.brand,
@@ -21,7 +22,7 @@ const createNewItemsController = async (req, res) => {
             image_of_item: req.file ? (url + '/images/' + req.file.filename) : (''),
             added_date: req.body.added_date
         }
-
+console.log(req.body);
         const items = new itemsModel(reqItems);
         const data = await items.save();
         res.send({ success: data });

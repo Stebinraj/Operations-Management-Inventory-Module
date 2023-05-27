@@ -17,11 +17,9 @@ const ItemsGroup = () => {
     const [item_group_id, setItemGroupId] = useState({ item_group_id: '', class: '', feedback: '' });
     const [item_name, setItemName] = useState({ item_name: '', class: '', feedback: '' });
     const [unit, setUnit] = useState({ unit: '', class: '', feedback: '' });
-    const [dimensions, setDimensions] = useState({
-        length: '',
-        width: '',
-        height: ''
-    });
+    const [length, setLength] = useState({ length: '', class: '', feedback: '' });
+    const [width, setWidth] = useState({ width: '', class: '', feedback: '' });
+    const [height, setHeight] = useState({ height: '', class: '', feedback: '' });
     const [weight, setWeight] = useState({ weight: '', class: '', feedback: '' });
     const [manufacturer, setManufacturer] = useState({ manufacturer: '', class: '', feedback: '' });
     const [brand, setBrand] = useState({ brand: '', class: '', feedback: '' });
@@ -59,12 +57,27 @@ const ItemsGroup = () => {
     const addItems = async (e) => {
         try {
             e.preventDefault();
-            if (await validateItemGroupId() & await validateItemName() & await validateUnit() & await validateWeight() & await validateManufacturer() & await validateBrand() & await validateSellingPrice() & await validateCostPrice() & await validateOpeningStock() & await validateReorderPoint() & await validatePreferredVendor()) {
+            if (await validateItemGroupId()
+                & await validateItemName()
+                & await validateUnit()
+                & await validateWeight()
+                & await validateManufacturer()
+                & await validateBrand()
+                & await validateSellingPrice()
+                & await validateCostPrice()
+                & await validateOpeningStock()
+                & await validateReorderPoint()
+                & await validatePreferredVendor()
+                & await validateLength()
+                & await validateWidth()
+                & await validateHeight()) {
                 const formData = new FormData();
                 formData.append('item_group_id', item_group_id.item_group_id);
                 formData.append('item_name', item_name.item_name);
                 formData.append('unit', unit.unit);
-                formData.append('dimensions', JSON.stringify(dimensions));
+                formData.append('length', length.length);
+                formData.append('width', width.width);
+                formData.append('height', height.height);
                 formData.append('weight', weight.weight);
                 formData.append('manufacturer', manufacturer.manufacturer);
                 formData.append('brand', brand.brand);
@@ -88,7 +101,9 @@ const ItemsGroup = () => {
                         setItemGroupId({ item_group_id: '', class: '', feedback: '' });
                         setItemName({ item_name: '', class: '', feedback: '' });
                         setUnit({ unit: '', class: '', feedback: '' });
-                        setDimensions({ length: '', width: '', height: '' });
+                        setLength({ length: '', class: '', feedback: '' });
+                        setWidth({ width: '', class: '', feedback: '' });
+                        setHeight({ height: '', class: '', feedback: '' });
                         setWeight({ weight: '', class: '', feedback: '' });
                         setManufacturer({ manufacturer: '', class: '', feedback: '' });
                         setBrand({ brand: '', class: '', feedback: '' });
@@ -99,6 +114,8 @@ const ItemsGroup = () => {
                         setReorderPoint({ reorder_point: '', class: '', feedback: '' });
                         setPreferredVendor({ preferred_vendor: '', class: '', feedback: '' });
                         setImageOfItem([]);
+                    }, 1000);
+                    setTimeout(() => {
                         navigate('/view/items');
                     }, 2500);
                 }
@@ -313,6 +330,7 @@ const ItemsGroup = () => {
         }
     };
 
+    // validate preferred vendor
     const validatePreferredVendor = async () => {
         if (preferred_vendor.preferred_vendor === "") {
             setPreferredVendor({ ...preferred_vendor, feedback: 'Required *', class: 'is-invalid' });
@@ -320,6 +338,48 @@ const ItemsGroup = () => {
         } else {
             setPreferredVendor({ ...preferred_vendor, feedback: 'All Good', class: 'is-valid' });
             return true;
+        }
+    };
+
+    // validate length
+    const validateLength = async () => {
+        if (length.length === "") {
+            setLength({ ...length, feedback: '', class: '' });
+            return true;
+        } else if (numberRegex.test(length.length)) {
+            setLength({ ...length, feedback: 'All Good', class: 'is-valid' });
+            return true;
+        } else {
+            setLength({ ...length, feedback: 'Number Only Allowed', class: 'is-invalid' });
+            return false;
+        }
+    };
+
+    // validate width
+    const validateWidth = async () => {
+        if (width.width === "") {
+            setWidth({ ...width, feedback: '', class: '' });
+            return true;
+        } else if (numberRegex.test(width.width)) {
+            setWidth({ ...width, feedback: 'All Good', class: 'is-valid' });
+            return true;
+        } else {
+            setWidth({ ...width, feedback: 'Number Only Allowed', class: 'is-invalid' });
+            return false;
+        }
+    };
+
+    // validate width
+    const validateHeight = async () => {
+        if (height.height === "") {
+            setHeight({ ...height, feedback: '', class: '' });
+            return true;
+        } else if (numberRegex.test(height.height)) {
+            setHeight({ ...height, feedback: 'All Good', class: 'is-valid' });
+            return true;
+        } else {
+            setHeight({ ...height, feedback: 'Number Only Allowed', class: 'is-invalid' });
+            return false;
         }
     };
 
@@ -358,7 +418,12 @@ const ItemsGroup = () => {
                     setReorderPoint={setReorderPoint}
                     setOpeningStock={setOpeningStock}
                     setDescription={setDescription}
-                    setDimensions={setDimensions}
+                    length={length}
+                    width={width}
+                    height={height}
+                    setLength={setLength}
+                    setWidth={setWidth}
+                    setHeight={setHeight}
                     setBrand={setBrand}
                     setCostPrice={setCostPrice}
                     setSellingPrice={setSellingPrice}
@@ -366,7 +431,6 @@ const ItemsGroup = () => {
                     setItemName={setItemName}
                     setUnit={setUnit}
                     setWeight={setWeight}
-                    dimensions={dimensions}
                     item_name={item_name}
                     unit={unit}
                     weight={weight}

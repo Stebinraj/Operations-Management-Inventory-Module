@@ -1,6 +1,6 @@
 import React from 'react'
 
-const AddItems = ({ itemGroupData, item_group_id, setItemGroupId, addItems, setImageOfItem, setPreferredVendor, setReorderPoint, setOpeningStock, setDescription, setDimensions, setBrand, setCostPrice, setSellingPrice, setManufacturer, setItemName, setUnit, setWeight, dimensions, item_name, unit, weight, manufacturer, brand, selling_price, cost_price, description, opening_stock, reorder_point, preferred_vendor, vendorsData }) => {
+const AddItems = ({ itemGroupData, item_group_id, setItemGroupId, addItems, setImageOfItem, setPreferredVendor, setReorderPoint, setOpeningStock, setDescription, setBrand, setCostPrice, setSellingPrice, setManufacturer, setItemName, setUnit, setWeight, item_name, unit, weight, manufacturer, brand, selling_price, cost_price, description, opening_stock, reorder_point, preferred_vendor, vendorsData, length, width, height, setLength, setWidth, setHeight }) => {
     return (
         <>
             {/* add new items to inventory */}
@@ -57,14 +57,38 @@ const AddItems = ({ itemGroupData, item_group_id, setItemGroupId, addItems, setI
                                 </>
                             )}
                         </div>
-                        <div className="form-group mb-3 col-12">
+                        <div className="form-group mb-0 col-12">
                             <span className="card-text">Dimensions</span>
-                            <div className='d-flex'>
-                                <input className="form-control text-right " type="number" placeholder='Length' onChange={(e) => { setDimensions({ ...dimensions, length: e.target.value }) }} value={dimensions.length || ""} />
-                                <span className='m-auto text-secondary'>x</span>
-                                <input className="form-control text-right" type="number" placeholder='Width' onChange={(e) => { setDimensions({ ...dimensions, width: e.target.value }) }} value={dimensions.width || ""} />
-                                <span className='m-auto text-secondary'>x</span>
-                                <input className="form-control text-right" type="number" placeholder='Height' onChange={(e) => { setDimensions({ ...dimensions, height: e.target.value }) }} value={dimensions.height || ""} />
+                            <div className='d-md-flex'>
+                                <div className="form-group">
+                                    <input className={length.class ? (`form-control ${length.class}`) : ('form-control')} type="text" placeholder='Length in inch' onChange={(e) => { setLength({ ...length, length: e.target.value }) }} value={length.length || ""} />
+                                    {length.feedback && (
+                                        <>
+                                            <small className="valid-feedback">{length.feedback}</small>
+                                            <small className="invalid-feedback">{length.feedback}</small>
+                                        </>
+                                    )}
+                                </div>
+                                <span className='text-secondary mt-1'>x</span>
+                                <div className="form-group">
+                                    <input className={width.class ? (`form-control ${width.class}`) : ('form-control')} type="text" placeholder='Width in inch' onChange={(e) => { setWidth({ ...width, width: e.target.value }) }} value={width.width || ""} />
+                                    {width.feedback && (
+                                        <>
+                                            <small className="valid-feedback">{width.feedback}</small>
+                                            <small className="invalid-feedback">{width.feedback}</small>
+                                        </>
+                                    )}
+                                </div>
+                                <span className='text-secondary mt-1'>x</span>
+                                <div className="form-group">
+                                    <input className={height.class ? (`form-control ${height.class}`) : ('form-control')} type="text" placeholder='Height in inch' onChange={(e) => { setHeight({ ...height, height: e.target.value }) }} value={height.height || ""} />
+                                    {height.feedback && (
+                                        <>
+                                            <small className="valid-feedback">{height.feedback}</small>
+                                            <small className="invalid-feedback">{height.feedback}</small>
+                                        </>
+                                    )}
+                                </div>
                             </div>
                         </div>
                         <div className="mb-3 form-group col-md-6">
