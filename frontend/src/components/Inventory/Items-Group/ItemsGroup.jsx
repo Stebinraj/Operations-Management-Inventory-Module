@@ -350,7 +350,7 @@ const ItemsGroup = () => {
             setLength({ ...length, feedback: 'All Good', class: 'is-valid' });
             return true;
         } else {
-            setLength({ ...length, feedback: 'Number Only Allowed', class: 'is-invalid' });
+            setLength({ ...length, feedback: 'Number Only Accepted', class: 'is-invalid' });
             return false;
         }
     };
@@ -364,7 +364,7 @@ const ItemsGroup = () => {
             setWidth({ ...width, feedback: 'All Good', class: 'is-valid' });
             return true;
         } else {
-            setWidth({ ...width, feedback: 'Number Only Allowed', class: 'is-invalid' });
+            setWidth({ ...width, feedback: 'Number Only Accepted', class: 'is-invalid' });
             return false;
         }
     };
@@ -378,7 +378,7 @@ const ItemsGroup = () => {
             setHeight({ ...height, feedback: 'All Good', class: 'is-valid' });
             return true;
         } else {
-            setHeight({ ...height, feedback: 'Number Only Allowed', class: 'is-invalid' });
+            setHeight({ ...height, feedback: 'Number Only Accepted', class: 'is-invalid' });
             return false;
         }
     };
