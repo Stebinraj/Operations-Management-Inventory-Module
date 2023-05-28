@@ -1,3 +1,4 @@
+import numeral from 'numeral';
 import React from 'react'
 
 const NewOrdersSummary = ({ ordersSummaryData }) => {
@@ -20,7 +21,7 @@ const NewOrdersSummary = ({ ordersSummaryData }) => {
                                     <h2 className="d-flex align-items-center mb-0">0</h2>
                                 ) : (
                                     ordersSummaryData.map((value, index) => (
-                                        <h2 className="d-flex align-items-center mb-0" key={index}>{value.orderQuantity}</h2>
+                                        <h2 className="d-flex align-items-center mb-0" key={index}>{numeral(value.orderQuantity).format('0,0')}</h2>
                                     ))
                                 )}
                             </div>

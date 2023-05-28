@@ -1,4 +1,5 @@
 import moment from 'moment';
+import numeral from 'numeral';
 import React from 'react'
 
 const InventoryAgingSummaryListTable = ({ itemsData }) => {
@@ -26,12 +27,12 @@ const InventoryAgingSummaryListTable = ({ itemsData }) => {
                             return (
                                 <tr key={index}>
                                     <td>{value.item_name}</td>
-                                    <td>{differenceInDays >= 0 && differenceInDays < 31 ? (value.opening_stock) : ('-')}</td>
-                                    <td>{differenceInDays > 30 && differenceInDays < 61 ? (value.opening_stock) : ('-')}</td>
-                                    <td>{differenceInDays > 60 && differenceInDays < 91 ? (value.opening_stock) : ('-')}</td>
-                                    <td>{differenceInDays > 90 && differenceInDays < 121 ? (value.opening_stock) : ('-')}</td>
-                                    <td>{differenceInDays > 120 && differenceInDays < 151 ? (value.opening_stock) : ('-')}</td>
-                                    <td>{differenceInDays > 150 ? (value.opening_stock) : ('-')}</td>
+                                    <td>{differenceInDays >= 0 && differenceInDays < 31 ? (numeral(value.opening_stock).format('0,0')) : ('-')}</td>
+                                    <td>{differenceInDays > 30 && differenceInDays < 61 ? (numeral(value.opening_stock).format('0,0')) : ('-')}</td>
+                                    <td>{differenceInDays > 60 && differenceInDays < 91 ? (numeral(value.opening_stock).format('0,0')) : ('-')}</td>
+                                    <td>{differenceInDays > 90 && differenceInDays < 121 ? (numeral(value.opening_stock).format('0,0')) : ('-')}</td>
+                                    <td>{differenceInDays > 120 && differenceInDays < 151 ? (numeral(value.opening_stock).format('0,0')) : ('-')}</td>
+                                    <td>{differenceInDays > 150 ? (numeral(value.opening_stock).format('0,0')) : ('-')}</td>
                                 </tr>
                             )
                         })}

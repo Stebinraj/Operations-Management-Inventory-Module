@@ -1,3 +1,4 @@
+import numeral from 'numeral';
 import React from 'react'
 
 const RegisteredCustomersSummary = ({ customerCountData }) => {
@@ -19,7 +20,7 @@ const RegisteredCustomersSummary = ({ customerCountData }) => {
                                 {customerCountData.length === 0 ? (
                                     <h2 className="d-flex align-items-center mb-0">0</h2>
                                 ) : (
-                                    <h2 className="d-flex align-items-center mb-0">{customerCountData}</h2>
+                                    <h2 className="d-flex align-items-center mb-0">{numeral(customerCountData).format('0,0')}</h2>
                                 )}
                             </div>
                         </div>
