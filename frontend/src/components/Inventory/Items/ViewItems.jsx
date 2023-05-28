@@ -13,15 +13,17 @@ const ViewItems = ({ itemsPage }) => {
 
     // State variables to adjust inventory adjustments
     const [item_id, setItemId] = useState('');
-    const [mode_of_adjustment, setModeOfAdjustment] = useState('');
-    const [reason, setReason] = useState('');
-    const [description, setDescription] = useState('');
+    const [mode_of_adjustment, setModeOfAdjustment] = useState({ mode_of_adjustment: '', class: '', feedback: '' });
+    const [reason, setReason] = useState({ reason: '', class: '', feedback: '' });
+    const [description, setDescription] = useState({ description: '', class: '', feedback: '' });
     const [selling_price, setSellingPrice] = useState('');
     const [opening_stock, setOpeningStock] = useState('');
-    const [quantity, setQuantity] = useState('');
-    const [value, setValue] = useState('');
+    const [quantity, setQuantity] = useState({ quantity: '', class: '', feedback: '' });
+    const [value, setValue] = useState({ value: '', class: '', feedback: '' });
     const randomNum = Math.floor(Math.random() * 10000000000);
     const reference_number = String(randomNum).padStart(10, '0');
+    const aplhaNumericRegex = /^[\w\s]+$/;
+    const numberRegex = /^[-+]?\d+$/;
 
     // fetch items and set to setItemsData
     const getItems = async () => {
@@ -41,91 +43,135 @@ const ViewItems = ({ itemsPage }) => {
         setItemId(value._id);
         setSellingPrice(value.selling_price);
         setOpeningStock(value.opening_stock);
-        setDescription(value.description);
+        setDescription({ ...description, description: value.description });
     };
 
     // When changing the mode of adjustment, reset quantity, value and reason if necessary
     const handleModeOfAdjustmentChange = (e) => {
-        const selectedMode = e.target.value;
-        setModeOfAdjustment(selectedMode);
-        if (selectedMode === 'Quantity') {
-            setQuantity('');
-        } else if (selectedMode === "Value") {
-            setValue('');
+        setModeOfAdjustment({ ...mode_of_adjustment, mode_of_adjustment: e.target.value });
+        if (e.target.value === 'Quantity') {
+            setQuantity({ quantity: '', class: '', feedback: '' });
+        } else if (e.target.value === "Value") {
+            setValue({ value: '', class: '', feedback: '' });
         }
-        setReason('');
+        setReason({ reason: '', class: '', feedback: '' });
     };
 
     // submit inventory adjustments data
     const submitAdjustment = async (e) => {
         try {
             e.preventDefault();
-            // checking for non negative while adding opening stock and quantity
-            if (Number(opening_stock) + Number(quantity) < 0) {
-                toast.error('Invalid Quantity !!!');
-                setItemId('');
-                setModeOfAdjustment('');
-                setReason('');
-                setDescription('');
-                setSellingPrice('');
-                setOpeningStock('');
-                setQuantity('');
-                setValue('');
-                return;
-            }
-            // checking for non negative while adding selling price and value
-            else if (Number(selling_price) + Number(value) < 0) {
-                toast.error('Invalid Value !!!');
-                setItemId('');
-                setModeOfAdjustment('');
-                setReason('');
-                setDescription('');
-                setSellingPrice('');
-                setOpeningStock('');
-                setQuantity('');
-                setValue('');
-                return;
-            }
-            // send adjustments data to the database
-            const response = await axios.put(`http://localhost:5000/adjust-items/${item_id}`, {
-                item_id,
-                mode_of_adjustment,
-                reference_number,
-                date: new Date(),
-                reason,
-                description,
-                quantity,
-                value
-            });
-            // if adjustment data sends and save successfully an alert appears then the state variables set to empty
-            if (response && response.data.success) {
-                toast.success('Items Adjusted Successfully !!!');
-                setItemId('');
-                setModeOfAdjustment('');
-                setReason('');
-                setDescription('');
-                setSellingPrice('');
-                setOpeningStock('');
-                setQuantity('');
-                setValue('');
-                await getItems();
+            const validateQuantityorValue = mode_of_adjustment.mode_of_adjustment === "Quantity" ? await validateQuantity() : mode_of_adjustment.mode_of_adjustment === "Value" ? await validateValue() : null
+            if (await validateModeOfAdjustment() & await validateReason() & await validateDescription() & validateQuantityorValue) {
+                // checking for non negative while adding opening stock and quantity
+                if (Number(opening_stock) + Number(quantity.quantity) < 0) {
+                    toast.error('Invalid Quantity !!!');
+                    await handleAdjustClose();
+                    return;
+                }
+                // checking for non negative while adding selling price and value
+                else if (Number(selling_price) + Number(value.value) < 0) {
+                    toast.error('Invalid Value !!!');
+                    await handleAdjustClose();
+                    return;
+                }
+                // send adjustments data to the database
+                const response = await axios.put(`http://localhost:5000/adjust-items/${item_id}`, {
+                    item_id,
+                    mode_of_adjustment: mode_of_adjustment.mode_of_adjustment,
+                    reference_number,
+                    date: new Date(),
+                    reason: reason.reason,
+                    description: description.description,
+                    quantity: quantity.quantity,
+                    value: value.value
+                });
+                // if adjustment data sends and save successfully an alert appears then the state variables set to empty
+                if (response && response.data.success) {
+                    toast.success('Items Adjusted Successfully !!!');
+                    await handleAdjustClose();
+                    await getItems();
+                }
             }
         } catch (error) {
             console.error(error);
         }
     };
 
+    // validate mode of adjustment
+    const validateModeOfAdjustment = async () => {
+        if (mode_of_adjustment.mode_of_adjustment === '') {
+            setModeOfAdjustment({ ...mode_of_adjustment, feedback: 'Required *', class: 'is-invalid' });
+            return false;
+        } else if (mode_of_adjustment.mode_of_adjustment) {
+            setModeOfAdjustment({ ...mode_of_adjustment, feedback: 'All Good', class: 'is-valid' });
+            return true;
+        }
+    };
+
+    // validate reason
+    const validateReason = async () => {
+        if (reason.reason === "") {
+            setReason({ ...reason, feedback: 'Required *', class: 'is-invalid' });
+            return false;
+        } else if (aplhaNumericRegex.test(reason.reason)) {
+            setReason({ ...reason, feedback: 'All Good', class: 'is-valid' });
+            return true;
+        } else {
+            setReason({ ...reason, feedback: 'Text and Numbers Only Accepted', class: 'is-invalid' });
+            return false;
+        }
+    };
+
+    // validate quantity
+    const validateQuantity = async () => {
+        if (quantity.quantity === "") {
+            setQuantity({ ...quantity, feedback: 'Required *', class: 'is-invalid' });
+            return false;
+        } else if (numberRegex.test(quantity.quantity)) {
+            setQuantity({ ...quantity, feedback: 'All Good', class: 'is-valid' });
+            return true;
+        } else {
+            setQuantity({ ...quantity, feedback: 'Numbers Only Accepted', class: 'is-invalid' });
+            return false;
+        }
+    };
+
+    // validate description
+    const validateDescription = async () => {
+        if (description.description === "") {
+            setDescription({ ...description, feedback: 'Required *', class: 'is-invalid' });
+            return false;
+        } else {
+            setDescription({ ...description, feedback: 'All Good', class: 'is-valid' });
+            return true;
+        }
+    }
+
+    // validate value
+    const validateValue = async () => {
+        if (value.value === "") {
+            setValue({ ...value, feedback: 'Required *', class: 'is-invalid' });
+            return false;
+        } else if (numberRegex.test(value.value)) {
+            setValue({ ...value, feedback: 'All Good', class: 'is-valid' });
+            return true;
+        } else {
+            setValue({ ...value, feedback: 'Numbers Only Accepted', class: 'is-invalid' });
+            return false;
+        }
+    };
+
     // closing the adjustment to make state variables empty
-    const handleAdjustClose = async (e) => {
-        e.preventDefault();
+    const handleAdjustClose = async () => {
         setItemId('');
-        setModeOfAdjustment('');
-        setReason('');
-        setDescription('');
+        setModeOfAdjustment({ mode_of_adjustment: '', class: '', feedback: '' });
+        setReason({ reason: '', class: '', feedback: '' });
+        setDescription({ description: '', class: '', feedback: '' });
         setSellingPrice('');
         setOpeningStock('');
-        setQuantity('');
-        setValue('');
+        setQuantity({ quantity: '', class: '', feedback: '' });
+        setValue({ value: '', class: '', feedback: '' });
     };
 
     // handle side-effects while fetching items

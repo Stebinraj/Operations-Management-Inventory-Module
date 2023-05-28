@@ -9,6 +9,7 @@ const AdjustmentModal = ({ handleAdjustClose, submitAdjustment, adjustmentForm }
                     <div className="modal-content">
                         <div className="modal-header">
                             <h1 className="modal-title fs-5" id="exampleModalLabel">Create Inventory Adjustment</h1>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={handleAdjustClose}></button>
                         </div>
                         <div className="modal-body">
                             {/* Adjustment form component */}
@@ -16,7 +17,7 @@ const AdjustmentModal = ({ handleAdjustClose, submitAdjustment, adjustmentForm }
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={handleAdjustClose}>Close</button>
-                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={(e) => { submitAdjustment(e) }}>Submit</button>
+                            <button type="button" className="btn btn-primary" onClick={(e) => { submitAdjustment(e) }}>Submit</button>
                         </div>
                     </div>
                 </div>
