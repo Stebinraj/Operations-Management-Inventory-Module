@@ -21,6 +21,7 @@ import SalesByItemsOrCustomersSummary from './SalesByItemsOrCustomersSummary';
 import OrdersListTable from '../Sales/SalesOrders/OrdersListTable';
 import InventoryAgingSummary from './InventoryAgingSummary';
 import InventoryAgingSummaryListTable from './InventoryAgingSummaryListTable';
+import { toast } from 'react-toastify';
 
 const Dashboard = ({ dashboardPage }) => {
 
@@ -35,10 +36,9 @@ const Dashboard = ({ dashboardPage }) => {
     const [returnedItemsData, setReturnedItemsData] = useState([]);
     const [orderItemsData, setOrderItemsData] = useState([]);
     const [itemsData, setItemsData] = useState([]);
-    const [filterBy, setFilterBy] = useState('');
-    const [filterId, setFilterId] = useState('');
+    const [filterBy, setFilterBy] = useState({ filterBy: '', class: '', feedback: '' });
+    const [filterId, setFilterId] = useState({ filterId: '', class: '', feedback: '' });
     const [customerOrFilterItemsData, setCustomerOrFilterItemsData] = useState([]);
-
     // fetch inventory summary and set to inventorySummaryData
     const getInventorySummary = async () => {
         try {
@@ -184,13 +184,13 @@ const Dashboard = ({ dashboardPage }) => {
 
     // handle while filtering sales orders
     const handleFilterBy = async (e) => {
-        setFilterBy(e.target.value);
+        setFilterBy({ ...filterBy, filterBy: e.target.value });
         if (e.target.value === "Customer") {
             await getCustomerFilter();
         } else if (e.target.value === "Items") {
             await getItemsFilter();
         }
-        setFilterId('');
+        setFilterId({ filterId: '', class: '', feedback: '' });
     };
 
     // fetch customers and set to setCustomerData
@@ -208,19 +208,52 @@ const Dashboard = ({ dashboardPage }) => {
     const filterSalesOrders = async (e) => {
         try {
             e.preventDefault();
-            if (filterBy === "Customer" || filterBy === "Items") {
-                await getSpecificSales(filterId);
+            if (await validateFilterBy() & await validateFilterId()) {
+                if (orderItemsData.length === 0) {
+                    toast.error('Nothing To Filter !!!');
+                    return;
+                } else if (filterBy.filterBy === "Customer" || filterBy.filterBy === "Items") {
+                    await getSpecificSales(filterId.filterId);
+                    toast.success('Filtered SuccessFully !!!');
+                    return;
+                }
             }
         } catch (error) {
             console.log(error);
         }
     };
 
+    // validate filter by
+    const validateFilterBy = async () => {
+        if (filterBy.filterBy === "") {
+            setFilterBy({ ...filterBy, feedback: 'Required *', class: 'is-invalid' });
+            return false;
+        } else if (filterBy.filterBy) {
+            setFilterBy({ ...filterBy, feedback: 'All Good', class: 'is-valid' });
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // validate filter id
+    const validateFilterId = async () => {
+        if (filterId.filterId === "") {
+            setFilterId({ ...filterId, feedback: 'Required *', class: 'is-invalid' });
+            return false;
+        } else if (filterId.filterId) {
+            setFilterId({ ...filterId, feedback: 'All Good', class: 'is-valid' });
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     const resetSalesOrder = async () => {
         await getOrderItems();
-        setFilterBy('');
-        setFilterId('');
-        setCustomerOrFilterItemsData([]);
+        setFilterBy({ filterBy: '', class: '', feedback: '' });
+        setFilterId({ filterId: '', class: '', feedback: '' });
+        toast.success('Resetted Successfully !!!');
     }
 
     const getSpecificSales = async (id) => {
