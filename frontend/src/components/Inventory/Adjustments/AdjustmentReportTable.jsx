@@ -1,4 +1,5 @@
 import moment from 'moment';
+import numeral from 'numeral';
 import React from 'react'
 
 const AdjustmentReportTable = ({ reportData }) => {
@@ -42,8 +43,8 @@ const AdjustmentReportTable = ({ reportData }) => {
                                     <td className='text-nowrap align-middle'>{value.item_id.brand}</td>
                                     <td className='text-nowrap align-middle'>{value.item_id.manufacturer}</td>
                                     <td className='text-nowrap align-middle'>{value.mode_of_adjustment}</td>
-                                    <td className='text-nowrap align-middle'>{value.quantity === "" ? ("-") : (value.quantity)}</td>
-                                    <td className='text-nowrap align-middle'>{value.value === "" ? ("-") : (value.value)}</td>
+                                    <td className='text-nowrap align-middle'>{value.quantity === "" ? ("-") : (numeral(value.quantity).format('0,0'))}</td>
+                                    <td className='text-nowrap align-middle'>{value.value === "" ? ("-") : `₹ ${numeral(value.value).format('0,0')}`}</td>
                                     <td className='text-nowrap align-middle'>{`IA - ${value.reference_number}`}</td>
                                     <td className='text-nowrap align-middle'>{value.reason}</td>
                                     <td className='text-nowrap align-middle'>{value.description}</td>

@@ -1,3 +1,4 @@
+import numeral from 'numeral'
 import React from 'react'
 
 const PurchaseOrdersFormModal = ({ purchase_quantity, total_price, vendor, setPurchaseQuantity, handlePurchaseCartClose, addItemsToPurchaseCart }) => {
@@ -23,7 +24,7 @@ const PurchaseOrdersFormModal = ({ purchase_quantity, total_price, vendor, setPu
                                 </div>
                                 <div className="mb-3 form-group col-12">
                                     <span>Total Price</span>
-                                    <input className='form-control' disabled={true} value={total_price} />
+                                    <input className='form-control' disabled={true} value={`₹ ${numeral(total_price).format('0,0')}`} />
                                 </div>
                             </form>
                         </div>

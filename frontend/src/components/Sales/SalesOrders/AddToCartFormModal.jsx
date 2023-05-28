@@ -1,3 +1,4 @@
+import numeral from 'numeral'
 import React from 'react'
 
 const AddToCartFormModal = ({ customer_id, handleCustomerChange, customerData, customerEmail, customerPhoneNumber, customerBillingAddress, setQuantity, quantity, total_price, handleCartClose, addItemsToCart }) => {
@@ -42,7 +43,7 @@ const AddToCartFormModal = ({ customer_id, handleCustomerChange, customerData, c
                                 </div>
                                 <div className="mb-3 form-group col-md-6">
                                     <span>Total Price</span>
-                                    <input className='form-control' disabled={true} value={total_price} />
+                                    <input className='form-control' disabled={true} value={`₹ ${numeral(total_price).format('0,0')}`} />
                                 </div>
                             </form>
                         </div>

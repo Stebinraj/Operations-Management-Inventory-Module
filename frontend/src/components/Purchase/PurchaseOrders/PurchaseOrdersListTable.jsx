@@ -1,4 +1,5 @@
 import moment from 'moment'
+import numeral from 'numeral'
 import React from 'react'
 
 const PurchaseOrdersListTable = ({ purchaseOrdersData, purchaseOrdersPage, receivedOrdersPage, markAsReceived }) => {
@@ -16,7 +17,7 @@ const PurchaseOrdersListTable = ({ purchaseOrdersData, purchaseOrdersPage, recei
                             <th scope="col" className='text-nowrap'>Image</th>
                             <th scope="col" className='text-nowrap'>Quantity</th>
                             <th scope="col" className='text-nowrap'>Price Per Item</th>
-                            <th scope="col" className='text-nowrap'>Total</th>
+                            <th scope="col" className='text-nowrap'>Total Price</th>
                             {purchaseOrdersPage && (
                                 <th scope="col" className='text-nowrap'>Status</th>
                             )}
@@ -40,8 +41,8 @@ const PurchaseOrdersListTable = ({ purchaseOrdersData, purchaseOrdersPage, recei
                                         </div>
                                     </td>
                                     <td className='text-nowrap align-middle'>{value.quantity}</td>
-                                    <td className='text-nowrap align-middle'>{value.purchased_price_per_item}</td>
-                                    <td className='text-nowrap align-middle'>{value.total}</td>
+                                    <td className='text-nowrap align-middle'>{`₹ ${numeral(value.purchased_price_per_item).format('0,0')}`}</td>
+                                    <td className='text-nowrap align-middle'>{`₹ ${numeral(value.total).format('0,0')}`}</td>
                                     <td className='text-nowrap align-middle'>
                                         {value.purchase_status === "Confirmed" && (
                                             purchaseOrdersPage ? (

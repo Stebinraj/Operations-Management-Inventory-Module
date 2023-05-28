@@ -1,4 +1,5 @@
 import moment from 'moment'
+import numeral from 'numeral'
 import React from 'react'
 
 const VendorCreditsListTable = ({ vendorCreditsData, vendorCreditPage }) => {
@@ -37,8 +38,8 @@ const VendorCreditsListTable = ({ vendorCreditsData, vendorCreditPage }) => {
                                         </div>
                                     </td>
                                     <td className='text-nowrap align-middle'>{value.payment_id.billed_id.received_order_id.purchased_id.quantity}</td>
-                                    <td className='text-nowrap align-middle'>{value.payment_id.billed_id.received_order_id.purchased_id.purchased_price_per_item}</td>
-                                    <td className='text-nowrap align-middle'>{value.payment_id.billed_id.received_order_id.purchased_id.total}</td>
+                                    <td className='text-nowrap align-middle'>{`₹ ${numeral(value.payment_id.billed_id.received_order_id.purchased_id.purchased_price_per_item).format('0,0')}`}</td>
+                                    <td className='text-nowrap align-middle'>{`₹ ${numeral(value.payment_id.billed_id.received_order_id.purchased_id.total).format('0,0')}`}</td>
                                     <td className='text-nowrap align-middle'>
                                         {value.payment_id.billed_id.received_order_id.purchased_id.purchase_status === "Credited" && (
                                             vendorCreditPage && (

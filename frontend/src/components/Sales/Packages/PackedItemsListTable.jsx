@@ -1,4 +1,5 @@
 import moment from 'moment'
+import numeral from 'numeral'
 import React from 'react'
 
 const PackedItemsListTable = ({ packedItemsData, generateChallans, packagesPage, deliveryChallansPage }) => {
@@ -19,7 +20,7 @@ const PackedItemsListTable = ({ packedItemsData, generateChallans, packagesPage,
                             <th scope="col" className='text-nowrap'>Image</th>
                             <th scope="col" className='text-nowrap'>Quantity</th>
                             <th scope="col" className='text-nowrap'>Price Per Item</th>
-                            <th scope="col" className='text-nowrap'>Total</th>
+                            <th scope="col" className='text-nowrap'>Total Price</th>
                             {packagesPage && (
                                 <th scope="col" className='text-nowrap'>Status</th>
                             )}
@@ -45,9 +46,9 @@ const PackedItemsListTable = ({ packedItemsData, generateChallans, packagesPage,
                                             <img src={value.order_id.item_id.image_of_item} style={{ width: '100%', height: '100%' }} alt='itemImage' />
                                         </div>
                                     </td>
-                                    <td className='text-nowrap align-middle'>{value.order_id.quantity}</td>
-                                    <td className='text-nowrap align-middle'>{value.order_id.ordered_price_per_item}</td>
-                                    <td className='text-nowrap align-middle'>{value.order_id.ordered_price_per_item * value.order_id.quantity}</td>
+                                    <td className='text-nowrap align-middle'>{numeral(value.order_id.quantity).format('0,0')}</td>
+                                    <td className='text-nowrap align-middle'>{`₹ ${numeral(value.order_id.ordered_price_per_item).format('0,0')}`}</td>
+                                    <td className='text-nowrap align-middle'>{`₹ ${numeral(value.order_id.ordered_price_per_item * value.order_id.quantity).format('0,0')}`}</td>
                                     <td className='text-nowrap align-middle'>
                                         {value.order_id.order_status === "Packed" && (
                                             packagesPage ? (

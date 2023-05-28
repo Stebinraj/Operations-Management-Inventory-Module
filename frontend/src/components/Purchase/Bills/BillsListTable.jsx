@@ -1,4 +1,5 @@
 import moment from 'moment'
+import numeral from 'numeral'
 import React from 'react'
 
 const BillsListTable = ({ billsPage, billsData, billPaymentsPage, markAsBillPaid }) => {
@@ -16,7 +17,7 @@ const BillsListTable = ({ billsPage, billsData, billPaymentsPage, markAsBillPaid
                             <th scope="col" className='text-nowrap'>Image</th>
                             <th scope="col" className='text-nowrap'>Quantity</th>
                             <th scope="col" className='text-nowrap'>Price Per Item</th>
-                            <th scope="col" className='text-nowrap'>Total</th>
+                            <th scope="col" className='text-nowrap'>Total Price</th>
                             {billsPage && (
                                 <th scope="col" className='text-nowrap'>Status</th>
                             )}
@@ -40,8 +41,8 @@ const BillsListTable = ({ billsPage, billsData, billPaymentsPage, markAsBillPaid
                                         </div>
                                     </td>
                                     <td className='text-nowrap align-middle'>{value.received_order_id.purchased_id.quantity}</td>
-                                    <td className='text-nowrap align-middle'>{value.received_order_id.purchased_id.purchased_price_per_item}</td>
-                                    <td className='text-nowrap align-middle'>{value.received_order_id.purchased_id.total}</td>
+                                    <td className='text-nowrap align-middle'>{`₹ ${numeral(value.received_order_id.purchased_id.purchased_price_per_item).format('0,0')}`}</td>
+                                    <td className='text-nowrap align-middle'>{`₹ ${numeral(value.received_order_id.purchased_id.total).format('0,0')}`}</td>
                                     <td className='text-nowrap align-middle'>
                                         {value.received_order_id.purchased_id.purchase_status === "Billed" && (
                                             billsPage ? (

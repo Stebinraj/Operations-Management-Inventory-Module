@@ -1,4 +1,5 @@
 import moment from 'moment'
+import numeral from 'numeral'
 import React from 'react'
 
 const PaymentsReceivedListTable = ({ paymentsReceivedPage, paymentsReceivedData, salesReturnsPage, processReturns }) => {
@@ -19,7 +20,7 @@ const PaymentsReceivedListTable = ({ paymentsReceivedPage, paymentsReceivedData,
                             <th scope="col" className='text-nowrap'>Image</th>
                             <th scope="col" className='text-nowrap'>Quantity</th>
                             <th scope="col" className='text-nowrap'>Price Per Item</th>
-                            <th scope="col" className='text-nowrap'>Total</th>
+                            <th scope="col" className='text-nowrap'>Total Price</th>
                             {paymentsReceivedPage && (
                                 <th scope="col" className='text-nowrap'>Status</th>
                             )}
@@ -45,9 +46,9 @@ const PaymentsReceivedListTable = ({ paymentsReceivedPage, paymentsReceivedData,
                                             <img src={value.invoice_id.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.item_id.image_of_item} style={{ width: '100%', height: '100%' }} alt='itemImage' />
                                         </div>
                                     </td>
-                                    <td className='text-nowrap align-middle'>{value.invoice_id.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.quantity}</td>
-                                    <td className='text-nowrap align-middle'>{value.invoice_id.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.ordered_price_per_item}</td>
-                                    <td className='text-nowrap align-middle'>{value.invoice_id.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.total}</td>
+                                    <td className='text-nowrap align-middle'>{numeral(value.invoice_id.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.quantity).format('0,0')}</td>
+                                    <td className='text-nowrap align-middle'>{`₹ ${numeral(value.invoice_id.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.ordered_price_per_item).format('0,0')}`}</td>
+                                    <td className='text-nowrap align-middle'>{`₹ ${numeral(value.invoice_id.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.total).format('0,0')}`}</td>
                                     <td className='text-nowrap align-middle'>
                                         {value.invoice_id.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.order_status === "Paid" && (
                                             paymentsReceivedPage ? (

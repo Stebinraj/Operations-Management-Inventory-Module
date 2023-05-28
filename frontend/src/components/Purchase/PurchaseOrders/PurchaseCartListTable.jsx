@@ -1,3 +1,4 @@
+import numeral from 'numeral'
 import React from 'react'
 
 const PurchaseCartListTable = ({ purchaseCartData, deletePurchaseCart }) => {
@@ -27,7 +28,7 @@ const PurchaseCartListTable = ({ purchaseCartData, deletePurchaseCart }) => {
                                         </div>
                                     </td>
                                     <td className='text-nowrap align-middle'>{value.purchase_quantity}</td>
-                                    <td className='text-nowrap align-middle'>{value.purchase_quantity * value.item_id.selling_price}</td>
+                                    <td className='text-nowrap align-middle'>{`₹ ${numeral(value.purchase_quantity * value.item_id.selling_price).format('0,0')}`}</td>
                                     <td className='text-nowrap align-middle'>
                                         <button className='btn btn-primary' onClick={(e) => { deletePurchaseCart(e, value) }}>Delete</button>
                                     </td>

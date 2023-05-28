@@ -1,4 +1,5 @@
 import moment from 'moment'
+import numeral from 'numeral'
 import React from 'react'
 
 const OrdersListTable = ({ orderItemsData, salesOrderPage, packagesPage, markAsPacked, dashboardPage }) => {
@@ -30,7 +31,7 @@ const OrdersListTable = ({ orderItemsData, salesOrderPage, packagesPage, markAsP
                             {salesOrderPage || packagesPage ? (
                                 <>
                                     <th scope="col" className='text-nowrap'>Price Per Item</th>
-                                    <th scope="col" className='text-nowrap'>Total</th>
+                                    <th scope="col" className='text-nowrap'>Total Price</th>
                                 </>
                             ) : null}
 
@@ -73,8 +74,8 @@ const OrdersListTable = ({ orderItemsData, salesOrderPage, packagesPage, markAsP
 
                                     {salesOrderPage || packagesPage ? (
                                         <>
-                                            <td className='text-nowrap align-middle'>{value.ordered_price_per_item}</td>
-                                            <td className='text-nowrap align-middle'>{value.quantity * value.ordered_price_per_item}</td>
+                                            <td className='text-nowrap align-middle'>{`₹ ${numeral(value.ordered_price_per_item).format('0,0')}`}</td>
+                                            <td className='text-nowrap align-middle'>{`₹ ${numeral(value.quantity * value.ordered_price_per_item).format('0,0')}`}</td>
                                         </>
                                     ) : null}
 

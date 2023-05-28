@@ -1,3 +1,4 @@
+import numeral from 'numeral'
 import React from 'react'
 
 const ItemsListTable = ({ handleAdjust, itemsData, itemsPage, salesOrderPage, handleCart, purchaseOrdersPage, handlePurchaseCart }) => {
@@ -43,23 +44,23 @@ const ItemsListTable = ({ handleAdjust, itemsData, itemsPage, salesOrderPage, ha
                                     <td className='text-nowrap align-middle'>{value.item_group_id.item_group_label}</td>
                                     <td className='text-nowrap align-middle'>{value.item_name}</td>
                                     <td className='text-nowrap align-middle'>{value.unit}</td>
-                                    <td className='text-nowrap align-middle'>{`${value.length} L ${value.width} W ${value.height} H`}</td>
-                                    <td className='text-nowrap align-middle'>{value.weight}</td>
+                                    <td className='text-nowrap align-middle'>{`${numeral(value.length).format('0,0')} L ${numeral(value.width).format('0,0')} W ${numeral(value.height).format('0,0')} H`}</td>
+                                    <td className='text-nowrap align-middle'>{numeral(value.weight).format('0,0')}</td>
                                     <td className='text-nowrap align-middle'>{value.manufacturer}</td>
                                     <td className='text-nowrap align-middle'>{value.brand}</td>
-                                    <td className='text-nowrap align-middle'>{value.selling_price}</td>
+                                    <td className='text-nowrap align-middle'>{`₹ ${numeral(value.selling_price).format('0,0')}`}</td>
                                     {itemsPage && (
-                                        <td className='text-nowrap align-middle'>{value.cost_price}</td>
+                                        <td className='text-nowrap align-middle'>{`₹ ${numeral(value.cost_price).format('0,0')}`}</td>
                                     )}
                                     <td className='text-nowrap align-middle'>{value.description}</td>
-                                    <td className='text-nowrap align-middle'>{value.opening_stock}</td>
+                                    <td className='text-nowrap align-middle'>{numeral(value.opening_stock).format('0,0')}</td>
                                     {itemsPage && (
-                                        <td className='text-nowrap align-middle'>{value.reorder_point}</td>
+                                        <td className='text-nowrap align-middle'>{numeral(value.reorder_point).format('0,0')}</td>
                                     )}
                                     <td className='text-nowrap align-middle'>{value.preferred_vendor.name}</td>
                                     <td className='text-nowrap align-middle'>
                                         <div className="card" style={{ width: '100px', height: '100px', backgroundSize: 'cover' }}>
-                                            <img src={value.image_of_item} style={{ width: '100%', height: '100%' }} alt='itemImage'/>
+                                            <img src={value.image_of_item} style={{ width: '100%', height: '100%' }} alt='itemImage' />
                                         </div>
                                     </td>
 
