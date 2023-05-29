@@ -89,7 +89,10 @@ const ViewItems = ({ itemsPage }) => {
                 // if adjustment data sends and save successfully an alert appears then the state variables set to empty
                 if (response && response.data.success) {
                     toast.success('Items Adjusted Successfully !!!');
-                    await handleAdjustClose();
+                    setTimeout(async () => {
+                        await handleAdjustClose();
+                        document.getElementById("closeModalButton").click();
+                    }, 1000);
                     await getItems();
                 }
             }
