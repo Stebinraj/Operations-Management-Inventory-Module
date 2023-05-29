@@ -91,7 +91,7 @@ const ViewItems = ({ itemsPage }) => {
                     toast.success('Items Adjusted Successfully !!!');
                     setTimeout(async () => {
                         await handleAdjustClose();
-                        document.getElementById("closeModalButton").click();
+                        document.getElementById("closeAdjustmentModalButton").click();
                     }, 1000);
                     await getItems();
                 }
