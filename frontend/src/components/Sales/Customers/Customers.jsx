@@ -151,7 +151,7 @@ const Customers = () => {
         if (pattern_1.test(phone_number.phone_number) || pattern_2.test(phone_number.phone_number) || pattern_3.test(phone_number.phone_number) || pattern_4.test(phone_number.phone_number)) {
             setPhoneNumber({ ...phone_number, feedback: 'All Good', class: 'is-valid' });
             return true;
-        } else if (phone_number.phone_number == "") {
+        } else if (phone_number.phone_number === "") {
             setPhoneNumber({ ...phone_number, feedback: 'Required *', class: 'is-invalid' });
             return false;
         } else {
