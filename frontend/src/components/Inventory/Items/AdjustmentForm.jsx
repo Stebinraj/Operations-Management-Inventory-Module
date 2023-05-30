@@ -22,7 +22,7 @@ const AdjustmentForm = ({ handleModeOfAdjustmentChange, setDescription, setQuant
                     <>
                         <div className="mb-3 form-group col-12">
                             <span>Opening Stock ({opening_stock})</span>
-                            <input className={quantity.class ? (`form-control ${quantity.class}`) : ('form-control')} type="text" placeholder='Enter Quantity' onChange={(e) => { setQuantity({ ...quantity, quantity: e.target.value }) }} value={quantity.quantity} />
+                            <input className={quantity.class ? (`form-control ${quantity.class}`) : ('form-control')} type="text" placeholder='Enter Quantity eg: +20,-20' onChange={(e) => { setQuantity({ ...quantity, quantity: e.target.value }) }} value={quantity.quantity} />
                             {quantity.feedback && (
                                 <>
                                     <small className="valid-feedback">{quantity.feedback}</small>
@@ -36,7 +36,7 @@ const AdjustmentForm = ({ handleModeOfAdjustmentChange, setDescription, setQuant
                     <>
                         <div className="mb-3 form-group col-12">
                             <span>Selling Price ({selling_price})</span>
-                            <input type="text" className={value.class ? (`form-control ${value.class}`) : ('form-control')} placeholder='Enter Value' onChange={(e) => { setValue({ ...value, value: e.target.value }) }} value={value.value} />
+                            <input type="text" className={value.class ? (`form-control ${value.class}`) : ('form-control')} placeholder='Enter Value eg: +20,-20' onChange={(e) => { setValue({ ...value, value: e.target.value }) }} value={value.value} />
                             {value.feedback && (
                                 <>
                                     <small className="valid-feedback">{value.feedback}</small>
