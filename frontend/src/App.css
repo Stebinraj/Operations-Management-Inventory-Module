@@ -37,9 +37,8 @@ select::-webkit-scrollbar {
 
 .sidebar-nav-links {
     background-color: white !important;
-  }
-  
-  .sidebar-nav-links.active .sidebar-links {
+}
+
+.sidebar-nav-links.active .sidebar-links {
     color: black !important;
-  }
-  
+}
