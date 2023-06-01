@@ -34,3 +34,12 @@ select::-webkit-scrollbar {
 .was-validated .form-control:invalid {
     background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Noun_project_exclamation_icon_620383.svg/1024px-Noun_project_exclamation_icon_620383.svg.png") !important;
 }
+
+.sidebar-nav-links {
+    background-color: white !important;
+  }
+  
+  .sidebar-nav-links.active .sidebar-links {
+    color: black !important;
+  }
+  

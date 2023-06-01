@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const Sidebar = () => {
 
@@ -38,12 +38,12 @@ const Sidebar = () => {
                         <li className="nav-item">
                             {sidebarLinks.map((value, index) => {
                                 return (
-                                    <Link key={index} to={value.navigate} replace={true} className="nav-link text-dark" onClick={() => { window.scrollTo({ top: 0, behavior: 'instant' }) }}>
+                                    <NavLink key={index} to={value.navigate} replace={true} className="nav-link sidebar-nav-links" onClick={() => { window.scrollTo({ top: 0, behavior: 'instant' }) }}>
                                         <i className={`nav-icon ${value.icon}`} style={{ fontSize: value.fontSize, color: value.iconColor }}></i>
                                         <p className='sidebar-links ml-3' style={{ color: 'grey' }}>
                                             {value.title}
                                         </p>
-                                    </Link>
+                                    </NavLink>
                                 )
                             })}
                         </li>
