@@ -5,7 +5,7 @@ const addVendorsController = async (req, res) => {
         const data = await vendorModel.create(req.body);
         res.send({ success: data });
     } catch (error) {
-        res.send(error);
+        res.status(500).send(error);
     }
 }
 

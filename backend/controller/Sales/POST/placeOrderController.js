@@ -8,7 +8,7 @@ const placeOrderController = async (req, res) => {
 
         res.send({ success: orders, deleteCart });
     } catch (error) {
-        res.send(error);
+        res.status(500).send(error);
     }
 }
 

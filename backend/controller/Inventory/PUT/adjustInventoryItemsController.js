@@ -16,7 +16,7 @@ const adjustInventoryItemsController = async (req, res) => {
             res.send({ success: adjustments, items });
         }
     } catch (error) {
-        res.send(error);
+        res.status(500).send(error);
     }
 }
 

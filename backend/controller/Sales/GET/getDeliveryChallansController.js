@@ -67,7 +67,7 @@ const getDeliveryChallansController = async (req, res) => {
 
         res.send({ success: data });
     } catch (error) {
-        res.send(error);
+        res.status(500).send(error);
     }
 }
 

@@ -9,7 +9,7 @@ const addReturnedItemsController = async (req, res) => {
         const updateQuantity = await itemsModel.findByIdAndUpdate({ _id: req.body.item_id }, { $inc: { opening_stock: req.body.quantity } });
         res.send({ success: data, updateOrderStatus, updateQuantity });
     } catch (error) {
-        res.send(error);
+        res.status(500).send(error);
     }
 }
 

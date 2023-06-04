@@ -56,7 +56,7 @@ const getFilterSalesController = async (req, res) => {
         console.log(data);
         console.log(req.params.id);
     } catch (error) {
-        res.send(error)
+        res.status(500).send(error)
     }
 }
 

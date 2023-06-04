@@ -7,7 +7,7 @@ const addPurchaseOrdersController = async (req, res) => {
         const deletePurchaseCart = await purchaseCartModel.deleteMany(req.body.delete_purchase_cart_id);
         res.send({ success: purchaseOrders, deletePurchaseCart });
     } catch (error) {
-        res.send(error);
+        res.status(500).send(error);
     }
 }
 

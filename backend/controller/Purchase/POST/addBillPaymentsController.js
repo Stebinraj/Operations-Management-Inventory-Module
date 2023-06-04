@@ -7,7 +7,7 @@ const addBillPaymentsController = async (req, res) => {
         const updatePurchaseOrderStatus = await purchaseOrdersModel.findByIdAndUpdate({ _id: req.body.purchased_id }, { $set: { purchase_status: req.body.paid_status } });
         res.send({ success: data, updatePurchaseOrderStatus });
     } catch (error) {
-        res.send(error);
+        res.status(500).send(error);
     }
 }
 

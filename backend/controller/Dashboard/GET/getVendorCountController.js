@@ -5,7 +5,7 @@ const getVendorCountController = async (req, res) => {
         const data = await vendorModel.countDocuments();
         res.send({ success: data });
     } catch (error) {
-        res.send(error);
+        res.status(500).send(error);
     }
 }
 

@@ -13,7 +13,7 @@ const deleteCartController = async (req, res) => {
         }
         res.send({ success: cart });
     } catch (error) {
-        res.send(error);
+        res.status(500).send(error);
     }
 
 }

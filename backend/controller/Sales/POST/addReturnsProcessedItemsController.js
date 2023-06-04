@@ -7,7 +7,7 @@ const addReturnsProcessedItemsController = async (req, res) => {
         const updateOrderStatus = await salesOrderModel.findByIdAndUpdate({ _id: req.body.order_id }, { $set: { order_status: req.body.returns_process_status } });
         res.send({ success: data, updateOrderStatus });
     } catch (error) {
-        res.send(error);
+        res.status(500).send(error);
     }
 }
 

@@ -13,7 +13,7 @@ const addPurchaseCartController = async (req, res) => {
             return;
         }
     } catch (error) {
-        res.send(error);
+        res.status(500).send(error);
     }
 }
 

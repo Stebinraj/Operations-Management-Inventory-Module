@@ -7,7 +7,7 @@ const addDeliveryChallansController = async (req, res) => {
         const updateSalesOrderStatus = await salesOrderModel.findByIdAndUpdate({ _id: req.body.order_id }, { $set: { order_status: req.body.challan_status } })
         res.send({ success: data, updateSalesOrderStatus });
     } catch (error) {
-        res.send(error);
+        res.status(500).send(error);
     }
 }
 

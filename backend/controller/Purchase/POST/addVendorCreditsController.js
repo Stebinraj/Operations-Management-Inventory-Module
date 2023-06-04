@@ -7,7 +7,7 @@ const addVendorCreditsController = async (req, res) => {
         const updatePurchaseStatus = await purchaseOrdersModel.findByIdAndUpdate({ _id: req.body.purchased_id }, { $set: { purchase_status: req.body.credit_status } });
         res.send({ success: data, updatePurchaseStatus });
     } catch (error) {
-        res.send(error);
+        res.status(500).send(error);
     }
 }
 

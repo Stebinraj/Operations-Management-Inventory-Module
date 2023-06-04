@@ -9,7 +9,7 @@ const addReceivedPurchaseOrdersController = async (req, res) => {
         const updateItemQuantity = await itemsModel.findByIdAndUpdate({ _id: req.body.item_id }, { $inc: { opening_stock: req.body.quantity }, $set: { added_date: new Date() } });
         res.send({ success: data, updatePurchaseStatus, updateItemQuantity });
     } catch (error) {
-        res.send(error);
+        res.status(500).send(error);
     }
 }
 

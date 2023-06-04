@@ -5,7 +5,7 @@ const deletePurchaseCartController = async (req, res) => {
         const data = await purchaseCartModel.findByIdAndDelete({ _id: req.body.id });
         res.send({ success: data });
     } catch (error) {
-        res.send(error);
+        res.status(500).send(error);
     }
 }
 
