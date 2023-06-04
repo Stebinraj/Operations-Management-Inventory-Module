@@ -22,7 +22,6 @@ const createNewItemsController = async (req, res) => {
             image_of_item: req.file ? (url + '/images/' + req.file.filename) : (''),
             added_date: req.body.added_date
         }
-console.log(req.body);
         const items = new itemsModel(reqItems);
         const data = await items.save();
         res.send({ success: data });
