@@ -1,6 +1,6 @@
 import React from 'react'
 
-const AddItems = ({ itemGroupData, item_group_id, setItemGroupId, addItems, setImageOfItem, setPreferredVendor, setReorderPoint, setOpeningStock, setDescription, setBrand, setCostPrice, setSellingPrice, setManufacturer, setItemName, setUnit, setWeight, item_name, unit, weight, manufacturer, brand, selling_price, cost_price, description, opening_stock, reorder_point, preferred_vendor, vendorsData, length, width, height, setLength, setWidth, setHeight }) => {
+const AddItems = ({ itemGroupData, item_group_id, setItemGroupId, addItems, setImageOfItem, setPreferredVendor, setReorderPoint, setOpeningStock, setDescription, setBrand, setCostPrice, setSellingPrice, setManufacturer, setItemName, setUnit, setWeight, item_name, unit, weight, manufacturer, brand, selling_price, cost_price, description, opening_stock, reorder_point, preferred_vendor, vendorsData, length, width, height, setLength, setWidth, setHeight, fileInput }) => {
     return (
         <>
             {/* add new items to inventory */}
@@ -174,7 +174,7 @@ const AddItems = ({ itemGroupData, item_group_id, setItemGroupId, addItems, setI
                         </div>
                         <div className="mb-3 form-group col-12">
                             <span className="card-text">Image of Item</span>
-                            <input type="file" name='photo' className="form-control" onChange={(e) => { setImageOfItem(e.target.files[0]) }} />
+                            <input type="file" name='photo' ref={fileInput} className="form-control" onChange={(e) => { setImageOfItem(e.target.files[0]) }} />
                         </div>
                         <button className="btn btn-primary w-100" onClick={(e) => { addItems(e) }}>Submit</button>
                     </form>

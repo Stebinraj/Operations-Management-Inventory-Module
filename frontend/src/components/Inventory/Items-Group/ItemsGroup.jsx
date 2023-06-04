@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import axios from 'axios';
 import ViewItemsGroup from './ViewItemsGroup';
 import AddItems from './AddItems';
@@ -31,6 +31,7 @@ const ItemsGroup = () => {
     const [preferred_vendor, setPreferredVendor] = useState({ preferred_vendor: '', class: '', feedback: '' });
     const [image_of_item, setImageOfItem] = useState([]);
     const navigate = useNavigate();
+    const fileInput = useRef(null);
 
     // create new item groups
     const addGroup = async (e) => {
@@ -96,7 +97,7 @@ const ItemsGroup = () => {
                 });
                 if (response && response.data.success) {
                     toast.success('Items Created Successfully !!!');
-                    setTimeout(() => {
+                    setTimeout(async () => {
                         setItemGroupLabel({ item_group_label: '', class: '', feedback: '' });
                         setItemGroupId({ item_group_id: '', class: '', feedback: '' });
                         setItemName({ item_name: '', class: '', feedback: '' });
@@ -114,6 +115,7 @@ const ItemsGroup = () => {
                         setReorderPoint({ reorder_point: '', class: '', feedback: '' });
                         setPreferredVendor({ preferred_vendor: '', class: '', feedback: '' });
                         setImageOfItem([]);
+                        await handleClearFileInput()
                     }, 1000);
                     setTimeout(() => {
                         navigate('/view/items');
@@ -383,6 +385,13 @@ const ItemsGroup = () => {
         }
     };
 
+    // handle clear file input
+    const handleClearFileInput = async () => {
+        if (fileInput.current) {
+            fileInput.current.value = ''; // Clear the value of the file input
+        }
+    };
+
     // handles side-effects while fething items group
     useEffect(() => {
         getItemsGroup();
@@ -443,6 +452,7 @@ const ItemsGroup = () => {
                     reorder_point={reorder_point}
                     preferred_vendor={preferred_vendor}
                     vendorsData={vendorsData}
+                    fileInput={fileInput}
                 />
                 {/* Add items component */}
             </div>
