@@ -16,19 +16,19 @@ const AddVendorsModal = ({ setName, setEmail, email, setPhoneNumber, phone_numbe
                             <form className='row'>
                                 <div className="mb-3 form-group col-12">
                                     <span>Name</span>
-                                    <input type="text" className="form-control" placeholder='Enter Name' onChange={(e) => { setName(e.target.value) }} value={name} />
+                                    <input id='vendor-name' type="text" className="form-control" placeholder='Enter Name' onChange={(e) => { setName(e.target.value) }} value={name} />
                                 </div>
                                 <div className="mb-3 form-group col-12">
                                     <span>Email</span>
-                                    <input type="text" className="form-control" placeholder='Enter Email' onChange={(e) => { setEmail(e.target.value) }} value={email} />
+                                    <input id='vendor-email' type="text" className="form-control" placeholder='Enter Email' onChange={(e) => { setEmail(e.target.value) }} value={email} />
                                 </div>
                                 <div className="mb-3 form-group col-12">
                                     <span>Phone Number</span>
-                                    <input type="text" className="form-control" placeholder='Enter Phone Number' onChange={(e) => { setPhoneNumber(e.target.value) }} value={phone_number} />
+                                    <input id='vendor-phone-number' type="text" className="form-control" placeholder='Enter Phone Number' onChange={(e) => { setPhoneNumber(e.target.value) }} value={phone_number} />
                                 </div>
                                 <div className="mb-3 form-group col-12">
                                     <span>Address</span>
-                                    <input type="text" className="form-control" placeholder='Enter Billing Address' onChange={(e) => { setAddress(e.target.value) }} value={address} />
+                                    <input id='vendor-address' type="text" className="form-control" placeholder='Enter Billing Address' onChange={(e) => { setAddress(e.target.value) }} value={address} />
                                 </div>
                             </form>
                         </div>
