@@ -27,7 +27,7 @@ const NewOrdersSummary = ({ ordersSummaryData }) => {
                             </div>
                         </div>
                         <div className="progress mt-1" style={{ height: '8px' }}>
-                            <div className="progress-bar l-bg-cyan" role="progressbar" aria-valuenow={progressValue} aria-valuemin={minProgressValue} aria-valuemax={maxProgressValue} style={{ width: `${progressValue}%` }} />
+                            <div className="progress-bar l-bg-cyan" role="progressbar" aria-valuenow={progressValue} aria-valuemin={minProgressValue} aria-valuemax={maxProgressValue} style={{ width: `${progressValue}%` }} aria-label="new-orders-progress-bar"/>
                         </div>
                     </div>
                 </div>

@@ -27,7 +27,7 @@ const InventoryStockSummary = ({ inventorySummaryData }) => {
                             </div>
                         </div>
                         <div className="progress mt-1" style={{ height: '8px' }}>
-                            <div className="progress-bar l-bg-green" role="progressbar" aria-valuenow={progressValue} aria-valuemin={minProgressValue} aria-valuemax={maxProgressValue} style={{ width: `${progressValue}%` }} />
+                            <div className="progress-bar l-bg-green" role="progressbar" aria-valuenow={progressValue} aria-valuemin={minProgressValue} aria-valuemax={maxProgressValue} style={{ width: `${progressValue}%` }} aria-label="inventory-stock-progress-bar" />
                         </div>
                     </div>
                 </div>
