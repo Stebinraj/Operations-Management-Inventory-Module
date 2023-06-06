@@ -1,3 +1,4 @@
+import axios from 'axios'
 import moment from 'moment'
 import numeral from 'numeral'
 import React from 'react'
@@ -34,7 +35,7 @@ const VendorCreditsListTable = ({ vendorCreditsData, vendorCreditPage }) => {
                                     <td className='text-nowrap align-middle'>{value.payment_id.billed_id.received_order_id.purchased_id.item_id.item_name}</td>
                                     <td className='text-nowrap align-middle'>
                                         <div className="card" style={{ width: '100px', height: '100px', backgroundSize: 'cover' }}>
-                                            <img src={value.payment_id.billed_id.received_order_id.purchased_id.item_id.image_of_item} style={{ width: '100%', height: '100%' }} alt='itemImage' />
+                                            <img src={(axios.defaults.baseURL ? axios.defaults.baseURL : "") + value.payment_id.billed_id.received_order_id.purchased_id.item_id.image_of_item} style={{ width: '100%', height: '100%' }} alt='itemImage' />
                                         </div>
                                     </td>
                                     <td className='text-nowrap align-middle'>{value.payment_id.billed_id.received_order_id.purchased_id.quantity}</td>

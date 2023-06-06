@@ -1,3 +1,4 @@
+import axios from 'axios'
 import numeral from 'numeral'
 import React from 'react'
 
@@ -26,7 +27,7 @@ const CartListTable = ({ deleteCartItems, cartItemsData }) => {
                                     <td className='text-nowrap align-middle'>{value.item_id.item_name}</td>
                                     <td className='text-nowrap align-middle'>
                                         <div className="card" style={{ width: '100px', height: '100px', backgroundSize: 'cover' }}>
-                                            <img src={value.item_id.image_of_item} style={{ width: '100%', height: '100%' }} alt='itemImage' />
+                                            <img src={(axios.defaults.baseURL ? axios.defaults.baseURL : "") + value.item_id.image_of_item} style={{ width: '100%', height: '100%' }} alt='itemImage' />
                                         </div>
                                     </td>
                                     <td className='text-nowrap align-middle'>{numeral(value.quantity).format('0,0')}</td>

@@ -1,3 +1,4 @@
+import axios from 'axios'
 import moment from 'moment'
 import numeral from 'numeral'
 import React from 'react'
@@ -43,7 +44,7 @@ const PaymentsReceivedListTable = ({ paymentsReceivedPage, paymentsReceivedData,
                                     <td className='text-nowrap align-middle'>{value.invoice_id.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.item_id.item_name}</td>
                                     <td className='text-nowrap align-middle'>
                                         <div className="card" style={{ width: '100px', height: '100px', backgroundSize: 'cover' }}>
-                                            <img src={value.invoice_id.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.item_id.image_of_item} style={{ width: '100%', height: '100%' }} alt='itemImage' />
+                                            <img src={(axios.defaults.baseURL ? axios.defaults.baseURL : "") + value.invoice_id.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.item_id.image_of_item} style={{ width: '100%', height: '100%' }} alt='itemImage' />
                                         </div>
                                     </td>
                                     <td className='text-nowrap align-middle'>{numeral(value.invoice_id.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.quantity).format('0,0')}</td>

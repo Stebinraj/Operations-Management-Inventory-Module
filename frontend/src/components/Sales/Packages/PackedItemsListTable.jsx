@@ -1,3 +1,4 @@
+import axios from 'axios'
 import moment from 'moment'
 import numeral from 'numeral'
 import React from 'react'
@@ -43,7 +44,7 @@ const PackedItemsListTable = ({ packedItemsData, generateChallans, packagesPage,
                                     <td className='text-nowrap align-middle'>{value.order_id.item_id.item_name}</td>
                                     <td className='text-nowrap align-middle'>
                                         <div className="card" style={{ width: '100px', height: '100px', backgroundSize: 'cover' }}>
-                                            <img src={value.order_id.item_id.image_of_item} style={{ width: '100%', height: '100%' }} alt='itemImage' />
+                                            <img src={(axios.defaults.baseURL ? axios.defaults.baseURL : "") + value.order_id.item_id.image_of_item} style={{ width: '100%', height: '100%' }} alt='itemImage' />
                                         </div>
                                     </td>
                                     <td className='text-nowrap align-middle'>{numeral(value.order_id.quantity).format('0,0')}</td>

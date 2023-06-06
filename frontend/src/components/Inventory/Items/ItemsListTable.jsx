@@ -1,3 +1,4 @@
+import axios from 'axios'
 import numeral from 'numeral'
 import React from 'react'
 
@@ -60,7 +61,7 @@ const ItemsListTable = ({ handleAdjust, itemsData, itemsPage, salesOrderPage, ha
                                     <td className='text-nowrap align-middle'>{value.preferred_vendor.name}</td>
                                     <td className='text-nowrap align-middle'>
                                         <div className="card" style={{ width: '100px', height: '100px', backgroundSize: 'cover' }}>
-                                            <img src={value.image_of_item} style={{ width: '100%', height: '100%' }} alt='itemImage' />
+                                            <img src={(axios.defaults.baseURL ? axios.defaults.baseURL : "") + value.image_of_item} style={{ width: '100%', height: '100%' }} alt='itemImage' />
                                         </div>
                                     </td>
 

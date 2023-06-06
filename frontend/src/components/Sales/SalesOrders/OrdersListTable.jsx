@@ -1,3 +1,4 @@
+import axios from 'axios'
 import moment from 'moment'
 import numeral from 'numeral'
 import React from 'react'
@@ -66,7 +67,7 @@ const OrdersListTable = ({ orderItemsData, salesOrderPage, packagesPage, markAsP
                                     {salesOrderPage || packagesPage ? (
                                         <td className='text-nowrap align-middle'>
                                             <div className="card" style={{ width: '100px', height: '100px', backgroundSize: 'cover' }}>
-                                                <img src={value.item_id.image_of_item} style={{ width: '100%', height: '100%' }} alt='itemImage' />
+                                                <img src={(axios.defaults.baseURL ? axios.defaults.baseURL : "") + value.item_id.image_of_item} style={{ width: '100%', height: '100%' }} alt='itemImage' />
                                             </div>
                                         </td>
                                     ) : null}
