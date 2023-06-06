@@ -21,7 +21,7 @@ const PaymentsReceived = ({ paymentsReceivedPage }) => {
                 setInvoicedItemsData(response.data.success.filter(items => items.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.order_status === "Invoiced"));
             }
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     }
 
@@ -42,7 +42,7 @@ const PaymentsReceived = ({ paymentsReceivedPage }) => {
                 await getPayments();
             }
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     }
 
@@ -54,7 +54,7 @@ const PaymentsReceived = ({ paymentsReceivedPage }) => {
                 setPaymentsReceivedData(response.data.success.filter(items => items.invoice_id.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.order_status === "Paid"))
             }
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     }
 

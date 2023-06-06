@@ -44,7 +44,7 @@ const Vendors = () => {
                 await getVendors();
             }
         } catch (error) {
-            console.log(error.message);
+            console.error(error.message);
         }
     }
 
@@ -74,7 +74,7 @@ const Vendors = () => {
                 await getVendors();
             }
         } catch (error) {
-            console.log(error.message);
+            console.error(error.message);
         }
     }
 
@@ -87,7 +87,7 @@ const Vendors = () => {
                 setupdateForm(false)
             }
         } catch (error) {
-            console.log(error.message);
+            console.error(error.message);
         }
     }
 

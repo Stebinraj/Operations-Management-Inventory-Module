@@ -21,7 +21,7 @@ const Bills = ({ billsPage }) => {
                 setReceivedOrdersData(response.data.success.filter(items => items.purchased_id.purchase_status === "Received"));
             }
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     }
 
@@ -42,7 +42,7 @@ const Bills = ({ billsPage }) => {
                 await getBill();
             }
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     }
 
@@ -54,7 +54,7 @@ const Bills = ({ billsPage }) => {
                 setBillsData(response.data.success.filter(items => items.received_order_id.purchased_id.purchase_status === "Billed"));
             }
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     }
 

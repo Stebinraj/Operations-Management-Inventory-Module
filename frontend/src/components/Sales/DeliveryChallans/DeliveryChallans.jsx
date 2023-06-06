@@ -21,7 +21,7 @@ const DeliveryChallans = ({ deliveryChallansPage }) => {
                 setDeliveryChallansData(response.data.success.filter(items => items.package_id.order_id.order_status === "Challans Generated"))
             }
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     }
 
@@ -33,7 +33,7 @@ const DeliveryChallans = ({ deliveryChallansPage }) => {
                 setPackedItemsData(response.data.success.filter(items => items.order_id.order_status === "Packed"))
             }
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     }
 
@@ -53,7 +53,7 @@ const DeliveryChallans = ({ deliveryChallansPage }) => {
                 await getDeliveryChallans();
             }
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     }
 

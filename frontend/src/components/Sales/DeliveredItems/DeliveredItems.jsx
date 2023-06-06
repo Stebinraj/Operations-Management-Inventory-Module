@@ -20,7 +20,7 @@ const DeliveredItems = ({ deliveredItemsPage }) => {
                 setShipmentsData(response.data.success.filter(items => items.delivery_challans_id.package_id.order_id.order_status === "Shipped"));
             }
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     }
 
@@ -41,7 +41,7 @@ const DeliveredItems = ({ deliveredItemsPage }) => {
                 await getDeliveredItemsData();
             }
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     }
 
@@ -53,7 +53,7 @@ const DeliveredItems = ({ deliveredItemsPage }) => {
                 setDeliveredItemsData(response.data.success.filter(items => items.shipments_id.delivery_challans_id.package_id.order_id.order_status === "Delivered"));
             }
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     }
 

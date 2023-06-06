@@ -103,7 +103,7 @@ const PurchaseOrders = ({ purchaseOrdersPage }) => {
                 toast.success('Deleted Successfully !!!')
             }
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     }
 
@@ -138,7 +138,7 @@ const PurchaseOrders = ({ purchaseOrdersPage }) => {
             }
 
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     };
 

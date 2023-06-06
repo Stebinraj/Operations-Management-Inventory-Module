@@ -21,7 +21,7 @@ const Shipments = ({ shipmentsPage }) => {
                 setDeliveryChallansData(response.data.success.filter(items => items.package_id.order_id.order_status === "Challans Generated"))
             }
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     }
 
@@ -42,7 +42,7 @@ const Shipments = ({ shipmentsPage }) => {
                 await getShipments();
             }
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     };
 
@@ -53,7 +53,7 @@ const Shipments = ({ shipmentsPage }) => {
                 setShipmentsData(response.data.success.filter(items => items.delivery_challans_id.package_id.order_id.order_status === "Shipped"));
             }
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     }
 

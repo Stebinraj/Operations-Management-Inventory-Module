@@ -54,7 +54,7 @@ const Customers = () => {
                 }
             }
         } catch (error) {
-            console.log(error.message);
+            console.error(error.message);
         }
     };
 
@@ -107,7 +107,7 @@ const Customers = () => {
                 }
             };
         } catch (error) {
-            console.log(error.message);
+            console.error(error.message);
         }
     };
 

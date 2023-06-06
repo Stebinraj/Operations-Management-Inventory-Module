@@ -21,7 +21,7 @@ const CreditNotes = ({ creditNotesPage }) => {
                 setReturnedItemsData(response.data.success.filter(items => items.returns_processed_id.payment_id.invoice_id.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.order_status === "Returned"));
             }
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     }
 
@@ -42,7 +42,7 @@ const CreditNotes = ({ creditNotesPage }) => {
                 await getCreditNotes();
             }
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     }
 
@@ -54,7 +54,7 @@ const CreditNotes = ({ creditNotesPage }) => {
                 setCreditNotesData(response.data.success.filter(items => items.returned_id.returns_processed_id.payment_id.invoice_id.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.order_status === "Credited"));
             }
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     }
 

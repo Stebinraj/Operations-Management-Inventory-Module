@@ -43,7 +43,7 @@ const ReceivedOrders = ({ receivedOrdersPage }) => {
                 await getReceivedOrders();
             }
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     };
 
@@ -55,7 +55,7 @@ const ReceivedOrders = ({ receivedOrdersPage }) => {
                 setReceivedOrdersData(response.data.success.filter(items => items.purchased_id.purchase_status === "Received"));
             }
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     }
 

@@ -21,7 +21,7 @@ const Invoices = ({ invoicesPage }) => {
                 setDeliveredItemsData(response.data.success.filter(items => items.shipments_id.delivery_challans_id.package_id.order_id.order_status === "Delivered"));
             }
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     }
 
@@ -42,7 +42,7 @@ const Invoices = ({ invoicesPage }) => {
                 await getInvoicedItems();
             }
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     };
 
@@ -54,7 +54,7 @@ const Invoices = ({ invoicesPage }) => {
                 setInvoicedItemsData(response.data.success.filter(items => items.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.order_status === "Invoiced"));
             }
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     }
 

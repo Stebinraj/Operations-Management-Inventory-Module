@@ -21,7 +21,7 @@ const ReturnedItems = ({ returnedItemsPage }) => {
                 setProcessedReturnsItemsData(response.data.success.filter(items => items.payment_id.invoice_id.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.order_status === "Returns Processed"));
             }
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     };
 
@@ -44,7 +44,7 @@ const ReturnedItems = ({ returnedItemsPage }) => {
                 await getReturnedItems();
             }
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     }
 
@@ -56,7 +56,7 @@ const ReturnedItems = ({ returnedItemsPage }) => {
                 setReturnedItemsData(response.data.success.filter(items => items.returns_processed_id.payment_id.invoice_id.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.order_status === "Returned"));
             }
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     }
 

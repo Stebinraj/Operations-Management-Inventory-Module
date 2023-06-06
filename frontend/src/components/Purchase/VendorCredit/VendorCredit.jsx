@@ -21,7 +21,7 @@ const VendorCredit = ({ vendorCreditPage }) => {
                 setBillsPaymentsData(response.data.success.filter(items => items.billed_id.received_order_id.purchased_id.purchase_status === "Paid"));
             }
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     };
 
@@ -42,7 +42,7 @@ const VendorCredit = ({ vendorCreditPage }) => {
                 await getVendorCredits();
             }
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     }
 
@@ -54,7 +54,7 @@ const VendorCredit = ({ vendorCreditPage }) => {
                 setVendorCreditsData(response.data.success.filter(items => items.payment_id.billed_id.received_order_id.purchased_id.purchase_status === "Credited"));
             }
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     }
 

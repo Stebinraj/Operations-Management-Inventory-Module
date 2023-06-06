@@ -164,7 +164,7 @@ const SalesOrders = ({ salesOrderPage }) => {
                 await getOrderItems();
             }
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     }
 
@@ -191,7 +191,7 @@ const SalesOrders = ({ salesOrderPage }) => {
                 await getItems();
             }
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     }
 
@@ -203,7 +203,7 @@ const SalesOrders = ({ salesOrderPage }) => {
                 setOrderItemsData(response.data.success)
             }
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     }
 

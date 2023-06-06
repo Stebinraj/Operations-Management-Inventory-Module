@@ -50,7 +50,6 @@ const ItemsGroup = () => {
             }
         } catch (error) {
             console.error(error.message);
-            return;
         }
     }
 
@@ -147,7 +146,7 @@ const ItemsGroup = () => {
                 setVendorsData(response.data.success);
             }
         } catch (error) {
-            console.log(error.message);
+            console.error(error.message);
         }
     }
 

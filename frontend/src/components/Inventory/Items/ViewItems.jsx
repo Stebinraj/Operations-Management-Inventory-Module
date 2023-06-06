@@ -97,7 +97,7 @@ const ViewItems = ({ itemsPage }) => {
                 }
             }
         } catch (error) {
-            console.error(error);
+            console.error(error.message);
         }
     };
 

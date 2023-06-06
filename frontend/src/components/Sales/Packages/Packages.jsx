@@ -22,7 +22,7 @@ const Packages = ({ packagesPage }) => {
                 setOrderItemsData(response.data.success.filter(items => items.order_status === "Confirmed"))
             }
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     }
 
@@ -34,7 +34,7 @@ const Packages = ({ packagesPage }) => {
                 setPackedItemsData(response.data.success.filter(items => items.order_id.order_status === "Packed"))
             }
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     }
 
@@ -53,7 +53,7 @@ const Packages = ({ packagesPage }) => {
                 await getPackages();
             }
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     }
 

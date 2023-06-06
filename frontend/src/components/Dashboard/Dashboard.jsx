@@ -155,7 +155,7 @@ const Dashboard = ({ dashboardPage }) => {
                 setOrderItemsData(response.data.success)
             }
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     }
 
@@ -167,7 +167,7 @@ const Dashboard = ({ dashboardPage }) => {
                 setItemsData(response.data.success);
             }
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     };
 
@@ -178,7 +178,7 @@ const Dashboard = ({ dashboardPage }) => {
                 setCustomerOrFilterItemsData(response.data.success);
             }
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     };
 
@@ -219,7 +219,7 @@ const Dashboard = ({ dashboardPage }) => {
                 }
             }
         } catch (error) {
-            console.log(error);
+            console.error(error.message);
         }
     };
 
