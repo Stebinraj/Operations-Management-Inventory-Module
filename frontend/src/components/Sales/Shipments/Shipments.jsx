@@ -11,8 +11,6 @@ const Shipments = ({ shipmentsPage }) => {
 
     const [deliveryChallansData, setDeliveryChallansData] = useState([]);
     const [shipmentsData, setShipmentsData] = useState([]);
-    const randomNum = Math.floor(Math.random() * 10000000000);
-    const shipped_id = String(randomNum).padStart(10, '0');
 
     // fetch delivery challans and set to deliveryChallansData
     const getDeliveryChallans = async () => {
