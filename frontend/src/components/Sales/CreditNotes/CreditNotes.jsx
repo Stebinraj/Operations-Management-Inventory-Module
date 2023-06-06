@@ -16,7 +16,7 @@ const CreditNotes = ({ creditNotesPage }) => {
     // fetch returned items and set to returnedItemsData
     const getReturnedItems = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/returns/items`);
+            const response = await axios.get(`/returns/items`);
             if (response && response.data.success) {
                 setReturnedItemsData(response.data.success.filter(items => items.returns_processed_id.payment_id.invoice_id.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.order_status === "Returned"));
             }
@@ -29,7 +29,7 @@ const CreditNotes = ({ creditNotesPage }) => {
     const issueCredits = async (e, value) => {
         try {
             e.preventDefault();
-            const response = await axios.post(`http://localhost:5000/credit-notes`, {
+            const response = await axios.post(`/credit-notes`, {
                 returned_id: await value._id,
                 credit_id,
                 credit_date: new Date(),
@@ -49,7 +49,7 @@ const CreditNotes = ({ creditNotesPage }) => {
     // fetch credit notes and set to crediNotesData
     const getCreditNotes = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/credit-notes`);
+            const response = await axios.get(`/credit-notes`);
             if (response && response.data.success) {
                 setCreditNotesData(response.data.success.filter(items => items.returned_id.returns_processed_id.payment_id.invoice_id.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.order_status === "Credited"));
             }

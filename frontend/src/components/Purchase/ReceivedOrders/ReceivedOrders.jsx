@@ -16,7 +16,7 @@ const ReceivedOrders = ({ receivedOrdersPage }) => {
     // fetch purchase orders and set to setPurchaseOrdersData
     const getPurchaseOrders = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/purchase/orders');
+            const response = await axios.get('/purchase/orders');
             if (response && response.data.success) {
                 setPurchaseOrdersData(response.data.success.filter(items => items.purchase_status === "Confirmed"));
             }
@@ -29,7 +29,7 @@ const ReceivedOrders = ({ receivedOrdersPage }) => {
     const markAsReceived = async (e, value) => {
         try {
             e.preventDefault();
-            const response = await axios.post('http://localhost:5000/purchase/received', {
+            const response = await axios.post('/purchase/received', {
                 purchased_id: await value._id,
                 received_date: new Date(),
                 received_id,
@@ -50,7 +50,7 @@ const ReceivedOrders = ({ receivedOrdersPage }) => {
     // fetch received items and set to receivedOrdersData
     const getReceivedOrders = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/purchase/received');
+            const response = await axios.get('/purchase/received');
             if (response && response.data.success) {
                 setReceivedOrdersData(response.data.success.filter(items => items.purchased_id.purchase_status === "Received"));
             }

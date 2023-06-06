@@ -15,7 +15,7 @@ const DeliveredItems = ({ deliveredItemsPage }) => {
 
     const getShipments = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/shipments`);
+            const response = await axios.get(`/shipments`);
             if (response && response.data.success) {
                 setShipmentsData(response.data.success.filter(items => items.delivery_challans_id.package_id.order_id.order_status === "Shipped"));
             }
@@ -28,7 +28,7 @@ const DeliveredItems = ({ deliveredItemsPage }) => {
     const markAsDelivered = async (e, value) => {
         try {
             e.preventDefault();
-            const response = await axios.post(`http://localhost:5000/delivered/items`, {
+            const response = await axios.post(`/delivered/items`, {
                 delivery_date: new Date(),
                 delivered_id,
                 shipments_id: await value._id,
@@ -48,7 +48,7 @@ const DeliveredItems = ({ deliveredItemsPage }) => {
     // fetch delivered items data and set to deliveredItemsData
     const getDeliveredItemsData = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/delivered/items`);
+            const response = await axios.get(`/delivered/items`);
             if (response && response.data.success) {
                 setDeliveredItemsData(response.data.success.filter(items => items.shipments_id.delivery_challans_id.package_id.order_id.order_status === "Delivered"));
             }

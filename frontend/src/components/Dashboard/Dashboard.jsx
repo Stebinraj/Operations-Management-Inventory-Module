@@ -42,7 +42,7 @@ const Dashboard = ({ dashboardPage }) => {
     // fetch inventory summary and set to inventorySummaryData
     const getInventorySummary = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/inventory/summary');
+            const response = await axios.get('/inventory/summary');
             if (response && response.data.success) {
                 setInventorySummaryData(response.data.success);
             }
@@ -54,7 +54,7 @@ const Dashboard = ({ dashboardPage }) => {
     // fetch inventory summary and set to ordersSummaryData 
     const getOrderSummary = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/order/summary');
+            const response = await axios.get('/order/summary');
             if (response && response.data.success) {
                 setOrdersSummaryData(response.data.success);
             }
@@ -66,7 +66,7 @@ const Dashboard = ({ dashboardPage }) => {
     // fetch product sales summary and set to productSalesSummaryData 
     const getProductSalesSummary = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/product-sales/summary');
+            const response = await axios.get('/product-sales/summary');
             if (response && response.data.success) {
                 setProductSalesSummaryData(response.data.success);
             }
@@ -78,7 +78,7 @@ const Dashboard = ({ dashboardPage }) => {
     // fetch customer count and set to customerCountData 
     const getCustomerCountSummary = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/customer/count');
+            const response = await axios.get('/customer/count');
             if (response && response.data.success) {
                 setCustomerCountData(response.data.success);
             }
@@ -90,7 +90,7 @@ const Dashboard = ({ dashboardPage }) => {
     // fetch customer count and set to vendorCountData 
     const getVendorCountSummary = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/vendor/count');
+            const response = await axios.get('/vendor/count');
             if (response && response.data.success) {
                 setVendorCountData(response.data.success);
             }
@@ -102,7 +102,7 @@ const Dashboard = ({ dashboardPage }) => {
     // fetch packed items and set to packedItemsData
     const getPackedItemsSummary = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/packed-items/summary');
+            const response = await axios.get('/packed-items/summary');
             if (response && response.data.success) {
                 setPackedItemsData(response.data.success);
             }
@@ -114,7 +114,7 @@ const Dashboard = ({ dashboardPage }) => {
     // fetch packed items and set to shippedItemsData
     const getShippedItemsSummary = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/shipped-items/summary');
+            const response = await axios.get('/shipped-items/summary');
             if (response && response.data.success) {
                 setShippedItemsData(response.data.success);
             }
@@ -126,7 +126,7 @@ const Dashboard = ({ dashboardPage }) => {
     // fetch delivered items and set to deliveredItemsData
     const getDeliveredItemsSummary = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/delivered-items/summary');
+            const response = await axios.get('/delivered-items/summary');
             if (response && response.data.success) {
                 setDeliveredItemsData(response.data.success);
             }
@@ -138,7 +138,7 @@ const Dashboard = ({ dashboardPage }) => {
     // fetch returned items and set to returnedItemsData
     const getreturnedItemsSummary = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/returned-items/summary');
+            const response = await axios.get('/returned-items/summary');
             if (response && response.data.success) {
                 setReturnedItemsData(response.data.success);
             }
@@ -150,7 +150,7 @@ const Dashboard = ({ dashboardPage }) => {
     // fetch order items and set to orderItemsData
     const getOrderItems = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/salesorders`);
+            const response = await axios.get(`/salesorders`);
             if (response && response.data.success) {
                 setOrderItemsData(response.data.success)
             }
@@ -162,7 +162,7 @@ const Dashboard = ({ dashboardPage }) => {
     // fetch items and set to ItemsData
     const getItems = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/items');
+            const response = await axios.get('/items');
             if (response && response.data.success) {
                 setItemsData(response.data.success);
             }
@@ -173,7 +173,7 @@ const Dashboard = ({ dashboardPage }) => {
 
     const getItemsFilter = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/items');
+            const response = await axios.get('/items');
             if (response && response.data.success) {
                 setCustomerOrFilterItemsData(response.data.success);
             }
@@ -196,7 +196,7 @@ const Dashboard = ({ dashboardPage }) => {
     // fetch customers and set to setCustomerData
     const getCustomerFilter = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/customer');
+            const response = await axios.get('/customer');
             if (response && response.data.success) {
                 setCustomerOrFilterItemsData(response.data.success);
             }
@@ -258,7 +258,7 @@ const Dashboard = ({ dashboardPage }) => {
 
     const getSpecificSales = async (id) => {
         try {
-            const response = await axios.get(`http://localhost:5000/filter/salesorders/${id}`);
+            const response = await axios.get(`/filter/salesorders/${id}`);
             if (response && response.data.success) {
                 setOrderItemsData(response.data.success);
             }

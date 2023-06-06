@@ -16,7 +16,7 @@ const SalesReturns = ({ salesReturnsPage }) => {
     // fetch payments and set to paymentsReceivedData
     const getPayments = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/payments`);
+            const response = await axios.get(`/payments`);
             if (response && response.data.success) {
                 setPaymentsReceivedData(response.data.success.filter(items => items.invoice_id.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.order_status === "Paid"))
             }
@@ -29,7 +29,7 @@ const SalesReturns = ({ salesReturnsPage }) => {
     const processReturns = async (e, value) => {
         try {
             e.preventDefault();
-            const response = await axios.post(`http://localhost:5000/process/returns`, {
+            const response = await axios.post(`/process/returns`, {
                 payment_id: await value._id,
                 returns_process_id,
                 returns_process_date: new Date(),
@@ -49,7 +49,7 @@ const SalesReturns = ({ salesReturnsPage }) => {
     // fetch processed returns items and set to processedReturnsItemsData
     const getProcessedReturns = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/process/returns`);
+            const response = await axios.get(`/process/returns`);
             if (response && response.data.success) {
                 setProcessedReturnsItemsData(response.data.success.filter(items => items.payment_id.invoice_id.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.order_status === "Returns Processed"));
             }

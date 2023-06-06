@@ -16,7 +16,7 @@ const VendorCredit = ({ vendorCreditPage }) => {
     // fetch payments lists and set to billsPaymentsData
     const getBillPayments = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/payments/bills');
+            const response = await axios.get('/payments/bills');
             if (response && response.data.success) {
                 setBillsPaymentsData(response.data.success.filter(items => items.billed_id.received_order_id.purchased_id.purchase_status === "Paid"));
             }
@@ -29,7 +29,7 @@ const VendorCredit = ({ vendorCreditPage }) => {
     const issueVendorCredits = async (e, value) => {
         try {
             e.preventDefault();
-            const response = await axios.post('http://localhost:5000/purchase/vendor/credits', {
+            const response = await axios.post('/purchase/vendor/credits', {
                 payment_id: await value._id,
                 credit_id,
                 credit_date: new Date(),
@@ -49,7 +49,7 @@ const VendorCredit = ({ vendorCreditPage }) => {
     // fetch vendor credits and set to vendorCreditsData
     const getVendorCredits = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/purchase/vendor/credits');
+            const response = await axios.get('/purchase/vendor/credits');
             if (response && response.data.success) {
                 setVendorCreditsData(response.data.success.filter(items => items.payment_id.billed_id.received_order_id.purchased_id.purchase_status === "Credited"));
             }

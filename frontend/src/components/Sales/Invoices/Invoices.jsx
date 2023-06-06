@@ -16,7 +16,7 @@ const Invoices = ({ invoicesPage }) => {
     // fetch delivered items data and set to deliveredItemsData
     const getDeliveredItemsData = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/delivered/items`);
+            const response = await axios.get(`/delivered/items`);
             if (response && response.data.success) {
                 setDeliveredItemsData(response.data.success.filter(items => items.shipments_id.delivery_challans_id.package_id.order_id.order_status === "Delivered"));
             }
@@ -29,7 +29,7 @@ const Invoices = ({ invoicesPage }) => {
     const generateInvoice = async (e, value) => {
         try {
             e.preventDefault();
-            const response = await axios.post(`http://localhost:5000/invoices`, {
+            const response = await axios.post(`/invoices`, {
                 delivery_id: await value._id,
                 invoiced_id,
                 invoiced_date: new Date(),
@@ -49,7 +49,7 @@ const Invoices = ({ invoicesPage }) => {
     // fetch invoiced items and set to invoicedItemsData
     const getInvoicedItems = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/invoices`);
+            const response = await axios.get(`/invoices`);
             if (response && response.data.success) {
                 setInvoicedItemsData(response.data.success.filter(items => items.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.order_status === "Invoiced"));
             }

@@ -16,7 +16,7 @@ const Bills = ({ billsPage }) => {
     // fetch received items and set to receivedOrdersData
     const getReceivedOrders = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/purchase/received');
+            const response = await axios.get('/purchase/received');
             if (response && response.data.success) {
                 setReceivedOrdersData(response.data.success.filter(items => items.purchased_id.purchase_status === "Received"));
             }
@@ -29,7 +29,7 @@ const Bills = ({ billsPage }) => {
     const generateBill = async (e, value) => {
         try {
             e.preventDefault();
-            const response = await axios.post('http://localhost:5000/purchase/bills', {
+            const response = await axios.post('/purchase/bills', {
                 received_order_id: await value._id,
                 bill_id,
                 bill_date: new Date(),
@@ -49,7 +49,7 @@ const Bills = ({ billsPage }) => {
     // fetch bill and set to setBillsData
     const getBill = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/purchase/bills');
+            const response = await axios.get('/purchase/bills');
             if (response && response.data.success) {
                 setBillsData(response.data.success.filter(items => items.received_order_id.purchased_id.purchase_status === "Billed"));
             }

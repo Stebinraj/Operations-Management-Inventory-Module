@@ -34,7 +34,7 @@ const Vendors = () => {
     const addVendor = async (e) => {
         try {
             e.preventDefault();
-            const response = await axios.post('http://localhost:5000/vendors', { name, email, phone_number, address });
+            const response = await axios.post('/vendors', { name, email, phone_number, address });
             if (response && response.data.success) {
                 toast.success('Vendor Added Successfully !!!');
                 setName('');
@@ -63,7 +63,7 @@ const Vendors = () => {
     const updateVendor = async (e) => {
         try {
             e.preventDefault();
-            const response = await axios.put(`http://localhost:5000/vendors/${id}`, { name, email, phone_number, address });
+            const response = await axios.put(`/vendors/${id}`, { name, email, phone_number, address });
             if (response && response.data.success) {
                 setName('');
                 setEmail('');
@@ -81,7 +81,7 @@ const Vendors = () => {
     // fetch vendors and set to vendorData
     const getVendors = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/vendors');
+            const response = await axios.get('/vendors');
             if (response && response.data.success) {
                 setVendorData(response.data.success)
                 setupdateForm(false)

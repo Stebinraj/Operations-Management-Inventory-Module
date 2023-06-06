@@ -28,7 +28,7 @@ const PurchaseOrders = ({ purchaseOrdersPage }) => {
     // fetch items and set to setItemsData
     const getItems = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/items');
+            const response = await axios.get('/items');
             if (response && response.data.success) {
                 setItemsData(response.data.success);
             }
@@ -67,7 +67,7 @@ const PurchaseOrders = ({ purchaseOrdersPage }) => {
                 await handlePurchaseCartClose();
                 return;
             }
-            const response = await axios.post('http://localhost:5000/purchase/cart', {
+            const response = await axios.post('/purchase/cart', {
                 item_id,
                 purchase_quantity,
                 total_price
@@ -85,7 +85,7 @@ const PurchaseOrders = ({ purchaseOrdersPage }) => {
     // fetch purchase cart items and set to setPurchaseCartData
     const getPurchaseCart = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/purchase/cart');
+            const response = await axios.get('/purchase/cart');
             if (response && response.data.success) {
                 setPurchaseCartData(response.data.success);
             }
@@ -98,7 +98,7 @@ const PurchaseOrders = ({ purchaseOrdersPage }) => {
     const deletePurchaseCart = async (e, value) => {
         try {
             e.preventDefault();
-            const response = await axios.delete(`http://localhost:5000/purchase/cart`, { data: { id: value._id } });
+            const response = await axios.delete(`/purchase/cart`, { data: { id: value._id } });
             if (response && response.data.success) {
                 toast.success('Deleted Successfully !!!')
             }
@@ -130,7 +130,7 @@ const PurchaseOrders = ({ purchaseOrdersPage }) => {
             }));
 
             // send purchase order details
-            const response = await axios.post('http://localhost:5000/purchase/orders', itemsToPurchase);
+            const response = await axios.post('/purchase/orders', itemsToPurchase);
             if (response && response.data.success) {
                 toast.success('Order Placed !!!');
                 await getPurchaseOrders();
@@ -145,7 +145,7 @@ const PurchaseOrders = ({ purchaseOrdersPage }) => {
     // fetch purchase orders and set to setPurchaseOrdersData
     const getPurchaseOrders = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/purchase/orders');
+            const response = await axios.get('/purchase/orders');
             if (response && response.data.success) {
                 setPurchaseOrdersData(response.data.success);
             }

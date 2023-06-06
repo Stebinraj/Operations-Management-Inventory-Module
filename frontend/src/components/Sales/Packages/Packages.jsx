@@ -17,7 +17,7 @@ const Packages = ({ packagesPage }) => {
     // fetch order items and set to orderItemsData
     const getOrderItems = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/salesorders`);
+            const response = await axios.get(`/salesorders`);
             if (response && response.data.success) {
                 setOrderItemsData(response.data.success.filter(items => items.order_status === "Confirmed"))
             }
@@ -29,7 +29,7 @@ const Packages = ({ packagesPage }) => {
     // fetch packed items
     const getPackages = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/packages`);
+            const response = await axios.get(`/packages`);
             if (response && response.data.success) {
                 setPackedItemsData(response.data.success.filter(items => items.order_id.order_status === "Packed"))
             }
@@ -41,7 +41,7 @@ const Packages = ({ packagesPage }) => {
     const markAsPacked = async (e, value) => {
         try {
             e.preventDefault();
-            const response = await axios.post(`http://localhost:5000/packages`, {
+            const response = await axios.post(`/packages`, {
                 package_date: new Date(),
                 packed_id,
                 order_id: value._id,

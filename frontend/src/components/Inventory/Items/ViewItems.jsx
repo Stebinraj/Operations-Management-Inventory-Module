@@ -28,7 +28,7 @@ const ViewItems = ({ itemsPage }) => {
     // fetch items and set to setItemsData
     const getItems = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/items');
+            const response = await axios.get('/items');
             if (response && response.data.success) {
                 setItemsData(response.data.success);
             }
@@ -76,7 +76,7 @@ const ViewItems = ({ itemsPage }) => {
                     return;
                 }
                 // send adjustments data to the database
-                const response = await axios.put(`http://localhost:5000/adjust-items/${item_id}`, {
+                const response = await axios.put(`/adjust-items/${item_id}`, {
                     item_id,
                     mode_of_adjustment: mode_of_adjustment.mode_of_adjustment,
                     reference_number,

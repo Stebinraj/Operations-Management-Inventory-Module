@@ -16,7 +16,7 @@ const BillPayments = ({ billPaymentsPage }) => {
     // fetch bill and set to setBillsData
     const getBill = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/purchase/bills');
+            const response = await axios.get('/purchase/bills');
             if (response && response.data.success) {
                 setBillsData(response.data.success.filter(items => items.received_order_id.purchased_id.purchase_status === "Billed"));
             }
@@ -29,7 +29,7 @@ const BillPayments = ({ billPaymentsPage }) => {
     const markAsBillPaid = async (e, value) => {
         try {
             e.preventDefault();
-            const response = await axios.post('http://localhost:5000/payments/bills', {
+            const response = await axios.post('/payments/bills', {
                 billed_id: await value._id,
                 purchased_id: await value.received_order_id.purchased_id._id,
                 paid_date: new Date(),
@@ -49,7 +49,7 @@ const BillPayments = ({ billPaymentsPage }) => {
     // fetch payments lists and set to billsPaymentsData
     const getBillPayments = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/payments/bills');
+            const response = await axios.get('/payments/bills');
             if (response && response.data.success) {
                 setBillsPaymentsData(response.data.success.filter(items => items.billed_id.received_order_id.purchased_id.purchase_status === "Paid"));
             }

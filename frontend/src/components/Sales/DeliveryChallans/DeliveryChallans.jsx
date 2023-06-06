@@ -16,7 +16,7 @@ const DeliveryChallans = ({ deliveryChallansPage }) => {
     // fetch delivery challans and set to deliveryChallansData
     const getDeliveryChallans = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/delivery-challans`);
+            const response = await axios.get(`/delivery-challans`);
             if (response && response.data.success) {
                 setDeliveryChallansData(response.data.success.filter(items => items.package_id.order_id.order_status === "Challans Generated"))
             }
@@ -28,7 +28,7 @@ const DeliveryChallans = ({ deliveryChallansPage }) => {
     // fetch packed items
     const getPackages = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/packages`);
+            const response = await axios.get(`/packages`);
             if (response && response.data.success) {
                 setPackedItemsData(response.data.success.filter(items => items.order_id.order_status === "Packed"))
             }
@@ -40,7 +40,7 @@ const DeliveryChallans = ({ deliveryChallansPage }) => {
     const generateChallans = async (e, value) => {
         try {
             e.preventDefault();
-            const response = await axios.post(`http://localhost:5000/delivery-challans`, {
+            const response = await axios.post(`/delivery-challans`, {
                 order_id: value.order_id._id,
                 package_id: value._id,
                 challan_id,

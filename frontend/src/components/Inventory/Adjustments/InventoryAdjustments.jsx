@@ -16,7 +16,7 @@ const InventoryAdjustments = () => {
     // fetch inventory adjustment reports and set to reportData
     const getReports = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/adjust-reports');
+            const response = await axios.get('/adjust-reports');
             if (response && response.data.success) {
                 setReportData(response.data.success);
             }
@@ -57,7 +57,7 @@ const InventoryAdjustments = () => {
         try {
             const start = startDate.toISOString();
             const end = endDate.toISOString();
-            const response = await axios.post('http://localhost:5000/date-range-reports', { start, end });
+            const response = await axios.post('/date-range-reports', { start, end });
             if (response && response.data.success) {
                 setReportData(response.data.success);
             }

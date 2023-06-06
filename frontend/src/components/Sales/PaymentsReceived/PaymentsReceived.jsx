@@ -16,7 +16,7 @@ const PaymentsReceived = ({ paymentsReceivedPage }) => {
     // fetch invoiced items and set to invoicedItemsData
     const getInvoicedItems = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/invoices`);
+            const response = await axios.get(`/invoices`);
             if (response && response.data.success) {
                 setInvoicedItemsData(response.data.success.filter(items => items.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.order_status === "Invoiced"));
             }
@@ -29,7 +29,7 @@ const PaymentsReceived = ({ paymentsReceivedPage }) => {
     const markAsPaid = async (e, value) => {
         try {
             e.preventDefault();
-            const response = await axios.post(`http://localhost:5000/payments`, {
+            const response = await axios.post(`/payments`, {
                 invoice_id: await value._id,
                 paid_id,
                 paid_date: new Date(),
@@ -49,7 +49,7 @@ const PaymentsReceived = ({ paymentsReceivedPage }) => {
     // fetch payments and set to paymentsReceivedData
     const getPayments = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/payments`);
+            const response = await axios.get(`/payments`);
             if (response && response.data.success) {
                 setPaymentsReceivedData(response.data.success.filter(items => items.invoice_id.delivery_id.shipments_id.delivery_challans_id.package_id.order_id.order_status === "Paid"))
             }

@@ -38,7 +38,7 @@ const ItemsGroup = () => {
         try {
             e.preventDefault();
             if (await validateItemGroup()) {
-                const response = await axios.post('http://localhost:5000/items-group', { item_group_label: item_group_label.item_group_label });
+                const response = await axios.post('/items-group', { item_group_label: item_group_label.item_group_label });
                 if (response && response.data.success) {
                     toast.success('Group Created Successfully !!!');
                     await getItemsGroup();
@@ -90,7 +90,7 @@ const ItemsGroup = () => {
                 formData.append('preferred_vendor', preferred_vendor.preferred_vendor);
                 formData.append('photo', image_of_item);
                 formData.append('added_date', new Date());
-                const response = await axios.post('http://localhost:5000/items', formData, {
+                const response = await axios.post('/items', formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
@@ -130,7 +130,7 @@ const ItemsGroup = () => {
     // create new items groups
     const getItemsGroup = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/items-group');
+            const response = await axios.get('/items-group');
             if (response && response.data.success) {
                 setItemGroupData(response.data.success);
             }
@@ -142,7 +142,7 @@ const ItemsGroup = () => {
     // fetch vedors and set to vendorsData
     const getVendors = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/vendors');
+            const response = await axios.get('/vendors');
             if (response && response.data.success) {
                 setVendorsData(response.data.success);
             }

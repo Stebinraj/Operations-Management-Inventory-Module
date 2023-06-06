@@ -35,7 +35,7 @@ const Customers = () => {
         try {
             e.preventDefault();
             if (await ValidateName() & await validateEmail() & await validatePhoneNumber() & await validateBillingAddress()) {
-                const response = await axios.post('http://localhost:5000/customer', {
+                const response = await axios.post('/customer', {
                     name: name.name,
                     email: email.email,
                     phone_number: phone_number.phone_number,
@@ -61,7 +61,7 @@ const Customers = () => {
     // fetch customers and set to setCustomerData
     const getCustomer = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/customer');
+            const response = await axios.get('/customer');
             if (response && response.data.success) {
                 setCustomerData(response.data.success);
             }
@@ -86,7 +86,7 @@ const Customers = () => {
         try {
             e.preventDefault();
             if (await ValidateName() & await validateEmail() & await validatePhoneNumber() & await validateBillingAddress()) {
-                const response = await axios.put(`http://localhost:5000/customer/${id}`, {
+                const response = await axios.put(`/customer/${id}`, {
                     name: name.name,
                     email: email.email,
                     phone_number: phone_number.phone_number,
