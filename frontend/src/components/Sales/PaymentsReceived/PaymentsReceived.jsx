@@ -5,13 +5,12 @@ import { toast } from 'react-toastify';
 import PaymentReceivedIconLabelLink from './PaymentReceivedIconLabelLink';
 import PaymentsReceivedModel from './PaymentsReceivedModel';
 import PaymentsReceivedListTable from './PaymentsReceivedListTable';
+import { v4 as uuidv4 } from 'uuid';
 
 const PaymentsReceived = ({ paymentsReceivedPage }) => {
 
     const [invoicedItemsData, setInvoicedItemsData] = useState([]);
     const [paymentsReceivedData, setPaymentsReceivedData] = useState([]);
-    const randomNum = Math.floor(Math.random() * 10000000000);
-    const paid_id = String(randomNum).padStart(10, '0');
 
     // fetch invoiced items and set to invoicedItemsData
     const getInvoicedItems = async () => {
@@ -31,7 +30,7 @@ const PaymentsReceived = ({ paymentsReceivedPage }) => {
             e.preventDefault();
             const response = await axios.post(`/payments`, {
                 invoice_id: await value._id,
-                paid_id,
+                paid_id:uuidv4().replace(/-/g, ''),
                 paid_date: new Date(),
                 payment_status: 'Paid',
                 order_id: await value.delivery_id.shipments_id.delivery_challans_id.package_id.order_id._id

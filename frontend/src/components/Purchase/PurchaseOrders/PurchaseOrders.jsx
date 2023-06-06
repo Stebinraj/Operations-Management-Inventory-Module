@@ -10,6 +10,7 @@ import ViewPurchaseCartItemsModal from './ViewPurchaseCartItemsModal';
 import PurchaseCartListTable from './PurchaseCartListTable';
 import ViewPurchaseOrdersModal from './ViewPurchaseOrdersModal';
 import PurchaseOrdersListTable from './PurchaseOrdersListTable';
+import { v4 as uuidv4 } from 'uuid';
 
 const PurchaseOrders = ({ purchaseOrdersPage }) => {
 
@@ -22,8 +23,6 @@ const PurchaseOrders = ({ purchaseOrdersPage }) => {
     const [vendor, setVendor] = useState('');
     const [purchase_quantity, setPurchaseQuantity] = useState('');
     const total_price = selling_price * purchase_quantity;
-    const randomNum = Math.floor(Math.random() * 10000000000);
-    const purchase_id = String(randomNum).padStart(10, '0');
 
     // fetch items and set to setItemsData
     const getItems = async () => {
@@ -119,7 +118,7 @@ const PurchaseOrders = ({ purchaseOrdersPage }) => {
 
             // map the array of cart items data
             const itemsToPurchase = purchaseCartData.map((items) => ({
-                purchase_id,
+                purchase_id: uuidv4().replace(/-/g, ''),
                 purchase_date: new Date(),
                 item_id: items.item_id._id,
                 quantity: items.purchase_quantity,

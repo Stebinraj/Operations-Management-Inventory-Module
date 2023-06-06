@@ -5,13 +5,12 @@ import PackedItemsListTable from '../Packages/PackedItemsListTable';
 import { toast } from 'react-toastify';
 import DeliveryChallansIconLabelLink from './DeliveryChallansIconLabelLink';
 import DeliveryChallansModal from './DeliveryChallansModal';
+import { v4 as uuidv4 } from 'uuid';
 
 const DeliveryChallans = ({ deliveryChallansPage }) => {
 
     const [deliveryChallansData, setDeliveryChallansData] = useState([]);
     const [packedItemsData, setPackedItemsData] = useState([]);
-    const randomNum = Math.floor(Math.random() * 10000000000);
-    const challan_id = String(randomNum).padStart(10, '0');
 
     // fetch delivery challans and set to deliveryChallansData
     const getDeliveryChallans = async () => {
@@ -43,7 +42,7 @@ const DeliveryChallans = ({ deliveryChallansPage }) => {
             const response = await axios.post(`/delivery-challans`, {
                 order_id: value.order_id._id,
                 package_id: value._id,
-                challan_id,
+                challan_id: uuidv4().replace(/-/g, ''),
                 challan_date: new Date(),
                 challan_status: "Challans Generated"
             });

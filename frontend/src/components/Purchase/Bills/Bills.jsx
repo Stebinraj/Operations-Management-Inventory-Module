@@ -5,13 +5,12 @@ import { toast } from 'react-toastify';
 import BillsIconLabelLink from './BillsIconLabelLink';
 import BillsModal from './BillsModal';
 import BillsListTable from './BillsListTable';
+import { v4 as uuidv4 } from 'uuid';
 
 const Bills = ({ billsPage }) => {
 
     const [receivedOrdersData, setReceivedOrdersData] = useState([]);
     const [billsData, setBillsData] = useState([]);
-    const randomNum = Math.floor(Math.random() * 10000000000);
-    const bill_id = String(randomNum).padStart(10, '0');
 
     // fetch received items and set to receivedOrdersData
     const getReceivedOrders = async () => {
@@ -31,7 +30,7 @@ const Bills = ({ billsPage }) => {
             e.preventDefault();
             const response = await axios.post('/purchase/bills', {
                 received_order_id: await value._id,
-                bill_id,
+                bill_id:uuidv4().replace(/-/g, ''),
                 bill_date: new Date(),
                 bill_status: 'Billed',
                 purchased_id: await value.purchased_id._id

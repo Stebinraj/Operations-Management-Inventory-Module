@@ -5,14 +5,13 @@ import OrdersListTable from '../SalesOrders/OrdersListTable';
 import { toast } from 'react-toastify';
 import PackedItemsModal from './PackedItemsModal';
 import PackedItemsListTable from './PackedItemsListTable';
+import { v4 as uuidv4 } from 'uuid';
 
 const Packages = ({ packagesPage }) => {
 
     // order items data state variable
     const [orderItemsData, setOrderItemsData] = useState([]);
     const [packedItemsData, setPackedItemsData] = useState([]);
-    const randomNum = Math.floor(Math.random() * 10000000000);
-    const packed_id = String(randomNum).padStart(10, '0');
 
     // fetch order items and set to orderItemsData
     const getOrderItems = async () => {
@@ -43,7 +42,7 @@ const Packages = ({ packagesPage }) => {
             e.preventDefault();
             const response = await axios.post(`/packages`, {
                 package_date: new Date(),
-                packed_id,
+                packed_id:uuidv4().replace(/-/g, ''),
                 order_id: value._id,
                 package_status: "Packed"
             });

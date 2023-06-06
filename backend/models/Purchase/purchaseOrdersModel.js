@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const purchaseOrdersSchema = mongoose.Schema({
-    purchase_id: { type: Number, required: true, unique: true },
+    purchase_id: { type: String, required: true, unique: true },
     purchase_date: { type: Date, required: true },
     item_id: { type: mongoose.SchemaTypes.ObjectId, required: true },
     quantity: { type: Number, required: true },

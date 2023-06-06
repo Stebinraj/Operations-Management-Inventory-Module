@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 
 const inventoryAdjSchema = mongoose.Schema({
     item_id: { type: mongoose.SchemaTypes.ObjectId, required: true },
-    quantity: { type: String },
-    value: { type: String },
+    quantity: { type: Number },
+    value: { type: Number },
     mode_of_adjustment: { type: String, required: true },
     reference_number: { type: String, unique: true },
     date: { type: Date, required: true },

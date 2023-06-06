@@ -5,6 +5,7 @@ import AdjustmentModal from './AdjustmentModal';
 import ItemsList from './ItemsList';
 import ItemsListTable from './ItemsListTable';
 import AdjustmentForm from './AdjustmentForm';
+import { v4 as uuidv4 } from 'uuid';
 
 const ViewItems = ({ itemsPage }) => {
 
@@ -20,8 +21,6 @@ const ViewItems = ({ itemsPage }) => {
     const [opening_stock, setOpeningStock] = useState('');
     const [quantity, setQuantity] = useState({ quantity: '', class: '', feedback: '' });
     const [value, setValue] = useState({ value: '', class: '', feedback: '' });
-    const randomNum = Math.floor(Math.random() * 10000000000);
-    const reference_number = String(randomNum).padStart(10, '0');
     const aplhaNumericRegex = /^[\w\s]+$/;
     const numberRegex = /^[-+]?\d+$/;
 
@@ -79,7 +78,7 @@ const ViewItems = ({ itemsPage }) => {
                 const response = await axios.put(`/adjust-items/${item_id}`, {
                     item_id,
                     mode_of_adjustment: mode_of_adjustment.mode_of_adjustment,
-                    reference_number,
+                    reference_number:uuidv4().replace(/-/g, ''),
                     date: new Date(),
                     reason: reason.reason,
                     description: description.description,

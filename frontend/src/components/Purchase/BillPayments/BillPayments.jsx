@@ -5,13 +5,12 @@ import { toast } from 'react-toastify';
 import BillPaymentsIconLabelLink from './BillPaymentsIconLabelLink';
 import BillsPaymentModal from './BillsPaymentModal';
 import BillPaymentsListTable from './BillPaymentsListTable';
+import { v4 as uuidv4 } from 'uuid';
 
 const BillPayments = ({ billPaymentsPage }) => {
 
     const [billsData, setBillsData] = useState([]);
     const [billsPaymentsData, setBillsPaymentsData] = useState([]);
-    const randomNum = Math.floor(Math.random() * 10000000000);
-    const paid_id = String(randomNum).padStart(10, '0');
 
     // fetch bill and set to setBillsData
     const getBill = async () => {
@@ -33,7 +32,7 @@ const BillPayments = ({ billPaymentsPage }) => {
                 billed_id: await value._id,
                 purchased_id: await value.received_order_id.purchased_id._id,
                 paid_date: new Date(),
-                paid_id,
+                paid_id: uuidv4().replace(/-/g, ''),
                 paid_status: 'Paid'
             });
             if (response && response.data.success) {

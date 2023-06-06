@@ -10,6 +10,7 @@ import ViewOrdersModal from './ViewOrdersModal';
 import ItemsListTable from '../../Inventory/Items/ItemsListTable';
 import CartListTable from './CartListTable';
 import OrdersListTable from './OrdersListTable';
+import { v4 as uuidv4 } from 'uuid';
 
 const SalesOrders = ({ salesOrderPage }) => {
 
@@ -31,8 +32,6 @@ const SalesOrders = ({ salesOrderPage }) => {
     const [customerPhoneNumber, setCustomerPhoneNumber] = useState('');
     const [customerBillingAddress, setCustomerBillingAddress] = useState();
     const total_price = Number(selling_price) * Number(quantity);
-    const randomNum = Math.floor(Math.random() * 10000000000);
-    const ordered_id = String(randomNum).padStart(10, '0');
 
     // fetch items and set to setItemsData
     const getItems = async () => {
@@ -144,7 +143,7 @@ const SalesOrders = ({ salesOrderPage }) => {
 
             // map the array of cart items data
             const itemsToOrder = cartItemsData.map((items) => ({
-                ordered_id,
+                ordered_id:uuidv4().replace(/-/g, ''),
                 order_date: new Date(),
                 customer_id: items.customer_id._id,
                 item_id: items.item_id._id,

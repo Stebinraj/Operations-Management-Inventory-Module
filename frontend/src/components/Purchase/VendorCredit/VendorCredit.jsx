@@ -5,13 +5,12 @@ import { toast } from 'react-toastify';
 import VendorCreditIconLabelLink from './VendorCreditIconLabelLink';
 import VendorCreditModal from './VendorCreditModal';
 import VendorCreditsListTable from './VendorCreditsListTable';
+import { v4 as uuidv4 } from 'uuid';
 
 const VendorCredit = ({ vendorCreditPage }) => {
 
     const [billsPaymentsData, setBillsPaymentsData] = useState([]);
     const [vendorCreditsData, setVendorCreditsData] = useState([]);
-    const randomNum = Math.floor(Math.random() * 10000000000);
-    const credit_id = String(randomNum).padStart(10, '0');
 
     // fetch payments lists and set to billsPaymentsData
     const getBillPayments = async () => {
@@ -31,7 +30,7 @@ const VendorCredit = ({ vendorCreditPage }) => {
             e.preventDefault();
             const response = await axios.post('/purchase/vendor/credits', {
                 payment_id: await value._id,
-                credit_id,
+                credit_id: uuidv4().replace(/-/g, ''),
                 credit_date: new Date(),
                 credit_status: 'Credited',
                 purchased_id: await value.billed_id.received_order_id.purchased_id._id

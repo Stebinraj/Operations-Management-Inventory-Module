@@ -5,13 +5,12 @@ import SalesReturnsProcessedItemsIconLabelLink from './SalesReturnsProcessedItem
 import SalesReturnsProcessedItemsModal from './SalesReturnsProcessedItemsModal';
 import { toast } from 'react-toastify';
 import SalesReturnsProcessedItemsListTable from './SalesReturnsProcessedItemsListTable';
+import { v4 as uuidv4 } from 'uuid';
 
 const SalesReturns = ({ salesReturnsPage }) => {
 
     const [paymentsReceivedData, setPaymentsReceivedData] = useState([]);
     const [processedReturnsItemsData, setProcessedReturnsItemsData] = useState([]);
-    const randomNum = Math.floor(Math.random() * 10000000000);
-    const returns_process_id = String(randomNum).padStart(10, '0');
 
     // fetch payments and set to paymentsReceivedData
     const getPayments = async () => {
@@ -31,7 +30,7 @@ const SalesReturns = ({ salesReturnsPage }) => {
             e.preventDefault();
             const response = await axios.post(`/process/returns`, {
                 payment_id: await value._id,
-                returns_process_id,
+                returns_process_id: uuidv4().replace(/-/g, ''),
                 returns_process_date: new Date(),
                 order_id: await value.invoice_id.delivery_id.shipments_id.delivery_challans_id.package_id.order_id._id,
                 returns_process_status: 'Returns Processed'

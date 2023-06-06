@@ -5,11 +5,10 @@ import CreditNotesIconLabelLink from './CreditNotesIconLabelLink';
 import { toast } from 'react-toastify';
 import CreditNotesModal from './CreditNotesModal';
 import CreditNotesListTable from './CreditNotesListTable';
+import { v4 as uuidv4 } from 'uuid';
 
 const CreditNotes = ({ creditNotesPage }) => {
 
-    const randomNum = Math.floor(Math.random() * 10000000000);
-    const credit_id = String(randomNum).padStart(10, '0');
     const [returnedItemsData, setReturnedItemsData] = useState([]);
     const [creditNotesData, setCreditNotesData] = useState([]);
 
@@ -31,7 +30,7 @@ const CreditNotes = ({ creditNotesPage }) => {
             e.preventDefault();
             const response = await axios.post(`/credit-notes`, {
                 returned_id: await value._id,
-                credit_id,
+                credit_id: uuidv4().replace(/-/g, ''),
                 credit_date: new Date(),
                 credit_status: 'Credited',
                 order_id: await value.returns_processed_id.payment_id.invoice_id.delivery_id.shipments_id.delivery_challans_id.package_id.order_id._id

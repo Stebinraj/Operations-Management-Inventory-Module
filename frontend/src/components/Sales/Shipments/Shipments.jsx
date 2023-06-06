@@ -5,6 +5,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import ShipmentsModal from './ShipmentsModal';
 import ShipmentsListTable from './ShipmentsListTable';
+import { v4 as uuidv4 } from 'uuid';
 
 const Shipments = ({ shipmentsPage }) => {
 
@@ -33,7 +34,7 @@ const Shipments = ({ shipmentsPage }) => {
                 delivery_challans_id: await value._id,
                 order_id: await value.package_id.order_id._id,
                 shipment_date: new Date(),
-                shipped_id,
+                shipped_id:uuidv4().replace(/-/g, ''),
                 shipping_status: 'Shipped'
             });
             if (response && response.data.success) {

@@ -5,13 +5,12 @@ import { toast } from 'react-toastify';
 import ReceivedOrdersIconsLabelLink from './ReceivedOrdersIconsLabelLink';
 import ReceivedOrdersModal from './ReceivedOrdersModal';
 import ReceivedOrdersListTable from './ReceivedOrdersListTable';
+import { v4 as uuidv4 } from 'uuid';
 
 const ReceivedOrders = ({ receivedOrdersPage }) => {
 
     const [purchaseOrdersData, setPurchaseOrdersData] = useState([]);
     const [receivedOrdersData, setReceivedOrdersData] = useState([]);
-    const randomNum = Math.floor(Math.random() * 10000000000);
-    const received_id = String(randomNum).padStart(10, '0');
 
     // fetch purchase orders and set to setPurchaseOrdersData
     const getPurchaseOrders = async () => {
@@ -32,7 +31,7 @@ const ReceivedOrders = ({ receivedOrdersPage }) => {
             const response = await axios.post('/purchase/received', {
                 purchased_id: await value._id,
                 received_date: new Date(),
-                received_id,
+                received_id: uuidv4().replace(/-/g, ''),
                 received_status: 'Received',
                 quantity: await value.quantity,
                 item_id: await value.item_id._id

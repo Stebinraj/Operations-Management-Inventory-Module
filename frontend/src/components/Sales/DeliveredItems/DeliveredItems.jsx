@@ -5,13 +5,12 @@ import DeliveredIconsLabelLink from './DeliveredIconsLabelLink';
 import { toast } from 'react-toastify';
 import DeliveredItemsModal from './DeliveredItemsModal';
 import DeliveredItemsListTable from './DeliveredItemsListTable';
+import { v4 as uuidv4 } from 'uuid';
 
 const DeliveredItems = ({ deliveredItemsPage }) => {
 
     const [shipmentsData, setShipmentsData] = useState([]);
     const [deliveredItemsData, setDeliveredItemsData] = useState([]);
-    const randomNum = Math.floor(Math.random() * 10000000000);
-    const delivered_id = String(randomNum).padStart(10, '0');
 
     const getShipments = async () => {
         try {
@@ -30,7 +29,7 @@ const DeliveredItems = ({ deliveredItemsPage }) => {
             e.preventDefault();
             const response = await axios.post(`/delivered/items`, {
                 delivery_date: new Date(),
-                delivered_id,
+                delivered_id:uuidv4().replace(/-/g, ''),
                 shipments_id: await value._id,
                 order_id: await value.delivery_challans_id.package_id.order_id._id,
                 delivery_status: 'Delivered'

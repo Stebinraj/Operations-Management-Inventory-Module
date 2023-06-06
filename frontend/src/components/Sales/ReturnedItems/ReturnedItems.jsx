@@ -5,12 +5,11 @@ import ReturnedItemsIconLabelLink from './ReturnedItemsIconLabelLink';
 import { toast } from 'react-toastify';
 import ReturnedItemsModal from './ReturnedItemsModal';
 import ReturnedItemsListTable from './ReturnedItemsListTable';
+import { v4 as uuidv4 } from 'uuid';
 
 const ReturnedItems = ({ returnedItemsPage }) => {
 
     const [processedReturnsItemsData, setProcessedReturnsItemsData] = useState([]);
-    const randomNum = Math.floor(Math.random() * 10000000000);
-    const returned_id = String(randomNum).padStart(10, '0');
     const [returnedItemsData, setReturnedItemsData] = useState([]);
 
     // fetch processed returns items and set to processedReturnsItemsData
@@ -31,7 +30,7 @@ const ReturnedItems = ({ returnedItemsPage }) => {
             e.preventDefault();
             const response = await axios.post(`/returns/items`, {
                 returns_processed_id: await value._id,
-                returned_id,
+                returned_id: uuidv4().replace(/-/g, ''),
                 returned_date: new Date(),
                 returned_status: 'Returned',
                 order_id: await value.payment_id.invoice_id.delivery_id.shipments_id.delivery_challans_id.package_id.order_id._id,
