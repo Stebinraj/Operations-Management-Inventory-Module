@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
+const path = require('path');
 dotenv.config();
 
 const app = express();
@@ -78,6 +79,7 @@ const returnedItemsSummary = require('./routes/Dashboard/returnedItemsSummaryRou
 
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
+app.use(express.static(path.join(__dirname,'../frontend/build')));
 app.use(items);
 app.use(inventoryAdjustment);
 app.use(itemGroups);
@@ -109,6 +111,10 @@ app.use(packedItemsSummary);
 app.use(shippedItemsSummary);
 app.use(deliveredItemsSummary);
 app.use(returnedItemsSummary);
+
+app.get('/*', function (req, res) {
+    res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
+})
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on the port ${process.env.PORT}`);

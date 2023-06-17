@@ -7,8 +7,6 @@ import { BrowserRouter } from 'react-router-dom';
 import "react-datepicker/dist/react-datepicker.css";
 import 'react-toastify/dist/ReactToastify.min.css';
 import { ToastContainer } from 'react-toastify';
-import axios from 'axios';
-axios.defaults.baseURL='http://localhost:5000'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
